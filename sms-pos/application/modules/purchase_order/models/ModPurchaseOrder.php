@@ -8,17 +8,11 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class grocery_CRUD_Model extends CI_Model
+class ModPurchaseOrder extends CI_Model
 {
     public function __construct()
     {
         parent::__construct();
-
-    }
-
-    public function getSupplierData(){
-        $this->db->select('id_principal','name');
-        $this->db->get('principal');
 
     }
 }
