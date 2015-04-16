@@ -34,10 +34,10 @@ class Master extends CI_Model
         !empty($this->fields) ? $this->db->select(implode(',', $this->fields)) : $this->db->select('*');
         if (!empty($this->condition))
             $this->db->where($this->condition);
-        if (!empty($this->condition))
-            $this->db->order_by(',', $this->condition);
+        if (!empty($this->order))
+            $this->db->order_by(implode(',', $this->order));
         if (!empty($this->limit))
-            $this->db->limit(',', $this->limit);
+            $this->db->limit(implode(',', $this->limit));
         $rows = $this->db->get($table);
 
         $this->_reset_run();
