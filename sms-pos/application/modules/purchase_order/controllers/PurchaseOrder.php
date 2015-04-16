@@ -14,7 +14,7 @@ class PurchaseOrder extends MX_Controller
     {
         parent::__construct();
         $this->load->model('Master');
-
+        $this->id_staff = $this->config->item('id_staff');
     }
 
     public function index()
