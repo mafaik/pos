@@ -7,4 +7,4 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$config['id_staff'] = 1;
+$config['id_staff'] = 2;

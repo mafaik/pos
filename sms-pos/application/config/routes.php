@@ -51,4 +51,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+//$route['translate_uri_dashes'] = FALSE;
+
+$route['purchase-order'] = "purchase_order/PurchaseOrder";
+$route['purchase-order/detail'] = "purchase_order/PurchaseOrder/insertPOD";
+$route['purchase-order/delete'] = "purchase_order/PurchaseOrder/resetPO";
+$route['purchase-order/detail/update/(:num)/(:num)'] = "purchase_order/PurchaseOrder/updatePOD/$1/$2";
+$route['purchase-order/detail/delete/(:num)'] = "purchase_order/PurchaseOrder/deletePOD/$1";
+$route['purchase-order/save'] = "purchase_order/PurchaseOrder/savePO";
+$route['purchase-order/invoice/(:num)'] = "purchase_order/Invoice/index/$1";
