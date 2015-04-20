@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-20 04:51:58
-         compiled from "/var/www/sms-pos/application/modules/purchase_order/views/invoice.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:23005477055334beb312c50-03180410%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-20 05:29:31
+         compiled from "/var/www/sms-pos/application/modules/card_stock/views/card_stock.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:15869628155348d4cb32e10-97600760%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '840e608367cd5e933874548fba183a38610c1370' => 
+    'd75152d400bcc8ab1996993f67f61aef5f295c4b' => 
     array (
-      0 => '/var/www/sms-pos/application/modules/purchase_order/views/invoice.tpl',
-      1 => 1429430584,
+      0 => '/var/www/sms-pos/application/modules/card_stock/views/card_stock.tpl',
+      1 => 1429507765,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -17,15 +17,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '23005477055334beb312c50-03180410',
+  'nocache_hash' => '15869628155348d4cb32e10-97600760',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_55334beb4e5bc5_64256095',
+  'unifunc' => 'content_55348d4cc95790_34534769',
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_55334beb4e5bc5_64256095')) {function content_55334beb4e5bc5_64256095($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_55348d4cc95790_34534769')) {function content_55348d4cc95790_34534769($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -316,178 +316,44 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
     <div class="page-content">
 
         
+    <!-- Default panel -->
+    <form action="<?php echo current_url();?>
+" role="form" method="post">
+        <div class="panel panel-default">
 
-    <!-- New invoice template -->
-    <div class="panel panel-success">
-        <div class="panel-heading">
-            <h6 class="panel-title"><i class="icon-checkmark3"></i> Purchase Order Invoice</h6>
-            <div class="dropdown pull-right">
-                <a href="#" class="dropdown-toggle panel-icon" data-toggle="dropdown">
-                    <i class="icon-cog3"></i>
-                    <b class="caret"></b>
-                </a>
-                
-                    
-                    
-                    
-                    
-                
-            </div>
-        </div>
+            <div class="panel-heading"><h6 class="panel-title">Card Stock</h6></div>
 
-        <div class="panel-body">
-
-            <div class="row invoice-header">
-                <div class="col-sm-6">
-                    <h3><?php echo $_smarty_tpl->tpl_vars['principal']->value->name;?>
-</h3>
-                    <span><?php echo $_smarty_tpl->tpl_vars['principal']->value->address;?>
- - <?php echo $_smarty_tpl->tpl_vars['principal']->value->zipcode;?>
-
-                        </br>
-                        <?php echo $_smarty_tpl->tpl_vars['principal']->value->city;?>
- - <?php echo $_smarty_tpl->tpl_vars['principal']->value->state;?>
-
-                        </br>
-                        <?php echo $_smarty_tpl->tpl_vars['principal']->value->telp1;?>
- - <?php echo $_smarty_tpl->tpl_vars['principal']->value->telp1;?>
-
-                        </br>
-                        <?php echo $_smarty_tpl->tpl_vars['principal']->value->email;?>
-
-                    </span>
+            <div class="panel-body">
+                <div class="block-inner">
+                    <h6 class="heading-hr">
+                        <i class="icon-clipboard"></i> Card Stock <small class="display-block">Informasi umum tentang proses purchasing</small>
+                    </h6>
                 </div>
+                <div class="form-group <?php ob_start();?><?php echo form_error('id_po');?>
+<?php $_tmp1=ob_get_clean();?><?php if ($_tmp1!='') {?>has-warning<?php }?>">
+                    <div class="row">
+                        <div class="col-md-4 <?php if (form_error('id_po')) {?>has-warning<?php }?>">
+                            <label>Supplier:</label>
+                            <?php echo form_dropdown('id_po',$_smarty_tpl->tpl_vars['principals']->value,set_value('id_po'),'data-placeholder="Purchase Order" class="select-full" tabindex="1" autofocus');?>
 
-                <div class="col-sm-3 pull-right">
-                    <ul>
-                        <li>Invoice # <strong class="text-danger pull-right"><?php echo $_smarty_tpl->tpl_vars['po']->value->id_po;?>
-</strong></li>
-                        <li>Staff  <strong class="pull-right"><?php echo $_smarty_tpl->tpl_vars['staff']->value->name;?>
- </strong></li>
-                        <li>Date of Invoice: <strong class="pull-right"><?php echo $_smarty_tpl->tpl_vars['po']->value->date;?>
-</strong></li>
-                        <li>Due Date: <strong class="pull-right"><?php echo $_smarty_tpl->tpl_vars['po']->value->due_date;?>
-</strong></li>
-                        <li class="invoice-status ">
-                            <strong>Stocking Status:</strong>
-                            <?php if ($_smarty_tpl->tpl_vars['po']->value->status_stocking==0) {?>
-                                <div class="label label-danger pull-right">
-                                    Waiting
-                                </div>
-                            <?php } else { ?>
-                                <div class="label label-success pull-right">
-                                    Done
-                                </div>
+                            <?php if (form_error('id_po')) {?>
+                                <span class="label label-block label-danger text-left"><?php echo form_error('id_po');?>
+</span>
                             <?php }?>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Barcode</th>
-                    <th>Name</th>
-                    <th>Unit</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                    <th>Discount</th>
-                    <th>Subtotal</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php $_smarty_tpl->tpl_vars['total'] = new Smarty_variable(0, null, 0);?>
-                <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable(1, null, 0);?>
-                <?php  $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['key']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['pod']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['key']->key => $_smarty_tpl->tpl_vars['key']->value) {
-$_smarty_tpl->tpl_vars['key']->_loop = true;
-?>
-                    <tr>
-                        <td><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['key']->value['barcode'];?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name'];?>
-</td>
-                        <td style="width:100px;"><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
- ( <?php echo $_smarty_tpl->tpl_vars['key']->value['value'];?>
- )</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['key']->value['qty'];?>
-</td>
-                        <td style="width:130px;" class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],2,".",",");?>
-</td>
-                        <td style="width:130px;" class="text-right">Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']),2,".",",");?>
-</td>
-                        <td style="width:130px;" class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['discount_total'],2,".",",");?>
-</td>
-                        <td style="width:130px;" class="text-right">Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']),2,".",",");?>
-</td>
-                    </tr>
-                    <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable($_smarty_tpl->tpl_vars['val']->value+1, null, 0);?>
-                    <?php $_smarty_tpl->tpl_vars['total'] = new Smarty_variable($_smarty_tpl->tpl_vars['total']->value+($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']), null, 0);?>
-
-                <?php } ?>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="panel-body">
-            <div class="row invoice-payment">
-                <div class="col-sm-8">
-                </div>
-
-                <div class="col-sm-4">
-                    <h6>Total:</h6>
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <th>total:</th>
-                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->total,2,".",",");?>
-</td>
-                        </tr>
-                        <tr>
-                            <th>Discount:</th>
-                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->discount_price,2,".",",");?>
-</td>
-                        </tr>
-                        <tr>
-                            <th>DPP:</th>
-                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->dpp,2,".",",");?>
-</td>
-                        </tr>
-                        <tr>
-                            <th>Tax:</th>
-                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->ppn,2,".",",");?>
-</td>
-                        </tr>
-                        <tr>
-                            <th>Grand Total:</th>
-                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->grand_total,2,".",",");?>
-</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="btn-group pull-right">
-                        <a href="<?php echo base_url('purchase-order');?>
-"  class="btn btn-info button"><i class="icon-box-add"></i> New Purchase Order</a>
-                        <button type="button" class="btn btn-primary"><i class="icon-print2"></i> Print</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="form-actions text-right ">
+                    <input type="submit" value="Add" class="btn btn-success">
+                </div>
+            </div><!-- /panel body -->
 
-            <h6>Notes &amp; Information:</h6>
-            This invoice contains a incomplete list of items destroyed by the Federation ship Enterprise on Startdate 5401.6 in an unprovked attacked on a peaceful &amp; wholly scientific mission to Outpost 775.
-            The Romulan people demand immediate compensation for the loss of their Warbird, Shuttle, Cloaking Device, and to a lesser extent thier troops.
-        </div>
-    </div>
-    <!-- /new invoice template -->
+            <div class="panel-body">
+                <h6>Notes &amp; Information:</h6>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            </div>
+        </div><!-- /default panel -->
+    </form>
 
 
         <!-- Footer -->

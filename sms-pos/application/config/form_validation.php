@@ -76,5 +76,12 @@ $config = array(
             'label' => 'Grand Total',
             'rules' => 'required|numeric'
         ),
+    ),
+    'cs' => array(
+        array(
+            'field' => 'id_po',
+            'label' => 'Purchase Order Number',
+            'rules' => 'required|integer'
+        ),
     )
 );

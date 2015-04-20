@@ -45,6 +45,17 @@ class ModPurchaseOrder extends CI_Model
         }
     }
 
+    public function getDataPOD($id_po)
+    {
+        $this->db->select('*, pod.status as stocking_status');
+        $this->db->from('purchase_order_detail pod');
+        $this->db->join('product p', 'p.id_product = pod.id_product', 'left');
+        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit');
+        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category');
+        $this->db->where('pod.id_po', $id_po);
+        return $this->db->get()->result_array();
+    }
+
     private function insertByField($table, $data_array = array())
     {
         if (is_array($data_array)) {
@@ -86,16 +97,6 @@ class ModPurchaseOrder extends CI_Model
             }
             return $result;
         }
-    }
-
-    public function getDataPOD($id_po)
-    {
-        $this->db->from('purchase_order_detail pod');
-        $this->db->join('product p', 'p.id_product = pod.id_product', 'left');
-        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit');
-        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category');
-        $this->db->where('pod.id_po', $id_po);
-        return $this->db->get()->result_array();
     }
 
 

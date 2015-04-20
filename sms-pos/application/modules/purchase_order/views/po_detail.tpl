@@ -12,7 +12,8 @@
         <div class="panel-body">
             <div class="block-inner">
                 <h6 class="heading-hr">
-                    <i class="icon-clipboard"></i> Purchase Info <small class="display-block">Informasi umum tentang proses purchasing</small>
+                    <i class="icon-clipboard"></i> Purchase Info
+                    <small class="display-block">Informasi umum tentang proses purchasing</small>
                 </h6>
             </div>
             <div class="row invoice-header">
@@ -34,7 +35,8 @@
                         <li>Date of Invoice: <strong>{$cache['value']['date']}</strong></li>
                         <li>Due Date: <strong>{$cache['value']['due_date']}</strong></li>
                         <li class="invoice-status text-right">
-                            <a href="{base_url('purchase-order/delete')}"  class=" button btn btn-danger"><i class="icon-eject"></i>New Purchase Order</a>
+                            <a href="{base_url('purchase-order/delete')}"  class=" button btn btn-danger">
+                                <i class="icon-eject"></i>New Purchase Order</a>
                         </li>
                     </ul>
                 </div>
@@ -60,7 +62,10 @@
                             <script type="text/javascript">
                                 var product_storage = {$product_storage|@json_encode};
                             </script>
-                            {form_dropdown('id_product_select',$products,set_value('id_product'),'data-placeholder="Product" class="select-full" id="product-id-select" onchange="leaveDropdownProduct(this,product_storage,\'id_product\')"')}
+                            {form_dropdown('id_product_select',
+                            $products,
+                            set_value('id_product'),
+                            'data-placeholder="Product" class="select-full" id="product-id-select" onchange="leaveDropdownProduct(this,product_storage,\'id_product\')"')}
                             {if form_error('id_product')}
                                 <span class="label label-block label-danger text-left">{form_error('id_product') }</span>
                             {/if}
@@ -68,7 +73,8 @@
                         </div>
                         <div class="col-md-4">
                             <label>Barcode:</label>
-                            {form_input('barcode', set_value('barcode'), 'class="form-control" placeholder="Type or scan barcode" id="product-barcode" autofocus onblur="leaveTextBarcode(this,product_storage,\'barcode\')"')}
+                            {form_input('barcode', set_value('barcode'),
+                            'class="form-control" placeholder="Type or scan barcode" id="product-barcode" autofocus onblur="leaveTextBarcode(this,product_storage,\'barcode\')"')}
                         </div>
                         <div class="col-md-4">
                             <label>Name:</label>
@@ -81,7 +87,8 @@
                     <div class="row">
                         <div class="col-md-4 {if form_error('qty')}has-warning{/if}">
                             <label>Qty:</label>
-                            <input type="number" name="qty" value="{set_value('qty')}" class="form-control" placeholder="0" >
+                            <input type="number" name="qty" value="{set_value('qty')}"
+                                   class="form-control" placeholder="0" >
                             {if form_error('qty')}
                                 <span class="label label-block label-danger text-left">{form_error('qty') }</span>
                             {/if}
@@ -90,7 +97,8 @@
                             <label>Price:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
-                                <input type="text" name="price" value="{set_value('price')}" class="form-control" placeholder="0" >
+                                <input type="text" name="price" value="{set_value('price')}"
+                                       class="form-control" placeholder="0" >
 
                             </div>
                             {if form_error('price')}
@@ -101,10 +109,13 @@
                             <label>Discount Total:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
-                                <input type="text" name="discount_total" value="{set_value('discount_total')}" class="form-control" placeholder="0" >
+                                <input type="text" name="discount_total" value="{set_value('discount_total')}"
+                                       class="form-control" placeholder="0" >
                             </div>
                             {if form_error('discount_total')}
-                                <span class="label label-block label-danger text-left">{form_error('discount_total') }</span>
+                                <span class="label label-block label-danger text-left">
+                                    {form_error('discount_total') }
+                                </span>
                             {/if}
                         </div>
                     </div>
@@ -141,17 +152,32 @@
                             <td>{$key['barcode']}</td>
                             <td>{$key['name_unit']}</td>
                             <td  style="width:100px;">
-                                <input type="number" id="qty-{$key['id_product']}" value="{$key['qty']}" class="form-control" onkeypress="qtyKeyPress({$key['id_product']},'{base_url('purchase-order/detail/update')}')">
+                                <input type="number" id="qty-{$key['id_product']}" value="{$key['qty']}"
+                                       class="form-control" onkeypress="qtyKeyPress({$key['id_product']},
+                                        '{base_url('purchase-order/detail/update')}')">
                             </td>
-                            <td style="width:130px;" class="text-right">Rp {$key['price']|number_format:2:".":","}</td>
-                            <td style="width:130px;" class="text-right">Rp {($key['qty'] * $key['price'])|number_format:2:".":","}</td>
-                            <td style="width:130px;" class="text-right">Rp {$key['discount_total']|number_format:2:".":","}</td>
-                            <td style="width:130px;" class="text-right">Rp {($key['qty'] * $key['price'] - $key['discount_total'])|number_format:2:".":","}</td>
+                            <td style="width:130px;" class="text-right">
+                                Rp {$key['price']|number_format:2:".":","}
+                            </td>
+                            <td style="width:130px;" class="text-right">
+                                Rp {($key['qty'] * $key['price'])|number_format:2:".":","}
+                            </td>
+                            <td style="width:130px;" class="text-right">
+                                Rp {$key['discount_total']|number_format:2:".":","}
+                            </td>
+                            <td style="width:130px;" class="text-right">
+                                Rp {($key['qty'] * $key['price'] - $key['discount_total'])|number_format:2:".":","}
+                            </td>
                             <td style="width:90px;">
 
                                 <div class="table-controls">
-                                    <a class="btn btn-link btn-icon btn-xs tip" title="Update Qty" onclick="updateQty({$key['id_product']},'{base_url('purchase-order/detail/update')}')"><i class="icon-pencil3"></i></a>
-                                    <a href="{base_url('purchase-order/detail/delete')}/{$key['id_product']}" class="btn btn-link btn-icon btn-xs tip" title="Hapus Data"><i class="icon-remove3"></i></a>
+                                    <a class="btn btn-link btn-icon btn-xs tip" title="Update Qty"
+                                       onclick="updateQty({$key['id_product']},
+                                               '{base_url('purchase-order/detail/update')}')">
+                                        <i class="icon-pencil3"></i></a>
+                                    <a href="{base_url('purchase-order/detail/delete')}/{$key['id_product']}"
+                                       class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
+                                        <i class="icon-remove3"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -164,7 +190,8 @@
             </div>
         {/if}
 
-        <form action="{base_url('purchase-order/save')}" role="form" method="post" enctype="multipart/form-data">
+        <form action="{base_url('purchase-order/save')}" role="form" method="post" enctype="multipart/form-data"
+              onsubmit="return confirm('Process Data');">
 
             <div class="panel-body">
 
@@ -189,11 +216,14 @@
                             <label>Discount:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
-                                <input type="text" name="discount_price" value="{set_value('discount_price',$cache['value']['discount_price'])}" class="form-control" placeholder="0" >
+                                <input type="text" name="discount_price" value="{set_value('discount_price',
+                                $cache['value']['discount_price'])}" class="form-control" placeholder="0" >
 
                             </div>
                             {if form_error('discount_price')}
-                                <span class="label label-block label-danger text-left">{form_error('discount_price') }</span>
+                                <span class="label label-block label-danger text-left">
+                                    {form_error('discount_price') }
+                                </span>
                             {/if}
                         </div>
                     </div>
@@ -204,18 +234,22 @@
                             <label>DPP:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
-                                <input type="text" name="dpp" value="{set_value('dpp',$cache['value']['dpp'])}" class="form-control" placeholder="0" >
+                                <input type="text" name="dpp" value="{set_value('dpp',
+                                $cache['value']['dpp'])}" class="form-control" placeholder="0" >
 
                             </div>
                             {if form_error('dpp')}
-                                <span class="label label-block label-danger text-left">{form_error('dpp') }</span>
+                                <span class="label label-block label-danger text-left">
+                                    {form_error('dpp') }
+                                </span>
                             {/if}
                         </div>
                         <div class="col-md-4 {if form_error('ppn')}has-warning{/if}">
                             <label>PPN:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
-                                <input type="text" name="ppn" value="{set_value('ppn',$cache['value']['ppn'])}" class="form-control" placeholder="0" >
+                                <input type="text" name="ppn" value="{set_value('ppn',
+                                $cache['value']['ppn'])}" class="form-control" placeholder="0" >
 
                             </div>
                             {if form_error('ppn')}
@@ -226,11 +260,14 @@
                             <label>Grand Total:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
-                                <input type="text" name="grand_total" value="{set_value('grand_total',$cache['value']['grand_total'])}" class="form-control" placeholder="0">
+                                <input type="text" name="grand_total" value="{set_value('grand_total',
+                                $cache['value']['grand_total'])}" class="form-control" placeholder="0">
 
                             </div>
                             {if form_error('grand_total')}
-                                <span class="label label-block label-danger text-left">{form_error('grand_total') }</span>
+                                <span class="label label-block label-danger text-left">
+                                    {form_error('grand_total') }
+                                </span>
                             {/if}
                         </div>
                     </div>
@@ -246,7 +283,8 @@
                     </div>
                 </div>
                 <div class="form-actions text-right">
-                    <button type="submit" name="save" value="Save" class="btn btn-success"><i class="icon-checkmark"></i> Process</button>
+                    <button type="submit" name="save" value="Save" class="btn btn-success"><i class="icon-checkmark">
+                            </i> Process</button>
                     {*<button type="button" name="print" class="btn btn-default"><i class="icon-print2"></i> Print</button>*}
                 </div>
             </div><!-- /panel body -->
