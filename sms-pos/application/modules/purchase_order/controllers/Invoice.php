@@ -22,7 +22,7 @@ class Invoice extends MX_Controller
 
     public function index($id_po){
         if(!$data_po = $this->db->get_where('purchase_order', array('id_po' => $id_po))->row()){
-            redirect('purchase_order');
+            redirect('purchase-order');
         }
         $data['po'] = $data_po;
         $data['principal'] = $this->db->get_where('principal', array('id_principal' => $data_po->id_principal))->row();

@@ -60,3 +60,8 @@ $route['purchase-order/detail/update/(:num)/(:num)'] = "purchase_order/PurchaseO
 $route['purchase-order/detail/delete/(:num)'] = "purchase_order/PurchaseOrder/deletePOD/$1";
 $route['purchase-order/save'] = "purchase_order/PurchaseOrder/savePO";
 $route['purchase-order/invoice/(:num)'] = "purchase_order/Invoice/index/$1";
+
+
+$route['card-stock'] = "card_stock/CardStock";
+$route['card-stock/detail/(:num)'] = "card_stock/CardStock/detailCS/$1";
+$route['card-stock/invoice/(:num)'] = "card_stock/CardStock/invoice/$1";
