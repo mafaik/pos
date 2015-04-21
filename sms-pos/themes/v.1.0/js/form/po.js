@@ -30,10 +30,3 @@ function qtyKeyPress(a, url){
         event.preventDefault();
     }
 }
-
-$(document).ready(function () {
-    ////////////////////////ALL textbox to upper
-    $("#").blur(function () {
-        $(this).val($(this).val().toUpperCase());
-    });
-});

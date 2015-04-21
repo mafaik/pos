@@ -83,5 +83,27 @@ $config = array(
             'label' => 'Purchase Order Number',
             'rules' => 'required|integer'
         ),
+    ),
+    'conversion' => array(
+        array(
+            'field' => 'id_product',
+            'label' => 'ID Product',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'qty',
+            'label' => 'QTY',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'id_product_result',
+            'label' => 'ID Product',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'qty_result',
+            'label' => 'QTY',
+            'rules' => 'required|integer'
+        )
     )
 );

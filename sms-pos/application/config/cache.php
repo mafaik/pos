@@ -7,4 +7,5 @@
  */
 
 $config['PO'] = null;
-$config['PRODUCT'] = null;
+$config['PRODUCT'] = 30;
+$config['PRODUCT_CONVERSION'] = null;

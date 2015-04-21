@@ -43,7 +43,11 @@ class PurchaseOrder extends MX_Controller
                         'id_principal' => $this->input->post('id_principal'),
                         'id_staff' => $this->id_staff,
                         'date' => $this->input->post('date'),
-                        'due_date' => $this->input->post('due_date')
+                        'due_date' => $this->input->post('due_date'),
+                        'discount_price' => '',
+                        'dpp' => '',
+                        'ppn' => '',
+                        'grand_total' => ''
                     ),
                     'detail' => array(
                         'table' => 'purchase_order_detail',
