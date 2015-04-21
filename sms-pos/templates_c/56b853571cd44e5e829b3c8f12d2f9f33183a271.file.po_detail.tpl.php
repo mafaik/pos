@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-19 05:33:51
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-21 05:57:04
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6338738805530ecdd0a61e9-92077084%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '56b853571cd44e5e829b3c8f12d2f9f33183a271' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl',
-      1 => 1429421628,
+      1 => 1429595744,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
     array (
       0 => '/var/www/sms-pos/application/master.tpl',
-      1 => 1429358104,
+      1 => 1429430584,
       2 => 'file',
     ),
   ),
@@ -328,7 +328,8 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
         <div class="panel-body">
             <div class="block-inner">
                 <h6 class="heading-hr">
-                    <i class="icon-clipboard"></i> Purchase Info <small class="display-block">Informasi umum tentang proses purchasing</small>
+                    <i class="icon-clipboard"></i> Purchase Info
+                    <small class="display-block">Informasi umum tentang proses purchasing</small>
                 </h6>
             </div>
             <div class="row invoice-header">
@@ -362,7 +363,8 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 </strong></li>
                         <li class="invoice-status text-right">
                             <a href="<?php echo base_url('purchase-order/delete');?>
-"  class=" button btn btn-danger"><i class="icon-eject"></i>New Purchase Order</a>
+"  class=" button btn btn-danger">
+                                <i class="icon-eject"></i>New Purchase Order</a>
                         </li>
                     </ul>
                 </div>
@@ -420,7 +422,8 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                         <div class="col-md-4 <?php if (form_error('qty')) {?>has-warning<?php }?>">
                             <label>Qty:</label>
                             <input type="number" name="qty" value="<?php echo set_value('qty');?>
-" class="form-control" placeholder="0" >
+"
+                                   class="form-control" placeholder="0" >
                             <?php if (form_error('qty')) {?>
                                 <span class="label label-block label-danger text-left"><?php echo form_error('qty');?>
 </span>
@@ -431,7 +434,8 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                             <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
                                 <input type="text" name="price" value="<?php echo set_value('price');?>
-" class="form-control" placeholder="0" >
+"
+                                       class="form-control" placeholder="0" >
 
                             </div>
                             <?php if (form_error('price')) {?>
@@ -444,11 +448,14 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                             <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
                                 <input type="text" name="discount_total" value="<?php echo set_value('discount_total');?>
-" class="form-control" placeholder="0" >
+"
+                                       class="form-control" placeholder="0" >
                             </div>
                             <?php if (form_error('discount_total')) {?>
-                                <span class="label label-block label-danger text-left"><?php echo form_error('discount_total');?>
-</span>
+                                <span class="label label-block label-danger text-left">
+                                    <?php echo form_error('discount_total');?>
+
+                                </span>
                             <?php }?>
                         </div>
                     </div>
@@ -494,27 +501,42 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                             <td  style="width:100px;">
                                 <input type="number" id="qty-<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
 " value="<?php echo $_smarty_tpl->tpl_vars['key']->value['qty'];?>
-" class="form-control" onkeypress="qtyKeyPress(<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
-,'<?php echo base_url('purchase-order/detail/update');?>
+"
+                                       class="form-control" onkeypress="qtyKeyPress(<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
+,
+                                        '<?php echo base_url('purchase-order/detail/update');?>
 ')">
                             </td>
-                            <td style="width:130px;">Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],2,".",",");?>
-</td>
-                            <td style="width:130px;">Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']),2,".",",");?>
-</td>
-                            <td style="width:130px;">Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['discount_total'],2,".",",");?>
-</td>
-                            <td style="width:130px;">Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']),2,".",",");?>
-</td>
+                            <td style="width:130px;" class="text-right">
+                                Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],2,".",",");?>
+
+                            </td>
+                            <td style="width:130px;" class="text-right">
+                                Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']),2,".",",");?>
+
+                            </td>
+                            <td style="width:130px;" class="text-right">
+                                Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['discount_total'],2,".",",");?>
+
+                            </td>
+                            <td style="width:130px;" class="text-right">
+                                Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']),2,".",",");?>
+
+                            </td>
                             <td style="width:90px;">
 
                                 <div class="table-controls">
-                                    <a class="btn btn-link btn-icon btn-xs tip" title="Update Qty" onclick="updateQty(<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
-,'<?php echo base_url('purchase-order/detail/update');?>
-')"><i class="icon-pencil3"></i></a>
+                                    <a class="btn btn-link btn-icon btn-xs tip" title="Update Qty"
+                                       onclick="updateQty(<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
+,
+                                               '<?php echo base_url('purchase-order/detail/update');?>
+')">
+                                        <i class="icon-pencil3"></i></a>
                                     <a href="<?php echo base_url('purchase-order/detail/delete');?>
 /<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
-" class="btn btn-link btn-icon btn-xs tip" title="Hapus Data"><i class="icon-remove3"></i></a>
+"
+                                       class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
+                                        <i class="icon-remove3"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -525,10 +547,10 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                     </tbody>
                 </table>
             </div>
-        <?php }?>
 
         <form action="<?php echo base_url('purchase-order/save');?>
-" role="form" method="post" enctype="multipart/form-data">
+" role="form" method="post" enctype="multipart/form-data"
+              onsubmit="return confirm('Process Data');">
 
             <div class="panel-body">
 
@@ -560,8 +582,10 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
 
                             </div>
                             <?php if (form_error('discount_price')) {?>
-                                <span class="label label-block label-danger text-left"><?php echo form_error('discount_price');?>
-</span>
+                                <span class="label label-block label-danger text-left">
+                                    <?php echo form_error('discount_price');?>
+
+                                </span>
                             <?php }?>
                         </div>
                     </div>
@@ -577,8 +601,10 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
 
                             </div>
                             <?php if (form_error('dpp')) {?>
-                                <span class="label label-block label-danger text-left"><?php echo form_error('dpp');?>
-</span>
+                                <span class="label label-block label-danger text-left">
+                                    <?php echo form_error('dpp');?>
+
+                                </span>
                             <?php }?>
                         </div>
                         <div class="col-md-4 <?php if (form_error('ppn')) {?>has-warning<?php }?>">
@@ -603,8 +629,10 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
 
                             </div>
                             <?php if (form_error('grand_total')) {?>
-                                <span class="label label-block label-danger text-left"><?php echo form_error('grand_total');?>
-</span>
+                                <span class="label label-block label-danger text-left">
+                                    <?php echo form_error('grand_total');?>
+
+                                </span>
                             <?php }?>
                         </div>
                     </div>
@@ -620,17 +648,19 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                     </div>
                 </div>
                 <div class="form-actions text-right">
-                    <button type="submit" name="save" value="Save" class="btn btn-success"><i class="icon-checkmark"></i> Process</button>
+                    <button type="submit" name="save" value="Save" class="btn btn-success"><i class="icon-checkmark">
+                            </i> Process</button>
                     
                 </div>
             </div><!-- /panel body -->
         </form>
+        <?php }?>
 
             
                 
                 
             
-        
+        </div><!-- /default panel -->
 
 
         <!-- Footer -->

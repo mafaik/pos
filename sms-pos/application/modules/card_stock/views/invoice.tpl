@@ -97,5 +97,6 @@
                 </div>
             </div>
         </div>
+    </div>
     <!-- /new invoice template -->
 {/block}
