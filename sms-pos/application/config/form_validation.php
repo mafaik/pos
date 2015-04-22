@@ -105,5 +105,18 @@ $config = array(
             'label' => 'QTY',
             'rules' => 'required|integer'
         )
+    ),
+    'credit' => array(
+        array(
+            'field' => 'amount',
+            'label' => 'Jumlah Bayar',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'payment_type',
+            'label' => 'Payment Type',
+            'rules' => 'trim|required'
+        ),
+
     )
 );
