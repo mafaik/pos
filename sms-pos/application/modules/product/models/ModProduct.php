@@ -33,4 +33,15 @@ class ModProduct extends CI_Model
         return $rows;
     }
 
+
+    public function checkStock($id_product, $qty)
+    {
+        $row = $this->db->get_where('product', array('id_product' => $id_product))->row();
+        if ($row->stock < $qty) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

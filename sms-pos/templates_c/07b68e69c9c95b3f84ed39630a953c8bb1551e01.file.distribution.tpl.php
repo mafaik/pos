@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-22 05:31:57
-         compiled from "/var/www/sms-pos/application/modules/product_conversion/views/conversion.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:14670946775534c34ec3dec4-49258782%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-22 05:48:02
+         compiled from "/var/www/sms-pos/application/modules/product_distribution/views/distribution.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:10828895655373254ab2ba3-61494005%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '3b150ffcdef22ade48c8ff727da53b4665e91c79' => 
+    '07b68e69c9c95b3f84ed39630a953c8bb1551e01' => 
     array (
-      0 => '/var/www/sms-pos/application/modules/product_conversion/views/conversion.tpl',
-      1 => 1429675796,
+      0 => '/var/www/sms-pos/application/modules/product_distribution/views/distribution.tpl',
+      1 => 1429681677,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -17,15 +17,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '14670946775534c34ec3dec4-49258782',
+  'nocache_hash' => '10828895655373254ab2ba3-61494005',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5534c34f095a92_00842873',
+  'unifunc' => 'content_55373254ca85c4_56191035',
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5534c34f095a92_00842873')) {function content_5534c34f095a92_00842873($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_55373254ca85c4_56191035')) {function content_55373254ca85c4_56191035($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -317,19 +317,15 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 
         
     <!-- Default panel -->
-    <?php echo js('function.js');?>
-
-    <?php echo js('form/conversion.js');?>
-
     <div class="panel panel-default">
 
-        <div class="panel-heading"><h6 class="panel-title">Product Conversion</h6></div>
+        <div class="panel-heading"><h6 class="panel-title">Product Distribution</h6></div>
 
         <div class="panel-body">
             <div class="block-inner">
                 <h6 class="heading-hr">
-                    <i class="icon-clipboard"></i> Product Conversion
-                    <small class="display-block">Informasi umum tentang proses purchasing</small>
+                    <i class="icon-clipboard"></i> Product Distribution
+                    <small class="display-block">Informasi umum tentang Product Distribution</small>
                 </h6>
             </div>
             <!-- Callout -->
@@ -348,103 +344,36 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 ;
             <?php echo '</script'; ?>
 >
-            <form action="<?php echo base_url('product-conversion');?>
+            <form action="<?php echo base_url('product-distribution');?>
 " role="form" method="post">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-3">
-                            <label>From Product:</label>
-                            <?php echo form_dropdown('id_product',$_smarty_tpl->tpl_vars['products']->value,set_value('id_product'),'data-placeholder="Product" class="select-full" id="id-product-select" onchange="leaveDropdownProductFrom(this,product_storage,\'id_product\')"');?>
+                            <label>Product:</label>
+                            <?php echo form_dropdown('id_product',$_smarty_tpl->tpl_vars['products']->value,set_value('id_product'),'data-placeholder="Product" class="select-full" id="id-product-select"');?>
 
                             <?php if (form_error('id_product')) {?>
                                 <span class="label label-block label-danger text-left"><?php echo form_error('id_product');?>
 </span>
                             <?php }?>
-                            <input type="hidden" id="product-id-text"
-                                   value="<?php echo set_value('id_product');?>
-">
 
                         </div>
                         <div class="col-md-1 <?php if (form_error('qty')) {?>has-warning<?php }?>">
                             <label>Qty:</label>
                             <input type="number" name="qty" id="product-qty" value="<?php echo set_value('qty');?>
 "
-                                   onblur="changeQty(product_storage)"
                                    class="form-control" placeholder="0">
-                            <?php if (form_error('qty')) {?>
-                                <span class="label label-block label-danger text-left"><?php echo form_error('qty');?>
-</span>
-                            <?php }?>
-                            <input type="hidden" id="product-value-text" name="value_text"
-                                   value="<?php echo set_value('qty_text');?>
-">
-                        </div>
-                        <div class="col-md-3">
-                            <label>Result Product:</label>
-                            <?php echo form_dropdown('id_product_result',$_smarty_tpl->tpl_vars['products']->value,set_value('id_product_result'),'data-placeholder="Product" class="select-full" id="id-product-select" onchange="leaveDropdownProductResult(this,product_storage,\'id_product\')"');?>
-
-                            <?php if (form_error('id_product_result')) {?>
-                                <span class="label label-block label-danger text-left"><?php echo form_error('id_product_result');?>
-</span>
-                            <?php }?>
-                            <input type="hidden" id="product-id-text-result"
-                                   value="<?php echo set_value('id_product_result');?>
-">
-
-                        </div>
-                        <div class="col-md-1 <?php if (form_error('qty_result')) {?>has-warning<?php }?>">
-                            <label>Qty:</label>
-                            <input type="number" name="qty_result" id="product-qty-result"
-                                   value="<?php echo set_value('qty_result');?>
-"
-                                   onblur="changeQtyResult(product_storage)"
-                                   class="form-control" placeholder="0">
-                            <?php if (form_error('qty_result')) {?>
-                                <span class="label label-block label-danger text-left"><?php echo form_error('qty_result');?>
-</span>
-                            <?php }?>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-4">
-                            <label>Detail From:</label>
-                            <ul>
-                                <li>Barcode # <span class="text-danger" id="product-barcode"></span></li>
-                                <li>Name: <strong class="text-info" id="product-name"></strong></li>
-                                <li>Unit: <strong class="text-info" id="product-unit"></strong></li>
-                                <li>Value Unit: <strong class="text-info" id="product-value"></strong></li>
-                                <li>Available Stock: <strong class="text-info" id="product-stock"></strong></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>Detail Result:</label>
-                            <ul>
-                                <li>Barcode # <span class="text-danger" id="product-barcode-result"></span></li>
-                                <li>Name: <strong class="text-info" id="product-name-result"></strong></li>
-                                <li>Unit: <strong class="text-info" id="product-unit-result"></strong></li>
-                                <li>Value Unit: <strong class="text-info" id="product-value-result"></strong></li>
-                                <li>Current Stock: <strong class="text-info" id="product-stock-result"></strong></li>
-                                <li>Updated Stock: <strong class="text-info" id="product-updated-stock-result"></strong>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-8">
-
                             <div class="form-actions text-right">
                                 <input type="submit" value="Add" class="btn btn-success">
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </form>
         </div>
@@ -452,78 +381,62 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 
 
         <?php if (!empty($_smarty_tpl->tpl_vars['list']->value)) {?>
-                <div class="table-responsive pre-scrollable">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                        <tr>
-                            <th rowspan="2">No</th>
-                            <th colspan="4">From</th>
-                            <th colspan="4">Result</th>
-                            <th rowspan="2">QTY</th>
-                            <th rowspan="2">Qty Result</th>
-                            <th rowspan="2">Action</th>
-                        </tr>
-                        <tr>
-                            <th>Barcode</th>
-                            <th>Name</th>
-                            <th>Unit</th>
-                            <th>Value</th>
-                            <th>Barcode</th>
-                            <th>Name</th>
-                            <th>Unit</th>
-                            <th>Value</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable(1, null, 0);?>
-                        <?php  $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['key']->_loop = false;
+            <div class="table-responsive pre-scrollable">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Barcode</th>
+                        <th>Name</th>
+                        <th>Unit</th>
+                        <th>Value</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable(1, null, 0);?>
+                    <?php  $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['key']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['key']->key => $_smarty_tpl->tpl_vars['key']->value) {
 $_smarty_tpl->tpl_vars['key']->_loop = true;
 ?>
-                            <tr>
-                                <td>
-                                    <?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+                        <tr>
+                            <td>
+                                <?php echo $_smarty_tpl->tpl_vars['val']->value;?>
 
-                                </td>
-                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['barcode'];?>
+                            </td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['barcode'];?>
 </td>
-                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name'];?>
+                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name'];?>
 </td>
-                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
+                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
 </td>
-                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['value'];?>
+                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['value'];?>
 </td>
-                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['barcode_result'];?>
+                            <td> Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],0);?>
 </td>
-                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name_result'];?>
+                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['qty'];?>
 </td>
-                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['unit_result'];?>
-</td>
-                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['value_result'];?>
-</td>
-                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['qty'];?>
-</td>
-                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['qty_result'];?>
-</td>
-                                <td>
+                            <td>
 
-                                    <div class="table-controls">
-                                        <a href="<?php echo base_url('product-conversion/detail/delete');?>
+                                <div class="table-controls">
+                                    <a href="<?php echo base_url('product-distribution/detail/delete');?>
 /<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
 "
-                                           class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
-                                            <i class="icon-remove3"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable($_smarty_tpl->tpl_vars['val']->value+1, null, 0);?>
-                        <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
+                                       class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
+                                        <i class="icon-remove3"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable($_smarty_tpl->tpl_vars['val']->value+1, null, 0);?>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </div>
 
-            <form action="<?php echo base_url('product-conversion/save');?>
+            <form action="<?php echo base_url('product-distribution/save');?>
 " role="form" method="post"
                   onsubmit="return confirm('Process Data');">
 

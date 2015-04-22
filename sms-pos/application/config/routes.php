@@ -71,3 +71,9 @@ $route['product-conversion/detail/delete/(:num)'] = "product_conversion/Conversi
 $route['product-conversion/save'] = "product_conversion/Conversion/save";
 $route['product-conversion/invoice/(:num)'] = "product_conversion/Conversion/invoice/$1";
 
+
+$route['product-distribution'] = "product_distribution/Distribution";
+$route['product-distribution/detail/delete/(:num)'] = "product_distribution/Distribution/deleteDetail/$1";
+$route['product-distribution/save'] = "product_distribution/Distribution/save";
+$route['product-distribution/invoice/(:num)'] = "product_distribution/Distribution/invoice/$1";
+

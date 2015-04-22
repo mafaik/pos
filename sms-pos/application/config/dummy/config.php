@@ -8,3 +8,4 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $config['id_staff'] = 2;
+$config['id_store'] = 1;
