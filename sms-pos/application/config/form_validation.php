@@ -117,6 +117,17 @@ $config = array(
             'label' => 'Payment Type',
             'rules' => 'trim|required'
         ),
-
+    ),
+    'distribution' => array(
+        array(
+            'field' => 'id_product',
+            'label' => 'ID Product',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'qty',
+            'label' => 'QTY',
+            'rules' => 'required|integer'
+        )
     )
 );

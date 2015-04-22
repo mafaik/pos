@@ -74,3 +74,8 @@ $route['credit'] = "Credit";
 $route['credit/bill/(:num)'] = "Credit/bill/$1";
 $route['credit/detail/(:num)'] = "Credit/detailBayar/$1";
 
+$route['product-distribution'] = "product_distribution/Distribution";
+$route['product-distribution/detail/delete/(:num)'] = "product_distribution/Distribution/deleteDetail/$1";
+$route['product-distribution/save'] = "product_distribution/Distribution/save";
+$route['product-distribution/invoice/(:num)'] = "product_distribution/Distribution/invoice/$1";
+

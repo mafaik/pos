@@ -2,12 +2,12 @@
 /**
  * Created by PhpStorm.
  * User: Awalin Yudhana
- * Date: 20/04/2015
- * Time: 15:58
+ * Date: 22/04/2015
+ * Time: 11:39
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Conversion extends MX_Controller
+class Distribution extends MX_Controller
 {
     protected $id_staff;
 
@@ -18,36 +18,33 @@ class Conversion extends MX_Controller
         parent::__construct();
         $this->load->library('Caching');
         $this->id_staff = $this->config->item('id_staff');
+        $this->id_store = $this->config->item('id_store');
     }
 
     public function index()
     {
         $this->getCacheStatus();
+
         $data['error'] = '';
-
         $cache = $this->getCache();
-
         $this->load->model('product/ModProduct', 'ModProduct');
 
         if ($this->input->post()) {
-            if ($this->form_validation->run('conversion') == TRUE) {
+            if ($this->form_validation->run('distribution') == TRUE) {
                 if ($this->ModProduct->checkStock($this->input->post('id_product'), $this->input->post('qty')) == TRUE) {
                     $data_value = array(
                         'id_product' => $this->input->post('id_product'),
-                        'qty' => $this->input->post('qty'),
-                        'id_product_result' => $this->input->post('id_product_result'),
-                        'qty_result' => $this->input->post('qty_result')
+                        'qty' => $this->input->post('qty')
                     );
                     $cache['detail']['value'][] = $data_value;
-                    $this->caching->cacheQuery('PRODUCT_CONVERSION', $this->id_staff, json_encode($cache));
+                    $this->caching->cacheQuery('PRODUCT_DISTRIBUTION', $this->id_staff, json_encode($cache));
 
-                    redirect('product-conversion');
+                    redirect('product-distribution');
                     return false;
                 }
                 $data['error'] = 'stock tidak cukup';
             }
         }
-
 
         $data['product_storage'] = $this->ModProduct->get();
         $products = array('' => '');
@@ -57,24 +54,25 @@ class Conversion extends MX_Controller
 
         $data['products'] = $products;
         $data['cache'] = $cache;
-
-        $list = $this->getArrayIDProduct($cache['detail']['value'], $data['product_storage']);
+        $list = empty($cache['detail']['value']) ? null :
+            $this->getArrayIDProduct($cache['detail']['value'], $data['product_storage']);
         $data['list'] = $list;
 
-        $this->parser->parse("conversion.tpl", $data);
+        $this->parser->parse("distribution.tpl", $data);
     }
 
     public function save()
     {
         if ($this->getCacheStatus()) {
+            $this->load->library('Insert_Batch');
             $cache = $this->getCache();
-            $this->load->model('ModConversion');
-            if ($id_conversion = $this->ModConversion->insertBatch($cache)) {
-                redirect('product-conversion/invoice' . '/' . $id_conversion);
+
+            if ($id_distribution = $this->insert_batch->insertData($cache)) {
+                redirect('product-distribution/invoice' . '/' . $id_distribution);
                 return false;
             }
         }
-        redirect('product-conversion');
+        redirect('product-distribution');
     }
 
     public function deleteDetail($id_product)
@@ -82,71 +80,29 @@ class Conversion extends MX_Controller
         $this->getCacheStatus();
         $cache = $this->getCache();
         unset($cache['detail']['value'][$this->getArrayKeyDetail($id_product, $cache['detail']['value'])]);
-        $this->caching->cacheQuery('PRODUCT_CONVERSION', $this->id_staff, json_encode($cache));
-        redirect('product-conversion');
+        $this->caching->cacheQuery('PRODUCT_DISTRIBUTION', $this->id_staff, json_encode($cache));
+        redirect('product-distribution');
     }
 
-    public function invoice($id_conversion)
+    public function invoice($id_distribution)
     {
 
-        if (!$data_conversion = $this->db->from('product_conversion')
-            ->join('staff', 'staff.id_staff = product_conversion.id_staff')
-            ->where(array('id_conversion' => $id_conversion))
+        if (!$data_distribution = $this->db->from('product_distribution')
+            ->join('staff', 'staff.id_staff = product_distribution.id_staff')
+            ->where(array('id_product_distribution' => $id_distribution))
             ->get()->row()
         ) {
-            redirect('product-conversion');
+            redirect('product-distribution');
         }
         $this->getCacheStatus();
         $cache = $this->getCache();
         $this->load->model('product/ModProduct', 'ModProduct');
 
-
         $data['product_storage'] = $this->ModProduct->get();
-        $data['conversion'] = $data_conversion;
+        $data['distribution'] = $data_distribution;
         $list = $this->getArrayIDProduct($cache['detail']['value'], $data['product_storage']);
         $data['list'] = $list;
         $this->parser->parse("invoice.tpl", $data);
-    }
-
-    private function getArrayIDProduct($array = array(), $products = array())
-    {
-        foreach ($array as $key => $value_array) {
-            foreach ($products as $row) {
-                if ($value_array['id_product'] == $row['id_product']) {
-                    $id_product = $row['id_product'];
-                    $barcode = $row['barcode'];
-                    $name = $row['name'];
-                    $unit = $row['unit'];
-                    $value = $row['value'];
-                }
-            }
-
-            foreach ($products as $row) {
-                if ($value_array['id_product_result'] == $row['id_product']) {
-                    $id_product_result = $row['id_product'];
-                    $barcode_result = $row['barcode'];
-                    $name_result = $row['name'];
-                    $unit_result = $row['unit'];
-                    $value_result = $row['value'];
-                }
-            }
-            $result[] = array(
-                'id_product' => $id_product,
-                'barcode' => $barcode,
-                'name' => $name,
-                'unit' => $unit,
-                'value' => $value,
-                'id_product_result' => $id_product_result,
-                'barcode_result' => $barcode_result,
-                'name_result' => $name_result,
-                'unit_result' => $unit_result,
-                'value_result' => $value_result,
-                'qty' => $value_array['qty'],
-                'qty_result' => $value_array['qty_result']
-
-            );
-        }
-        return $result;
     }
 
     private function getArrayKeyDetail($id_product, $data = array())
@@ -158,23 +114,57 @@ class Conversion extends MX_Controller
         return false;
     }
 
+
+    private function getArrayIDProduct($array = array(), $products = array())
+    {
+        foreach ($array as $key => $value_array) {
+            foreach ($products as $row) {
+                if ($value_array['id_product'] == $row['id_product']) {
+                    $id_product = $row['id_product'];
+                    $barcode = $row['barcode'];
+                    $name = $row['name'];
+                    $unit = $row['unit'];
+                    $value = $row['value'];
+                    $price = $row['sell_price'];
+                }
+            }
+
+            $result[] = array(
+                'id_product' => $id_product,
+                'barcode' => $barcode,
+                'name' => $name,
+                'unit' => $unit,
+                'value' => $value,
+                'qty' => $value_array['qty'],
+                'price' => $price
+
+            );
+        }
+        return $result;
+    }
+
+
     private function getCacheStatus()
     {
-        if ($cache = $this->caching->getQueryCache('PRODUCT_CONVERSION', $this->id_staff, $this->config->item('PRODUCT_CONVERSION'))) {
+        if ($cache = $this->caching->getQueryCache('PRODUCT_DISTRIBUTION',
+            $this->id_staff,
+            $this->config->item('PRODUCT_DISTRIBUTION'))
+        ) {
             $this->setCache(json_decode($cache, TRUE));
             return true;
         } else {
             $data = array(
-                'table' => 'product_conversion',
+                'table' => 'product_distribution',
                 'value' => array(
                     'id_staff' => $this->id_staff,
+                    'id_store' => $this->id_store,
                 ),
                 'detail' => array(
-                    'table' => 'product_conversion_detail',
-                    'foreign_key' => 'id_conversion'
+                    'table' => 'product_distribution_detail',
+                    'foreign_key' => 'id_product_distribution'
                 )
             );
-            $this->caching->cacheQuery('PRODUCT_CONVERSION', $this->id_staff, json_encode($data));
+            $this->caching->cacheQuery('PRODUCT_DISTRIBUTION', $this->id_staff, json_encode($data));
             return false;
         }
     }
@@ -194,5 +184,6 @@ class Conversion extends MX_Controller
     {
         $this->cache = $cache;
     }
+
 
 }
