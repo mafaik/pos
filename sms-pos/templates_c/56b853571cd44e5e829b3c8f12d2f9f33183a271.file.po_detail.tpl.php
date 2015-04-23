@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-21 05:57:04
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-22 14:11:03
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6338738805530ecdd0a61e9-92077084%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '56b853571cd44e5e829b3c8f12d2f9f33183a271' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl',
-      1 => 1429595744,
+      1 => 1429711860,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -317,6 +317,12 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 
         
     <!-- Default panel -->
+    <?php echo '<script'; ?>
+ type="text/javascript">
+        var data_storage = <?php echo json_encode($_smarty_tpl->tpl_vars['product_storage']->value);?>
+;
+    <?php echo '</script'; ?>
+>
     <?php echo js('function.js');?>
 
     <?php echo js('form/po.js');?>
@@ -355,11 +361,11 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 
                 <div class="col-sm-6">
                     <ul class="invoice-details">
-                        <li>Invoice # <strong class="text-danger"><?php echo $_smarty_tpl->tpl_vars['cache']->value['value']['invoice_number'];?>
+                        <li>No Faktur # <strong class="text-danger"><?php echo $_smarty_tpl->tpl_vars['cache']->value['value']['invoice_number'];?>
 </strong></li>
-                        <li>Date of Invoice: <strong><?php echo $_smarty_tpl->tpl_vars['cache']->value['value']['date'];?>
+                        <li>Tanggal Nota Transaksi: <strong><?php echo $_smarty_tpl->tpl_vars['cache']->value['value']['date'];?>
 </strong></li>
-                        <li>Due Date: <strong><?php echo $_smarty_tpl->tpl_vars['cache']->value['value']['due_date'];?>
+                        <li>Jatuh Tempo Pembayaran: <strong><?php echo $_smarty_tpl->tpl_vars['cache']->value['value']['due_date'];?>
 </strong></li>
                         <li class="invoice-status text-right">
                             <a href="<?php echo base_url('purchase-order/delete');?>
@@ -386,76 +392,85 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 " role="form" method="post">
                 <div class="form-group">
                     <div class="row">
-
-                        <div class="col-md-4">
-                            <label>Product:</label>
-                            <?php echo '<script'; ?>
- type="text/javascript">
-                                var product_storage = <?php echo json_encode($_smarty_tpl->tpl_vars['product_storage']->value);?>
-;
-                            <?php echo '</script'; ?>
->
-                            <?php echo form_dropdown('id_product_select',$_smarty_tpl->tpl_vars['products']->value,set_value('id_product'),'data-placeholder="Product" class="select-full" id="product-id-select" onchange="leaveDropdownProduct(this,product_storage,\'id_product\')"');?>
-
-                            <?php if (form_error('id_product')) {?>
-                                <span class="label label-block label-danger text-left"><?php echo form_error('id_product');?>
-</span>
-                            <?php }?>
-                            <input type="hidden" name="id_product" id="product-id" value="<?php echo set_value('id_product');?>
-">
-                        </div>
-                        <div class="col-md-4">
-                            <label>Barcode:</label>
-                            <?php echo form_input('barcode',set_value('barcode'),'class="form-control" placeholder="Type or scan barcode" id="product-barcode" autofocus onblur="leaveTextBarcode(this,product_storage,\'barcode\')"');?>
-
-                        </div>
-                        <div class="col-md-4">
-                            <label>Name:</label>
-                            <input type="hidden" name="unit" id="product-unit" value="<?php echo set_value('unit');?>
-">
+                        <div class="col-md-6">
+                            <label>Nama Produk</label>
                             <h6 id="product-name"></h6>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Satuan / isi</label>
+                            <h6 id="product-unit"></h6>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Merek</label>
+                            <h6 id="product-brand"></h6>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Kategory</label>
+                            <h6 id="product-category"></h6>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-4 <?php if (form_error('qty')) {?>has-warning<?php }?>">
+                        <div class="col-md-3">
+                            <label>Barcode:</label>
+                            <?php echo form_input('barcode',set_value('barcode'),'class="form-control" placeholder="Type or scan barcode" id="product-barcode" autofocus onblur="leaveTextBarcode(this)"');?>
+
+
+                            <input type="hidden" name="id_product" id="product-id" value="<?php echo set_value('id_product');?>
+">
+                            <input type="hidden" name="name" id="product-name-text" value="<?php echo set_value('name');?>
+">
+                            <input type="hidden" name="brand" id="product-brand-text" value="<?php echo set_value('brand');?>
+">
+                            <input type="hidden" name="unit" id="product-unit-text" value="<?php echo set_value('unit');?>
+">
+                            <input type="hidden" name="value" id="product-value-text" value="<?php echo set_value('value');?>
+">
+                        </div>
+                        <div class="col-md-2">
+                            <a data-toggle="modal" role="button" href="#default-modal"
+                               class="button btn btn-info " style="margin-top:22px;">
+                                <i class="icon-search2"></i> Cari
+                            </a>
+                        </div>
+                        <div class="col-md-1 <?php if (form_error('qty')) {?>has-warning<?php }?>">
                             <label>Qty:</label>
-                            <input type="number" name="qty" value="<?php echo set_value('qty');?>
-"
+                            <input type="text" name="qty" value="<?php echo set_value('qty');?>
+" id="product-qty-text"
                                    class="form-control" placeholder="0" >
                             <?php if (form_error('qty')) {?>
                                 <span class="label label-block label-danger text-left"><?php echo form_error('qty');?>
 </span>
                             <?php }?>
                         </div>
-                        <div class="col-md-4 <?php if (form_error('price')) {?>has-warning<?php }?>">
+                        <div class="col-md-2 <?php if (form_error('price')) {?>has-warning<?php }?>">
                             <label>Price:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
-                                <input type="text" name="price" value="<?php echo set_value('price');?>
+                                <input type="number" name="price" value="<?php echo set_value('price');?>
 "
                                        class="form-control" placeholder="0" >
 
                             </div>
                             <?php if (form_error('price')) {?>
-                            <span class="label label-block label-danger text-left"><?php echo form_error('price');?>
+                                <span class="label label-block label-danger text-left"><?php echo form_error('price');?>
 </span>
                             <?php }?>
                         </div>
-                        <div class="col-md-4 <?php if (form_error('discount_total')) {?>has-warning<?php }?>">
+                        <div class="col-md-2 <?php if (form_error('discount_total')) {?>has-warning<?php }?>">
                             <label>Discount Total:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
-                                <input type="text" name="discount_total" value="<?php echo set_value('discount_total');?>
+                                <input type="number" name="discount_total" value="<?php echo set_value('discount_total');?>
 "
                                        class="form-control" placeholder="0" >
                             </div>
                             <?php if (form_error('discount_total')) {?>
                                 <span class="label label-block label-danger text-left">
-                                    <?php echo form_error('discount_total');?>
+                                <?php echo form_error('discount_total');?>
 
-                                </span>
+                            </span>
                             <?php }?>
                         </div>
                     </div>
@@ -474,11 +489,13 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                     <tr>
                         <th>No</th>
                         <th>Barcode</th>
-                        <th>Name</th>
+                        <th>Nama Produk</th>
+                        <th>Merek</th>
+                        <th>Satuan / isi</th>
                         <th>Qty</th>
-                        <th>Price</th>
+                        <th>Harga</th>
                         <th>Total</th>
-                        <th>Discount</th>
+                        <th>Diskon</th>
                         <th>Subtotal</th>
                         <th>Action</th>
                     </tr>
@@ -496,7 +513,12 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
 </td>
                             <td><?php echo $_smarty_tpl->tpl_vars['key']->value['barcode'];?>
 </td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name_unit'];?>
+                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name'];?>
+</td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['brand'];?>
+</td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
+ / <?php echo $_smarty_tpl->tpl_vars['key']->value['value'];?>
 </td>
                             <td  style="width:100px;">
                                 <input type="number" id="qty-<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
@@ -508,19 +530,19 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
 ')">
                             </td>
                             <td style="width:130px;" class="text-right">
-                                Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],2,".",",");?>
+                                Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],0);?>
 
                             </td>
                             <td style="width:130px;" class="text-right">
-                                Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']),2,".",",");?>
+                                Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']),0);?>
 
                             </td>
                             <td style="width:130px;" class="text-right">
-                                Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['discount_total'],2,".",",");?>
+                                Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['discount_total'],0);?>
 
                             </td>
                             <td style="width:130px;" class="text-right">
-                                Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']),2,".",",");?>
+                                Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']),0);?>
 
                             </td>
                             <td style="width:90px;">
@@ -563,7 +585,7 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                         <p><h6>Total:</h6></p>
                     </div>
                     <div class="col-sm-2 text-right">
-                        <p><h6><strong>Rp <?php echo number_format($_smarty_tpl->tpl_vars['total']->value,2,".",",");?>
+                        <p><h6><strong>Rp <?php echo number_format($_smarty_tpl->tpl_vars['total']->value,0);?>
 </strong></h6></p>
 
                         <input type="hidden" name="total" value="<?php echo $_smarty_tpl->tpl_vars['total']->value;?>
@@ -661,6 +683,74 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                 
             
         </div><!-- /default panel -->
+
+
+    <!-- Default modal -->
+    <div id="default-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Daftar Product</h4>
+                </div>
+
+                <!-- New invoice template -->
+                <div class="panel panel-default">
+                    <div class="datatable-tools">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Barcode</th>
+                                <th>Name</th>
+                                <th>Kategory</th>
+                                <th>Satuan</th>
+                                <th>Isi</th>
+                                <th>Merek</th>
+                                <th>Ukuran</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php  $_smarty_tpl->tpl_vars['products'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['products']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['product_storage']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['products']->key => $_smarty_tpl->tpl_vars['products']->value) {
+$_smarty_tpl->tpl_vars['products']->_loop = true;
+?>
+                                <tr>
+                                    <td><?php echo $_smarty_tpl->tpl_vars['products']->value['barcode'];?>
+</td>
+                                    <td><?php echo $_smarty_tpl->tpl_vars['products']->value['name'];?>
+</td>
+                                    <td><?php echo $_smarty_tpl->tpl_vars['products']->value['category'];?>
+</td>
+                                    <td><?php echo $_smarty_tpl->tpl_vars['products']->value['unit'];?>
+</td>
+                                    <td><?php echo $_smarty_tpl->tpl_vars['products']->value['value'];?>
+</td>
+                                    <td><?php echo $_smarty_tpl->tpl_vars['products']->value['brand'];?>
+</td>
+                                    <td><?php echo $_smarty_tpl->tpl_vars['products']->value['size'];?>
+</td>
+                                    <td>
+                                        <a href="#" onclick="addItem(<?php echo $_smarty_tpl->tpl_vars['products']->value['id_product'];?>
+)"
+                                           class="button btn btn-info  btn-icon" data-dismiss="modal">
+                                            <i class="icon-cart-add"></i> Pilih
+                                        </a>
+
+                                    </td>
+                                </tr>
+
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /new invoice template -->
+            </div>
+        </div>
+    </div>
+    <!-- /default modal -->
 
 
         <!-- Footer -->

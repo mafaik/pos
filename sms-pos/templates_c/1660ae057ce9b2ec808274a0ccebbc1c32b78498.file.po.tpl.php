@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-20 04:46:38
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-22 14:02:30
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/po.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:20319457125530dd2fcb4f06-62660745%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1660ae057ce9b2ec808274a0ccebbc1c32b78498' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/po.tpl',
-      1 => 1429430584,
+      1 => 1429690052,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -333,7 +333,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 <?php $_tmp1=ob_get_clean();?><?php if ($_tmp1!='') {?>has-warning<?php }?>">
                     <div class="row">
                         <div class="col-md-6 <?php if (form_error('id_principal')) {?>has-warning<?php }?>">
-                            <label>Supplier:</label>
+                            <label>Supplier / Principal:</label>
                             <?php echo form_dropdown('id_principal',$_smarty_tpl->tpl_vars['principals']->value,set_value('id_principal'),'data-placeholder="Supplier" class="select-full" tabindex="1" autofocus');?>
 
                             <?php if (form_error('id_principal')) {?>
@@ -342,7 +342,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                             <?php }?>
                         </div>
                         <div class="col-md-6 <?php if (form_error('invoice_number')) {?>has-warning<?php }?>">
-                            <label>Invoice Number:</label>
+                            <label>No Faktur:</label>
                             <?php echo form_input('invoice_number',set_value('invoice_number'),'class="form-control" placeholder="Invoice Number"');?>
 
                             <?php if (form_error('invoice_number')) {?>
@@ -356,12 +356,12 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6 <?php if (form_error('date')) {?>has-warning<?php }?>">
-                            <label>Order Date:</label>
+                            <label>Tanggal Nota Transaksi:</label>
                             <?php echo form_input('date',set_value('date'),'class="datepicker-trigger form-control" data-mask="9999-99-99" placeholder"YYYY-MM-dd"');?>
 
                         </div>
                         <div class="col-md-6 <?php if (form_error('due_date')) {?>has-warning<?php }?>">
-                            <label>Due Date:</label>
+                            <label>Jatuh Tempo Pembayaran:</label>
                             <?php echo form_input('due_date',set_value('due_date'),'class="datepicker-trigger form-control" data-mask="9999-99-99" placeholder"YYYY-MM-dd"');?>
 
                         </div>

@@ -74,11 +74,14 @@ class PurchaseOrder extends MX_Controller
             if ($this->form_validation->run('po_detail') == TRUE) {
                 $data_value = array(
                     'id_product' => $this->input->post('id_product'),
+                    'name' => $this->input->post('name'),
                     'barcode' => $this->input->post('barcode'),
-                    'name_unit' => $this->input->post('unit'),
+                    'unit' => $this->input->post('unit'),
+                    'value' => $this->input->post('value'),
+                    'brand' => $this->input->post('brand'),
                     'qty' => $this->input->post('qty'),
                     'price' => $this->input->post('price'),
-                    'discount_total' => $this->input->post('discount_total') != null ? $this->input->post('discount_total') : 0 ,
+                    'discount_total' => $this->input->post('discount_total') != null ? $this->input->post('discount_total') : 0,
                     'status' => 0
                 );
                 if ($cache['detail']['value'] == null || !$this->cekDetailAvailable($data_value['id_product'], $cache['detail']['value'])) {
@@ -94,7 +97,11 @@ class PurchaseOrder extends MX_Controller
         $data['product_storage'] = $this->ModProduct->get();
         $products = array('' => '');
         foreach ($data['product_storage'] as $row) {
-            $products[$row['id_product']] = $row['name'] . ' | ' . $row['unit'] . ' ( ' . $row['value'] . ' )';
+            $value_option = $row['name'];
+            $value_option .= ' | ' . $row['brand'];
+            $value_option .= ' | ' . $row['unit'];
+            $value_option .= ' ( ' . $row['value'] . ' )';
+            $products[$row['id_product']] = $value_option;
         }
 
         $data['products'] = $products;
@@ -135,7 +142,8 @@ class PurchaseOrder extends MX_Controller
         redirect('purchase-order');
     }
 
-    public function savePO(){
+    public function savePO()
+    {
         if (!$this->getCacheStatus()) {
             redirect('purchase-order');
             return false;
@@ -174,9 +182,12 @@ class PurchaseOrder extends MX_Controller
                 $cache['value']['file'] = $scan;
 
                 $this->caching->cacheQuery('PO', $this->id_staff, json_encode($cache));
-                if($id_po = $this->ModPurchaseOrder->insertBatch($cache)){
+
+                $this->load->library('Insert_Batch');
+
+                if ($id_po = $this->insert_batch->insertData($cache)) {
                     $this->caching->deleteCache('PO', $this->id_staff);
-                    redirect('purchase-order/invoice/'.$id_po);
+                    redirect('purchase-order/invoice/' . $id_po);
                     return false;
                 }
             }

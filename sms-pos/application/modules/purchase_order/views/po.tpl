@@ -17,14 +17,14 @@
                 <div class="form-group {if {form_error('invoice_number')} != ''}has-warning{/if}">
                     <div class="row">
                         <div class="col-md-6 {if form_error('id_principal')}has-warning{/if}">
-                            <label>Supplier:</label>
+                            <label>Supplier / Principal:</label>
                             {form_dropdown('id_principal',$principals,set_value('id_principal'),'data-placeholder="Supplier" class="select-full" tabindex="1" autofocus')}
                             {if form_error('id_principal')}
                                 <span class="label label-block label-danger text-left">{form_error('id_principal') }</span>
                             {/if}
                         </div>
                         <div class="col-md-6 {if form_error('invoice_number')}has-warning{/if}">
-                            <label>Invoice Number:</label>
+                            <label>No Faktur:</label>
                             {form_input('invoice_number', set_value('invoice_number'), 'class="form-control" placeholder="Invoice Number"')}
                             {if form_error('invoice_number')}
                                 <span class="label label-block label-danger text-left">{form_error('invoice_number') }</span>
@@ -36,11 +36,11 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6 {if form_error('date')}has-warning{/if}">
-                            <label>Order Date:</label>
+                            <label>Tanggal Nota Transaksi:</label>
                             {form_input('date', set_value('date'), 'class="datepicker-trigger form-control" data-mask="9999-99-99" placeholder"YYYY-MM-dd"')}
                         </div>
                         <div class="col-md-6 {if form_error('due_date')}has-warning{/if}">
-                            <label>Due Date:</label>
+                            <label>Jatuh Tempo Pembayaran:</label>
                             {form_input('due_date', set_value('due_date'), 'class="datepicker-trigger form-control" data-mask="9999-99-99" placeholder"YYYY-MM-dd"')}
                         </div>
                     </div>

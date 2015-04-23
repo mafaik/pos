@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-22 14:42:25
-         compiled from "/var/www/sms-pos/application/modules/product_distribution/views/invoice.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:111877558055373acd445ae1-12119020%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-23 06:54:50
+         compiled from "/var/www/sms-pos/application/modules/product_conversion/views/conversion_add.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:3822220495538808c8a4394-43898444%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    'e6da9b6f4cd191ad8b4c2c8b42708bf490110080' => 
+    'b50831107edf142f840aa7f523c3229785250005' => 
     array (
-      0 => '/var/www/sms-pos/application/modules/product_distribution/views/invoice.tpl',
-      1 => 1429683054,
+      0 => '/var/www/sms-pos/application/modules/product_conversion/views/conversion_add.tpl',
+      1 => 1429772086,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -17,15 +17,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '111877558055373acd445ae1-12119020',
+  'nocache_hash' => '3822220495538808c8a4394-43898444',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_55373acd5ecdb1_69841705',
+  'unifunc' => 'content_5538808ca22d85_28239982',
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_55373acd5ecdb1_69841705')) {function content_55373acd5ecdb1_69841705($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5538808ca22d85_28239982')) {function content_5538808ca22d85_28239982($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -316,112 +316,218 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
     <div class="page-content">
 
         
+    <!-- Default panel -->
+    <?php echo '<script'; ?>
+ type="text/javascript">
+        var data_storage = <?php echo json_encode($_smarty_tpl->tpl_vars['product_storage']->value);?>
+;
+    <?php echo '</script'; ?>
+>
+    <?php echo js('function.js');?>
 
-    <!-- New invoice template -->
-    <div class="panel panel-success">
-        <div class="panel-heading">
-            <h6 class="panel-title"><i class="icon-checkmark3"></i> Product Distribution Invoice</h6>
-            <div class="dropdown pull-right">
-                <a href="#" class="dropdown-toggle panel-icon" data-toggle="dropdown">
-                    <i class="icon-cog3"></i>
-                    <b class="caret"></b>
-                </a>
-                
-                
-                
-                
-                
-                
-            </div>
-        </div>
+    <?php echo js('form/conversion.js');?>
 
-        <div class="panel-body">
-
-            <div class="row invoice-header">
-                <div class="col-sm-6">
-                    <h3>Product Distribution</h3>
+    <div class="row">
+        <form action="<?php echo base_url('product-conversion/save');?>
+" role="form" method="post">
+            <div class="col-md-12">
+                <div class="block-inner">
+                    <h6 class="heading-hr">
+                        <i class="icon-clipboard"></i> Product Conversion
+                        <small class="display-block">Informasi umum tentang proses purchasing</small>
+                    </h6>
                 </div>
 
-                <div class="col-sm-3 pull-right">
-                    <ul>
-                        <li>ID Distribution # <strong class="text-danger pull-right"><?php echo $_smarty_tpl->tpl_vars['distribution']->value->id_product_distribution;?>
-</strong></li>
-                        <li>Staff  <strong class="pull-right"><?php echo $_smarty_tpl->tpl_vars['distribution']->value->name;?>
- </strong></li>
-                        <li>Date: <strong class="pull-right"><?php echo $_smarty_tpl->tpl_vars['distribution']->value->date;?>
-</strong></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="table-responsive">
-
-            <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Barcode</th>
-                    <th>Name</th>
-                    <th>Unit</th>
-                    <th>Value</th>
-                    <th>Price</th>
-                    <th>Qty</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable(1, null, 0);?>
-                <?php  $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['key']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['key']->key => $_smarty_tpl->tpl_vars['key']->value) {
-$_smarty_tpl->tpl_vars['key']->_loop = true;
-?>
-                    <tr>
-                        <td>
-                            <?php echo $_smarty_tpl->tpl_vars['val']->value;?>
-
-                        </td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['key']->value['barcode'];?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name'];?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['key']->value['value'];?>
-</td>
-                        <td> Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],0);?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['key']->value['qty'];?>
-</td>
-                    </tr>
-                    <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable($_smarty_tpl->tpl_vars['val']->value+1, null, 0);?>
-                <?php } ?>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="panel-body">
-            <div class="row invoice-payment">
-                <div class="col-sm-8">
-                </div>
-
-                <div class="col-sm-4">
-                    <div class="btn-group pull-right">
-                        <a href="<?php echo base_url('product-distribution');?>
-"  class="btn btn-info button">
-                            <i class="icon-box-add"></i> New Product Distribution</a>
-                        <button type="button" class="btn btn-primary"><i class="icon-print2"></i> Print</button>
+                <?php if ($_smarty_tpl->tpl_vars['error']->value) {?>
+                    <div class="callout callout-danger fade in">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <p><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+</p>
                     </div>
+                <?php }?>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h6 class="panel-title">Product Conversion</h6></div>
+                    <div class="panel-body">
+                        <div class="col-sm-12">
+                            <h6>Konversi Dar Produk:</h6>
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th>Barcode:</th>
+                                    <td class="text-right"><?php echo $_smarty_tpl->tpl_vars['product']->value->barcode;?>
+</td>
+                                </tr>
+                                <tr>
+                                    <th>Nama Produk:</th>
+                                    <td class="text-right"><?php echo $_smarty_tpl->tpl_vars['product']->value->name;?>
+</td>
+                                </tr>
+                                <tr>
+                                    <th>Merek:</th>
+                                    <td class="text-right"><?php echo $_smarty_tpl->tpl_vars['product']->value->brand;?>
+</td>
+                                </tr>
+                                <tr>
+                                    <th>Satuan / Isi:</th>
+                                    <td class="text-right">
+                                        <?php echo $_smarty_tpl->tpl_vars['product']->value->unit;?>
+ / <?php echo $_smarty_tpl->tpl_vars['product']->value->value;?>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Stok:</th>
+                                    <td class="text-right"><?php echo $_smarty_tpl->tpl_vars['product']->value->stock;?>
+</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Qty: </label>
+                                <div class="col-sm-3 <?php if (form_error('qty')) {?>has-warning<?php }?>">
+                                    <input type="hidden" name="id_product" value="<?php echo $_smarty_tpl->tpl_vars['product']->value->id_product;?>
+">
+                                    <input type="number" value="<?php echo set_value('qty');?>
+" class="form-control" autofocus="autofocus" name="qty" id="qty"
+                                           placeholder="0">
+                                    <input type="hidden" name="id_product_result" id="result-id-product">
+                                    <input type="hidden" name="qty_result" id="result-qty-result">
+                                    <input type="hidden" id="value" value="<?php echo $_smarty_tpl->tpl_vars['product']->value->value;?>
+">
+                                </div>
+                                <label class="col-sm-4 control-label">Conversion To: </label>
+                                <div class="col-sm-3">
+                                    <a data-toggle="modal" role="button" href="#default-modal"
+                                       class="button btn btn-info ">
+                                        <i class="icon-search2"></i> Cari
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
 
-            <h6>Notes &amp; Information:</h6>
-            This invoice contains a incomplete list of items destroyed by the Federation ship Enterprise on Startdate 5401.6 in an unprovked attacked on a peaceful &amp; wholly scientific mission to Outpost 775.
-            The Romulan people demand immediate compensation for the loss of their Warbird, Shuttle, Cloaking Device, and to a lesser extent thier troops.
+                    <div class="panel-heading"><h6 class="panel-title">Konversi Ke Produk</h6></div>
+                    <div class="panel-body">
+                        <div class="col-sm-12">
+                            <h6>Rincian Produk:</h6>
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th>Barcode:</th>
+                                    <td class="text-right" id="result-barcode"></td>
+                                </tr>
+                                <tr>
+                                    <th>Nama Produk:</th>
+                                    <td class="text-right" id="result-name"></td>
+                                </tr>
+                                <tr>
+                                    <th>Merek:</th>
+                                    <td class="text-right" id="result-brand"></td>
+                                </tr>
+                                <tr>
+                                    <th>Satuan / Isi:</th>
+                                    <td class="text-right" id="result-unit">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Stok:</th>
+                                    <td class="text-right"  id="result-stock"></td>
+                                </tr>
+                                <tr>
+                                    <th>Stok Tambahan:</th>
+                                    <td class="text-right"  id="result-qty"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <input type="submit" class="btn btn-block btn-success" value="Submit">
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Default modal -->
+    <div id="default-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Daftar Product</h4>
+                </div>
+
+                <!-- New invoice template -->
+                <?php if ($_smarty_tpl->tpl_vars['product_storage']->value) {?>
+                    <div class="panel panel-default">
+                        <div class="datatable-tools">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Barcode</th>
+                                    <th>Name</th>
+                                    <th>Kategory</th>
+                                    <th>Satuan</th>
+                                    <th>Isi</th>
+                                    <th>Merek</th>
+                                    <th>Ukuran</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php  $_smarty_tpl->tpl_vars['products'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['products']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['product_storage']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['products']->key => $_smarty_tpl->tpl_vars['products']->value) {
+$_smarty_tpl->tpl_vars['products']->_loop = true;
+?>
+                                    <tr>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['products']->value['barcode'];?>
+</td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['products']->value['name'];?>
+</td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['products']->value['category'];?>
+</td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['products']->value['unit'];?>
+</td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['products']->value['value'];?>
+</td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['products']->value['brand'];?>
+</td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['products']->value['size'];?>
+</td>
+                                        <td>
+                                            <a href="#" onclick="addItem(<?php echo $_smarty_tpl->tpl_vars['products']->value['id_product'];?>
+)"
+                                               class="button btn btn-info  btn-icon" data-dismiss="modal">
+                                                <i class="icon-cart-add"></i>
+                                            </a>
+
+                                        </td>
+                                    </tr>
+
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <?php }?>
+                <!-- /new invoice template -->
+            </div>
         </div>
     </div>
-    <!-- /new invoice template -->
+    <!-- /default modal -->
 
 
         <!-- Footer -->

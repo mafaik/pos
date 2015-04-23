@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-21 05:58:21
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-22 13:58:48
          compiled from "/var/www/sms-pos/application/modules/card_stock/views/card_stock.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:15869628155348d4cb32e10-97600760%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd75152d400bcc8ab1996993f67f61aef5f295c4b' => 
     array (
       0 => '/var/www/sms-pos/application/modules/card_stock/views/card_stock.tpl',
-      1 => 1429516874,
+      1 => 1429711125,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -317,43 +317,76 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 
         
     <!-- Default panel -->
-    <form action="<?php echo current_url();?>
-" role="form" method="post">
-        <div class="panel panel-default">
+    <div class="panel panel-default">
 
-            <div class="panel-heading"><h6 class="panel-title">Card Stock</h6></div>
+        <div class="panel-heading"><h6 class="panel-title">Card Stock</h6></div>
 
-            <div class="panel-body">
-                <div class="block-inner">
-                    <h6 class="heading-hr">
-                        <i class="icon-clipboard"></i> Card Stock <small class="display-block">Informasi umum tentang proses purchasing</small>
-                    </h6>
-                </div>
-                <div class="form-group <?php ob_start();?><?php echo form_error('id_po');?>
-<?php $_tmp1=ob_get_clean();?><?php if ($_tmp1!='') {?>has-warning<?php }?>">
-                    <div class="row">
-                        <div class="col-md-4 <?php if (form_error('id_po')) {?>has-warning<?php }?>">
-                            <label>Supplier:</label>
-                            <?php echo form_dropdown('id_po',$_smarty_tpl->tpl_vars['principals']->value,set_value('id_po'),'data-placeholder="Purchase Order" class="select-full" tabindex="1" autofocus');?>
-
-                            <?php if (form_error('id_po')) {?>
-                                <span class="label label-block label-danger text-left"><?php echo form_error('id_po');?>
-</span>
-                            <?php }?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-actions text-right ">
-                    <input type="submit" value="Add" class="btn btn-success">
-                </div>
-            </div><!-- /panel body -->
-
-            <div class="panel-body">
-                <h6>Notes &amp; Information:</h6>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        <div class="panel-body">
+            <div class="block-inner">
+                <h6 class="heading-hr">
+                    <i class="icon-clipboard"></i> Card Stock <small class="display-block">Informasi umum tentang proses purchasing</small>
+                </h6>
             </div>
-        </div><!-- /default panel -->
-    </form>
+            <?php if ($_smarty_tpl->tpl_vars['data_po']->value) {?>
+            <div class="panel panel-default">
+                <div class="datatable-tools">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>No Faktur</th>
+                            <th>No Nota</th>
+                            <th>Tanggal Transaksi</th>
+                            <th>Tanggal Ajuan Stocking</th>
+                            <th>Supplier / Prinsipal</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable(1, null, 0);?>
+                        <?php  $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['key']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['data_po']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['key']->key => $_smarty_tpl->tpl_vars['key']->value) {
+$_smarty_tpl->tpl_vars['key']->_loop = true;
+?>
+                            <tr>
+                                <td><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+</td>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value->id_po;?>
+</td>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value->invoice_number;?>
+</td>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value->date;?>
+</td>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value->date_created;?>
+</td>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value->name;?>
+</td>
+                                <td>
+                                    <a href="<?php echo base_url('card-stock/detail');?>
+/<?php echo $_smarty_tpl->tpl_vars['key']->value->id_po;?>
+"
+                                       class="button btn btn-info " >
+                                        <i class="icon-cart-add"></i> Pilih
+                                    </a>
+
+                                </td>
+                            </tr>
+
+                            <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable($_smarty_tpl->tpl_vars['val']->value+1, null, 0);?>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <?php }?>
+        </div><!-- /panel body -->
+
+        <div class="panel-body">
+            <h6>Notes &amp; Information:</h6>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        </div>
+    </div><!-- /default panel -->
 
 
         <!-- Footer -->

@@ -3,6 +3,9 @@
 
 {block name=content}
     <!-- Default panel -->
+    <script type="text/javascript">
+        var data_storage = {$product_storage|@json_encode};
+    </script>
     {js('function.js')}
     {js('form/po.js')}
     <div class="panel panel-default">
@@ -31,9 +34,9 @@
 
                 <div class="col-sm-6">
                     <ul class="invoice-details">
-                        <li>Invoice # <strong class="text-danger">{$cache['value']['invoice_number']}</strong></li>
-                        <li>Date of Invoice: <strong>{$cache['value']['date']}</strong></li>
-                        <li>Due Date: <strong>{$cache['value']['due_date']}</strong></li>
+                        <li>No Faktur # <strong class="text-danger">{$cache['value']['invoice_number']}</strong></li>
+                        <li>Tanggal Nota Transaksi: <strong>{$cache['value']['date']}</strong></li>
+                        <li>Jatuh Tempo Pembayaran: <strong>{$cache['value']['due_date']}</strong></li>
                         <li class="invoice-status text-right">
                             <a href="{base_url('purchase-order/delete')}"  class=" button btn btn-danger">
                                 <i class="icon-eject"></i>New Purchase Order</a>
@@ -56,66 +59,74 @@
             <form action="{base_url('purchase-order/detail')}" role="form" method="post">
                 <div class="form-group">
                     <div class="row">
-
-                        <div class="col-md-4">
-                            <label>Product:</label>
-                            <script type="text/javascript">
-                                var product_storage = {$product_storage|@json_encode};
-                            </script>
-                            {form_dropdown('id_product_select',
-                            $products,
-                            set_value('id_product'),
-                            'data-placeholder="Product" class="select-full" id="product-id-select" onchange="leaveDropdownProduct(this,product_storage,\'id_product\')"')}
-                            {if form_error('id_product')}
-                                <span class="label label-block label-danger text-left">{form_error('id_product') }</span>
-                            {/if}
-                            <input type="hidden" name="id_product" id="product-id" value="{set_value('id_product')}">
-                        </div>
-                        <div class="col-md-4">
-                            <label>Barcode:</label>
-                            {form_input('barcode', set_value('barcode'),
-                            'class="form-control" placeholder="Type or scan barcode" id="product-barcode" autofocus onblur="leaveTextBarcode(this,product_storage,\'barcode\')"')}
-                        </div>
-                        <div class="col-md-4">
-                            <label>Name:</label>
-                            <input type="hidden" name="unit" id="product-unit" value="{set_value('unit')}">
+                        <div class="col-md-6">
+                            <label>Nama Produk</label>
                             <h6 id="product-name"></h6>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Satuan / isi</label>
+                            <h6 id="product-unit"></h6>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Merek</label>
+                            <h6 id="product-brand"></h6>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Kategory</label>
+                            <h6 id="product-category"></h6>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-4 {if form_error('qty')}has-warning{/if}">
+                        <div class="col-md-3">
+                            <label>Barcode:</label>
+                            {form_input('barcode', set_value('barcode'),
+                                'class="form-control" placeholder="Type or scan barcode" id="product-barcode" autofocus onblur="leaveTextBarcode(this)"')}
+
+                            <input type="hidden" name="id_product" id="product-id" value="{set_value('id_product')}">
+                            <input type="hidden" name="name" id="product-name-text" value="{set_value('name')}">
+                            <input type="hidden" name="brand" id="product-brand-text" value="{set_value('brand')}">
+                            <input type="hidden" name="unit" id="product-unit-text" value="{set_value('unit')}">
+                            <input type="hidden" name="value" id="product-value-text" value="{set_value('value')}">
+                        </div>
+                        <div class="col-md-2">
+                            <a data-toggle="modal" role="button" href="#default-modal"
+                               class="button btn btn-info " style="margin-top:22px;">
+                                <i class="icon-search2"></i> Cari
+                            </a>
+                        </div>
+                        <div class="col-md-1 {if form_error('qty')}has-warning{/if}">
                             <label>Qty:</label>
-                            <input type="number" name="qty" value="{set_value('qty')}"
+                            <input type="text" name="qty" value="{set_value('qty')}" id="product-qty-text"
                                    class="form-control" placeholder="0" >
                             {if form_error('qty')}
                                 <span class="label label-block label-danger text-left">{form_error('qty') }</span>
                             {/if}
                         </div>
-                        <div class="col-md-4 {if form_error('price')}has-warning{/if}">
+                        <div class="col-md-2 {if form_error('price')}has-warning{/if}">
                             <label>Price:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
-                                <input type="text" name="price" value="{set_value('price')}"
+                                <input type="number" name="price" value="{set_value('price')}"
                                        class="form-control" placeholder="0" >
 
                             </div>
                             {if form_error('price')}
-                            <span class="label label-block label-danger text-left">{form_error('price') }</span>
+                                <span class="label label-block label-danger text-left">{form_error('price') }</span>
                             {/if}
                         </div>
-                        <div class="col-md-4 {if form_error('discount_total')}has-warning{/if}">
+                        <div class="col-md-2 {if form_error('discount_total')}has-warning{/if}">
                             <label>Discount Total:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
-                                <input type="text" name="discount_total" value="{set_value('discount_total')}"
+                                <input type="number" name="discount_total" value="{set_value('discount_total')}"
                                        class="form-control" placeholder="0" >
                             </div>
                             {if form_error('discount_total')}
                                 <span class="label label-block label-danger text-left">
-                                    {form_error('discount_total') }
-                                </span>
+                                {form_error('discount_total') }
+                            </span>
                             {/if}
                         </div>
                     </div>
@@ -134,11 +145,13 @@
                     <tr>
                         <th>No</th>
                         <th>Barcode</th>
-                        <th>Name</th>
+                        <th>Nama Produk</th>
+                        <th>Merek</th>
+                        <th>Satuan / isi</th>
                         <th>Qty</th>
-                        <th>Price</th>
+                        <th>Harga</th>
                         <th>Total</th>
-                        <th>Discount</th>
+                        <th>Diskon</th>
                         <th>Subtotal</th>
                         <th>Action</th>
                     </tr>
@@ -150,23 +163,25 @@
                         <tr>
                             <td>{$val}</td>
                             <td>{$key['barcode']}</td>
-                            <td>{$key['name_unit']}</td>
+                            <td>{$key['name']}</td>
+                            <td>{$key['brand']}</td>
+                            <td>{$key['unit']} / {$key['value']}</td>
                             <td  style="width:100px;">
                                 <input type="number" id="qty-{$key['id_product']}" value="{$key['qty']}"
                                        class="form-control" onkeypress="qtyKeyPress({$key['id_product']},
                                         '{base_url('purchase-order/detail/update')}')">
                             </td>
                             <td style="width:130px;" class="text-right">
-                                Rp {$key['price']|number_format:2:".":","}
+                                Rp {$key['price']|number_format:0}
                             </td>
                             <td style="width:130px;" class="text-right">
-                                Rp {($key['qty'] * $key['price'])|number_format:2:".":","}
+                                Rp {($key['qty'] * $key['price'])|number_format:0}
                             </td>
                             <td style="width:130px;" class="text-right">
-                                Rp {$key['discount_total']|number_format:2:".":","}
+                                Rp {$key['discount_total']|number_format:0}
                             </td>
                             <td style="width:130px;" class="text-right">
-                                Rp {($key['qty'] * $key['price'] - $key['discount_total'])|number_format:2:".":","}
+                                Rp {($key['qty'] * $key['price'] - $key['discount_total'])|number_format:0}
                             </td>
                             <td style="width:90px;">
 
@@ -203,7 +218,7 @@
                         <p><h6>Total:</h6></p>
                     </div>
                     <div class="col-sm-2 text-right">
-                        <p><h6><strong>Rp {$total|number_format:2:".":","}</strong></h6></p>
+                        <p><h6><strong>Rp {$total|number_format:0}</strong></h6></p>
 
                         <input type="hidden" name="total" value="{$total}" >
                     </div>
@@ -295,4 +310,62 @@
                 {*Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.*}
             {*</div>*}
         </div><!-- /default panel -->
+
+
+    <!-- Default modal -->
+    <div id="default-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Daftar Product</h4>
+                </div>
+
+                <!-- New invoice template -->
+                {if $product_storage}
+                <div class="panel panel-default">
+                    <div class="datatable-tools">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Barcode</th>
+                                <th>Name</th>
+                                <th>Kategory</th>
+                                <th>Satuan</th>
+                                <th>Isi</th>
+                                <th>Merek</th>
+                                <th>Ukuran</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $product_storage as $products }
+                                <tr>
+                                    <td>{$products['barcode']}</td>
+                                    <td>{$products['name']}</td>
+                                    <td>{$products['category']}</td>
+                                    <td>{$products['unit']}</td>
+                                    <td>{$products['value']}</td>
+                                    <td>{$products['brand']}</td>
+                                    <td>{$products['size']}</td>
+                                    <td>
+                                        <a href="#" onclick="addItem({$products['id_product']})"
+                                           class="button btn btn-info  btn-icon" data-dismiss="modal">
+                                            <i class="icon-cart-add"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {/if}
+                <!-- /new invoice template -->
+            </div>
+        </div>
+    </div>
+    <!-- /default modal -->
 {/block}

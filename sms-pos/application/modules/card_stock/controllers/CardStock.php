@@ -19,12 +19,6 @@ class CardStock extends MX_Controller
 
     public function index()
     {
-        if ($this->input->post()) {
-            if ($this->form_validation->run('cs') == TRUE) {
-                redirect('card-stock/detail' . '/' . $this->input->post('id_po'));
-            }
-        }
-        $po = array('' => '');
         $data_po = $this->db->from('purchase_order')
             ->join('principal',
                 'principal.id_principal = purchase_order.id_principal',
@@ -33,14 +27,8 @@ class CardStock extends MX_Controller
             ->order_by('purchase_order.id_po ASC')
             ->get()
             ->result();
-        foreach ($data_po as $object) {
-            $value = "#";
-            $value .= $object->id_po;
-            $value .= !empty($object->invoice_number) ? ' | ' . $object->invoice_number : "";
-            $value .= ' | ' . $object->name;
-            $po[$object->id_po] = $value;
-        }
-        $data['principals'] = $po;
+
+        $data['data_po'] = $data_po;
         $this->parser->parse("card_stock.tpl", $data);
     }
 

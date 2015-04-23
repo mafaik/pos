@@ -68,6 +68,7 @@ class Distribution extends MX_Controller
             $cache = $this->getCache();
 
             if ($id_distribution = $this->insert_batch->insertData($cache)) {
+                $this->caching->deleteCache('PRODUCT_DISTRIBUTION', $this->id_staff);
                 redirect('product-distribution/invoice' . '/' . $id_distribution);
                 return false;
             }
@@ -114,7 +115,6 @@ class Distribution extends MX_Controller
         return false;
     }
 
-
     private function getArrayIDProduct($array = array(), $products = array())
     {
         foreach ($array as $key => $value_array) {
@@ -143,7 +143,6 @@ class Distribution extends MX_Controller
         return $result;
     }
 
-
     private function getCacheStatus()
     {
         if ($cache = $this->caching->getQueryCache('PRODUCT_DISTRIBUTION',
@@ -168,7 +167,6 @@ class Distribution extends MX_Controller
             return false;
         }
     }
-
     /**
      * @return array
      */

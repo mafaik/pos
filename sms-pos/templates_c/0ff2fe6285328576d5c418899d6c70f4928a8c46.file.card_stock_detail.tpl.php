@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-21 05:59:00
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-22 14:29:45
          compiled from "/var/www/sms-pos/application/modules/card_stock/views/card_stock_detail.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1401075379553494b90e25e2-83927373%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0ff2fe6285328576d5c418899d6c70f4928a8c46' => 
     array (
       0 => '/var/www/sms-pos/application/modules/card_stock/views/card_stock_detail.tpl',
-      1 => 1429595934,
+      1 => 1429711860,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -381,9 +381,6 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 
 
         <?php if (!empty($_smarty_tpl->tpl_vars['po_detail']->value)) {?>
-
-
-        <div class="panel-body">
             <form action="<?php echo current_url();?>
 " role="form" method="post"
                   onsubmit="return confirm('Process Data');" >
@@ -393,8 +390,9 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                         <tr>
                             <th>No</th>
                             <th>Barcode</th>
-                            <th>Name</th>
-                            <th>Unit</th>
+                            <th>Nama Produk</th>
+                            <th>Merek</th>
+                            <th>Satuan / isi</th>
                             <th>Qty</th>
                             <th>Qty Checked</th>
                         </tr>
@@ -414,9 +412,11 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
 </td>
                                 <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name'];?>
 </td>
-                                <td style="width:100px;"><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
- ( <?php echo $_smarty_tpl->tpl_vars['key']->value['value'];?>
- )</td>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['brand'];?>
+</td>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
+ / <?php echo $_smarty_tpl->tpl_vars['key']->value['value'];?>
+</td>
                                 <td><?php echo $_smarty_tpl->tpl_vars['key']->value['qty'];?>
 </td>
                                 <td  style="width:100px;">
@@ -442,12 +442,14 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                         </tbody>
                     </table>
                 </div>
-                <div class="form-actions text-right">
-                    <button type="submit" name="save" value="Save" class="btn btn-success"><i class="icon-checkmark"></i> Process</button>
-                    
-                </div>
+
+                <div class="panel-body">
+                    <div class="btn-group pull-right">
+                        <button type="submit" name="save" value="Save" class="btn btn-success"><i class="icon-checkmark"></i> Process</button>
+                        
+                    </div>
+                </div><!-- /panel body -->
             </form>
-        </div><!-- /panel body -->
         <?php }?>
 
 
