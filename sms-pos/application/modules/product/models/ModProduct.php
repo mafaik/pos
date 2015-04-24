@@ -33,6 +33,7 @@ class ModProduct extends CI_Model
         $this->db->join('product_unit','product_unit.id_product_unit = product.id_product_unit');
         $this->db->join('product_category','product_category.id_product_category = product.id_product_category');
         $this->db->where('product.id_product',$id_product);
+        $this->db->order_by('product.name ASC');
         $result = $this->db->get();
         return $result->row();
     }

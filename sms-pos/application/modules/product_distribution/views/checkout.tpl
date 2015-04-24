@@ -25,13 +25,21 @@
 
             <div class="row invoice-header">
                 <div class="col-sm-6">
-                    <h3>Product Distribution</h3>
+                    <h3>{$distribution->store_name}</h3>
+                    <span>{$distribution->address} - {$distribution->zipcode}
+                        </br>
+                        {$distribution->city} - {$distribution->state}
+                        </br>
+                        {$distribution->telp}
+                        </br>
+                        {$distribution->owner}
+                    </span>
                 </div>
 
                 <div class="col-sm-3 pull-right">
                     <ul>
                         <li>ID Distribution # <strong class="text-danger pull-right">{$distribution->id_product_distribution}</strong></li>
-                        <li>Staff  <strong class="pull-right">{$distribution->name} </strong></li>
+                        <li>Staff  <strong class="pull-right">{$distribution->staff_name} </strong></li>
                         <li>Date: <strong class="pull-right">{$distribution->date}</strong></li>
                     </ul>
                 </div>
@@ -47,25 +55,29 @@
                     <th>No</th>
                     <th>Barcode</th>
                     <th>Name</th>
-                    <th>Unit</th>
-                    <th>Value</th>
-                    <th>Price</th>
+                    <th>Satuan</th>
+                    <th>Isi</th>
+                    <th>Merek</th>
+                    <th>Ukuran</th>
+                    <th>Harga</th>
                     <th>Qty</th>
                 </tr>
                 </thead>
                 <tbody>
                 {assign var=val value=1}
-                {foreach $list as $key }
+                {foreach $items as $key }
                     <tr>
                         <td>
                             {$val}
                         </td>
-                        <td>{$key['barcode']}</td>
-                        <td>{$key['name']}</td>
-                        <td>{$key['unit']}</td>
-                        <td>{$key['value']}</td>
-                        <td> Rp {$key['price']|number_format:0}</td>
-                        <td>{$key['qty']}</td>
+                        <td>{$key->barcode}</td>
+                        <td>{$key->name}</td>
+                        <td>{$key->unit}</td>
+                        <td>{$key->value}</td>
+                        <td>{$key->brand}</td>
+                        <td>{$key->size}</td>
+                        <td width="120px"> Rp {$key->sell_price|number_format:0}</td>
+                        <td>{$key->qty}</td>
                     </tr>
                     {assign var=val value=$val+1}
                 {/foreach}

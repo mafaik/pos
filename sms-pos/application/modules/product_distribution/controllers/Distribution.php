@@ -11,177 +11,133 @@ class Distribution extends MX_Controller
 {
     protected $id_staff;
 
-    protected $cache = array();
-
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('Caching');
         $this->id_staff = $this->config->item('id_staff');
+        $this->load->model('product/ModProduct', 'ModProduct');
+        $this->load->library('cart',
+            array(
+                'cache_path' => 'PRODUCT_DISTRIBUTION',
+                'cache_file' => $this->id_staff,
+                'primary_table' => 'product_distribution',
+                'foreign_table' => 'product_distribution_detail'
+            ));
         $this->id_store = $this->config->item('id_store');
     }
 
     public function index()
     {
-        $this->getCacheStatus();
+        $data['error'] = !$this->session->flashdata('error') ? "" : $this->session->flashdata('error');
 
-        $data['error'] = '';
-        $cache = $this->getCache();
-        $this->load->model('product/ModProduct', 'ModProduct');
-
-        if ($this->input->post()) {
-            if ($this->form_validation->run('distribution') == TRUE) {
-                if ($this->ModProduct->checkStock($this->input->post('id_product'), $this->input->post('qty')) == TRUE) {
-                    $data_value = array(
-                        'id_product' => $this->input->post('id_product'),
-                        'qty' => $this->input->post('qty')
-                    );
-                    $cache['detail']['value'][] = $data_value;
-                    $this->caching->cacheQuery('PRODUCT_DISTRIBUTION', $this->id_staff, json_encode($cache));
-
-                    redirect('product-distribution');
-                    return false;
-                }
-                $data['error'] = 'stock tidak cukup';
-            }
+        if (!$cache = $this->cart
+            ->primary_data(array(
+                'id_staff' => $this->id_staff,
+                'id_store' => $this->id_store
+            ))
+            ->getCache()
+        ) {
+            $data['error'] = $this->cart->getError();
         }
 
-        $data['product_storage'] = $this->ModProduct->get();
-        $products = array('' => '');
-        foreach ($data['product_storage'] as $row) {
-            $products[$row['id_product']] = $row['name'] . ' | ' . $row['unit'] . ' ( ' . $row['value'] . ' )';
-        }
+        $product_storage = $this->ModProduct->get();
 
-        $data['products'] = $products;
+        $items = $this->cart->list_item($product_storage, 'id_product')->result_array_item();
+
         $data['cache'] = $cache;
-        $list = empty($cache['detail']['value']) ? null :
-            $this->getArrayIDProduct($cache['detail']['value'], $data['product_storage']);
-        $data['list'] = $list;
+        $data['items'] = $items;
+        $data['product_storage'] = $product_storage;
 
         $this->parser->parse("distribution.tpl", $data);
     }
 
-    public function save()
+    public function add()
     {
-        if ($this->getCacheStatus()) {
-            $this->load->library('Insert_Batch');
-            $cache = $this->getCache();
+        if ($this->input->post()) {
+            if ($this->form_validation->run('distribution') == TRUE) {
 
-            if ($id_distribution = $this->insert_batch->insertData($cache)) {
-                $this->caching->deleteCache('PRODUCT_DISTRIBUTION', $this->id_staff);
-                redirect('product-distribution/invoice' . '/' . $id_distribution);
-                return false;
+                if ($this->ModProduct->checkStock($this->input->post('id_product'),
+                        $this->input->post('qty')) == TRUE
+                ) {
+                    $data_value = array(
+                        'id_product' => $this->input->post('id_product'),
+                        'qty' => $this->input->post('qty')
+                    );
+
+                    if (!$this->cart->add_item($this->input->post('id_product'), $data_value)) {
+                        $this->session->set_flashdata('error', $this->cart->getError());
+                    }
+
+                }
+                $this->session->set_flashdata('error', "stok tidak cukup");
             }
+            $this->session->set_flashdata('error', validation_errors());
         }
         redirect('product-distribution');
     }
 
-    public function deleteDetail($id_product)
+    public function delete($id_product)
     {
-        $this->getCacheStatus();
-        $cache = $this->getCache();
-        unset($cache['detail']['value'][$this->getArrayKeyDetail($id_product, $cache['detail']['value'])]);
-        $this->caching->cacheQuery('PRODUCT_DISTRIBUTION', $this->id_staff, json_encode($cache));
+        if (!$this->cart->delete_item($id_product)) {
+            $this->session->set_flashdata('error', $this->cart->getError());
+        }
         redirect('product-distribution');
     }
 
-    public function invoice($id_distribution)
+    public function save()
     {
+        if ($this->input->post()) {
+            $i = 0;
+            foreach ($this->input->post('id_product') as $val) {
+                $id_product = $val;
+                $qty = $this->input->post('qty')[$i];
+                if ($this->ModProduct->checkStock($id_product, $qty) == TRUE) {
 
-        if (!$data_distribution = $this->db->from('product_distribution')
-            ->join('staff', 'staff.id_staff = product_distribution.id_staff')
-            ->where(array('id_product_distribution' => $id_distribution))
+                    $data_value = array(
+                        'id_product' => $id_product,
+                        'qty' => $qty
+                    );
+
+                    if (!$this->cart->update_item($id_product, $data_value)) {
+                        $this->session->set_flashdata('error', $this->cart->getError());
+                        redirect('product-distribution');
+                    }
+                } else {
+                    $this->session->set_flashdata('error', "input data error");
+                    redirect('product-distribution');
+                }
+                $i++;
+            }
+            if($id_distribution = $this->cart->save()){
+                redirect('product-distribution/checkout').'/'.$id_distribution;
+            }
+            $this->session->set_flashdata('error', "transaction error");
+        }
+        redirect('product-distribution');
+    }
+
+    public function checkout($id_distribution)
+    {
+        if (!$data_distribution = $this->db->select("* , staff.name as staff_name, store.name as store_name")
+            ->from('product_distribution pd')
+            ->join('staff', 'staff.id_staff = pd.id_staff')
+            ->join('store','store.id_store = pd.id_store')
+            ->where(array('pd.id_product_distribution' => $id_distribution))
             ->get()->row()
         ) {
             redirect('product-distribution');
         }
-        $this->getCacheStatus();
-        $cache = $this->getCache();
-        $this->load->model('product/ModProduct', 'ModProduct');
-
-        $data['product_storage'] = $this->ModProduct->get();
         $data['distribution'] = $data_distribution;
-        $list = $this->getArrayIDProduct($cache['detail']['value'], $data['product_storage']);
-        $data['list'] = $list;
-        $this->parser->parse("invoice.tpl", $data);
+        $items = $this->db->select('*')
+            ->from('product_distribution pd')
+            ->join('product_distribution_detail pdd','pdd.id_product_distribution = pd.id_product_distribution')
+            ->join('product p','p.id_product = pdd.id_product')
+            ->join('product_category pc','pc.id_product_category = p.id_product_category')
+            ->join('product_unit pu','pu.id_product_unit = p.id_product_unit')
+            ->where(array('pd.id_product_distribution' => $id_distribution))
+            ->get()->result();
+        $data['items'] = $items;
+        $this->parser->parse("checkout.tpl", $data);
     }
-
-    private function getArrayKeyDetail($id_product, $data = array())
-    {
-        foreach ($data as $key => $product) {
-            if ($product['id_product'] === $id_product)
-                return $key;
-        }
-        return false;
-    }
-
-    private function getArrayIDProduct($array = array(), $products = array())
-    {
-        foreach ($array as $key => $value_array) {
-            foreach ($products as $row) {
-                if ($value_array['id_product'] == $row['id_product']) {
-                    $id_product = $row['id_product'];
-                    $barcode = $row['barcode'];
-                    $name = $row['name'];
-                    $unit = $row['unit'];
-                    $value = $row['value'];
-                    $price = $row['sell_price'];
-                }
-            }
-
-            $result[] = array(
-                'id_product' => $id_product,
-                'barcode' => $barcode,
-                'name' => $name,
-                'unit' => $unit,
-                'value' => $value,
-                'qty' => $value_array['qty'],
-                'price' => $price
-
-            );
-        }
-        return $result;
-    }
-
-    private function getCacheStatus()
-    {
-        if ($cache = $this->caching->getQueryCache('PRODUCT_DISTRIBUTION',
-            $this->id_staff,
-            $this->config->item('PRODUCT_DISTRIBUTION'))
-        ) {
-            $this->setCache(json_decode($cache, TRUE));
-            return true;
-        } else {
-            $data = array(
-                'table' => 'product_distribution',
-                'value' => array(
-                    'id_staff' => $this->id_staff,
-                    'id_store' => $this->id_store,
-                ),
-                'detail' => array(
-                    'table' => 'product_distribution_detail',
-                    'foreign_key' => 'id_product_distribution'
-                )
-            );
-            $this->caching->cacheQuery('PRODUCT_DISTRIBUTION', $this->id_staff, json_encode($data));
-            return false;
-        }
-    }
-    /**
-     * @return array
-     */
-    public function getCache()
-    {
-        return $this->cache;
-    }
-
-    /**
-     * @param array $cache
-     */
-    public function setCache($cache)
-    {
-        $this->cache = $cache;
-    }
-
 
 }
