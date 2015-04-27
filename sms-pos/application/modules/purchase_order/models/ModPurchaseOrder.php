@@ -3,22 +3,14 @@
 /**
  * Created by PhpStorm.
  * User: Awalin Yudhana
- * Date: 16/04/2015
- * Time: 16:43
+ * Date: 27/04/2015
+ * Time: 11:20
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
 class ModPurchaseOrder extends CI_Model
 {
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
     }
-
-    /**
-     * @param array $data
-     * @return bool
-     */
     public function getDataPOD($id_po)
     {
         $this->db->select('*, pod.status as stocking_status');
@@ -29,5 +21,4 @@ class ModPurchaseOrder extends CI_Model
         $this->db->where('pod.id_po', $id_po);
         return $this->db->get()->result_array();
     }
-
 }

@@ -129,5 +129,17 @@ $config = array(
             'label' => 'QTY',
             'rules' => 'required|integer'
         )
+    ),
+    'pricing' => array(
+        array(
+            'field' => 'id_product',
+            'label' => 'ID Product',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'sell_price',
+            'label' => 'Harga Jual',
+            'rules' => 'required|integer'
+        )
     )
 );

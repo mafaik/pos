@@ -79,11 +79,10 @@ Class CI_Cart
 
     public function primary_data($field, $value = NULL)
     {
-        if ( ! is_array($field))
-        {
+        if (!is_array($field)) {
             $this->cache['value'][$field] = $value;
-        }else{
-            foreach($field as $key => $value){
+        } else {
+            foreach ($field as $key => $value) {
                 $this->cache['value'][$key] = $value;
             }
         }
@@ -96,9 +95,7 @@ Class CI_Cart
     public function add_item($index, $value = array())
     {
         if (isset($this->cache['detail']['value'][$index])) {
-            foreach ($this->field_updateable as $v) {
-                $this->cache['detail']['value'][$index][$v] +=  $value[$v];
-            }
+            $this->cache['detail']['value'][$index]['qty'] += $value['qty'];
         } else {
             $this->cache['detail']['value'][$index] = $value;
         }
@@ -111,7 +108,7 @@ Class CI_Cart
     {
         if (isset($this->cache['detail']['value'][$index])) {
             foreach ($this->field_updateable as $v) {
-                $this->cache['detail']['value'][$index][$v] =  $value[$v];
+                $this->cache['detail']['value'][$index][$v] = $value[$v];
             }
         } else {
             $this->error['param'][] = 'item updated not found';
@@ -123,10 +120,10 @@ Class CI_Cart
 
     public function save()
     {
-        if($id = $this->insertToDB($this->cache)){
-            $this->deleteCache($this->cache_path,$this->cache_file);
+        if ($id = $this->insertToDB($this->cache)) {
+            $this->deleteCache();
             return $id;
-        }else{
+        } else {
             return false;
         }
     }
@@ -136,7 +133,7 @@ Class CI_Cart
 
         if (isset($this->cache['detail']['value'][$index])) {
             unset($this->cache['detail']['value'][$index]);
-        }else{
+        } else {
             $this->error['param'][] = 'item deleted not found';
         }
 
@@ -144,7 +141,8 @@ Class CI_Cart
         return $this;
     }
 
-    public function list_item($data = array(),$key){
+    public function list_item($data = array(), $key)
+    {
 
         $this->item_storage = $data;
 
@@ -153,27 +151,29 @@ Class CI_Cart
         return $this;
     }
 
-    public function result_array_item(){
+    public function result_array_item()
+    {
         $result = null;
-        if(!$this->item_storage)
+        if (!$this->item_storage)
             $this->error['param'][] = 'items_storage no set';
-        if(!$this->item_key)
+        if (!$this->item_key)
             $this->error['param'][] = 'item key no set';
 
-        if($this->cache['detail']['value']){
+        if ($this->cache['detail']['value']) {
             foreach ($this->cache['detail']['value'] as $key => $value) {
-                foreach($this->item_storage as $index => $row){
-                    if($key == $row[$this->item_key])
-                        $result[] = array_merge($this->cache['detail']['value'] [$key],$this->item_storage[$index]) ;
+                foreach ($this->item_storage as $index => $row) {
+                    if ($key == $row[$this->item_key])
+                        $result[] = array_merge($this->cache['detail']['value'] [$key], $this->item_storage[$index]);
                 }
             }
-        }else{
+        } else {
             $this->error['param'][] = 'items record not set';
         }
 
         return $result;
 
     }
+
     private function initCacheData()
     {
         if ($cache = $this->getQueryCache(
@@ -235,10 +235,10 @@ Class CI_Cart
         $this->cache_time = $cache_time;
     }
 
-    public function getError($index = null, $prefix = "<p>", $suffix ="</p>")
+    public function getError($index = null, $prefix = "<p>", $suffix = "</p>")
     {
         $error = "";
-        foreach($this->error as $key => $value){
+        foreach ($this->error as $key => $value) {
             $error .= $prefix == "" ? "" : $prefix;
             $error .= $value;
             $error .= $suffix == "" ? "" : $suffix;
@@ -250,11 +250,33 @@ Class CI_Cart
     /**
      * @return mixed
      */
-    public function getCache()
+    public function array_cache()
     {
         return $this->cache;
     }
 
+    /**
+     * @param array $field_updateable
+     */
+    public function field_updateable($field_updateable)
+    {
+        $this->field_updateable = $field_updateable;
+    }
+
+    public function primary_data_exists()
+    {
+        return is_null($this->cache['value']) ? false : true;
+    }
+
+    public function cache_exists()
+    {
+        $file = APPPATH . 'cache/' . $this->cache_path . '/' . $this->cache_file;
+        if (file_exists($file)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
     protected function appendCache($data = array())
@@ -294,15 +316,18 @@ Class CI_Cart
         }
     }
 
-    public function deleteCache($dirName, $fileName)
+    public function deleteCache()
     {
-        $file = APPPATH . 'cache/' . $dirName . '/' . $fileName;
+        $file = APPPATH . 'cache/' . $this->cache_path . '/' . $this->cache_file;
 
         if (file_exists($file)) {
             unlink($file);
         }
     }
 
+    public function delete_record(){
+        $this->deleteCache();
+    }
 
     private function insertToDB($data = array())
     {

@@ -3,15 +3,17 @@
 
 {block name=content}
     <!-- Default panel -->
+    {js('function.js')}
+    {js('form/conversion.js')}
     <div class="panel panel-default">
 
-        <div class="panel-heading"><h6 class="panel-title">Product Conversion</h6></div>
+        <div class="panel-heading"><h6 class="panel-title">Pricing</h6></div>
 
         <div class="panel-body">
             <div class="block-inner">
                 <h6 class="heading-hr">
-                    <i class="icon-clipboard"></i> Product Conversion
-                    <small class="display-block">Informasi umum tentang proses purchasing</small>
+                    <i class="icon-clipboard"></i> Pricing
+                    <small class="display-block">Informasi umum tentang proses Pricing</small>
                 </h6>
             </div>
             <!-- Callout -->
@@ -35,7 +37,7 @@
                                 <th>Isi</th>
                                 <th>Merek</th>
                                 <th>Ukuran</th>
-                                <th>Stok</th>
+                                <th>Harga Jual</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -49,10 +51,12 @@
                                     <td>{$products['value']}</td>
                                     <td>{$products['brand']}</td>
                                     <td>{$products['size']}</td>
-                                    <td>{$products['stock']}</td>
+                                    <td width="120px">
+                                        Rp {$products['sell_price']|number_format:0}
+                                    </td>
                                     <td>
-                                        <a href="{base_url('product-conversion/add/')}/{$products['id_product']}"
-                                           class="button btn btn-info " data-dismiss="modal"> Konversi
+                                        <a href="{base_url('pricing/setting/')}/{$products['id_product']}"
+                                           class="button btn btn-info " data-dismiss="modal"> Update
                                         </a>
 
                                     </td>

@@ -35,7 +35,7 @@ class Distribution extends MX_Controller
                 'id_staff' => $this->id_staff,
                 'id_store' => $this->id_store
             ))
-            ->getCache()
+            ->array_cache()
         ) {
             $data['error'] = $this->cart->getError();
         }
@@ -70,8 +70,9 @@ class Distribution extends MX_Controller
 
                 }
                 $this->session->set_flashdata('error', "stok tidak cukup");
+            }else{
+                $this->session->set_flashdata('error', validation_errors());
             }
-            $this->session->set_flashdata('error', validation_errors());
         }
         redirect('product-distribution');
     }
@@ -109,7 +110,7 @@ class Distribution extends MX_Controller
                 $i++;
             }
             if($id_distribution = $this->cart->save()){
-                redirect('product-distribution/checkout').'/'.$id_distribution;
+                redirect('product-distribution/checkout'.'/'.$id_distribution);
             }
             $this->session->set_flashdata('error', "transaction error");
         }

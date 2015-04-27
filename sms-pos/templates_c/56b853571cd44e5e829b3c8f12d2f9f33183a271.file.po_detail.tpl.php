@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-23 10:25:25
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-27 04:34:12
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6338738805530ecdd0a61e9-92077084%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '56b853571cd44e5e829b3c8f12d2f9f33183a271' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl',
-      1 => 1429772919,
+      1 => 1430109247,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -376,8 +376,6 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                 </div>
             </div>
 
-            <hr>
-
             <!-- Callout -->
             <?php if ($_smarty_tpl->tpl_vars['error']->value) {?>
                 <div class="callout callout-danger fade in">
@@ -439,10 +437,9 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                             <input type="text" name="qty" value="<?php echo set_value('qty');?>
 " id="product-qty-text"
                                    class="form-control" placeholder="0" >
-                            <?php if (form_error('qty')) {?>
-                                <span class="label label-block label-danger text-left"><?php echo form_error('qty');?>
-</span>
-                            <?php }?>
+                            
+                                
+                            
                         </div>
                         <div class="col-md-2 <?php if (form_error('price')) {?>has-warning<?php }?>">
                             <label>Price:</label>
@@ -453,10 +450,9 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                                        class="form-control" placeholder="0" >
 
                             </div>
-                            <?php if (form_error('price')) {?>
-                                <span class="label label-block label-danger text-left"><?php echo form_error('price');?>
-</span>
-                            <?php }?>
+                            
+                                
+                            
                         </div>
                         <div class="col-md-2 <?php if (form_error('discount_total')) {?>has-warning<?php }?>">
                             <label>Discount Total:</label>
@@ -466,12 +462,11 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 "
                                        class="form-control" placeholder="0" >
                             </div>
-                            <?php if (form_error('discount_total')) {?>
-                                <span class="label label-block label-danger text-left">
-                                <?php echo form_error('discount_total');?>
-
-                            </span>
-                            <?php }?>
+                            
+                                
+                                
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -708,6 +703,7 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                                 <th>Isi</th>
                                 <th>Merek</th>
                                 <th>Ukuran</th>
+                                <th>Stok</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -731,6 +727,8 @@ $_smarty_tpl->tpl_vars['products']->_loop = true;
                                     <td><?php echo $_smarty_tpl->tpl_vars['products']->value['brand'];?>
 </td>
                                     <td><?php echo $_smarty_tpl->tpl_vars['products']->value['size'];?>
+</td>
+                                    <td><?php echo $_smarty_tpl->tpl_vars['products']->value['stock'];?>
 </td>
                                     <td>
                                         <a href="#" onclick="addItem(<?php echo $_smarty_tpl->tpl_vars['products']->value['id_product'];?>

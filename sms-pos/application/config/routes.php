@@ -81,3 +81,7 @@ $route['product-distribution/detail/delete/(:num)'] = "product_distribution/Dist
 $route['product-distribution/save'] = "product_distribution/Distribution/save";
 $route['product-distribution/checkout/(:num)'] = "product_distribution/Distribution/checkout/$1";
 
+
+$route['pricing'] = "pricing";
+$route['pricing/setting/(:num)'] = "pricing/setPrice/$1";
+

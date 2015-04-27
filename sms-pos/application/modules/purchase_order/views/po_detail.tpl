@@ -45,8 +45,6 @@
                 </div>
             </div>
 
-            <hr>
-
             <!-- Callout -->
             {if $error}
                 <div class="callout callout-danger fade in">
@@ -100,9 +98,9 @@
                             <label>Qty:</label>
                             <input type="text" name="qty" value="{set_value('qty')}" id="product-qty-text"
                                    class="form-control" placeholder="0" >
-                            {if form_error('qty')}
-                                <span class="label label-block label-danger text-left">{form_error('qty') }</span>
-                            {/if}
+                            {*{if form_error('qty')}*}
+                                {*<span class="label label-block label-danger text-left">{form_error('qty') }</span>*}
+                            {*{/if}*}
                         </div>
                         <div class="col-md-2 {if form_error('price')}has-warning{/if}">
                             <label>Price:</label>
@@ -112,9 +110,9 @@
                                        class="form-control" placeholder="0" >
 
                             </div>
-                            {if form_error('price')}
-                                <span class="label label-block label-danger text-left">{form_error('price') }</span>
-                            {/if}
+                            {*{if form_error('price')}*}
+                                {*<span class="label label-block label-danger text-left">{form_error('price') }</span>*}
+                            {*{/if}*}
                         </div>
                         <div class="col-md-2 {if form_error('discount_total')}has-warning{/if}">
                             <label>Discount Total:</label>
@@ -123,11 +121,11 @@
                                 <input type="number" name="discount_total" value="{set_value('discount_total')}"
                                        class="form-control" placeholder="0" >
                             </div>
-                            {if form_error('discount_total')}
-                                <span class="label label-block label-danger text-left">
-                                {form_error('discount_total') }
-                            </span>
-                            {/if}
+                            {*{if form_error('discount_total')}*}
+                                {*<span class="label label-block label-danger text-left">*}
+                                {*{form_error('discount_total') }*}
+                            {*</span>*}
+                            {*{/if}*}
                         </div>
                     </div>
                 </div>
@@ -335,6 +333,7 @@
                                 <th>Isi</th>
                                 <th>Merek</th>
                                 <th>Ukuran</th>
+                                <th>Stok</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -348,6 +347,7 @@
                                     <td>{$products['value']}</td>
                                     <td>{$products['brand']}</td>
                                     <td>{$products['size']}</td>
+                                    <td>{$products['stock']}</td>
                                     <td>
                                         <a href="#" onclick="addItem({$products['id_product']})"
                                            class="button btn btn-info  btn-icon" data-dismiss="modal">
