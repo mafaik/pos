@@ -83,12 +83,17 @@
                             </tr>
                             <tr>
                                 <th>Harga Jual:</th>
-                                <td class="text-right {if form_error('sell_price')}has-warning{/if}" width="140px;">
+                                <td class="text-right {if form_error('sell_price')}has-warning{/if}" width="170px;">
                                     <input type="hidden" name="id_product" value="{$product->id_product}">
-                                    <input type="number" value="{set_value('sell_price')}"
-                                           class="form-control small"
-                                           autofocus="autofocus" name="sell_price" id="sell-price"
-                                           placeholder="0">
+
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Rp</span>
+                                        <input type="number" value="{set_value('sell_price')}"
+                                               class="form-control "
+                                               autofocus="autofocus" name="sell_price" id="sell-price"
+                                               placeholder="0">
+                                    </div>
+
                                 </td>
                             </tr>
                             </tbody>

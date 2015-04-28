@@ -68,8 +68,8 @@ $route['card-stock/invoice/(:num)'] = "card_stock/CardStock/invoice/$1";
 $route['product-conversion'] = "product_conversion/Conversion";
 $route['product-conversion/add/(:num)'] = "product_conversion/Conversion/addConversion/$1";
 $route['product-conversion/save'] = "product_conversion/Conversion/save";
-$route['product-conversion/invoice/(:num)'] = "product_conversion/Conversion/invoice/$1";
-$route['product-conversion/detail/delete/(:num)'] = "product_conversion/Conversion/deleteDetail/$1";
+//$route['product-conversion/invoice/(:num)'] = "product_conversion/Conversion/invoice/$1";
+//$route['product-conversion/detail/delete/(:num)'] = "product_conversion/Conversion/deleteDetail/$1";
 
 $route['credit'] = "Credit";
 $route['credit/bill/(:num)'] = "Credit/bill/$1";
@@ -90,4 +90,13 @@ $route['retail/update/(:num)/(:num)'] = "Retail/updateItem/$1/$2";
 $route['retail/delete/(:num)'] = "Retail/deleteItem/$1";
 $route['retail/save'] = "Retail/save";
 $route['retail/checkout/(:num)'] = "retail/Checkout/index/$1";
+
+
+$route['stock-opname'] = "Opname";
+$route['stock-opname/checking/(:num)'] = "Opname/checking/$1";
+$route['stock-opname/save'] = "Opname/save";
+
+$route['stock-opname/store'] = "opname/Store";
+$route['stock-opname/store/checking/(:num)'] = "opname/Store/checking/$1";
+$route['stock-opname/store/save'] = "opname/Store/save";
 

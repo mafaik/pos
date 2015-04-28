@@ -70,7 +70,7 @@
                             <td>{$key['stock']}</td>
                             <td>{$key['size']}</td>
                             <td width="120px"> Rp {$key['sell_price']|number_format:0}</td>
-                            <td width="90px" class="{if $key['stock'] <= $key['qty']}has-warning{/if}">
+                            <td width="90px" class="{if $key['stock'] < $key['qty']}has-warning{/if}">
                                 <input type="hidden" name="id_product[]" value="{$key['id_product']}">
                                 <input type="number" name="qty[]" value="{set_value('qty',$key['qty'])}"
                                        class="form-control"

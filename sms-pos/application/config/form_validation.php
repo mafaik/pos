@@ -25,7 +25,7 @@ $config = array(
         array(
             'field' => 'due_date',
             'label' => 'Due Date',
-            'rules' => 'required'
+            'rules' => ''
         ),
     ),
     'po_detail' => array(
@@ -164,6 +164,50 @@ $config = array(
             'field' => 'discount',
             'label' => 'Diskon',
             'rules' => 'integer'
+        )
+    ),
+    'opname/save' => array(
+        array(
+            'field' => 'id_product',
+            'label' => 'Product',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'stock_system',
+            'label' => 'Stok System',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'stock_real',
+            'label' => 'Stok Fisik',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'note',
+            'label' => 'Keterangan',
+            'rules' => 'required|trim'
+        )
+    ),
+    'opname-store/save' => array(
+        array(
+            'field' => 'id_product_store',
+            'label' => 'Product',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'stock_system',
+            'label' => 'Stok System',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'stock_real',
+            'label' => 'Stok Fisik',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'note',
+            'label' => 'Keterangan',
+            'rules' => 'required|trim'
         )
     )
 );
