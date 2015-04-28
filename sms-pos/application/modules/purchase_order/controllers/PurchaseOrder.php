@@ -128,7 +128,6 @@ class PurchaseOrder extends MX_Controller
         if(!$this->cart->update_item($id_product, ['qty'=>$qty]))
             $this->session->set_flashdata('error',$this->cart->getError());
         redirect('purchase-order/detail');
-
     }
 
     public function resetPO()

@@ -141,5 +141,29 @@ $config = array(
             'label' => 'Harga Jual',
             'rules' => 'required|integer'
         )
+    ),
+    'retail' => array(
+        array(
+            'field' => 'id_product',
+            'label' => 'Product',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'qty',
+            'label' => 'QTY',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'discount',
+            'label' => 'Diskon',
+            'rules' => 'integer'
+        )
+    ),
+    'retail/save' => array(
+        array(
+            'field' => 'discount',
+            'label' => 'Diskon',
+            'rules' => 'integer'
+        )
     )
 );
