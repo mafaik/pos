@@ -66,12 +66,13 @@
                 <tr>
                     <th>No</th>
                     <th>Barcode</th>
-                    <th>Name</th>
-                    <th>Unit</th>
+                    <th>Nama Product</th>
+                    <th>Merk</th>
+                    <th>Satuan</th>
                     <th>Qty</th>
-                    <th>Price</th>
+                    <th>Harga</th>
                     <th>Total</th>
-                    <th>Discount</th>
+                    <th>Diskon</th>
                     <th>Subtotal</th>
                 </tr>
                 </thead>
@@ -83,12 +84,15 @@
                         <td>{$val}</td>
                         <td>{$key['barcode']}</td>
                         <td>{$key['name']}</td>
+                        <td>{$key['brand']}</td>
                         <td style="width:100px;">{$key['unit']} ( {$key['value']} )</td>
                         <td>{$key['qty']}</td>
-                        <td style="width:130px;" class="text-right">Rp {$key['price']|number_format:2:".":","}</td>
-                        <td style="width:130px;" class="text-right">Rp {($key['qty'] * $key['price'])|number_format:2:".":","}</td>
-                        <td style="width:130px;" class="text-right">Rp {$key['discount_total']|number_format:2:".":","}</td>
-                        <td style="width:130px;" class="text-right">Rp {($key['qty'] * $key['price'] - $key['discount_total'])|number_format:2:".":","}</td>
+                        <td style="width:130px;" class="text-right">Rp {$key['price']|number_format:0}</td>
+                        <td style="width:130px;" class="text-right">Rp {($key['qty'] * $key['price'])|number_format:0}</td>
+                        <td style="width:130px;" class="text-right">Rp {$key['discount_total']|number_format:0}</td>
+                        <td style="width:130px;" class="text-right">
+                            Rp {($key['qty'] * $key['price'] - $key['discount_total'])|number_format:0}
+                        </td>
                     </tr>
                     {assign var=val value=$val+1}
                     {assign var=total value=$total+($key['qty'] * $key['price'] - $key['discount_total'])}
@@ -104,33 +108,33 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <h6>Total:</h6>
                     <table class="table">
                         <tbody>
                         <tr>
-                            <th>total:</th>
-                            <td class="text-right">Rp {$po->total|number_format:2:".":","}</td>
+                            <th>Total:</th>
+                            <td class="text-right">Rp {$po->total|number_format:0}</td>
                         </tr>
                         <tr>
-                            <th>Discount:</th>
-                            <td class="text-right">Rp {$po->discount_price|number_format:2:".":","}</td>
+                            <th>Diskon Total:</th>
+                            <td class="text-right">Rp {$po->discount_price|number_format:0}</td>
                         </tr>
                         <tr>
                             <th>DPP:</th>
-                            <td class="text-right">Rp {$po->dpp|number_format:2:".":","}</td>
+                            <td class="text-right">Rp {$po->dpp|number_format:0}</td>
                         </tr>
                         <tr>
-                            <th>Tax:</th>
-                            <td class="text-right">Rp {$po->ppn|number_format:2:".":","}</td>
+                            <th>PPN:</th>
+                            <td class="text-right">Rp {$po->ppn|number_format:0}</td>
                         </tr>
                         <tr>
                             <th>Grand Total:</th>
-                            <td class="text-right">Rp {$po->grand_total|number_format:2:".":","}</td>
+                            <td class="text-right">Rp {$po->grand_total|number_format:0}</td>
                         </tr>
                         </tbody>
                     </table>
                     <div class="btn-group pull-right">
-                        <a href="{base_url('purchase-order')}"  class="btn btn-info button"><i class="icon-box-add"></i> New Purchase Order</a>
+                        <a href="{base_url('purchase-order')}"  class="btn btn-info button">
+                            <i class="icon-box-add"></i> New Purchase Order</a>
                         <button type="button" class="btn btn-primary"><i class="icon-print2"></i> Print</button>
                     </div>
                 </div>

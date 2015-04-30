@@ -66,16 +66,51 @@ $route['card-stock/detail/(:num)'] = "card_stock/CardStock/detailCS/$1";
 $route['card-stock/invoice/(:num)'] = "card_stock/CardStock/invoice/$1";
 
 $route['product-conversion'] = "product_conversion/Conversion";
-$route['product-conversion/detail/delete/(:num)'] = "product_conversion/Conversion/deleteDetail/$1";
+$route['product-conversion/add/(:num)'] = "product_conversion/Conversion/addConversion/$1";
 $route['product-conversion/save'] = "product_conversion/Conversion/save";
-$route['product-conversion/invoice/(:num)'] = "product_conversion/Conversion/invoice/$1";
+//$route['product-conversion/invoice/(:num)'] = "product_conversion/Conversion/invoice/$1";
+//$route['product-conversion/detail/delete/(:num)'] = "product_conversion/Conversion/deleteDetail/$1";
 
 $route['credit'] = "Credit";
 $route['credit/bill/(:num)'] = "Credit/bill/$1";
 $route['credit/detail/(:num)'] = "Credit/detailBayar/$1";
 
 $route['product-distribution'] = "product_distribution/Distribution";
-$route['product-distribution/detail/delete/(:num)'] = "product_distribution/Distribution/deleteDetail/$1";
+$route['product-distribution/detail/add'] = "product_distribution/Distribution/add";
+$route['product-distribution/detail/delete/(:num)'] = "product_distribution/Distribution/delete/$1";
 $route['product-distribution/save'] = "product_distribution/Distribution/save";
-$route['product-distribution/invoice/(:num)'] = "product_distribution/Distribution/invoice/$1";
+$route['product-distribution/checkout/(:num)'] = "product_distribution/Distribution/checkout/$1";
+
+
+$route['pricing'] = "Pricing";
+$route['pricing/setting/(:num)'] = "Pricing/setPrice/$1";
+
+$route['retail'] = "Retail";
+$route['retail/update/(:num)/(:num)'] = "Retail/updateItem/$1/$2";
+$route['retail/delete/(:num)'] = "Retail/deleteItem/$1";
+$route['retail/save'] = "Retail/save";
+$route['retail/checkout/(:num)'] = "retail/Checkout/index/$1";
+
+
+$route['retail/returns'] = "retail/Returns";
+$route['retail/returns/list-item/(:num)'] = "retail/Returns/listItem/$1";
+$route['retail/returns/(:num)'] = "retail/Returns/returnsItem/$1";
+
+
+$route['retail/replace/(:num)'] = "retail/Replace/index/$1";
+$route['retail/replace/update/(:num)/(:num)/(:num)'] = "retail/Replace/updateItem/$1/$2/$3";
+$route['retail/replace/delete/(:num)/(:num)'] = "retail/Replace/deleteItem/$1/$2";
+$route['retail/replace/checkout/(:num)'] = "retail/Checkout/replace/$1";
+
+
+
+$route['stock-opname'] = "Opname";
+$route['stock-opname/checking/(:num)'] = "Opname/checking/$1";
+$route['stock-opname/save'] = "Opname/save";
+
+$route['stock-opname/store'] = "opname/Store";
+$route['stock-opname/store/checking/(:num)'] = "opname/Store/checking/$1";
+$route['stock-opname/store/save'] = "opname/Store/save";
+
+
 

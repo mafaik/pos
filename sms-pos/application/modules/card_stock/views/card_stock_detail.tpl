@@ -51,9 +51,6 @@
 
 
         {if !empty($po_detail)}
-
-
-        <div class="panel-body">
             <form action="{current_url()}" role="form" method="post"
                   onsubmit="return confirm('Process Data');" >
                 <div class="table-responsive pre-scrollable">
@@ -62,8 +59,9 @@
                         <tr>
                             <th>No</th>
                             <th>Barcode</th>
-                            <th>Name</th>
-                            <th>Unit</th>
+                            <th>Nama Produk</th>
+                            <th>Merek</th>
+                            <th>Satuan / isi</th>
                             <th>Qty</th>
                             <th>Qty Checked</th>
                         </tr>
@@ -76,7 +74,8 @@
                                 <td>{$val}</td>
                                 <td>{$key['barcode']}</td>
                                 <td>{$key['name']}</td>
-                                <td style="width:100px;">{$key['unit']} ( {$key['value']} )</td>
+                                <td>{$key['brand']}</td>
+                                <td>{$key['unit']} / {$key['value']}</td>
                                 <td>{$key['qty']}</td>
                                 <td  style="width:100px;">
                                     <input name="id_po_detail[]" type="hidden" value="{$key['id_po_detail']}">
@@ -96,12 +95,14 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="form-actions text-right">
-                    <button type="submit" name="save" value="Save" class="btn btn-success"><i class="icon-checkmark"></i> Process</button>
-                    {*<button type="button" name="print" class="btn btn-default"><i class="icon-print2"></i> Print</button>*}
-                </div>
+
+                <div class="panel-body">
+                    <div class="btn-group pull-right">
+                        <button type="submit" name="save" value="Save" class="btn btn-success"><i class="icon-checkmark"></i> Process</button>
+                        {*<button type="button" name="print" class="btn btn-default"><i class="icon-print2"></i> Print</button>*}
+                    </div>
+                </div><!-- /panel body -->
             </form>
-        </div><!-- /panel body -->
         {/if}
 
 

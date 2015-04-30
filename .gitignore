@@ -2,3 +2,4 @@
 .vagrant/*
 sms-pos/upload/*
 sms-pos/application/cache/*
+sms-pos/templates_c/*

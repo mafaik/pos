@@ -6,7 +6,7 @@
     <!-- New invoice template -->
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h6 class="panel-title"><i class="icon-checkmark3"></i> Product Conversion Invoice</h6>
+            <h6 class="panel-title"><i class="icon-checkmark3"></i> Product Distribution Invoice</h6>
             <div class="dropdown pull-right">
                 <a href="#" class="dropdown-toggle panel-icon" data-toggle="dropdown">
                     <i class="icon-cog3"></i>
@@ -25,14 +25,22 @@
 
             <div class="row invoice-header">
                 <div class="col-sm-6">
-                    <h3>Product Conversion</h3>
+                    <h3>{$distribution->store_name}</h3>
+                    <span>{$distribution->address} - {$distribution->zipcode}
+                        </br>
+                        {$distribution->city} - {$distribution->state}
+                        </br>
+                        {$distribution->telp}
+                        </br>
+                        {$distribution->owner}
+                    </span>
                 </div>
 
                 <div class="col-sm-3 pull-right">
                     <ul>
-                        <li>ID Conversion # <strong class="text-danger pull-right">{$conversion->id_conversion}</strong></li>
-                        <li>Staff  <strong class="pull-right">{$conversion->name} </strong></li>
-                        <li>Date: <strong class="pull-right">{$conversion->date}</strong></li>
+                        <li>ID Distribution # <strong class="text-danger pull-right">{$distribution->id_product_distribution}</strong></li>
+                        <li>Staff  <strong class="pull-right">{$distribution->staff_name} </strong></li>
+                        <li>Date: <strong class="pull-right">{$distribution->date}</strong></li>
                     </ul>
                 </div>
             </div>
@@ -44,40 +52,32 @@
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th rowspan="2">No</th>
-                    <th colspan="4">From</th>
-                    <th colspan="4">Result</th>
-                    <th rowspan="2">QTY</th>
-                    <th rowspan="2">Qty Result</th>
-                </tr>
-                <tr>
+                    <th>No</th>
                     <th>Barcode</th>
                     <th>Name</th>
-                    <th>Unit</th>
-                    <th>Value</th>
-                    <th>Barcode</th>
-                    <th>Name</th>
-                    <th>Unit</th>
-                    <th>Value</th>
+                    <th>Satuan</th>
+                    <th>Isi</th>
+                    <th>Merek</th>
+                    <th>Ukuran</th>
+                    <th>Harga</th>
+                    <th>Qty</th>
                 </tr>
                 </thead>
                 <tbody>
                 {assign var=val value=1}
-                {foreach $list as $key }
+                {foreach $items as $key }
                     <tr>
                         <td>
                             {$val}
                         </td>
-                        <td>{$key['barcode']}</td>
-                        <td>{$key['name']}</td>
-                        <td>{$key['unit']}</td>
-                        <td>{$key['value']}</td>
-                        <td>{$key['barcode_result']}</td>
-                        <td>{$key['name_result']}</td>
-                        <td>{$key['unit_result']}</td>
-                        <td>{$key['value_result']}</td>
-                        <td>{$key['qty']}</td>
-                        <td>{$key['qty_result']}</td>
+                        <td>{$key->barcode}</td>
+                        <td>{$key->name}</td>
+                        <td>{$key->unit}</td>
+                        <td>{$key->value}</td>
+                        <td>{$key->brand}</td>
+                        <td>{$key->size}</td>
+                        <td width="120px"> Rp {$key->sell_price|number_format:0}</td>
+                        <td>{$key->qty}</td>
                     </tr>
                     {assign var=val value=$val+1}
                 {/foreach}
@@ -92,8 +92,8 @@
 
                 <div class="col-sm-4">
                     <div class="btn-group pull-right">
-                        <a href="{base_url('product-conversion')}"  class="btn btn-info button">
-                            <i class="icon-box-add"></i> New Product Conversion</a>
+                        <a href="{base_url('product-distribution')}"  class="btn btn-info button">
+                            <i class="icon-box-add"></i> New Product Distribution</a>
                         <button type="button" class="btn btn-primary"><i class="icon-print2"></i> Print</button>
                     </div>
                 </div>

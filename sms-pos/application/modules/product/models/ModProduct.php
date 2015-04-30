@@ -13,26 +13,30 @@ class ModProduct extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('Caching');
     }
 
     public function get(){
-        if ($cache = $this->caching->getQueryCache('MASTER', 'PRODUCT',$this->config->item('PRODUCT'))) {
-            return json_decode($cache, TRUE);
-        } else {
-            return $this->insertCache();
-        }
-    }
-    private function insertCache(){
+
         $this->db->select('*');
         $this->db->from('product');
         $this->db->join('product_unit','product_unit.id_product_unit = product.id_product_unit');
         $this->db->join('product_category','product_category.id_product_category = product.id_product_category');
         $result = $this->db->get();
         $rows = $result->result_array();
-        $this->caching->cacheQuery('MASTER', 'PRODUCT', json_encode($rows));
         return $rows;
     }
 
+    public function getProduct($id_product){
+        $this->db->select('*');
+        $this->db->from('product');
+        $this->db->join('product_unit','product_unit.id_product_unit = product.id_product_unit');
+        $this->db->join('product_category','product_category.id_product_category = product.id_product_category');
+        $this->db->where('product.id_product',$id_product);
+        $this->db->order_by('product.name ASC');
+        $result = $this->db->get();
+        return $result->row();
+    }
 
     public function checkStock($id_product, $qty)
     {

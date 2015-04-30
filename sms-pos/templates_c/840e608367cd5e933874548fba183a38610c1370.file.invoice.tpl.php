@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-20 04:51:58
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-27 04:13:22
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/invoice.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:23005477055334beb312c50-03180410%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '840e608367cd5e933874548fba183a38610c1370' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/invoice.tpl',
-      1 => 1429430584,
+      1 => 1429772919,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -392,12 +392,13 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                 <tr>
                     <th>No</th>
                     <th>Barcode</th>
-                    <th>Name</th>
-                    <th>Unit</th>
+                    <th>Nama Product</th>
+                    <th>Merk</th>
+                    <th>Satuan</th>
                     <th>Qty</th>
-                    <th>Price</th>
+                    <th>Harga</th>
                     <th>Total</th>
-                    <th>Discount</th>
+                    <th>Diskon</th>
                     <th>Subtotal</th>
                 </tr>
                 </thead>
@@ -416,19 +417,23 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
 </td>
                         <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name'];?>
 </td>
+                        <td><?php echo $_smarty_tpl->tpl_vars['key']->value['brand'];?>
+</td>
                         <td style="width:100px;"><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
  ( <?php echo $_smarty_tpl->tpl_vars['key']->value['value'];?>
  )</td>
                         <td><?php echo $_smarty_tpl->tpl_vars['key']->value['qty'];?>
 </td>
-                        <td style="width:130px;" class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],2,".",",");?>
+                        <td style="width:130px;" class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],0);?>
 </td>
-                        <td style="width:130px;" class="text-right">Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']),2,".",",");?>
+                        <td style="width:130px;" class="text-right">Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']),0);?>
 </td>
-                        <td style="width:130px;" class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['discount_total'],2,".",",");?>
+                        <td style="width:130px;" class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['discount_total'],0);?>
 </td>
-                        <td style="width:130px;" class="text-right">Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']),2,".",",");?>
-</td>
+                        <td style="width:130px;" class="text-right">
+                            Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']),0);?>
+
+                        </td>
                     </tr>
                     <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable($_smarty_tpl->tpl_vars['val']->value+1, null, 0);?>
                     <?php $_smarty_tpl->tpl_vars['total'] = new Smarty_variable($_smarty_tpl->tpl_vars['total']->value+($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']), null, 0);?>
@@ -444,39 +449,39 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                 </div>
 
                 <div class="col-sm-4">
-                    <h6>Total:</h6>
                     <table class="table">
                         <tbody>
                         <tr>
-                            <th>total:</th>
-                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->total,2,".",",");?>
+                            <th>Total:</th>
+                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->total,0);?>
 </td>
                         </tr>
                         <tr>
-                            <th>Discount:</th>
-                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->discount_price,2,".",",");?>
+                            <th>Diskon Total:</th>
+                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->discount_price,0);?>
 </td>
                         </tr>
                         <tr>
                             <th>DPP:</th>
-                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->dpp,2,".",",");?>
+                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->dpp,0);?>
 </td>
                         </tr>
                         <tr>
-                            <th>Tax:</th>
-                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->ppn,2,".",",");?>
+                            <th>PPN:</th>
+                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->ppn,0);?>
 </td>
                         </tr>
                         <tr>
                             <th>Grand Total:</th>
-                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->grand_total,2,".",",");?>
+                            <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['po']->value->grand_total,0);?>
 </td>
                         </tr>
                         </tbody>
                     </table>
                     <div class="btn-group pull-right">
                         <a href="<?php echo base_url('purchase-order');?>
-"  class="btn btn-info button"><i class="icon-box-add"></i> New Purchase Order</a>
+"  class="btn btn-info button">
+                            <i class="icon-box-add"></i> New Purchase Order</a>
                         <button type="button" class="btn btn-primary"><i class="icon-print2"></i> Print</button>
                     </div>
                 </div>

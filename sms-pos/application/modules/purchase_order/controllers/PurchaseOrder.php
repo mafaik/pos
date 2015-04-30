@@ -12,92 +12,95 @@ class PurchaseOrder extends MX_Controller
 {
     protected $id_staff;
 
-    protected $cache = array();
-
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('Caching');
-        $this->load->model('ModPurchaseOrder');
         $this->id_staff = $this->config->item('id_staff');
+        $this->load->model('product/ModProduct', 'ModProduct');
+        $this->load->library('cart',
+            array(
+                'cache_path' => 'PURCHASE_ORDER',
+                'cache_file' => $this->id_staff,
+                'primary_table' => 'purchase_order',
+                'foreign_table' => 'purchase_order_detail'
+            ));
     }
 
     public function index()
     {
-        if ($this->getCacheStatus()) {
+        if ($this->cart->primary_data_exists()) {
             $this->insertPOD();
             return false;
         }
+
+        if ($this->input->post()) {
+            if ($this->form_validation->run('po') == TRUE) {
+                $this->cart->primary_data(array(
+                    'invoice_number' => $this->input->post('invoice_number'),
+                    'id_principal' => $this->input->post('id_principal'),
+                    'id_staff' => $this->id_staff,
+                    'date' => $this->input->post('date'),
+                    'due_date' => $this->input->post('due_date'),
+                    'total' => 0,
+                    'discount_price' => 0,
+                    'dpp' => 0,
+                    'ppn' => 0,
+                    'grand_total' => 0
+
+                ));
+                redirect('purchase-order/detail');
+            }
+        }
+
         $principal = array('' => '');
         foreach ($this->db->get('principal')->result() as $object) {
             $principal[$object->id_principal] = $object->name;
         }
         $data['principals'] = $principal;
-
-        if ($this->input->post()) {
-            if ($this->form_validation->run('po') == TRUE) {
-                $data = array(
-                    'table' => 'purchase_order',
-                    'value' => array(
-                        'invoice_number' => $this->input->post('invoice_number'),
-                        'id_principal' => $this->input->post('id_principal'),
-                        'id_staff' => $this->id_staff,
-                        'date' => $this->input->post('date'),
-                        'due_date' => $this->input->post('due_date'),
-                        'discount_price' => '',
-                        'dpp' => '',
-                        'ppn' => '',
-                        'grand_total' => ''
-                    ),
-                    'detail' => array(
-                        'table' => 'purchase_order_detail',
-                        'foreign_key' => 'id_po',
-                        'value' => null
-                    )
-                );
-                $this->caching->cacheQuery('PO', $this->id_staff, json_encode($data));
-                redirect('purchase-order/detail');
-            }
-        }
         $this->parser->parse("po.tpl", $data);
     }
 
     public function insertPOD()
     {
-        if (!$this->getCacheStatus()) {
+        if (!$this->cart->primary_data_exists()) {
             redirect('purchase-order');
             return false;
         }
+
         $data['error'] = $this->session->flashdata('error') != null ? $this->session->flashdata('error') : null;
-        $cache = $this->getCache();
         if ($this->input->post()) {
             if ($this->form_validation->run('po_detail') == TRUE) {
                 $data_value = array(
                     'id_product' => $this->input->post('id_product'),
+                    'name' => $this->input->post('name'),
                     'barcode' => $this->input->post('barcode'),
-                    'name_unit' => $this->input->post('unit'),
+                    'unit' => $this->input->post('unit'),
+                    'value' => $this->input->post('value'),
+                    'brand' => $this->input->post('brand'),
                     'qty' => $this->input->post('qty'),
                     'price' => $this->input->post('price'),
-                    'discount_total' => $this->input->post('discount_total') != null ? $this->input->post('discount_total') : 0 ,
+                    'discount_total' => $this->input->post('discount_total') != null ?
+                        $this->input->post('discount_total') : 0,
                     'status' => 0
                 );
-                if ($cache['detail']['value'] == null || !$this->cekDetailAvailable($data_value['id_product'], $cache['detail']['value'])) {
-                    $cache['detail']['value'][] = $data_value;
-                    $this->caching->cacheQuery('PO', $this->id_staff, json_encode($cache));
-                    redirect('purchase-order/detail');
-                }
-                $data['error'] = "Product sudah diinputkan sebelumnya, silahkan ubah qty di frame product list";
+
+                $this->cart->add_item($this->input->post('id_product'), $data_value);
+                redirect('purchase-order/detail');
             }
         }
-        $this->load->model('product/ModProduct', 'ModProduct');
 
         $data['product_storage'] = $this->ModProduct->get();
         $products = array('' => '');
         foreach ($data['product_storage'] as $row) {
-            $products[$row['id_product']] = $row['name'] . ' | ' . $row['unit'] . ' ( ' . $row['value'] . ' )';
+            $value_option = $row['name'];
+            $value_option .= ' | ' . $row['brand'];
+            $value_option .= ' | ' . $row['unit'];
+            $value_option .= ' ( ' . $row['value'] . ' )';
+            $products[$row['id_product']] = $value_option;
         }
 
         $data['products'] = $products;
+        $cache = $this->cart->array_cache();
         $data['principal'] = $this->db->get_where('principal', array('id_principal' => $cache['value']['id_principal']))->row();
         $data['cache'] = $cache;
 
@@ -106,44 +109,42 @@ class PurchaseOrder extends MX_Controller
 
     public function deletePOD($id_product)
     {
-        if (!$this->getCacheStatus()) {
+        if (!$this->cart->primary_data_exists()) {
             redirect('purchase-order');
             return false;
         }
-        $cache = $this->getCache();
-        unset($cache['detail']['value'][$this->getArrayKeyDetail($id_product, $cache['detail']['value'])]);
-        $this->caching->cacheQuery('PO', $this->id_staff, json_encode($cache));
+        if(!$this->cart->delete_item($id_product))
+            $this->session->set_flashdata('error',$this->cart->getError());
         redirect('purchase-order/detail');
     }
 
     public function updatePOD($id_product, $qty)
     {
-        if (!$this->getCacheStatus()) {
+        if (!$this->cart->primary_data_exists()) {
             redirect('purchase-order');
             return false;
         }
-        $cache = $this->getCache();
-        $cache['detail']['value'][$this->getArrayKeyDetail($id_product, $cache['detail']['value'])]['qty'] = $qty;
-        $this->caching->cacheQuery('PO', $this->id_staff, json_encode($cache));
-        redirect('purchase-order/detail');
 
+        if(!$this->cart->update_item($id_product, ['qty'=>$qty]))
+            $this->session->set_flashdata('error',$this->cart->getError());
+        redirect('purchase-order/detail');
     }
 
     public function resetPO()
     {
-        $this->caching->deleteCache('PO', $this->id_staff);
+        if(!$this->cart->delete_record())
         redirect('purchase-order');
     }
 
-    public function savePO(){
-        if (!$this->getCacheStatus()) {
+    public function savePO()
+    {
+        if (!$this->cart->primary_data_exists()) {
             redirect('purchase-order');
             return false;
         }
 
         if ($this->input->post()) {
             if ($this->form_validation->run('po_save') == TRUE) {
-                $cache = $this->getCache();
                 $scan = "default.jpg";
 
                 if (isset($_FILES['file']['size']) && ($_FILES['file']['size'] > 0)) {
@@ -166,66 +167,22 @@ class PurchaseOrder extends MX_Controller
                     $scan = base_url() . "/upload/po" . $file['file_name'];
                 }
 
-                $cache['value']['total'] = $this->input->post('total');
-                $cache['value']['discount_price'] = $this->input->post('discount_price');
-                $cache['value']['dpp'] = $this->input->post('dpp');
-                $cache['value']['ppn'] = $this->input->post('ppn');
-                $cache['value']['grand_total'] = $this->input->post('grand_total');
-                $cache['value']['file'] = $scan;
 
-                $this->caching->cacheQuery('PO', $this->id_staff, json_encode($cache));
-                if($id_po = $this->ModPurchaseOrder->insertBatch($cache)){
-                    $this->caching->deleteCache('PO', $this->id_staff);
-                    redirect('purchase-order/invoice/'.$id_po);
-                    return false;
+                if($id_po =$this->cart->primary_data(array(
+                    'total' => $this->input->post('total'),
+                    'discount_price' => $this->input->post('discount_price'),
+                    'dpp' => $this->input->post('dpp'),
+                    'ppn' => $this->input->post('ppn'),
+                    'grand_total' => $this->input->post('grand_total'),
+                    'file' => $scan
+
+                ))->save()){
+                    redirect('purchase-order/invoice/' . $id_po);
                 }
+                $this->session->set_flashdata('error', "transaction error");
             }
         }
         $this->insertPOD();
-    }
-
-    /**
-     * @return array
-     */
-    public function getCache()
-    {
-        return $this->cache;
-    }
-
-    /**
-     * @param array $cache
-     */
-    public function setCache($cache)
-    {
-        $this->cache = $cache;
-    }
-
-    private function getCacheStatus()
-    {
-        if ($cache = $this->caching->getQueryCache('PO', $this->id_staff, $this->config->item('PO'))) {
-            $this->setCache(json_decode($cache, TRUE));
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private function cekDetailAvailable($id_product, $data = array())
-    {
-        foreach ($data as $row) {
-            if ($row['id_product'] == $id_product)
-                return true;
-        }
-        return false;
-    }
-
-    private function getArrayKeyDetail($id_product, $data = array())
-    {
-        foreach ($data as $key => $product) {
-            if ($product['id_product'] === $id_product)
-                return $key;
-        }
-        return false;
     }
 
 }

@@ -21,12 +21,7 @@ $config = array(
             'field' => 'date',
             'label' => 'Order Date',
             'rules' => 'required'
-        ),
-        array(
-            'field' => 'due_date',
-            'label' => 'Due Date',
-            'rules' => 'required'
-        ),
+        )
     ),
     'po_detail' => array(
         array(
@@ -128,6 +123,105 @@ $config = array(
             'field' => 'qty',
             'label' => 'QTY',
             'rules' => 'required|integer'
+        )
+    ),
+    'pricing' => array(
+        array(
+            'field' => 'id_product',
+            'label' => 'ID Product',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'sell_price',
+            'label' => 'Harga Jual',
+            'rules' => 'required|integer'
+        )
+    ),
+    'retail' => array(
+        array(
+            'field' => 'id_product',
+            'label' => 'Product',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'qty',
+            'label' => 'QTY',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'discount',
+            'label' => 'Diskon',
+            'rules' => 'integer'
+        )
+    ),
+    'retail/save' => array(
+        array(
+            'field' => 'discount',
+            'label' => 'Diskon',
+            'rules' => 'integer'
+        )
+    ),
+    'retail/replace/save' => array(
+        array(
+            'field' => 'cashback',
+            'label' => 'Diskon',
+            'rules' => 'integer'
+        )
+    ),
+    'opname/save' => array(
+        array(
+            'field' => 'id_product',
+            'label' => 'Product',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'stock_system',
+            'label' => 'Stok System',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'stock_real',
+            'label' => 'Stok Fisik',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'note',
+            'label' => 'Keterangan',
+            'rules' => 'required|trim'
+        )
+    ),
+    'opname-store/save' => array(
+        array(
+            'field' => 'id_product_store',
+            'label' => 'Product',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'stock_system',
+            'label' => 'Stok System',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'stock_real',
+            'label' => 'Stok Fisik',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'note',
+            'label' => 'Keterangan',
+            'rules' => 'required|trim'
+        )
+    ),
+    'returns' => array(
+        array(
+            'field' => 'returns',
+            'label' => 'Jumlah Retur',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'reason',
+            'label' => 'Keterangan',
+            'rules' => 'required|trim'
         )
     )
 );
