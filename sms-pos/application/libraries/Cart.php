@@ -141,6 +141,10 @@ Class CI_Cart
         return $this;
     }
 
+    public function count_item()
+    {
+        return count($this->cache['detail']['value']);
+    }
     public function list_item($data = array(), $key)
     {
 

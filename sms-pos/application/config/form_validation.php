@@ -21,12 +21,7 @@ $config = array(
             'field' => 'date',
             'label' => 'Order Date',
             'rules' => 'required'
-        ),
-        array(
-            'field' => 'due_date',
-            'label' => 'Due Date',
-            'rules' => ''
-        ),
+        )
     ),
     'po_detail' => array(
         array(
@@ -166,6 +161,13 @@ $config = array(
             'rules' => 'integer'
         )
     ),
+    'retail/replace/save' => array(
+        array(
+            'field' => 'cashback',
+            'label' => 'Diskon',
+            'rules' => 'integer'
+        )
+    ),
     'opname/save' => array(
         array(
             'field' => 'id_product',
@@ -206,6 +208,18 @@ $config = array(
         ),
         array(
             'field' => 'note',
+            'label' => 'Keterangan',
+            'rules' => 'required|trim'
+        )
+    ),
+    'returns' => array(
+        array(
+            'field' => 'returns',
+            'label' => 'Jumlah Retur',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'reason',
             'label' => 'Keterangan',
             'rules' => 'required|trim'
         )

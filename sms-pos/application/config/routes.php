@@ -92,6 +92,18 @@ $route['retail/save'] = "Retail/save";
 $route['retail/checkout/(:num)'] = "retail/Checkout/index/$1";
 
 
+$route['retail/returns'] = "retail/Returns";
+$route['retail/returns/list-item/(:num)'] = "retail/Returns/listItem/$1";
+$route['retail/returns/(:num)'] = "retail/Returns/returnsItem/$1";
+
+
+$route['retail/replace/(:num)'] = "retail/Replace/index/$1";
+$route['retail/replace/update/(:num)/(:num)/(:num)'] = "retail/Replace/updateItem/$1/$2/$3";
+$route['retail/replace/delete/(:num)/(:num)'] = "retail/Replace/deleteItem/$1/$2";
+$route['retail/replace/checkout/(:num)'] = "retail/Checkout/replace/$1";
+
+
+
 $route['stock-opname'] = "Opname";
 $route['stock-opname/checking/(:num)'] = "Opname/checking/$1";
 $route['stock-opname/save'] = "Opname/save";
@@ -99,4 +111,6 @@ $route['stock-opname/save'] = "Opname/save";
 $route['stock-opname/store'] = "opname/Store";
 $route['stock-opname/store/checking/(:num)'] = "opname/Store/checking/$1";
 $route['stock-opname/store/save'] = "opname/Store/save";
+
+
 

@@ -21,14 +21,7 @@ class Checkout extends MX_Controller
 
     public function index($id_retail)
     {
-        if (!$data_retail = $this->db
-            ->select('*, staff.name as staff_name, staff.name as store_name')
-            ->from('retail')
-            ->join('staff', 'staff.id_staff = retail.id_staff')
-            ->join('store', 'store.id_store = retail.id_store')
-            ->where('retail.id_retail', $id_retail)
-            ->get()
-            ->row()
+        if (!$data_retail = $this->ModRetail->getDataRetail($id_retail)
         ) {
             redirect('retail');
         }
@@ -36,5 +29,20 @@ class Checkout extends MX_Controller
         $data['items'] = $this->ModRetail->getRetailDetail($id_retail);
         $this->parser->parse("checkout.tpl", $data);
 
+    }
+
+    public function replace($id_retur){
+
+        if (!$data_retur = $this->ModRetail->getDataRetur($id_retur)
+        ) {
+            redirect('retail-retur');
+        }
+        $data_retail = $this->ModRetail->getDataRetail($data_retur->id_retail);
+        $product_replaced = $this->ModRetail->getDetailItemReplaced($data_retur->id_retail);
+        $data['items'] = $this->ModRetail->getReturDetail($id_retur);
+        $data['master'] = $data_retail;
+        $data['product_replaced'] = $product_replaced;
+        $data['retur'] = $data_retur;
+        $this->parser->parse("retur_checkout.tpl", $data);
     }
 }
