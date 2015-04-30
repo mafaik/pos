@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-sm-3">
                     <ul>
-                        <li>No Faktur Retur # <strong class="text-danger pull-right">{$retur->id_retail_retur}</strong></li>
+                        <li>No Faktur Retur # <strong class="text-danger pull-right">{$retur->id_retail_returns}</strong></li>
                         <li>Staff  <strong class="pull-right">{$retur->staff_name} </strong></li>
                         <li>Date : <strong class="pull-right">{$retur->date}</strong></li>
                     </ul>
@@ -81,16 +81,16 @@
                         <td>{$key['brand']}</td>
                         <td style="width:100px;">{$key['unit']} ( {$key['value']} )</td>
                         <td>{$key['qty']}</td>
-                        <td>{$key['retur']}</td>
+                        <td>{$key['returns']}</td>
                         <td style="width:130px;" class="text-right">Rp {$key['price']|number_format:0}</td>
-                        <td style="width:130px;" class="text-right">Rp {($key['retur'] * $key['price'])|number_format:0}</td>
+                        <td style="width:130px;" class="text-right">Rp {($key['returns'] * $key['price'])|number_format:0}</td>
                         {*<td style="width:130px;" class="text-right">Rp {$key['discount']|number_format:0}</td>*}
                         <td style="width:130px;" class="text-right">
-                            Rp {($key['retur'] * $key['price'] - $key['discount'])|number_format:0}
+                            Rp {($key['returns'] * $key['price'] - $key['discount'])|number_format:0}
                         </td>
                     </tr>
                     {assign var=val value=$val+1}
-                    {assign var=total value=$total+($key['retur'] * $key['price'] - $key['discount'])}
+                    {assign var=total value=$total+($key['returns'] * $key['price'] - $key['discount'])}
                 {/foreach}
                 </tbody>
             </table>
@@ -162,8 +162,16 @@
                 <table class="table">
                     <tbody>
                     <tr>
-                        <th>Grand Total:</th>
+                        <th>Total:</th>
                         <td class="text-right">Rp {$total|number_format:0}</td>
+                    </tr>
+                    <tr>
+                        <th>Kembali Tunai:</th>
+                        <td class="text-right">Rp {$retur->cashback|number_format:0}</td>
+                    </tr>
+                    <tr>
+                        <th>Grand Total:</th>
+                        <td class="text-right">Rp {($total+$retur->cashback)|number_format:0}</td>
                     </tr>
                     </tbody>
                 </table>

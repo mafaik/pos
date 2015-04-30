@@ -4,25 +4,25 @@
 
 
 function appendItem(data){
-
-    $.each(data, function (i, b) {
-        var value;
-        if (b === parseInt(b, 10)){
+    console.log(data);
+    for (var x in data){
+        if (data[x] === parseInt(data[x], 10)){
             value = parseInt(b);
         }
         else{
-            value = b;
+            value = data[x];
         }
 
-        var id_input = $('#input-'+i);
-        var id_text = $('#text-'+i);
+        var id_input = $('#input-'+x);
+        var id_text = $('#text-'+x);
         if(id_input.length){
-            id_input.val( b );
+            id_input.val( data[x] );
         }
         if(id_text.length){
-            id_text.html( b );
+            id_text.html( data[x] );
         }
-    });
+
+    }
 }
 
 function barcodeParam(param_objt){
