@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-24 10:23:41
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-01 05:30:29
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/po.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:20319457125530dd2fcb4f06-62660745%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1660ae057ce9b2ec808274a0ccebbc1c32b78498' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/po.tpl',
-      1 => 1429772919,
+      1 => 1430458226,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -342,7 +342,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                             <?php }?>
                         </div>
                         <div class="col-md-6 <?php if (form_error('invoice_number')) {?>has-warning<?php }?>">
-                            <label>No Faktur:</label>
+                            <label>No Nota Pembelian:</label>
                             <?php echo form_input('invoice_number',set_value('invoice_number'),'class="form-control" placeholder="Invoice Number"');?>
 
                             <?php if (form_error('invoice_number')) {?>
@@ -356,7 +356,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6 <?php if (form_error('date')) {?>has-warning<?php }?>">
-                            <label>Tanggal Nota Transaksi:</label>
+                            <label>Tanggal Nota Pembelian:</label>
                             <?php echo form_input('date',set_value('date'),'class="datepicker-trigger form-control" data-mask="9999-99-99" placeholder"YYYY-MM-dd"');?>
 
                         </div>
@@ -367,8 +367,10 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                         </div>
                     </div>
                 </div>
-                <div class="form-actions text-right ">
-                    <input type="submit" value="Add" class="btn btn-success">
+                <div class="form-actions ">
+                    <div class="col-sm-12">
+                        <input type="submit" class="btn btn-block btn-success" value="Purchase Order">
+                    </div>
                 </div>
             </div><!-- /panel body -->
 

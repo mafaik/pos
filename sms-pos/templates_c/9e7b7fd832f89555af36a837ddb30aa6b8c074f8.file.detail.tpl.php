@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-27 04:24:59
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-01 07:30:21
          compiled from "/var/www/sms-pos/application/modules/Credit/views/detail.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:135180974055371c5f929c56-63041865%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9e7b7fd832f89555af36a837ddb30aa6b8c074f8' => 
     array (
       0 => '/var/www/sms-pos/application/modules/Credit/views/detail.tpl',
-      1 => 1429683043,
+      1 => 1430465418,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -345,11 +345,11 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 
                     <div class="col-sm-3 pull-right">
                         <ul>
-                            <li>Invoice # <strong class="text-danger pull-right"><?php echo $_smarty_tpl->tpl_vars['po']->value->id_po;?>
+                            <li>No Faktur # <strong class="text-danger pull-right"><?php echo $_smarty_tpl->tpl_vars['po']->value->id_po;?>
 </strong></li>
-                            <li>Date of Invoice: <strong class="pull-right"><?php echo $_smarty_tpl->tpl_vars['po']->value->date;?>
+                            <li>Tanggal Nota Transaksi : <strong class="pull-right"><?php echo $_smarty_tpl->tpl_vars['po']->value->date;?>
 </strong></li>
-                            <li>Due Date: <strong class="pull-right"><?php echo $_smarty_tpl->tpl_vars['po']->value->due_date;?>
+                            <li>Tanggal Jatuh Tempo: <strong class="pull-right"><?php echo $_smarty_tpl->tpl_vars['po']->value->due_date;?>
 </strong></li>
                         </ul>
                     </div>
@@ -361,12 +361,14 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Date</th>
+                        <th>Tanggal</th>
+                        <th>Tanggal Penarikan</th>
                         <th>Staff</th>
-                        <th>Amount</th>
-                        <th>Payment Type</th>
+                        <th>Jumlah Bayar</th>
+                        <th>Type Pembayaran</th>
                         <th>No Resi</th>
                         <th>Bukti Pembayaran</th>
+                        <th>Status Pembayaran</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -384,6 +386,8 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
 </td>
                                 <td><?php echo $_smarty_tpl->tpl_vars['key']->value->date;?>
 </td>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value->date_withdrawal;?>
+</td>
                                 <td><?php echo $_smarty_tpl->tpl_vars['key']->value->name;?>
 </td>
                                 <td>Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value->amount,0);?>
@@ -396,11 +400,25 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                                     <div class="table-controls">
                                         <a href="<?php echo $_smarty_tpl->tpl_vars['key']->value->file;?>
 "
-                                           class="btn btn-link btn-icon btn-xs tip" title="View">
+                                           class="btn btn-link btn-icon btn-xs tip" title="Lihat Bukti Pembayaran">
                                             <i class="icon-picassa"></i>
                                         </a>
-
+                                        <?php if ($_smarty_tpl->tpl_vars['key']->value->status=="0") {?>
+                                            <a href="<?php echo base_url('credit/paid');?>
+/<?php echo $_smarty_tpl->tpl_vars['key']->value->id_credit;?>
+"
+                                               class="btn btn-link btn-icon btn-xs tip" title="Ubah Status">
+                                                <i class="icon-coin"></i>
+                                            </a>
+                                        <?php }?>
                                     </div>
+                                </td>
+                                <td>
+                                    <?php if ($_smarty_tpl->tpl_vars['key']->value->status=="1") {?>
+                                        Terbayar
+                                    <?php } else { ?>
+                                        Belum Terbayar
+                                    <?php }?>
                                 </td>
                             </tr>
                             <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable($_smarty_tpl->tpl_vars['val']->value+1, null, 0);?>

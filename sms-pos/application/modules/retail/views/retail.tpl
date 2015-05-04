@@ -46,12 +46,12 @@
             {*</div>*}
 
             <!-- Callout -->
-            {*{if $error}*}
-            {*<div class="callout callout-danger fade in">*}
-            {*<button type="button" class="close" data-dismiss="alert">×</button>*}
-            {*<p>{$error}</p>*}
-            {*</div>*}
-            {*{/if}*}
+            {if $error}
+                <div class="callout callout-danger fade in">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <p>{$error}</p>
+                </div>
+            {/if}
             <!-- /callout -->
             <div class="row">
                 <div class="col-md-4">
@@ -266,7 +266,8 @@
                             </table>
                             <div class="btn-group pull-right">
                                 <button type="submit" name="save" class="btn btn-success"><i class="icon-checkmark">
-                                    </i> Checkout</button>
+                                    </i> Checkout
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -15,7 +15,7 @@ $config = array(
         array(
             'field' => 'invoice_number',
             'label' => 'Invoice Number',
-            'rules' => 'trim|alpha_dash'
+            'rules' => 'trim'
         ),
         array(
             'field' => 'date',

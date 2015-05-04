@@ -33,13 +33,19 @@ class Retail extends MX_Controller
 
         if ($this->input->post()) {
             if ($this->form_validation->run('retail') == TRUE) {
-                $this->cart->add_item($this->input->post('id_product'), [
-                    'id_product' => $this->input->post('id_product'),
-                    'barcode' => $this->input->post('barcode'),
-                    'qty' => $this->input->post('qty'),
-                    'discount' => $this->input->post('discount') ? $this->input->post('discount') : 0
-                ]);
-                redirect('retail');
+                if( $this->ModRetail->checkStock($this->id_store,
+                    $this->input->post('id_product'),
+                    $this->input->post('qty')
+                    )){
+                    $this->cart->add_item($this->input->post('id_product'), [
+                        'id_product' => $this->input->post('id_product'),
+                        'barcode' => $this->input->post('barcode'),
+                        'qty' => $this->input->post('qty'),
+                        'discount' => $this->input->post('discount') ? $this->input->post('discount') : 0
+                    ]);
+                    redirect('retail');
+                }
+                $data['error'] = "stock tidak cukup";
             }
         }
         $data['items'] = $this->cart->list_item($product_storage, 'id_product')->result_array_item();
@@ -48,8 +54,15 @@ class Retail extends MX_Controller
 
     public function updateItem($id_product, $qty)
     {
-        if (!$this->cart->update_item($id_product, ['qty' => $qty]))
-            $this->session->set_flashdata('error', $this->cart->getError());
+        if( $this->ModRetail->checkStock($this->id_store,
+            $id_product,
+            $qty
+        )){
+            if (!$this->cart->update_item($id_product, ['qty' => $qty]))
+                $this->session->set_flashdata('error', $this->cart->getError());
+        }else{
+            $this->session->set_flashdata('error', "stock tidak cukup");
+        }
         redirect('retail');
     }
 

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-27 04:13:22
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-01 06:18:27
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/invoice.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:23005477055334beb312c50-03180410%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '840e608367cd5e933874548fba183a38610c1370' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/invoice.tpl',
-      1 => 1429772919,
+      1 => 1430460838,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -338,7 +338,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
         <div class="panel-body">
 
             <div class="row invoice-header">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <h3><?php echo $_smarty_tpl->tpl_vars['principal']->value->name;?>
 </h3>
                     <span><?php echo $_smarty_tpl->tpl_vars['principal']->value->address;?>
@@ -358,18 +358,33 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                     </span>
                 </div>
 
-                <div class="col-sm-3 pull-right">
-                    <ul>
-                        <li>Invoice # <strong class="text-danger pull-right"><?php echo $_smarty_tpl->tpl_vars['po']->value->id_po;?>
+
+                <div class="col-sm-4">
+                    <ul class="invoice-details">
+                        <li>NPWP <strong><?php echo $_smarty_tpl->tpl_vars['principal']->value->npwp;?>
 </strong></li>
-                        <li>Staff  <strong class="pull-right"><?php echo $_smarty_tpl->tpl_vars['staff']->value->name;?>
+                        <li>SIUP <strong><?php echo $_smarty_tpl->tpl_vars['principal']->value->siup;?>
+</strong></li>
+                        <li>PBF <strong><?php echo $_smarty_tpl->tpl_vars['principal']->value->pbf;?>
+</strong></li>
+                        <li>PBAK <strong><?php echo $_smarty_tpl->tpl_vars['principal']->value->pbak;?>
+</strong></li>
+                        <li>FAK <strong><?php echo $_smarty_tpl->tpl_vars['principal']->value->fak;?>
+</strong></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <ul class="invoice-details">
+                        <li>No Faktur # <strong class="text-danger"><?php echo $_smarty_tpl->tpl_vars['po']->value->id_po;?>
+</strong></li>
+                        <li>Staff: <strong><?php echo $_smarty_tpl->tpl_vars['staff']->value->name;?>
  </strong></li>
-                        <li>Date of Invoice: <strong class="pull-right"><?php echo $_smarty_tpl->tpl_vars['po']->value->date;?>
+                        <li>Tanggal Nota Transaksi: <strong><?php echo $_smarty_tpl->tpl_vars['po']->value->date;?>
+ </strong></li>
+                        <li>Jatuh Tempo Pembayaran: <strong><?php echo $_smarty_tpl->tpl_vars['po']->value->due_date;?>
 </strong></li>
-                        <li>Due Date: <strong class="pull-right"><?php echo $_smarty_tpl->tpl_vars['po']->value->due_date;?>
-</strong></li>
-                        <li class="invoice-status ">
-                            <strong>Stocking Status:</strong>
+                        <li class="invoice-status list-unstyled">
+                            Stocking Status:
                             <?php if ($_smarty_tpl->tpl_vars['po']->value->status_stocking==0) {?>
                                 <div class="label label-danger pull-right">
                                     Waiting
@@ -379,7 +394,6 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                                     Done
                                 </div>
                             <?php }?>
-                        </li>
                     </ul>
                 </div>
             </div>

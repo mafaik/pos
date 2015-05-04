@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-27 04:22:10
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-01 06:28:55
          compiled from "/var/www/sms-pos/application/modules/card_stock/views/card_stock_detail.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1401075379553494b90e25e2-83927373%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0ff2fe6285328576d5c418899d6c70f4928a8c46' => 
     array (
       0 => '/var/www/sms-pos/application/modules/card_stock/views/card_stock_detail.tpl',
-      1 => 1429772919,
+      1 => 1430461732,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -445,7 +445,9 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
 
                 <div class="panel-body">
                     <div class="btn-group pull-right">
-                        <button type="submit" name="save" value="Save" class="btn btn-success"><i class="icon-checkmark"></i> Process</button>
+                        <button type="submit" name="save" class="btn btn-success">
+                            <i class="icon-checkmark"></i> Process
+                        </button>
                         
                     </div>
                 </div><!-- /panel body -->

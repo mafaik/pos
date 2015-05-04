@@ -98,7 +98,9 @@
 
                 <div class="panel-body">
                     <div class="btn-group pull-right">
-                        <button type="submit" name="save" value="Save" class="btn btn-success"><i class="icon-checkmark"></i> Process</button>
+                        <button type="submit" name="save" class="btn btn-success">
+                            <i class="icon-checkmark"></i> Process
+                        </button>
                         {*<button type="button" name="print" class="btn btn-default"><i class="icon-print2"></i> Print</button>*}
                     </div>
                 </div><!-- /panel body -->

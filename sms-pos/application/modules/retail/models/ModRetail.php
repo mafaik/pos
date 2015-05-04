@@ -94,4 +94,15 @@ class ModRetail extends CI_Model
     }
 
 
+    public function checkStock($id_store,$id_product, $qty)
+    {
+        $row = $this->db->get_where('product_store', ['id_store' => $id_store,'id_product' => $id_product])->row();
+        if ($row->stock < $qty) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
 }

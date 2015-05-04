@@ -40,7 +40,7 @@
                                 <tr>
                                     <th>Harga</th>
                                     <td class="text-right">
-                                       Rp {$master->sell_price|number_format:0}
+                                        Rp {$master->sell_price|number_format:0}
                                     </td>
                                 </tr>
                                 </tbody>
@@ -56,11 +56,11 @@
                 <div class="panel-heading"><h6 class="panel-title">Form retur</h6></div>
                 <div class="panel-body">
                     {if $error}
-    <div class="callout callout-danger fade in">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <p>{$error}</p>
-    </div>
-{/if}
+                        <div class="callout callout-danger fade in">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <p>{$error}</p>
+                        </div>
+                    {/if}
                     <form action="{current_url()}" role="form" method="post">
                         <div class="row">
                             <div class="col-sm-12">
@@ -73,7 +73,8 @@
                                         <div class="col-md-4
                                         col-lg-push-3  {if form_error('retur')}has-warning{/if}">
                                             <input type="hidden" name="id_retail" value="{$master->id_retail}">
-                                            <input type="hidden" name="id_retail_detail" value="{$master->id_retail_detail}">
+                                            <input type="hidden" name="id_retail_detail"
+                                                   value="{$master->id_retail_detail}">
 
                                             <input type="number" value="{set_value('returns')}"
                                                    class="form-control"
@@ -89,7 +90,7 @@
 
                                         <div class="col-md-6 col-lg-push-1 {if form_error('reason')}has-warning{/if}">
                                             <textarea rows="4" cols="5" name="reason" placeholder="Ket..."
-                                              class="elastic form-control">{set_value('reason')}</textarea>
+                                                      class="elastic form-control">{set_value('reason')}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -100,10 +101,10 @@
                                         <input type="submit" class="btn btn-block btn-success" value="Submit">
                                     </div>
                                     <div class="col-sm-3">
-                                            <a href="{base_url('retail/returns/list-item/')}/{$master->id_retail}"
-                                               type="button" name="cancel" class="btn btn-warning">
-                                                <i class="icon-cancel-circle">
-                                                </i> Cancel</a>
+                                        <a href="{base_url('retail/returns/list-item/')}/{$master->id_retail}"
+                                           type="button" name="cancel" class="btn btn-warning">
+                                            <i class="icon-cancel-circle">
+                                            </i> Cancel</a>
                                     </div>
 
                                 </div>
@@ -112,7 +113,6 @@
 
                     </form>
                 </div>
-
             </div>
         </div>
     </div>

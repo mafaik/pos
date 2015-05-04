@@ -40,12 +40,7 @@ class PurchaseOrder extends MX_Controller
                     'id_principal' => $this->input->post('id_principal'),
                     'id_staff' => $this->id_staff,
                     'date' => $this->input->post('date'),
-                    'due_date' => $this->input->post('due_date'),
-                    'total' => 0,
-                    'discount_price' => 0,
-                    'dpp' => 0,
-                    'ppn' => 0,
-                    'grand_total' => 0
+                    'due_date' => $this->input->post('due_date')
 
                 ));
                 redirect('purchase-order/detail');
@@ -89,20 +84,14 @@ class PurchaseOrder extends MX_Controller
             }
         }
 
-        $data['product_storage'] = $this->ModProduct->get();
-        $products = array('' => '');
-        foreach ($data['product_storage'] as $row) {
-            $value_option = $row['name'];
-            $value_option .= ' | ' . $row['brand'];
-            $value_option .= ' | ' . $row['unit'];
-            $value_option .= ' ( ' . $row['value'] . ' )';
-            $products[$row['id_product']] = $value_option;
-        }
+        $product_storage = $this->ModProduct->get();
 
-        $data['products'] = $products;
+        $data['items'] = $this->cart->list_item($product_storage, 'id_product')->result_array_item();
         $cache = $this->cart->array_cache();
-        $data['principal'] = $this->db->get_where('principal', array('id_principal' => $cache['value']['id_principal']))->row();
+        $data['principal'] = $this->db->get_where('principal',
+            array('id_principal' => $cache['value']['id_principal']))->row();
         $data['cache'] = $cache;
+        $data['product_storage'] = $product_storage;
 
         $this->parser->parse("po_detail.tpl", $data);
     }

@@ -24,7 +24,7 @@
         <div class="panel-body">
 
             <div class="row invoice-header">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <h3>{$po->principal_name}</h3>
                     <span>{$po->address} - {$po->zipcode}
                         </br>
@@ -36,7 +36,7 @@
                     </span>
                 </div>
 
-                <div class="col-sm-3 pull-right">
+                <div class="col-sm-4">
                     <ul>
                         <li>Staff  <strong class="pull-right">{$cs->name} </strong></li>
                         <li>ID Card Stock # <strong class="text-danger pull-right">{$cs->id_card_stock}</strong></li>
@@ -44,7 +44,7 @@
                     </ul>
                 </div>
 
-                <div class="col-sm-3 pull-right">
+                <div class="col-sm-4">
                     <ul>
                         <li>Staff  <strong class="pull-right">{$po->staff_name} </strong></li>
                         <li>ID Purchase Order # <strong class="text-danger pull-right">{$po->id_po}</strong></li>

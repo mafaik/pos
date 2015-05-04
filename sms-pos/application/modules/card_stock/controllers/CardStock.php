@@ -51,7 +51,7 @@ class CardStock extends MX_Controller
                 $i++;
             }
             if ($id_card_stock = $this->ModCardStock->stocking($id_po, $this->id_staff, $update_data)) {
-                redirect('card-stock/invoice' . '/' . $id_card_stock);
+                redirect('card-stock/checkout' . '/' . $id_card_stock);
                 return false;
             }
             $data['error'] = "error database transaction";
@@ -77,7 +77,7 @@ class CardStock extends MX_Controller
         $this->parser->parse("card_stock_detail.tpl", $data);
     }
 
-    public function invoice($id_card_stock)
+    public function checkout($id_card_stock)
     {
         $this->load->model('purchase_order/ModPurchaseOrder', 'PO');
         $data_cs = $this->db->from('card_stock')
@@ -110,7 +110,7 @@ class CardStock extends MX_Controller
         $data['po'] = $data_po;
         $data['po_detail'] = $this->PO->getDataPOD($data_cs->id_po);
 
-        $this->parser->parse("invoice.tpl", $data);
+        $this->parser->parse("checkout.tpl", $data);
 
 
     }

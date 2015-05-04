@@ -23,9 +23,9 @@
 
                     <div class="col-sm-3 pull-right">
                         <ul>
-                            <li>Invoice # <strong class="text-danger pull-right">{$po->id_po}</strong></li>
-                            <li>Date of Invoice: <strong class="pull-right">{$po->date}</strong></li>
-                            <li>Due Date: <strong class="pull-right">{$po->due_date}</strong></li>
+                            <li>No Faktur # <strong class="text-danger pull-right">{$po->id_po}</strong></li>
+                            <li>Tanggal Nota Transaksi : <strong class="pull-right">{$po->date}</strong></li>
+                            <li>Tanggal Jatuh Tempo: <strong class="pull-right">{$po->due_date}</strong></li>
                         </ul>
                     </div>
                 </div>
@@ -36,12 +36,14 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Date</th>
+                        <th>Tanggal</th>
+                        <th>Tanggal Penarikan</th>
                         <th>Staff</th>
-                        <th>Amount</th>
-                        <th>Payment Type</th>
+                        <th>Jumlah Bayar</th>
+                        <th>Type Pembayaran</th>
                         <th>No Resi</th>
                         <th>Bukti Pembayaran</th>
+                        <th>Status Pembayaran</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,6 +55,7 @@
                             <tr>
                                 <td>{$val}</td>
                                 <td>{$key->date}</td>
+                                <td>{$key->date_withdrawal}</td>
                                 <td>{$key->name}</td>
                                 <td>Rp {$key->amount|number_format:0}</td>
                                 <td>{$key->payment_type}</td>
@@ -60,11 +63,23 @@
                                 <td>
                                     <div class="table-controls">
                                         <a href="{$key->file}"
-                                           class="btn btn-link btn-icon btn-xs tip" title="View">
+                                           class="btn btn-link btn-icon btn-xs tip" title="Lihat Bukti Pembayaran">
                                             <i class="icon-picassa"></i>
                                         </a>
-
+                                        {if $key->status == "0"}
+                                            <a href="{base_url('credit/paid')}/{$key->id_credit}"
+                                               class="btn btn-link btn-icon btn-xs tip" title="Ubah Status">
+                                                <i class="icon-coin"></i>
+                                            </a>
+                                        {/if}
                                     </div>
+                                </td>
+                                <td>
+                                    {if $key->status == "1"}
+                                        Terbayar
+                                    {else}
+                                        Belum Terbayar
+                                    {/if}
                                 </td>
                             </tr>
                             {assign var=val value=$val+1}

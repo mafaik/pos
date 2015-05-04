@@ -4,7 +4,7 @@
 {block name=content}
 
     <!-- New invoice template -->
-    <div class="panel panel-success">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h6 class="panel-title"><i class="icon-checkmark3"></i> Data nota {$master->id_retail}</h6>
             <div class="dropdown pull-right">
@@ -135,10 +135,43 @@
                 </div>
             </div>
 
-            <h6>Notes &amp; Information:</h6>
-            This invoice contains a incomplete list of items destroyed by the Federation ship Enterprise on Startdate 5401.6 in an unprovked attacked on a peaceful &amp; wholly scientific mission to Outpost 775.
-            The Romulan people demand immediate compensation for the loss of their Warbird, Shuttle, Cloaking Device, and to a lesser extent thier troops.
+
         </div>
+
+        {if $history_returns}
+            <div class="block-inner">
+                <h6 class="heading-hr">
+                    <i class="icon-clipboard"></i> Riwayat Retur nota  {$master->id_retail}
+                </h6>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>No Retur</th>
+                        <th>Tanggal Retur</th>
+                        <th>Staff</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach $history_returns as $returns }
+                        <tr>
+                            <td>{$returns->id_retail_returns}</td>
+                            <td>{$returns->date}</td>
+                            <td>{$returns->name}</td>
+                            <td>
+                                <a href="{base_url('retail/replace/checkout/')}/{$returns->id_retail_returns}"
+                                   target="_blank" class="button btn btn-info "> Detail
+                                </a>
+                            </td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        {/if}
+
     </div>
     <!-- /new invoice template -->
 {/block}

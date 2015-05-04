@@ -24,7 +24,7 @@
                             {/if}
                         </div>
                         <div class="col-md-6 {if form_error('invoice_number')}has-warning{/if}">
-                            <label>No Faktur:</label>
+                            <label>No Nota Pembelian:</label>
                             {form_input('invoice_number', set_value('invoice_number'), 'class="form-control" placeholder="Invoice Number"')}
                             {if form_error('invoice_number')}
                                 <span class="label label-block label-danger text-left">{form_error('invoice_number') }</span>
@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6 {if form_error('date')}has-warning{/if}">
-                            <label>Tanggal Nota Transaksi:</label>
+                            <label>Tanggal Nota Pembelian:</label>
                             {form_input('date', set_value('date'), 'class="datepicker-trigger form-control" data-mask="9999-99-99" placeholder"YYYY-MM-dd"')}
                         </div>
                         <div class="col-md-6 {if form_error('due_date')}has-warning{/if}">
@@ -45,8 +45,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-actions text-right ">
-                    <input type="submit" value="Add" class="btn btn-success">
+                <div class="form-actions ">
+                    <div class="col-sm-12">
+                        <input type="submit" class="btn btn-block btn-success" value="Purchase Order">
+                    </div>
                 </div>
             </div><!-- /panel body -->
 

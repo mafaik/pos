@@ -24,7 +24,7 @@
         <div class="panel-body">
 
             <div class="row invoice-header">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <h3>{$principal->name}</h3>
                     <span>{$principal->address} - {$principal->zipcode}
                         </br>
@@ -36,14 +36,24 @@
                     </span>
                 </div>
 
-                <div class="col-sm-3 pull-right">
-                    <ul>
-                        <li>Invoice # <strong class="text-danger pull-right">{$po->id_po}</strong></li>
-                        <li>Staff  <strong class="pull-right">{$staff->name} </strong></li>
-                        <li>Date of Invoice: <strong class="pull-right">{$po->date}</strong></li>
-                        <li>Due Date: <strong class="pull-right">{$po->due_date}</strong></li>
-                        <li class="invoice-status ">
-                            <strong>Stocking Status:</strong>
+
+                <div class="col-sm-4">
+                    <ul class="invoice-details">
+                        <li>NPWP <strong>{$principal->npwp}</strong></li>
+                        <li>SIUP <strong>{$principal->siup}</strong></li>
+                        <li>PBF <strong>{$principal->pbf}</strong></li>
+                        <li>PBAK <strong>{$principal->pbak}</strong></li>
+                        <li>FAK <strong>{$principal->fak}</strong></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <ul class="invoice-details">
+                        <li>No Faktur # <strong class="text-danger">{$po->id_po}</strong></li>
+                        <li>Staff: <strong>{$staff->name} </strong></li>
+                        <li>Tanggal Nota Transaksi: <strong>{$po->date} </strong></li>
+                        <li>Jatuh Tempo Pembayaran: <strong>{$po->due_date}</strong></li>
+                        <li class="invoice-status list-unstyled">
+                            Stocking Status:
                             {if $po->status_stocking == 0}
                                 <div class="label label-danger pull-right">
                                     Waiting
@@ -53,7 +63,6 @@
                                     Done
                                 </div>
                             {/if}
-                        </li>
                     </ul>
                 </div>
             </div>

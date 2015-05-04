@@ -86,11 +86,10 @@ class Credit extends MX_Controller
                     if (!$this->upload->do_upload('file')) {
                         $this->session->set_flashdata('error',
                             $this->upload->display_errors(''));
-                        redirect('bill'.'/'.$id_po);
+                        redirect('bill' . '/' . $id_po);
                     }
                     $file = $this->upload->data();
                     $scan = base_url() . "/upload/credit" . $file['file_name'];
-
 
 
                 }
@@ -100,11 +99,13 @@ class Credit extends MX_Controller
                     'payment_type' => $this->input->post('payment_type'),
                     'amount' => $this->input->post('amount'),
                     'resi_number' => $this->input->post('resi_number'),
+                    'date_withdrawal' => $this->input->post('date_withdrawal'),
+                    'status' => $this->input->post('payment_type') == "bg" ? 0 : 1,
                     'file' => $scan
                 );
 
                 $this->db->insert('credit', $data_insert);
-                $this->session->set_flashdata('success','insert data berhasil');
+                $this->session->set_flashdata('success', 'insert data berhasil');
                 redirect('credit');
             }
         }
@@ -118,6 +119,16 @@ class Credit extends MX_Controller
 
         $data['po'] = $po;
         $this->parser->parse("bill.tpl", $data);
+    }
+
+    public function update($id_credit)
+    {
+        $this->db
+            ->where('id_credit',$id_credit)
+            ->set('status',true)
+            ->update('credit');
+        $row = $this->db->get_where('credit',['id_credit'=>$id_credit])->row();
+            redirect('credit/detail'.'/'.$row->id_po);
     }
 
     public function detailBayar($id_po)

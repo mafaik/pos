@@ -41,6 +41,10 @@ class Returns extends MX_Controller
 
         }
         $data['master'] = $retail;
+        $data['history_returns'] = $this->db->from('retail_returns')
+            ->join('staff','staff.id_staff = retail_returns.id_staff')
+            ->where(['id_retail'=>$id_retail])
+            ->get()->result();
         $data['items'] = $this->ModRetail->getRetailDetail($id_retail);
         $this->parser->parse("returns_list.tpl", $data);
     }
@@ -70,7 +74,7 @@ class Returns extends MX_Controller
                     redirect('retail/returns/list-item' . '/' . $this->input->post('id_retail'));
 
                 }
-                $this->session->set_flashdata('error', 'Jumlah retur tidak sesuai');
+                $data['error'] = 'Jumlah retur tidak sesuai';
             }
         }
 

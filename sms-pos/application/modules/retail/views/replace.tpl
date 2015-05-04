@@ -111,14 +111,13 @@
             {*</div>*}
             {*</div>*}
 
-            <!-- Callout -->
-            {*{if $error}*}
-            {*<div class="callout callout-danger fade in">*}
-            {*<button type="button" class="close" data-dismiss="alert">×</button>*}
-            {*<p>{$error}</p>*}
-            {*</div>*}
-            {*{/if}*}
-            <!-- /callout -->
+
+            {if $error}
+                <div class="callout callout-danger fade in">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <p>{$error}</p>
+                </div>
+            {/if}
             <div class="row">
                 <div class="col-md-4">
                     <form action="{current_url()}" role="form" method="post">

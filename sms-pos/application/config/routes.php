@@ -63,7 +63,7 @@ $route['purchase-order/invoice/(:num)'] = "purchase_order/Invoice/index/$1";
 
 $route['card-stock'] = "card_stock/CardStock";
 $route['card-stock/detail/(:num)'] = "card_stock/CardStock/detailCS/$1";
-$route['card-stock/invoice/(:num)'] = "card_stock/CardStock/invoice/$1";
+$route['card-stock/checkout/(:num)'] = "card_stock/CardStock/checkout/$1";
 
 $route['product-conversion'] = "product_conversion/Conversion";
 $route['product-conversion/add/(:num)'] = "product_conversion/Conversion/addConversion/$1";
@@ -73,6 +73,7 @@ $route['product-conversion/save'] = "product_conversion/Conversion/save";
 
 $route['credit'] = "Credit";
 $route['credit/bill/(:num)'] = "Credit/bill/$1";
+$route['credit/paid/(:num)'] = "Credit/update/$1";
 $route['credit/detail/(:num)'] = "Credit/detailBayar/$1";
 
 $route['product-distribution'] = "product_distribution/Distribution";
