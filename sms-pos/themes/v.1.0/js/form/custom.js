@@ -7,7 +7,7 @@ function appendItem(data){
     console.log(data);
     for (var x in data){
         if (data[x] === parseInt(data[x], 10)){
-            value = parseInt(b);
+            value = parseInt(data[x]);
         }
         else{
             value = data[x];
@@ -15,6 +15,29 @@ function appendItem(data){
 
         var id_input = $('#input-'+x);
         var id_text = $('#text-'+x);
+        if(id_input.length){
+            id_input.val( data[x] );
+        }
+        if(id_text.length){
+            id_text.html( data[x] );
+        }
+
+    }
+}
+
+function updateItem(param){
+    var data = getDataProductArray(param, items, 'id_product');
+    for (var x in data){
+        if (data[x] === parseInt(data[x], 10)){
+            value = parseInt(data[x]);
+        }
+        else{
+            value = data[x];
+        }
+
+        console.log(x);
+        var id_input = $('#update-input-'+x);
+        var id_text = $('#update-text-'+x);
         if(id_input.length){
             id_input.val( data[x] );
         }

@@ -103,8 +103,6 @@ $route['retail/replace/update/(:num)/(:num)/(:num)'] = "retail/Replace/updateIte
 $route['retail/replace/delete/(:num)/(:num)'] = "retail/Replace/deleteItem/$1/$2";
 $route['retail/replace/checkout/(:num)'] = "retail/Checkout/replace/$1";
 
-
-
 $route['stock-opname'] = "Opname";
 $route['stock-opname/checking/(:num)'] = "Opname/checking/$1";
 $route['stock-opname/save'] = "Opname/save";
@@ -113,5 +111,19 @@ $route['stock-opname/store'] = "opname/Store";
 $route['stock-opname/store/checking/(:num)'] = "opname/Store/checking/$1";
 $route['stock-opname/store/save'] = "opname/Store/save";
 
+
+
+$route['proposal'] = "proposal";
+$route['proposal/delete'] = "proposal/reset";
+$route['proposal/save'] = "proposal/saveProposal";
+$route['proposal/detail'] = "proposal/insertDetail";
+$route['proposal/detail/delete/(:num)'] = "proposal/deleteDetail/$1";
+$route['proposal/detail/update'] = "proposal/detailUpdate";
+$route['proposal/checkout/(:num)'] = "proposal/checkout/$1";
+
+
+$route['proposal/list'] = "proposal/Listing/index";
+$route['proposal/approve/(:num)'] = "proposal/Listing/approve/$1";
+$route['proposal/delete/(:num)'] = "proposal/Listing/delete/$1";
 
 
