@@ -31,7 +31,7 @@
                         <th>Penanngung Jawab</th>
                         <th>Jenis Proposal</th>
                         <th>PPn Status</th>
-                        <th>Action</th>
+                        <th width="300px">Action</th>
                     </tr>
                     </thead>
                     <tbody>

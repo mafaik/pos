@@ -11,7 +11,7 @@
     {js('form/custom.js')}
     <div class="panel panel-default">
 
-        <div class="panel-heading"><h6 class="panel-title">Proposal</h6></div>
+        <div class="panel-heading"><h6 class="panel-title">Sales Order</h6></div>
 
         <div class="panel-body">
             <div class="row invoice-header">
@@ -34,8 +34,8 @@
                         <li>Jenis Proposal <strong class="text-info">{$proposal_type}</strong></li>
                         <li>PPn status # <strong class="text-info">{$status_ppn}</strong></li>
                         <li class="invoice-status text-right list-unstyled">
-                            <a href="{base_url('proposal/delete')}" class=" button btn btn-danger">
-                                <i class="icon-eject"></i>Buat Proposal Baru</a>
+                            <a href="{base_url('sales-order/delete')}" class=" button btn btn-danger">
+                                <i class="icon-eject"></i>Ganti Dengan Proposal Lain</a>
                         </li>
                     </ul>
                 </div>
@@ -50,107 +50,107 @@
             {/if}
             <!-- /callout -->
 
-            <div class="row">
-                <div class="col-md-4">
-                    <form action="{base_url('proposal/detail')}" role="form" method="post">
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="col-sm-4 control-label">Barcode: </label>
+            {if $cache['value']['type'] == 0}
+                {*<div class="row">*}
+                    {*<div class="col-md-4">*}
+                        {*<form action="{base_url('proposal/detail')}" role="form" method="post">*}
+                            {*<div class="form-group">*}
+                                {*<div class="row">*}
+                                    {*<label class="col-sm-4 control-label">Barcode: </label>*}
 
-                                <div class="col-md-8">
-                                    <input type="text" name="barcode" value="{set_value('barcode')}" id="input-barcode"
-                                           class="form-control" placeholder="Type or scan barcode"
-                                           autofocus onblur="barcodeParam(this)">
-                                    <input type="hidden" name="id_product" value="{set_value('id_product')}"
-                                           id="input-id_product">
-                                </div>
-                            </div>
-                        </div>
-                        {if $cache['value']['type'] == 1}
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="col-sm-4 control-label">Qty: </label>
+                                    {*<div class="col-md-8">*}
+                                        {*<input type="text" name="barcode" value="{set_value('barcode')}"*}
+                                               {*id="input-barcode"*}
+                                               {*class="form-control" placeholder="Type or scan barcode"*}
+                                               {*autofocus onblur="barcodeParam(this)">*}
+                                        {*<input type="hidden" name="id_product" value="{set_value('id_product')}"*}
+                                               {*id="input-id_product">*}
+                                    {*</div>*}
+                                {*</div>*}
+                            {*</div>*}
+                            {*<div class="form-group">*}
+                                {*<div class="row">*}
+                                    {*<label class="col-sm-4 control-label">Qty: </label>*}
 
-                                    <div class="col-md-4 {if form_error('qty')}has-warning{/if}">
-                                        <input type="number" name="qty" value="{set_value('qty',1)}"
-                                                {*id="input-qty"*}
-                                               class="form-control" placeholder="0">
-                                    </div>
-                                </div>
-                            </div>
-                        {/if}
+                                    {*<div class="col-md-4 {if form_error('qty')}has-warning{/if}">*}
+                                        {*<input type="number" name="qty" value="{set_value('qty',1)}" id="input-qty"*}
+                                               {*class="form-control" placeholder="0">*}
+                                    {*</div>*}
+                                {*</div>*}
+                            {*</div>*}
 
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="col-sm-4 control-label">Harga: </label>
+                            {*<div class="form-group">*}
+                                {*<div class="row">*}
+                                    {*<label class="col-sm-4 control-label">Harga: </label>*}
 
-                                <div class="col-md-7 {if form_error('price')}has-warning{/if}">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Rp</span>
-                                        <input type="number" name="price" value="{set_value('price')}"
-                                               class="form-control" placeholder="0" id="input-sell_price">
+                                    {*<div class="col-md-7 {if form_error('price')}has-warning{/if}">*}
+                                        {*<div class="input-group">*}
+                                            {*<span class="input-group-addon">Rp</span>*}
+                                            {*<input type="number" name="price" value="{set_value('price')}"*}
+                                                   {*class="form-control" placeholder="0" id="input-sell_price">*}
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="col-sm-4 control-label">Diskon: </label>
+                                        {*</div>*}
+                                    {*</div>*}
+                                {*</div>*}
+                            {*</div>*}
+                            {*<div class="form-group">*}
+                                {*<div class="row">*}
+                                    {*<label class="col-sm-4 control-label">Diskon: </label>*}
 
-                                <div class="col-md-7 {if form_error('discount')}has-warning{/if}">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Rp</span>
-                                        <input type="number" name="discount" value="{set_value('discount')}"
-                                               class="form-control" placeholder="0">
+                                    {*<div class="col-md-7 {if form_error('discount')}has-warning{/if}">*}
+                                        {*<div class="input-group">*}
+                                            {*<span class="input-group-addon">Rp</span>*}
+                                            {*<input type="number" name="discount" value="{set_value('discount')}"*}
+                                                   {*class="form-control" placeholder="0">*}
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="submit" class="btn btn-block btn-success" value="Submit">
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md-2">
-                    <div class="col-sm-12">
-                        <a data-toggle="modal" role="button" href="#default-modal"
-                           class="button btn btn-info center-block">Cari
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Nama Produk</label>
-                            <h6 id="text-name"></h6>
-                        </div>
-                        <div class="col-md-3">
-                            <label>Kategori:</label>
-                            <h6 id="text-category"></h6>
-                        </div>
-                        <div class="col-md-3">
-                            <label>Merek</label>
-                            <h6 id="text-brand"></h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label>Satuan:</label>
-                            <h6 id="text-unit"></h6>
-                        </div>
-                        <div class="col-md-3">
-                            <label>Isi Satuan:</label>
-                            <h6 id="text-value"></h6>
-                        </div>
-                        <div class="col-md-3">
-                            <label>Ukuran</label>
-                            <h6 id="text-size"></h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                        {*</div>*}
+                                    {*</div>*}
+                                {*</div>*}
+                            {*</div>*}
+                            {*<div class="col-sm-12">*}
+                                {*<input type="submit" class="btn btn-block btn-success" value="Submit">*}
+                            {*</div>*}
+                        {*</form>*}
+                    {*</div>*}
+                    {*<div class="col-md-2">*}
+                        {*<div class="col-sm-12">*}
+                            {*<a data-toggle="modal" role="button" href="#default-modal"*}
+                               {*class="button btn btn-info center-block">Cari*}
+                            {*</a>*}
+                        {*</div>*}
+                    {*</div>*}
+                    {*<div class="col-md-6">*}
+                        {*<div class="row">*}
+                            {*<div class="col-md-6">*}
+                                {*<label>Nama Produk</label>*}
+                                {*<h6 id="text-name"></h6>*}
+                            {*</div>*}
+                            {*<div class="col-md-3">*}
+                                {*<label>Kategori:</label>*}
+                                {*<h6 id="text-category"></h6>*}
+                            {*</div>*}
+                            {*<div class="col-md-3">*}
+                                {*<label>Merek</label>*}
+                                {*<h6 id="text-brand"></h6>*}
+                            {*</div>*}
+                        {*</div>*}
+                        {*<div class="row">*}
+                            {*<div class="col-md-3">*}
+                                {*<label>Satuan:</label>*}
+                                {*<h6 id="text-unit"></h6>*}
+                            {*</div>*}
+                            {*<div class="col-md-3">*}
+                                {*<label>Isi Satuan:</label>*}
+                                {*<h6 id="text-value"></h6>*}
+                            {*</div>*}
+                            {*<div class="col-md-3">*}
+                                {*<label>Ukuran</label>*}
+                                {*<h6 id="text-size"></h6>*}
+                            {*</div>*}
+                        {*</div>*}
+                    {*</div>*}
+                {*</div>*}
+            {/if}
         </div>
         <!-- /panel body -->
 
@@ -164,7 +164,7 @@
                         <th>Nama Produk</th>
                         <th>Merek</th>
                         <th>Satuan / isi</th>
-                        <th>Qty</th>
+                        <th width="100px">Qty</th>
                         <th>Harga</th>
                         <th>Diskon</th>
                         {if $cache['value']['status_ppn'] == 1}
@@ -187,7 +187,13 @@
                             <td>{$key['brand']}</td>
                             <td>{$key['unit']} / {$key['value']}</td>
                             <td>
-                                {$key['qty']}
+                                {if $cache['value']['status_ppn'] == 0}
+                                    <input type="number" id="qty-{$key['id_product']}" value="{$key['qty']}"
+                                           class="form-control" onkeypress="qtyKeyPress({$key['id_product']},
+                                            '{base_url('sales-order/update')}')">
+                                {else}
+                                    {$key['qty']}
+                                {/if}
                             </td>
                             {*{/if}*}
                             <td style="width:130px;" class="text-right">
@@ -230,7 +236,7 @@
                     </tbody>
                 </table>
             </div>
-            <form action="{base_url('proposal/save')}" role="form" method="post"
+            <form action="{base_url('sales-order/save')}" role="form" method="post"
                   onsubmit="return confirm('Process Data');">
                 <div class="panel-body">
 
@@ -241,19 +247,39 @@
                             <table class="table">
                                 <tbody>
                                 <tr>
-                                    <th>Total:</th>
-                                    <td class="text-right">Rp
-                                        <span id="sum-total-text"><strong>{$total|number_format:0}</strong> </span>
+                                    <th>Jatuh Tempo:</th>
+                                    <td class="text-right">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-12 {if form_error('due_date')}has-warning{/if}">
+                                        {form_input('due_date', set_value('due_date'),
+                                        'class="datepicker-trigger form-control" data-mask="9999-99-99" placeholder"YYYY-MM-dd"')}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
-                                    <tr>
-                                        <th>PPn:</th>
-                                        <td class="text-right">Rp
-                                            <span id="sum-ppn-text"><strong> {$ppn_total|number_format:0}</strong> </span>
-                                        </td>
-                                    </tr>
+
                                 <tr>
-                                    <th>Grand Total:</th>
+                                    <th>Total:</th>
+                                    <td class="text-right">Rp
+                                        <span id="sum-dpp-text"><strong>{$total|number_format:0}</strong> </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {if $cache['value']['status_ppn'] == 0}
+                                        <label class="radio">
+                                            <input type="checkbox" name="status_ppn" class="styled"
+                                                   onclick="ppnCheck()">
+                                            {/if}
+                                            PPN 10 %
+                                        </label>
+                                    </th>
+                                    <td class="text-right">Rp <span id="sum-ppn-text">{$ppn_total|number_format:0}</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Total:</th>
                                     <td class="text-right text-danger">
                                         <h6>Rp <span id="sum-grand_total-text">{($total+$ppn_total)|number_format:0} </span>
                                         </h6>

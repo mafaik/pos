@@ -127,3 +127,10 @@ $route['proposal/approve/(:num)'] = "proposal/Listing/approve/$1";
 $route['proposal/delete/(:num)'] = "proposal/Listing/delete/$1";
 
 
+
+$route['sales-order/(:num)'] = "sales_order/SalesOrder/index/$1";
+$route['sales-order/list'] = "sales_order/SalesOrder/detail";
+$route['sales-order/delete'] = "sales_order/SalesOrder/reset";
+$route['sales-order/save'] = "sales_order/SalesOrder/save";
+$route['sales-order/update/(:num)/(:num)'] = "sales_order/SalesOrder/updateItem/$1/$2";
+$route['sales-order/checkout/(:num)'] = "sales_order/SalesOrder/checkout/$1";

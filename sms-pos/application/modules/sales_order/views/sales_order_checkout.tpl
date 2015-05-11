@@ -6,7 +6,7 @@
     <!-- New invoice template -->
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h6 class="panel-title"><i class="icon-checkmark3"></i> Proposal Penawaran Cheockout</h6>
+            <h6 class="panel-title"><i class="icon-checkmark3"></i> Sales Order Cheockout</h6>
 
             <div class="dropdown pull-right">
                 <a href="#" class="dropdown-toggle panel-icon" data-toggle="dropdown">
@@ -33,10 +33,10 @@
 
                 <div class="col-sm-3 pull-right">
                     <ul>
-                        <li>Jenis Proposal <strong class="text-info pull-right">{$proposal_type}</strong></li>
                         <li>No Proposal # <strong class="text-danger pull-right">{$master->id_proposal}</strong></li>
                         <li>Staff <strong class="pull-right">{$master->staff_name} </strong></li>
-                        <li>Date : <strong class="pull-right">{$master->date_created}</strong></li>
+                        <li>Date : <strong class="pull-right">{$master->date}</strong></li>
+                        <li>Jatuh Tempo : <strong class="pull-right">{$master->due_date}</strong></li>
                         <li>PPn status <strong class="text-info pull-right">{$status_ppn}</strong></li>
                     </ul>
                 </div>
@@ -96,6 +96,7 @@
                             )|number_format:0}
                         </td>
                         <td style="width:90px;">
+
                             <div class="table-controls">
                                 <a data-toggle="modal" class="btn btn-link btn-icon btn-xs tip" title="Update Qty"
                                    href="#update-modal" onclick="updateItem({$key['id_product']})" role="button">
@@ -109,6 +110,7 @@
                     {assign var=val value=$val+1}
                     {assign var=total value=$total+($key['qty'] * ($key['price'] - $key['discount']))}
                     {assign var=ppn_total value=$ppn_total+ $ppn}
+
                 {/foreach}
                 </tbody>
             </table>
@@ -126,12 +128,10 @@
                             <th>Total:</th>
                             <td class="text-right">Rp {$total|number_format:0}</td>
                         </tr>
-                        {if $master->status_ppn == 1}
-                            <tr>
-                                <th>PPn:</th>
-                                <td class="text-right">Rp {$ppn_total|number_format:0}</td>
-                            </tr>
-                        {/if}
+                        <tr>
+                            <th>PPn:</th>
+                            <td class="text-right">Rp {$ppn_total|number_format:0}</td>
+                        </tr>
 
                         <tr>
                             <th>Grand Total:</th>
@@ -143,8 +143,8 @@
                         </tbody>
                     </table>
                     <div class="btn-group pull-right">
-                        <a href="{base_url('proposal')}" class="btn btn-info button">
-                            <i class="icon-box-add"></i> New Proposal</a>
+                        <a href="{base_url('proposal/list')}" class="btn btn-info button">
+                            <i class="icon-box-add"></i> New Sales Order</a>
                         <button type="button" class="btn btn-primary"><i class="icon-print2"></i> Print</button>
                     </div>
                 </div>

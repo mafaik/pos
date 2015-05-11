@@ -36,7 +36,7 @@ class ModelProduct extends CI_Model
 
     private function getPriceLastProposal($id_proposal){
         return $this->db
-            ->select('*, IF(proposal_detail.price IS NULL, product.sell_price, proposal_detail.price) as sell_price'
+            ->select('product.* ,product_unit.* ,product_category.* ,IF(proposal_detail.price IS NULL, product.sell_price, proposal_detail.price) as sell_price'
                 ,false)
             ->from('proposal_detail')
             ->join('product', ' product.id_product = proposal_detail.id_product','right outer')

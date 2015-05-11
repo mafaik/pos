@@ -262,5 +262,12 @@ $config = array(
             'label' => 'Discount',
             'rules' => 'numeric'
         ),
+    ),
+    'sales_order/save' => array(
+        array(
+            'field' => 'due_date',
+            'label' => 'Tanggal Jatuh Tempo',
+            'rules' => 'required'
+        )
     )
 );
