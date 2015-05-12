@@ -131,6 +131,7 @@ $route['proposal/delete/(:num)'] = "proposal/Listing/delete/$1";
 $route['sales-order/(:num)'] = "sales_order/SalesOrder/index/$1";
 $route['sales-order/list'] = "sales_order/SalesOrder/detail";
 $route['sales-order/delete'] = "sales_order/SalesOrder/reset";
+$route['sales-order/detail/delete/(:num)'] = "sales_order/SalesOrder/deleteDetail/$1";
 $route['sales-order/save'] = "sales_order/SalesOrder/save";
 $route['sales-order/update/(:num)/(:num)'] = "sales_order/SalesOrder/updateItem/$1/$2";
 $route['sales-order/checkout/(:num)'] = "sales_order/SalesOrder/checkout/$1";
@@ -140,3 +141,12 @@ $route['debit'] = "Debit";
 $route['debit/bill/(:num)'] = "Debit/bill/$1";
 $route['debit/paid/(:num)'] = "Debit/update/$1";
 $route['debit/detail/(:num)'] = "Debit/detailBayar/$1";
+
+
+$route['delivery-order'] = "delivery_order/DeliveryOrder/listing";
+$route['delivery-order/send/(:num)'] = "delivery_order/DeliveryOrder/index/$1";
+$route['delivery-order/list'] = "delivery_order/DeliveryOrder/detail";
+$route['delivery-order/delete'] = "delivery_order/DeliveryOrder/reset";
+$route['delivery-order/detail/delete/(:num)'] = "delivery_order/DeliveryOrder/deleteDetail/$1";
+$route['delivery-order/save'] = "delivery_order/DeliveryOrder/save";
+$route['delivery-order/checkout/(:num)/(:num)'] = "delivery_order/DeliveryOrder/checkout/$1/$2";

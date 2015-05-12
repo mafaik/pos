@@ -269,5 +269,12 @@ $config = array(
             'label' => 'Tanggal Jatuh Tempo',
             'rules' => 'required'
         )
+    ),
+    'delivery_order/save' => array(
+        array(
+            'field' => 'date_sending',
+            'label' => 'Tanggal Pengiriman',
+            'rules' => 'required'
+        )
     )
 );

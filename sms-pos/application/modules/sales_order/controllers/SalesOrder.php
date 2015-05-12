@@ -102,7 +102,6 @@ class SalesOrder extends MX_Controller
             }
         }
         $this->detail();
-
     }
 
 
@@ -125,5 +124,16 @@ class SalesOrder extends MX_Controller
         $data['status_ppn'] = $this->status_ppn[$master->status_ppn];
         $data['items'] = $this->model_so->getDataSODetail($id);
         $this->parser->parse("sales_order_checkout.tpl", $data);
+    }
+
+    public function deleteDetail($id_product)
+    {
+        if (!$this->cart->primary_data_exists()) {
+            redirect('proposal/list');
+            return false;
+        }
+        if (!$this->cart->delete_item($id_product))
+            $this->session->set_flashdata('error', $this->cart->getError());
+        redirect('sales-order/list');
     }
 }
