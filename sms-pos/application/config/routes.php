@@ -134,3 +134,9 @@ $route['sales-order/delete'] = "sales_order/SalesOrder/reset";
 $route['sales-order/save'] = "sales_order/SalesOrder/save";
 $route['sales-order/update/(:num)/(:num)'] = "sales_order/SalesOrder/updateItem/$1/$2";
 $route['sales-order/checkout/(:num)'] = "sales_order/SalesOrder/checkout/$1";
+
+
+$route['debit'] = "Debit";
+$route['debit/bill/(:num)'] = "Debit/bill/$1";
+$route['debit/paid/(:num)'] = "Debit/update/$1";
+$route['debit/detail/(:num)'] = "Debit/detailBayar/$1";
