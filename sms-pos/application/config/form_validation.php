@@ -223,5 +223,51 @@ $config = array(
             'label' => 'Keterangan',
             'rules' => 'required|trim'
         )
+    ),
+    'proposal' => array(
+        array(
+            'field' => 'id_customer',
+            'label' => 'Customer',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'type',
+            'label' => 'Jenis Proposal',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'status_ppn',
+            'label' => 'PPn Status',
+            'rules' => 'required'
+        )
+    ),
+    'proposal/detail' => array(
+        array(
+            'field' => 'id_product',
+            'label' => 'Product',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'qty',
+            'label' => 'QTY Number',
+            'rules' => 'integer'
+        ),
+        array(
+            'field' => 'price',
+            'label' => 'Price',
+            'rules' => 'required|numeric'
+        ),
+        array(
+            'field' => 'discount',
+            'label' => 'Discount',
+            'rules' => 'numeric'
+        ),
+    ),
+    'sales_order/save' => array(
+        array(
+            'field' => 'due_date',
+            'label' => 'Tanggal Jatuh Tempo',
+            'rules' => 'required'
+        )
     )
 );

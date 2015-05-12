@@ -195,6 +195,9 @@
                                                placeholder="0">
                                     </div>
                                 </div>
+                                <div class="form-actions">
+                                    <input type="submit" class="btn btn-block btn-success" value="Submit">
+                                </div>
                             </form>
                         </div>
                     </div>

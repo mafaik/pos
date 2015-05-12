@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-01 05:30:29
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-04 09:37:06
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/po.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:20319457125530dd2fcb4f06-62660745%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1660ae057ce9b2ec808274a0ccebbc1c32b78498' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/po.tpl',
-      1 => 1430458226,
+      1 => 1430724893,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -329,8 +329,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                         <i class="icon-clipboard"></i> Purchase Info <small class="display-block">Informasi umum tentang proses purchasing</small>
                     </h6>
                 </div>
-                <div class="form-group <?php ob_start();?><?php echo form_error('invoice_number');?>
-<?php $_tmp1=ob_get_clean();?><?php if ($_tmp1!='') {?>has-warning<?php }?>">
+                <div class="form-group">
                     <div class="row">
                         <div class="col-md-6 <?php if (form_error('id_principal')) {?>has-warning<?php }?>">
                             <label>Supplier / Principal:</label>

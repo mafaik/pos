@@ -68,8 +68,9 @@ class Distribution extends MX_Controller
                         $this->session->set_flashdata('error', $this->cart->getError());
                     }
 
+                }else{
+                    $this->session->set_flashdata('error', "stok tidak cukup");
                 }
-                $this->session->set_flashdata('error', "stok tidak cukup");
             }else{
                 $this->session->set_flashdata('error', validation_errors());
             }

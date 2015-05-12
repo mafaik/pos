@@ -14,7 +14,7 @@
                         <i class="icon-clipboard"></i> Purchase Info <small class="display-block">Informasi umum tentang proses purchasing</small>
                     </h6>
                 </div>
-                <div class="form-group {if {form_error('invoice_number')} != ''}has-warning{/if}">
+                <div class="form-group">
                     <div class="row">
                         <div class="col-md-6 {if form_error('id_principal')}has-warning{/if}">
                             <label>Supplier / Principal:</label>

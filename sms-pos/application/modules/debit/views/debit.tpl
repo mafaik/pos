@@ -11,18 +11,18 @@
     {/if}
         <div class="panel panel-default">
 
-            <div class="panel-heading"><h6 class="panel-title">Hutang</h6></div>
+            <div class="panel-heading"><h6 class="panel-title">Piutang</h6></div>
 
             <div class="panel-body">
                 <div class="block-inner">
                     <h6 class="heading-hr">
-                        <i class="icon-coin"></i> Hutang Info <small class="display-block">Informasi umum tentang proposal</small>
+                        <i class="icon-coin"></i> Piutang Info <small class="display-block">Informasi umum tentang proposal</small>
                     </h6>
                 </div>
 
                 <form action="{current_url()}" method="post" role="form">
                     <div class="form-group">
-                        <label>Hutang:</label>
+                        <label>Piutang:</label>
                         <div class="row">
                             <div class="col-md-4">
                                 {form_dropdown('date',$date,set_value('date'),
@@ -58,7 +58,7 @@
                         <th>Jatuh Tempo</th>
                         <th>Tagihan</th>
                         <th>Terbayar</th>
-                        <th>Hutang</th>
+                        <th>Piutang</th>
                         <th>Bayar</th>
                     </tr>
                     </thead>
@@ -70,7 +70,7 @@
 
                         <tr>
                             <td>{$val}</td>
-                            <td>{$key->id_po}</td>
+                            <td>{$key->id_so}</td>
                             <td>{$key->name}</td>
                             <td>{$key->date}</td>
                             <td>{$key->due_date}</td>
@@ -79,11 +79,11 @@
                             <td>Rp {($key->grand_total - $key->paid)|number_format:0}</td>
                             <td>
                                 <div class="table-controls">
-                                    <a href="{base_url('credit/bill/')}/{$key->id_po}"
+                                    <a href="{base_url('debit/bill/')}/{$key->id_so}"
                                        class="btn btn-link btn-icon btn-xs tip" title="Bayar">
                                         <i class="icon-coin"></i>
                                     </a>
-                                    <a href="{base_url('credit/detail/')}/{$key->id_po}"
+                                    <a href="{base_url('debit/detail/')}/{$key->id_so}"
                                        class="btn btn-link btn-icon btn-xs tip" title="Detail">
                                         <i class="icon-list"></i>
                                     </a>
@@ -105,12 +105,12 @@
                     <table class="table">
                         <tbody>
                         <tr>
-                            <th>Total Hutang Bulan " {set_value('date')} ":</th>
+                            <th>Total Piutang Bulan " {set_value('date')} ":</th>
                             <td class="text-right">Rp {$total|number_format:0}</td>
                         </tr>
                         <tr>
-                            <th>Total Hutang:</th>
-                            <td class="text-right"><h6>Rp {$credit_total|number_format:0}</h6></td>
+                            <th>Total Piutang:</th>
+                            <td class="text-right"><h6>Rp {$debit_total|number_format:0}</h6></td>
                         </tr>
                         </tbody>
                     </table>
