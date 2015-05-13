@@ -33,8 +33,8 @@
                         {foreach $data_po as $key }
                             <tr>
                                 <td>{$val}</td>
-                                <td>{$key->id_po}</td>
-                                <td>{$key->invoice_number}</td>
+                                <td>#{$key->id_po}</td>
+                                <td>#{$key->invoice_number}</td>
                                 <td>{$key->date}</td>
                                 <td>{$key->date_created}</td>
                                 <td>{$key->name}</td>

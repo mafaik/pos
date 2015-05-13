@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-01 06:28:55
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-13 08:03:47
          compiled from "/var/www/sms-pos/application/modules/card_stock/views/card_stock_detail.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1401075379553494b90e25e2-83927373%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0ff2fe6285328576d5c418899d6c70f4928a8c46' => 
     array (
       0 => '/var/www/sms-pos/application/modules/card_stock/views/card_stock_detail.tpl',
-      1 => 1430461732,
+      1 => 1431504218,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -356,14 +356,13 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                     <ul class="invoice-details">
                         <li>Staff PO <strong class="text-danger"><?php echo $_smarty_tpl->tpl_vars['po']->value->staff_name;?>
 </strong></li>
-                        <li>ID Purchase Order # <strong class="text-danger"><?php echo $_smarty_tpl->tpl_vars['po']->value->id_po;?>
+                        <li>No Faktur # <strong class="text-danger"><?php echo $_smarty_tpl->tpl_vars['po']->value->id_po;?>
 </strong></li>
-                        <li>Invoice # <strong class="text-danger"><?php echo $_smarty_tpl->tpl_vars['po']->value->invoice_number;?>
+                        <li>No Nota # <strong class="text-danger"><?php echo $_smarty_tpl->tpl_vars['po']->value->invoice_number;?>
 </strong></li>
-                        <li>Date of Invoice: <strong><?php echo $_smarty_tpl->tpl_vars['po']->value->date;?>
+                        <li>Tanggal Pembelian: <strong><?php echo $_smarty_tpl->tpl_vars['po']->value->date;?>
 </strong></li>
-                        <li>Due Date: <strong><?php echo $_smarty_tpl->tpl_vars['po']->value->due_date;?>
-</strong></li>
+                        
                     </ul>
                 </div>
             </div>

@@ -156,6 +156,11 @@ $config = array(
     ),
     'retail/save' => array(
         array(
+            'field' => 'bayar',
+            'label' => 'Jumlah Bayar',
+            'rules' => 'required|integer'
+        ),
+        array(
             'field' => 'discount',
             'label' => 'Diskon',
             'rules' => 'integer'
@@ -267,6 +272,13 @@ $config = array(
         array(
             'field' => 'due_date',
             'label' => 'Tanggal Jatuh Tempo',
+            'rules' => 'required'
+        )
+    ),
+    'delivery_order/save' => array(
+        array(
+            'field' => 'date_sending',
+            'label' => 'Tanggal Pengiriman',
             'rules' => 'required'
         )
     )

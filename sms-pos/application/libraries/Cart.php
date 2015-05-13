@@ -221,9 +221,8 @@ Class CI_Cart
             ->where("TABLE_NAME", $this->foreign_table)
             ->where("REFERENCED_TABLE_NAME", $this->primary_table)
             ->get()->row();
-        $foreign_key = $row->REFERENCED_COLUMN_NAME;
 
-        if (!empty($foreign_key)) {
+        if (!empty($row->REFERENCED_COLUMN_NAME)) {
             $this->foreign_key = $row->REFERENCED_COLUMN_NAME;
         } else {
             return false;

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-05 05:26:42
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-13 08:17:10
          compiled from "/var/www/sms-pos/application/modules/product_distribution/views/distribution.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:10828895655373254ab2ba3-61494005%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '07b68e69c9c95b3f84ed39630a953c8bb1551e01' => 
     array (
       0 => '/var/www/sms-pos/application/modules/product_distribution/views/distribution.tpl',
-      1 => 1430803563,
+      1 => 1431505028,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -350,89 +350,89 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 
 
         <?php if ($_smarty_tpl->tpl_vars['items']->value) {?>
-        <form action="<?php echo base_url('product-distribution/save');?>
+            <form action="<?php echo base_url('product-distribution/save');?>
 " role="form" method="post"
                   onsubmit="return confirm('Process Data');">
-            <div class="table-responsive pre-scrollable">
-                <table class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Barcode</th>
-                        <th>Name</th>
-                        <th>Satuan</th>
-                        <th>Isi</th>
-                        <th>Merek</th>
-                        <th>Stok</th>
-                        <th>Ukuran</th>
-                        <th>Harga</th>
-                        <th>Qty</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable(1, null, 0);?>
-                    <?php  $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['key']->_loop = false;
+                <div class="table-responsive pre-scrollable">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Barcode</th>
+                            <th>Name</th>
+                            <th>Satuan</th>
+                            <th>Isi</th>
+                            <th>Merek</th>
+                            <th>Stok</th>
+                            <th>Ukuran</th>
+                            <th>Harga</th>
+                            <th>Qty</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable(1, null, 0);?>
+                        <?php  $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['key']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['items']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['key']->key => $_smarty_tpl->tpl_vars['key']->value) {
 $_smarty_tpl->tpl_vars['key']->_loop = true;
 ?>
-                        <tr>
-                            <td>
-                                <?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+                            <tr>
+                                <td>
+                                    <?php echo $_smarty_tpl->tpl_vars['val']->value;?>
 
-                            </td>
+                                </td>
 
-                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['barcode'];?>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['barcode'];?>
 </td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name'];?>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name'];?>
 </td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
 </td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['value'];?>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['value'];?>
 </td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['brand'];?>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['brand'];?>
 </td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['stock'];?>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['stock'];?>
 </td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['size'];?>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['size'];?>
 </td>
-                            <td width="120px"> Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['sell_price'],0);?>
+                                <td width="120px"> Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['sell_price'],0);?>
 </td>
-                            <td width="90px" class="<?php if ($_smarty_tpl->tpl_vars['key']->value['stock']<$_smarty_tpl->tpl_vars['key']->value['qty']) {?>has-warning<?php }?>">
-                                <input type="hidden" name="id_product[]" value="<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
+                                <td width="90px" class="<?php if ($_smarty_tpl->tpl_vars['key']->value['stock']<$_smarty_tpl->tpl_vars['key']->value['qty']) {?>has-warning<?php }?>">
+                                    <input type="hidden" name="id_product[]" value="<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
 ">
-                                <input type="number" name="qty[]" value="<?php echo set_value('qty',$_smarty_tpl->tpl_vars['key']->value['qty']);?>
+                                    <input type="number" name="qty[]" value="<?php echo set_value('qty',$_smarty_tpl->tpl_vars['key']->value['qty']);?>
 "
-                                       class="form-control"
-                            </td>
-                            <td>
-                                <div class="table-controls">
-                                    <a href="<?php echo base_url('product-distribution/detail/delete');?>
+                                           class="form-control"
+                                </td>
+                                <td>
+                                    <div class="table-controls">
+                                        <a href="<?php echo base_url('product-distribution/detail/delete');?>
 /<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
 "
-                                       class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
-                                        <i class="icon-remove3"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable($_smarty_tpl->tpl_vars['val']->value+1, null, 0);?>
-                    <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <div class="form-actions text-right">
-                        <button type="submit" name="save" value="Save" class="btn btn-success"><i
-                                    class="icon-checkmark">
-                            </i> Process
-                        </button>
-                        
+                                           class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
+                                            <i class="icon-remove3"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable($_smarty_tpl->tpl_vars['val']->value+1, null, 0);?>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="form-actions text-right">
+                            <button type="submit" name="save" value="Save" class="btn btn-success"><i
+                                        class="icon-checkmark">
+                                </i> Process
+                            </button>
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
         <?php }?>
     </div>
     
@@ -496,11 +496,11 @@ $_smarty_tpl->tpl_vars['products']->_loop = true;
 </td>
                                         <td>
                                             <a
-                                               class="button btn btn-info  btn-icon"
-                                               onclick="javascript:$('#id-product').val(<?php echo $_smarty_tpl->tpl_vars['products']->value['id_product'];?>
+                                                    class="button btn btn-info  btn-icon"
+                                                    onclick="javascript:$('#id-product').val(<?php echo $_smarty_tpl->tpl_vars['products']->value['id_product'];?>
 );"
-                                               data-toggle="modal" role="button"
-                                               href="#qty-modal" data-dismiss="modal">
+                                                    data-toggle="modal" role="button"
+                                                    href="#qty-modal" data-dismiss="modal">
                                                 <i class="icon-cart-add"></i>
                                             </a>
 
@@ -516,7 +516,6 @@ $_smarty_tpl->tpl_vars['products']->_loop = true;
             </div>
         </div>
     </div>
-
     <div id="qty-modal" class="modal fade" tabindex="-2" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -533,19 +532,25 @@ $_smarty_tpl->tpl_vars['products']->_loop = true;
 
                             <form action="<?php echo base_url('product-distribution/detail/add');?>
 " role="form" method="post">
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Qty: </label>
-                                    <div class="col-sm-6 <?php if (form_error('qty')) {?>has-warning<?php }?>">
-                                        <input type="hidden" name="id_product" id="id-product" value="">
-                                        <input type="number" value="<?php echo set_value('qty');?>
+
+                                <div class="col-md-12 ">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Qty: </label>
+
+                                        <div class="col-sm-6 <?php if (form_error('qty')) {?>has-warning<?php }?>">
+                                            <input type="hidden" name="id_product" id="id-product" value="">
+                                            <input type="number" value="<?php echo set_value('qty');?>
 "
-                                               class="form-control"
-                                               name="qty" id="qty"
-                                               placeholder="0">
+                                                   class="form-control"
+                                                   name="qty" id="qty"
+                                                   placeholder="0">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-actions">
-                                    <input type="submit" class="btn btn-block btn-success" value="Submit">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-block btn-success" value="Submit">
+                                    </div>
                                 </div>
                             </form>
                         </div>

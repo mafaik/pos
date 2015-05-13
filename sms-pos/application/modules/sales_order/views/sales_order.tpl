@@ -222,7 +222,7 @@
                                     <a data-toggle="modal" class="btn btn-link btn-icon btn-xs tip" title="Update Qty"
                                        href="#update-modal" onclick="updateItem({$key['id_product']})" role="button">
                                         <i class="icon-pencil3"></i></a>
-                                    <a href="{base_url('proposal/detail/delete')}/{$key['id_product']}"
+                                    <a href="{base_url('sales_order/detail/delete')}/{$key['id_product']}"
                                        class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
                                         <i class="icon-remove3"></i></a>
                                 </div>

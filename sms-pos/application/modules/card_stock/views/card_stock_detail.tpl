@@ -31,10 +31,10 @@
                 <div class="col-sm-6">
                     <ul class="invoice-details">
                         <li>Staff PO <strong class="text-danger">{$po->staff_name}</strong></li>
-                        <li>ID Purchase Order # <strong class="text-danger">{$po->id_po}</strong></li>
-                        <li>Invoice # <strong class="text-danger">{$po->invoice_number}</strong></li>
-                        <li>Date of Invoice: <strong>{$po->date}</strong></li>
-                        <li>Due Date: <strong>{$po->due_date}</strong></li>
+                        <li>No Faktur <strong class="text-danger">#{$po->id_po}</strong></li>
+                        <li>No Nota <strong class="text-danger">#{$po->invoice_number}</strong></li>
+                        <li>Tanggal Pembelian: <strong>{$po->date}</strong></li>
+                        {*<li>Due Date: <strong>{$po->due_date}</strong></li>*}
                     </ul>
                 </div>
             </div>

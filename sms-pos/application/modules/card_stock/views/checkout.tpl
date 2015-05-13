@@ -38,19 +38,18 @@
 
                 <div class="col-sm-4">
                     <ul>
-                        <li>Staff  <strong class="pull-right">{$cs->name} </strong></li>
-                        <li>ID Card Stock # <strong class="text-danger pull-right">{$cs->id_card_stock}</strong></li>
-                        <li>Date: <strong class="pull-right">{$cs->date}</strong></li>
+                        <li>Nama Staff Card Stock <strong class="pull-right">{$cs->name} </strong></li>
+                        <li>ID Card Stock <strong class="text-danger pull-right">#{$cs->id_card_stock}</strong></li>
+                        <li>Tanggal Card Stock: <strong class="pull-right">{$cs->date}</strong></li>
                     </ul>
                 </div>
 
                 <div class="col-sm-4">
                     <ul>
-                        <li>Staff  <strong class="pull-right">{$po->staff_name} </strong></li>
-                        <li>ID Purchase Order # <strong class="text-danger pull-right">{$po->id_po}</strong></li>
-                        <li>Invoice # <strong class="text-danger pull-right">{$po->invoice_number}</strong></li>
-                        <li>Date of Invoice: <strong class="pull-right">{$po->date}</strong></li>
-                        <li>Due Date: <strong class="pull-right">{$po->due_date}</strong></li>
+                        <li>Nama Staff PO  <strong class="pull-right">{$po->staff_name} </strong></li>
+                        <li>No Faktur <strong class="text-danger pull-right">#{$po->id_po}</strong></li>
+                        <li>No Nota <strong class="text-danger pull-right">#{$po->invoice_number}</strong></li>
+                        <li>Tanggal Pembelian: <strong class="pull-right">{$po->date}</strong></li>
                     </ul>
                 </div>
             </div>

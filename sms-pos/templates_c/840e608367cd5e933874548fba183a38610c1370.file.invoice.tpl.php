@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-01 06:18:27
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-13 07:57:17
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/invoice.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:23005477055334beb312c50-03180410%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '840e608367cd5e933874548fba183a38610c1370' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/invoice.tpl',
-      1 => 1430460838,
+      1 => 1431503836,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -375,7 +375,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                 </div>
                 <div class="col-sm-4">
                     <ul class="invoice-details">
-                        <li>No Faktur # <strong class="text-danger"><?php echo $_smarty_tpl->tpl_vars['po']->value->id_po;?>
+                        <li>No Puchase Order <strong class="text-danger"># <?php echo $_smarty_tpl->tpl_vars['po']->value->id_po;?>
 </strong></li>
                         <li>Staff: <strong><?php echo $_smarty_tpl->tpl_vars['staff']->value->name;?>
  </strong></li>

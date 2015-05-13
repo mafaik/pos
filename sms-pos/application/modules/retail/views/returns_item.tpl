@@ -38,6 +38,12 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <th>Jumlah Retur</th>
+                                    <td class="text-right">
+                                        {$master->returns}
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th>Harga</th>
                                     <td class="text-right">
                                         Rp {$master->sell_price|number_format:0}
@@ -115,5 +121,7 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 {/block}

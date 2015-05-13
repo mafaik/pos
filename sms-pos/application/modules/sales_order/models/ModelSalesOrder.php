@@ -15,7 +15,8 @@ class ModelSalesOrder extends CI_Model
     public function getDataSO($id)
     {
         return $this->db
-            ->select("sales_order.*,customer.*, staff.name as staff_name, customer.name as customer_name")
+            ->select("proposal.type, proposal.status_ppn,
+                sales_order.*,customer.*, staff.name as staff_name, customer.name as customer_name")
             ->from("sales_order")
             ->join('staff', 'staff.id_staff = sales_order.id_staff')
             ->join('proposal', 'proposal.id_proposal = sales_order.id_proposal')

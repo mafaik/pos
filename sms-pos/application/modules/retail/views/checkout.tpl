@@ -117,6 +117,14 @@
                             <th>Grand Total:</th>
                             <td class="text-right">Rp {$master->grand_total|number_format:0}</td>
                         </tr>
+                        <tr>
+                            <th>Jumlah Bayar:</th>
+                            <td class="text-right">Rp {$master->bayar|number_format:0}</td>
+                        </tr>
+                        <tr>
+                            <th>Kembali:</th>
+                            <td class="text-right">Rp {($master->bayar-$master->grand_total)|number_format:0}</td>
+                        </tr>
                         </tbody>
                     </table>
                     <div class="btn-group pull-right">
