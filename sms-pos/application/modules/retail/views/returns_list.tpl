@@ -4,21 +4,10 @@
 {block name=content}
 
     <!-- New invoice template -->
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h6 class="panel-title"><i class="icon-checkmark3"></i> Data nota {$master->id_retail}</h6>
-            <div class="dropdown pull-right">
-                <a href="#" class="dropdown-toggle panel-icon" data-toggle="dropdown">
-                    <i class="icon-cog3"></i>
-                    <b class="caret"></b>
-                </a>
-                {*<ul class="dropdown-menu icons-right dropdown-menu-right">*}
-                    {*<li><a href="#"><i class="icon-print2"></i> Print invoice</a></li>*}
-                    {*<li><a href="#"><i class="icon-download"></i> Download invoice</a></li>*}
-                    {*<li><a href="#"><i class="icon-file-pdf"></i> View .pdf</a></li>*}
-                    {*<li><a href="#"><i class="icon-stack"></i> Archive</a></li>*}
-                {*</ul>*}
-            </div>
         </div>
 
         <div class="panel-body">

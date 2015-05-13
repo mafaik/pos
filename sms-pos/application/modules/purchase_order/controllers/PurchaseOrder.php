@@ -24,6 +24,7 @@ class PurchaseOrder extends MX_Controller
                 'primary_table' => 'purchase_order',
                 'foreign_table' => 'purchase_order_detail'
             ));
+        $this->cache = $this->cart->array_cache();
     }
 
     public function index()
@@ -63,24 +64,27 @@ class PurchaseOrder extends MX_Controller
         }
 
         $data['error'] = $this->session->flashdata('error') != null ? $this->session->flashdata('error') : null;
-        if ($this->input->post()) {
+        if ($this->input->post('add_item')) {
             if ($this->form_validation->run('po_detail') == TRUE) {
-                $data_value = array(
-                    'id_product' => $this->input->post('id_product'),
-                    'name' => $this->input->post('name'),
-                    'barcode' => $this->input->post('barcode'),
-                    'unit' => $this->input->post('unit'),
-                    'value' => $this->input->post('value'),
-                    'brand' => $this->input->post('brand'),
-                    'qty' => $this->input->post('qty'),
-                    'price' => $this->input->post('price'),
-                    'discount_total' => $this->input->post('discount_total') != null ?
-                        $this->input->post('discount_total') : 0,
-                    'status' => 0
-                );
+                if(!isset($this->cache['detail']['value'][$this->input->post('id_product')])){
+                    $data_value = array(
+                        'id_product' => $this->input->post('id_product'),
+                        'name' => $this->input->post('name'),
+                        'barcode' => $this->input->post('barcode'),
+                        'unit' => $this->input->post('unit'),
+                        'value' => $this->input->post('value'),
+                        'brand' => $this->input->post('brand'),
+                        'qty' => $this->input->post('qty'),
+                        'price' => $this->input->post('price'),
+                        'discount_total' => $this->input->post('discount_total') != null ?
+                            $this->input->post('discount_total') : 0,
+                        'status' => 0
+                    );
+                    $this->cart->add_item($this->input->post('id_product'), $data_value);
+                    redirect('purchase-order/detail');
 
-                $this->cart->add_item($this->input->post('id_product'), $data_value);
-                redirect('purchase-order/detail');
+                }
+                $data['error'] = "item sudah ditambahkan, silakan update Qty.";
             }
         }
 
@@ -131,44 +135,45 @@ class PurchaseOrder extends MX_Controller
             redirect('purchase-order');
             return false;
         }
-
-        if ($this->input->post()) {
+        if ($this->input->post('save')) {
             if ($this->form_validation->run('po_save') == TRUE) {
                 $scan = "default.jpg";
 
                 if (isset($_FILES['file']['size']) && ($_FILES['file']['size'] > 0)) {
                     $config['upload_path'] = './upload/po';
                     $config['allowed_types'] = 'gif|jpg|png';
-                    $config['max_size'] = '2048';
-                    $config['max_width'] = '1024';
-                    $config['max_height'] = '768';
+                    $config['max_size'] = '4048';
+                    $config['max_width'] = '4024';
+                    $config['max_height'] = '4668';
                     $config['encrypt_name'] = true;
 
                     $this->load->library('upload', $config);
 
-                    if (!$this->upload->do_upload('file')) {
+                    if ($this->upload->do_upload('file') != false ) {
 
-                        $this->session->set_flashdata('error', $this->upload->display_errors('<small class="error" > ', '</small>'));
-                        redirect('purchase-order/detail');
-                        return false;
+                        $file = $this->upload->data();
+                        $scan = base_url() . "/upload/po" . $file['file_name'];
+
+
+                        if($id_po =$this->cart->primary_data(array(
+                            'total' => $this->input->post('total'),
+                            'discount_price' => $this->input->post('discount_price'),
+                            'dpp' => $this->input->post('dpp'),
+                            'ppn' => $this->input->post('ppn'),
+                            'grand_total' => $this->input->post('grand_total'),
+                            'file' => $scan
+
+                        ))->save()){
+                            redirect('purchase-order/invoice/' . $id_po);
+                        }
                     }
-                    $file = $this->upload->data();
-                    $scan = base_url() . "/upload/po" . $file['file_name'];
+
+
+                    $this->session->set_flashdata('error',
+                        $this->upload->display_errors());
+                }else{
+                    $this->session->set_flashdata('error', "mohon upload bukti pembelian");
                 }
-
-
-                if($id_po =$this->cart->primary_data(array(
-                    'total' => $this->input->post('total'),
-                    'discount_price' => $this->input->post('discount_price'),
-                    'dpp' => $this->input->post('dpp'),
-                    'ppn' => $this->input->post('ppn'),
-                    'grand_total' => $this->input->post('grand_total'),
-                    'file' => $scan
-
-                ))->save()){
-                    redirect('purchase-order/invoice/' . $id_po);
-                }
-                $this->session->set_flashdata('error', "transaction error");
             }
         }
         $this->insertPOD();

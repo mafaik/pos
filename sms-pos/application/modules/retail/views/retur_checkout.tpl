@@ -54,6 +54,7 @@
                 </div>
             </div>
             <div class="table-responsive">
+                <h3>Detail Item Pembelian</h3>
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
@@ -115,6 +116,7 @@
             </div>
 
             <div class="table-responsive">
+                <h3>Detail Item Pengembalian Barang</h3>
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>

@@ -258,8 +258,28 @@
                                 </tr>
                                 <tr>
                                     <th>Total:</th>
-                                    <td class="text-right text-danger">
+                                    <td class="text-right text-success">
                                         <h6>Rp <span id="sum-grand_total-text">{$total|number_format:0} </span></h6>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>Jumlah Bayar:</th>
+                                    <td class="text-right {if form_error('bayar')}has-warning{/if}" style="max-width: 135px;">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Rp</span>
+
+                                            <input type="number" name="bayar" value="{set_value('bayar')}"
+                                                   class="form-control" placeholder="0"
+                                                   id="input-bayar" onblur="setBayar(this.value)">
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Kembali:</th>
+                                    <td class="text-right text-danger">
+                                        <h6>Rp <span id="sum-returns-text"> </span></h6>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -282,11 +302,6 @@
                 <!-- /panel body -->
             </form>
         {/if}
-
-        {*<div class="panel-body">*}
-        {*<h6>Notes &amp; Information:</h6>*}
-        {*Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.*}
-        {*</div>*}
     </div>
     <!-- /default panel -->
 
@@ -309,7 +324,7 @@
                                 <tr>
                                     <th>Barcode</th>
                                     <th>Name</th>
-                                    <th>Kategory</th>
+                                    <th>Kategori</th>
                                     <th>Satuan</th>
                                     <th>Isi</th>
                                     <th>Merek</th>

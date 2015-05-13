@@ -82,6 +82,7 @@ class Retail extends MX_Controller
 
                 if ($id_retail = $this->cart->primary_data(array(
                     'discount' => $this->input->post('discount'),
+                    'bayar' => $this->input->post('bayar'),
                     'id_staff' => $this->id_staff,
                     'id_store' => $this->id_store
                 ))->save()

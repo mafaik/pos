@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-sm-4">
                     <ul class="invoice-details">
-                        <li>No Faktur # <strong class="text-danger">{$po->id_po}</strong></li>
+                        <li>No Faktur <strong class="text-danger"># {$po->id_po}</strong></li>
                         <li>Staff: <strong>{$staff->name} </strong></li>
                         <li>Tanggal Nota Transaksi: <strong>{$po->date} </strong></li>
                         <li>Jatuh Tempo Pembayaran: <strong>{$po->due_date}</strong></li>

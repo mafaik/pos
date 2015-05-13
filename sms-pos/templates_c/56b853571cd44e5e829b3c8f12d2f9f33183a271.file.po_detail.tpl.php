@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-01 06:18:00
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-13 07:34:15
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6338738805530ecdd0a61e9-92077084%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '56b853571cd44e5e829b3c8f12d2f9f33183a271' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl',
-      1 => 1430461078,
+      1 => 1431502425,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -394,6 +394,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
             <?php if ($_smarty_tpl->tpl_vars['error']->value) {?>
                 <div class="callout callout-danger fade in">
                     <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h5>Error Message</h5>
                     <p><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
 </p>
                 </div>
@@ -462,7 +463,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <input type="submit" class="btn btn-block btn-success" value="Submit">
+                            <input type="submit" name="add_item" class="btn btn-block btn-success" value="Submit">
                         </div>
                     </form>
                 </div>
@@ -584,7 +585,8 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                                     <a href="<?php echo base_url('purchase-order/detail/delete');?>
 /<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
 "
-                                       class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
+                                       class="btn btn-link btn-icon btn-xs tip"
+                                       onclick="return confirm('Hapus Item?')" title="Hapus Item">
                                         <i class="icon-remove3"></i></a>
                                 </div>
                             </td>
@@ -609,7 +611,7 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                                 <tbody>
                                 <tr>
                                     <th>Total:</th>
-                                    <td class="text-right">Rp
+                                    <td class="text-right">
                                         <span id="sum-total-text"><strong>Rp <?php echo number_format($_smarty_tpl->tpl_vars['total']->value,0);?>
 </strong> </span>
                                     </td>
@@ -674,7 +676,7 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Bukti Purchase Order:</th>
+                                    <th>Bukti Pembelian:</th>
                                     <td class="text-right text-danger">
                                         <input type="file" name="file" class="styled form-control" id="report-screenshot">
                                         <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
@@ -683,7 +685,8 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                                 </tbody>
                             </table>
                             <div class="btn-group right-box">
-                                <button type="submit" name="save" class="btn block full-width btn-success"><i class="icon-checkmark">
+                                <button type="submit" name="save" value="save"
+                                        class="btn block full-width btn-success"><i class="icon-checkmark">
                                     </i> Checkout</button>
                             </div>
                         </div>

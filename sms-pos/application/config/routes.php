@@ -150,3 +150,11 @@ $route['delivery-order/delete'] = "delivery_order/DeliveryOrder/reset";
 $route['delivery-order/detail/delete/(:num)'] = "delivery_order/DeliveryOrder/deleteDetail/$1";
 $route['delivery-order/save'] = "delivery_order/DeliveryOrder/save";
 $route['delivery-order/checkout/(:num)/(:num)'] = "delivery_order/DeliveryOrder/checkout/$1/$2";
+
+
+$route['join'] = "join";
+$route['join/select/(:num)'] = "join/select/$1";
+$route['join/do'] = "join/listing";
+$route['join/delete'] = "join/reset";
+$route['join/save'] = "join/save";
+$route['join/checkout/(:num)'] = "join/checkout/$1";

@@ -43,7 +43,7 @@
                 </div>
                 <div class="col-sm-4">
                     <ul class="invoice-details">
-                        <li>No Faktur # <strong class="text-danger">{$cache['value']['invoice_number']}</strong></li>
+                        <li>No Nota # <strong class="text-danger">{$cache['value']['invoice_number']}</strong></li>
                         <li>Tanggal Nota Transaksi: <strong>{$cache['value']['date']}</strong></li>
                         <li>Jatuh Tempo Pembayaran: <strong>{$cache['value']['due_date']}</strong></li>
                         <li class="invoice-status text-right list-unstyled">
@@ -58,6 +58,7 @@
             {if $error}
                 <div class="callout callout-danger fade in">
                     <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h5>Error Message</h5>
                     <p>{$error}</p>
                 </div>
             {/if}
@@ -119,7 +120,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <input type="submit" class="btn btn-block btn-success" value="Submit">
+                            <input type="submit" name="add_item" class="btn btn-block btn-success" value="Submit">
                         </div>
                     </form>
                 </div>
@@ -219,7 +220,8 @@
                                                '{base_url('purchase-order/detail/update')}')">
                                         <i class="icon-pencil3"></i></a>
                                     <a href="{base_url('purchase-order/detail/delete')}/{$key['id_product']}"
-                                       class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
+                                       class="btn btn-link btn-icon btn-xs tip"
+                                       onclick="return confirm('Hapus Item?')" title="Hapus Item">
                                         <i class="icon-remove3"></i></a>
                                 </div>
                             </td>
@@ -243,7 +245,7 @@
                                 <tbody>
                                 <tr>
                                     <th>Total:</th>
-                                    <td class="text-right">Rp
+                                    <td class="text-right">
                                         <span id="sum-total-text"><strong>Rp {$total|number_format:0}</strong> </span>
                                     </td>
                                     <input type="hidden" name="total" value="{$total}">
@@ -302,7 +304,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Bukti Purchase Order:</th>
+                                    <th>Bukti Pembelian:</th>
                                     <td class="text-right text-danger">
                                         <input type="file" name="file" class="styled form-control" id="report-screenshot">
                                         <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
@@ -311,7 +313,8 @@
                                 </tbody>
                             </table>
                             <div class="btn-group right-box">
-                                <button type="submit" name="save" class="btn block full-width btn-success"><i class="icon-checkmark">
+                                <button type="submit" name="save" value="save"
+                                        class="btn block full-width btn-success"><i class="icon-checkmark">
                                     </i> Checkout</button>
                             </div>
                         </div>

@@ -101,5 +101,13 @@ function ppnCheck(){
         ppn = 0.1 * dpp;
     }
     $('#sum-ppn-text').html(numberFormat(ppn));
-    $('#sum-grand_total-text').html(numberFormat(dpp + ppn));
+    var total = dpp + ppn;
+    $('#sum-grand_total-text').html(numberFormat(total));
+    setBayar($('#input-bayar').val());
+}
+
+function setBayar(bayar){
+    var total = parseInt(convertCurrency($('#sum-grand_total-text').text()));
+    $('#sum-returns-text').html(numberFormat(bayar - total));
+
 }

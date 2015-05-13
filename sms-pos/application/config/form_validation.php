@@ -156,6 +156,11 @@ $config = array(
     ),
     'retail/save' => array(
         array(
+            'field' => 'bayar',
+            'label' => 'Jumlah Bayar',
+            'rules' => 'required|integer'
+        ),
+        array(
             'field' => 'discount',
             'label' => 'Diskon',
             'rules' => 'integer'
