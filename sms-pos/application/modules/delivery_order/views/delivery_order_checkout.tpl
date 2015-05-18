@@ -33,18 +33,18 @@
 
                 <div class="col-sm-3">
                     <ul>
-                        <li>No Delivery Order # <strong class="text-danger pull-right">{$do->id_do}</strong></li>
+                        <li>No Delivery Order <strong class="text-danger pull-right">#{$do->id_do}</strong></li>
                         <li>Staff Pengirim <strong class="pull-right">{$do->name} </strong></li>
                         <li>Tanggal Kirim : <strong class="pull-right">{$do->date_sending}</strong></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
                     <ul>
-                        <li>No Proposal # <strong class="text-danger pull-right">{$master->id_proposal}</strong></li>
+                        <li>No Proposal <strong class="text-danger pull-right">#{$master->id_so}</strong></li>
                         <li>Staff <strong class="pull-right">{$master->staff_name} </strong></li>
                         <li>Date : <strong class="pull-right">{$master->date}</strong></li>
-                        <li>Jatuh Tempo : <strong class="pull-right">{$master->due_date}</strong></li>
-                        <li>PPn status <strong class="text-info pull-right">{$status_ppn}</strong></li>
+                        {*<li>Jatuh Tempo : <strong class="pull-right">{$master->due_date}</strong></li>*}
+                        {*<li>PPn status <strong class="text-info pull-right">{$status_ppn}</strong></li>*}
                     </ul>
                 </div>
             </div>

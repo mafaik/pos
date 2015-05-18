@@ -52,103 +52,103 @@
 
             {if $cache['value']['type'] == 0}
                 {*<div class="row">*}
-                    {*<div class="col-md-4">*}
-                        {*<form action="{base_url('proposal/detail')}" role="form" method="post">*}
-                            {*<div class="form-group">*}
-                                {*<div class="row">*}
-                                    {*<label class="col-sm-4 control-label">Barcode: </label>*}
+                {*<div class="col-md-4">*}
+                {*<form action="{base_url('proposal/detail')}" role="form" method="post">*}
+                {*<div class="form-group">*}
+                {*<div class="row">*}
+                {*<label class="col-sm-4 control-label">Barcode: </label>*}
 
-                                    {*<div class="col-md-8">*}
-                                        {*<input type="text" name="barcode" value="{set_value('barcode')}"*}
-                                               {*id="input-barcode"*}
-                                               {*class="form-control" placeholder="Type or scan barcode"*}
-                                               {*autofocus onblur="barcodeParam(this)">*}
-                                        {*<input type="hidden" name="id_product" value="{set_value('id_product')}"*}
-                                               {*id="input-id_product">*}
-                                    {*</div>*}
-                                {*</div>*}
-                            {*</div>*}
-                            {*<div class="form-group">*}
-                                {*<div class="row">*}
-                                    {*<label class="col-sm-4 control-label">Qty: </label>*}
+                {*<div class="col-md-8">*}
+                {*<input type="text" name="barcode" value="{set_value('barcode')}"*}
+                {*id="input-barcode"*}
+                {*class="form-control" placeholder="Type or scan barcode"*}
+                {*autofocus onblur="barcodeParam(this)">*}
+                {*<input type="hidden" name="id_product" value="{set_value('id_product')}"*}
+                {*id="input-id_product">*}
+                {*</div>*}
+                {*</div>*}
+                {*</div>*}
+                {*<div class="form-group">*}
+                {*<div class="row">*}
+                {*<label class="col-sm-4 control-label">Qty: </label>*}
 
-                                    {*<div class="col-md-4 {if form_error('qty')}has-warning{/if}">*}
-                                        {*<input type="number" name="qty" value="{set_value('qty',1)}" id="input-qty"*}
-                                               {*class="form-control" placeholder="0">*}
-                                    {*</div>*}
-                                {*</div>*}
-                            {*</div>*}
+                {*<div class="col-md-4 {if form_error('qty')}has-warning{/if}">*}
+                {*<input type="number" name="qty" value="{set_value('qty',1)}" id="input-qty"*}
+                {*class="form-control" placeholder="0">*}
+                {*</div>*}
+                {*</div>*}
+                {*</div>*}
 
-                            {*<div class="form-group">*}
-                                {*<div class="row">*}
-                                    {*<label class="col-sm-4 control-label">Harga: </label>*}
+                {*<div class="form-group">*}
+                {*<div class="row">*}
+                {*<label class="col-sm-4 control-label">Harga: </label>*}
 
-                                    {*<div class="col-md-7 {if form_error('price')}has-warning{/if}">*}
-                                        {*<div class="input-group">*}
-                                            {*<span class="input-group-addon">Rp</span>*}
-                                            {*<input type="number" name="price" value="{set_value('price')}"*}
-                                                   {*class="form-control" placeholder="0" id="input-sell_price">*}
+                {*<div class="col-md-7 {if form_error('price')}has-warning{/if}">*}
+                {*<div class="input-group">*}
+                {*<span class="input-group-addon">Rp</span>*}
+                {*<input type="number" name="price" value="{set_value('price')}"*}
+                {*class="form-control" placeholder="0" id="input-sell_price">*}
 
-                                        {*</div>*}
-                                    {*</div>*}
-                                {*</div>*}
-                            {*</div>*}
-                            {*<div class="form-group">*}
-                                {*<div class="row">*}
-                                    {*<label class="col-sm-4 control-label">Diskon: </label>*}
+                {*</div>*}
+                {*</div>*}
+                {*</div>*}
+                {*</div>*}
+                {*<div class="form-group">*}
+                {*<div class="row">*}
+                {*<label class="col-sm-4 control-label">Diskon: </label>*}
 
-                                    {*<div class="col-md-7 {if form_error('discount')}has-warning{/if}">*}
-                                        {*<div class="input-group">*}
-                                            {*<span class="input-group-addon">Rp</span>*}
-                                            {*<input type="number" name="discount" value="{set_value('discount')}"*}
-                                                   {*class="form-control" placeholder="0">*}
+                {*<div class="col-md-7 {if form_error('discount')}has-warning{/if}">*}
+                {*<div class="input-group">*}
+                {*<span class="input-group-addon">Rp</span>*}
+                {*<input type="number" name="discount" value="{set_value('discount')}"*}
+                {*class="form-control" placeholder="0">*}
 
-                                        {*</div>*}
-                                    {*</div>*}
-                                {*</div>*}
-                            {*</div>*}
-                            {*<div class="col-sm-12">*}
-                                {*<input type="submit" class="btn btn-block btn-success" value="Submit">*}
-                            {*</div>*}
-                        {*</form>*}
-                    {*</div>*}
-                    {*<div class="col-md-2">*}
-                        {*<div class="col-sm-12">*}
-                            {*<a data-toggle="modal" role="button" href="#default-modal"*}
-                               {*class="button btn btn-info center-block">Cari*}
-                            {*</a>*}
-                        {*</div>*}
-                    {*</div>*}
-                    {*<div class="col-md-6">*}
-                        {*<div class="row">*}
-                            {*<div class="col-md-6">*}
-                                {*<label>Nama Produk</label>*}
-                                {*<h6 id="text-name"></h6>*}
-                            {*</div>*}
-                            {*<div class="col-md-3">*}
-                                {*<label>Kategori:</label>*}
-                                {*<h6 id="text-category"></h6>*}
-                            {*</div>*}
-                            {*<div class="col-md-3">*}
-                                {*<label>Merek</label>*}
-                                {*<h6 id="text-brand"></h6>*}
-                            {*</div>*}
-                        {*</div>*}
-                        {*<div class="row">*}
-                            {*<div class="col-md-3">*}
-                                {*<label>Satuan:</label>*}
-                                {*<h6 id="text-unit"></h6>*}
-                            {*</div>*}
-                            {*<div class="col-md-3">*}
-                                {*<label>Isi Satuan:</label>*}
-                                {*<h6 id="text-value"></h6>*}
-                            {*</div>*}
-                            {*<div class="col-md-3">*}
-                                {*<label>Ukuran</label>*}
-                                {*<h6 id="text-size"></h6>*}
-                            {*</div>*}
-                        {*</div>*}
-                    {*</div>*}
+                {*</div>*}
+                {*</div>*}
+                {*</div>*}
+                {*</div>*}
+                {*<div class="col-sm-12">*}
+                {*<input type="submit" class="btn btn-block btn-success" value="Submit">*}
+                {*</div>*}
+                {*</form>*}
+                {*</div>*}
+                {*<div class="col-md-2">*}
+                {*<div class="col-sm-12">*}
+                {*<a data-toggle="modal" role="button" href="#default-modal"*}
+                {*class="button btn btn-info center-block">Cari*}
+                {*</a>*}
+                {*</div>*}
+                {*</div>*}
+                {*<div class="col-md-6">*}
+                {*<div class="row">*}
+                {*<div class="col-md-6">*}
+                {*<label>Nama Produk</label>*}
+                {*<h6 id="text-name"></h6>*}
+                {*</div>*}
+                {*<div class="col-md-3">*}
+                {*<label>Kategori:</label>*}
+                {*<h6 id="text-category"></h6>*}
+                {*</div>*}
+                {*<div class="col-md-3">*}
+                {*<label>Merek</label>*}
+                {*<h6 id="text-brand"></h6>*}
+                {*</div>*}
+                {*</div>*}
+                {*<div class="row">*}
+                {*<div class="col-md-3">*}
+                {*<label>Satuan:</label>*}
+                {*<h6 id="text-unit"></h6>*}
+                {*</div>*}
+                {*<div class="col-md-3">*}
+                {*<label>Isi Satuan:</label>*}
+                {*<h6 id="text-value"></h6>*}
+                {*</div>*}
+                {*<div class="col-md-3">*}
+                {*<label>Ukuran</label>*}
+                {*<h6 id="text-size"></h6>*}
+                {*</div>*}
+                {*</div>*}
+                {*</div>*}
                 {*</div>*}
             {/if}
         </div>
@@ -167,10 +167,10 @@
                         <th width="100px">Qty</th>
                         <th>Harga</th>
                         <th>Diskon</th>
-                        {if $cache['value']['status_ppn'] == 1}
+                        {*{if $cache['value']['status_ppn'] == 1}*}
                             <th>Subtotal</th>
                             <th>Ppn</th>
-                        {/if}
+                        {*{/if}*}
                         <th>Total</th>
                         <th>Action</th>
                     </tr>
@@ -187,7 +187,7 @@
                             <td>{$key['brand']}</td>
                             <td>{$key['unit']} / {$key['value']}</td>
                             <td>
-                                {if $cache['value']['status_ppn'] == 0}
+                                {if $cache['value']['type'] == 0}
                                     <input type="number" id="qty-{$key['id_product']}" value="{$key['qty']}"
                                            class="form-control" onkeypress="qtyKeyPress({$key['id_product']},
                                             '{base_url('sales-order/update')}')">
@@ -202,16 +202,16 @@
                             <td style="width:130px;" class="text-right">
                                 Rp {$key['discount']|number_format:0}
                             </td>
-                            {if $cache['value']['status_ppn'] == 1}
+                            {assign var=ppn value=$ppn+($key['qty'] * ($key['price'] - $key['discount'])*0.1 )}
+                            {*{if $cache['value']['status_ppn'] == 1}*}
                                 <td style="width:130px;" class="text-right">
                                     Rp {($key['qty'] * ($key['price'] - $key['discount']))|number_format:0}
                                 </td>
                                 <td style="width:130px;" class="text-right">
-                                    {assign var=ppn value=$ppn+($key['qty'] * ($key['price'] - $key['discount'])*0.1 )}
                                     Rp {$ppn|number_format:0}
 
                                 </td>
-                            {/if}
+                            {*{/if}*}
                             <td style="width:130px;" class="text-right">
                                 Rp {($key['qty'] * ($key['price'] - $key['discount'])
                                 +$ppn)|number_format:0}
@@ -252,8 +252,8 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-12 {if form_error('due_date')}has-warning{/if}">
-                                        {form_input('due_date', set_value('due_date'),
-                                        'class="datepicker-trigger form-control" data-mask="9999-99-99" placeholder"YYYY-MM-dd"')}
+                                                    {form_input('due_date', set_value('due_date'),
+                                                    'class="datepicker-trigger form-control" data-mask="9999-99-99" placeholder"YYYY-MM-dd"')}
                                                 </div>
                                             </div>
                                         </div>
@@ -268,20 +268,22 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {if $cache['value']['status_ppn'] == 0}
                                         <label class="radio">
-                                            <input type="checkbox" name="status_ppn" class="styled"
-                                                   onclick="ppnCheck()">
-                                            {/if}
+                                            {*{if $cache['value']['status_ppn'] == 0}*}
+                                                {*<input type="checkbox" name="status_ppn" class="styled"*}
+                                                       {*onclick="ppnCheck()">*}
+                                            {*{/if}*}
                                             PPN 10 %
                                         </label>
                                     </th>
-                                    <td class="text-right">Rp <span id="sum-ppn-text">{$ppn_total|number_format:0}</span></td>
+                                    <td class="text-right">Rp <span
+                                                id="sum-ppn-text">{$ppn_total|number_format:0}</span></td>
                                 </tr>
                                 <tr>
                                     <th>Total:</th>
                                     <td class="text-right text-danger">
-                                        <h6>Rp <span id="sum-grand_total-text">{($total+$ppn_total)|number_format:0} </span>
+                                        <h6>Rp <span
+                                                    id="sum-grand_total-text">{($total+$ppn_total)|number_format:0} </span>
                                         </h6>
                                     </td>
                                 </tr>
@@ -365,73 +367,4 @@
         </div>
     </div>
     <!-- /default modal -->
-    <div id="update-modal" class="modal fade" tabindex="-2" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Update Data <span id="update-text-name"></span></h4>
-                </div>
-
-                <div class="panel panel-default">
-
-                    <div class="panel-body">
-
-                        <form action="{base_url('proposal/detail/update')}" role="form" method="post">
-
-                            <input type="hidden" name="id_product" id="update-input-id_product">
-
-                            <div class="col-md-12 ">
-                                {if $cache['value']['type'] == 1}
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <label class="col-sm-4 control-label">Qty: </label>
-
-                                            <div class="col-md-7 {if form_error('qty')}has-warning{/if}">
-                                                <input type="number" value="{set_value('qty')}" class="form-control"
-                                                       name="qty" id="update-input-qty"
-                                                       placeholder="0">
-                                            </div>
-                                        </div>
-                                    </div>
-                                {/if}
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label class="col-sm-4 control-label">Harga: </label>
-
-                                        <div class="col-md-7 {if form_error('price')}has-warning{/if}">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">Rp</span>
-                                                <input type="number" name="price" value="{set_value('price')}"
-                                                       class="form-control" placeholder="0" id="update-input-price">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label class="col-sm-4 control-label">Diskon: </label>
-
-                                        <div class="col-md-7 {if form_error('discount')}has-warning{/if}">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">Rp</span>
-                                                <input type="number" name="discount" value="{set_value('discount')}"
-                                                       class="form-control" placeholder="0" id="update-input-discount">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <input type="submit" class="btn btn-block btn-success" value="Submit">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 {/block}

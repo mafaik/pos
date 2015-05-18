@@ -49,7 +49,7 @@
                                 <div class="table-controls">
                                     {if $key->status == 0}
                                         <a href="{base_url('proposal/approve')}/{$key->id_proposal}"
-                                           class="button btn btn-warning "
+                                           class="button btn btn-success "
                                            onclick="return confirm('Proposal {$key->id_proposal} telah di terima oleh {$key->customer_name}')">
                                             Ganti status
                                         </a>

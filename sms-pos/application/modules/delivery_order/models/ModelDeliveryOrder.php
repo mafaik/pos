@@ -17,13 +17,15 @@ class ModelDeliveryOrder extends CI_Model
     public function getListSO($status = 0 )
     {
         return $this->db
-            ->select("proposal.type, proposal.status_ppn,
-                sales_order.*,customer.*, staff.name as staff_name, customer.name as customer_name")
+            ->select("*, staff.name as staff_name, customer.name as customer_name")
+//            ->select("proposal.type, proposal.status_ppn,
+//                sales_order.*,customer.*, staff.name as staff_name, customer.name as customer_name")
             ->from("sales_order")
             ->join('staff', 'staff.id_staff = sales_order.id_staff')
-            ->join('proposal', 'proposal.id_proposal = sales_order.id_proposal')
-            ->join('customer', 'customer.id_customer = proposal.id_customer')
+//            ->join('proposal', 'proposal.id_proposal = sales_order.id_proposal')
+            ->join('customer', 'customer.id_customer = sales_order.id_customer')
             ->where("sales_order.status", $status)
+            ->where("sales_order.active", 1)
             ->get()
             ->result();
     }

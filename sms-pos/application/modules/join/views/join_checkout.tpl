@@ -33,7 +33,7 @@
 
                 <div class="col-sm-3 pull-right">
                     <ul>
-                        <li>No Proposal # <strong class="text-danger pull-right">{$master->id_proposal}</strong></li>
+                        <li>No Faktur Baru # <strong class="text-danger pull-right">{$master->id_so}</strong></li>
                         <li>Staff <strong class="pull-right">{$master->staff_name} </strong></li>
                         <li>Date : <strong class="pull-right">{$master->date}</strong></li>
                         <li>Jatuh Tempo : <strong class="pull-right">{$master->due_date}</strong></li>

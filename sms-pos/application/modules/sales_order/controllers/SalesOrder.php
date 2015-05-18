@@ -82,7 +82,8 @@ class SalesOrder extends MX_Controller
                 $status_ppn = $this->input->post('status_ppn') == "on" ? 1 : 0;
 
                 if ($id_so = $this->cart->primary_data(array(
-                    'status_ppn' => $this->cache['value']['status_ppn'] == 1 ? 1 : $status_ppn,
+                    'status_ppn' => 1,
+//                    'status_ppn' => $this->cache['value']['status_ppn'] == 1 ? 1 : $status_ppn,
                     'due_date' => $this->input->post('due_date')
                 ))->save()
                 ) {

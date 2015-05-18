@@ -24,9 +24,9 @@
                 </div>
                 <div class="col-sm-4">
                     <ul class="invoice-details">
-                        <li>No Faktur <strong class="text-info">{$master->id_so}</strong></li>
-                        <li>Jenis Proposal <strong class="text-info">{$proposal_type}</strong></li>
-                        <li>PPn status # <strong class="text-info">{$status_ppn}</strong></li>
+                        <li>No Faktur <strong class="text-info">#{$master->id_so}</strong></li>
+                        {*<li>Jenis Proposal <strong class="text-info">{$proposal_type}</strong></li>*}
+                        {*<li>PPn status # <strong class="text-info">{$status_ppn}</strong></li>*}
                         <li class="invoice-status text-right list-unstyled">
                             <a href="{base_url('delivery-order/delete')}" class=" button btn btn-danger">
                                 <i class="icon-eject"></i>Ganti Dengan No Faktur Lain</a>
@@ -97,7 +97,7 @@
                             <table class="table">
                                 <tbody>
                                 <tr>
-                                    <th>Tnggal Pengiriman:</th>
+                                    <th>Tanggal Pengiriman:</th>
                                     <td class="text-right">
                                         <div class="form-group">
                                             <div class="row">

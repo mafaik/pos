@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-13 07:34:15
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-14 05:39:39
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6338738805530ecdd0a61e9-92077084%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '56b853571cd44e5e829b3c8f12d2f9f33183a271' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl',
-      1 => 1431502425,
+      1 => 1431513788,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
@@ -375,7 +375,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                 </div>
                 <div class="col-sm-4">
                     <ul class="invoice-details">
-                        <li>No Faktur # <strong class="text-danger"><?php echo $_smarty_tpl->tpl_vars['cache']->value['value']['invoice_number'];?>
+                        <li>No Nota # <strong class="text-danger"><?php echo $_smarty_tpl->tpl_vars['cache']->value['value']['invoice_number'];?>
 </strong></li>
                         <li>Tanggal Nota Transaksi: <strong><?php echo $_smarty_tpl->tpl_vars['cache']->value['value']['date'];?>
 </strong></li>

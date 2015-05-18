@@ -44,6 +44,8 @@ class DeliveryOrder extends MX_Controller
             foreach ($detail as $key) {
                 $this->cart->add_item($key['id_so_detail'], $key);
             }
+            var_dump( $detail);
+            return false;
         }
         redirect('delivery-order/list');
     }
@@ -70,8 +72,8 @@ class DeliveryOrder extends MX_Controller
 
         $data['master'] = $this->model_so->getDataSO($this->cache['value']['id_so']);
 
-        $data['proposal_type'] = $this->proposal_type[$data['master']->type];
-        $data['status_ppn'] = $this->status_ppn[$data['master']->status_ppn];
+//        $data['proposal_type'] = $this->proposal_type[$data['master']->type];
+//        $data['status_ppn'] = $this->status_ppn[$data['master']->status_ppn];
 
         $data['cache'] = $this->cache;
         $data['items'] = $this->cache['detail']['value'];

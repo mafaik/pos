@@ -31,8 +31,8 @@
                         <th>Tanggal Pembuatan</th>
                         <th>Jatuh Tempo Pengiriman</th>
                         <th>Penanngung Jawab</th>
-                        <th>Jenis Proposal</th>
-                        <th>PPn Status</th>
+                        {*<th>Jenis Proposal</th>*}
+                        {*<th>PPn Status</th>*}
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -47,8 +47,8 @@
                             <td>{$key->date}</td>
                             <td>{$key->due_date}</td>
                             <td>{$key->staff_name}</td>
-                            <td>{$array_proposal_type[$key->type]}</td>
-                            <td>{$array_status_ppn[$key->status_ppn]}</td>
+                            {*<td>{$array_proposal_type[$key->type]}</td>*}
+                            {*<td>{$array_status_ppn[$key->status_ppn]}</td>*}
                             <td>
                                 <div class="table-controls">
 
