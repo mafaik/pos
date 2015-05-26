@@ -195,30 +195,10 @@ class Acl
         $return = array();
         foreach ($roles as $row) {
             if (isset($router[$row])) {
-                $data = [
-                    'title' => isset($router[$row]['title']) ? $router[$row]['title'] : $row,
-                    'url' => strtolower(isset($router[$row]['class']) ? $row . '/' . $router[$row]['class'] : $row),
-                    'icon' => isset($router[$row]['icon']) ? $router[$row]['icon'] : "",
-                    'attr' => isset($router[$row]['attr']) ? $router[$row]['attr'] : "",
-                    'child' => null
-                ];
-                if (isset($router[$row]['child']) && is_array($router[$row]['child'])) {
-
-                    $child = array();
-                    foreach ($router[$row]['child'] as $child_row) {
-                        $child[] = [
-                            'title' => isset($child_row['title']) ? $child_row['title'] : "",
-                            'url' => strtolower(isset($child_row['class']) ? $row . '/' . $child_row['class'] : ""),
-                            'icon' => isset($child_row['icon']) ? $child_row['icon'] : "",
-                            'attr' => isset($child_row['attr']) ? $child_row['attr'] : ""
-                        ];
-                    }
-                    $data['child'] = $child;
-                }
-                $return[] = $data;
+                $return[] = $router[$row];
             }
-            return $return;
         }
+        return $return;
     }
 
 }

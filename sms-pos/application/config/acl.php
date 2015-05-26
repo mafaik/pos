@@ -59,19 +59,45 @@ $config['module_router'] = [
     'users' => [
         'title' => 'Users',
         'icon' => 'icon-user',
-        'child' =>[
-            'users' =>[
+        'attr' => '',
+        'child' => [
+            'users' => [
                 'title' => 'Staff List',
+                'icon' => '',
+                'url' => 'users',
                 'class' => 'Users',
-                'icon' => ''
+                'attr' => ''
             ],
-            'group' =>[
+            'groups' => [
                 'title' => 'Staff Kategori',
-                'class' => 'Groups',
-                'icon' => ''
+                'icon' => '',
+                'url' => 'groups',
+                'attr' => '',
+                'class' => 'Groups'
             ]
         ]
     ],
+    'purchase_order' => [
+        'title' => 'Purchase Order',
+        'icon' => 'icon-tag',
+        'attr' => '',
+        'child' => [
+            'purchase_order' => [
+                'title' => 'Purchase Order',
+                'icon' => '',
+                'url' => 'purchase-order',
+                'class' => 'PurchaseOrder',
+                'attr' => ''
+            ],
+            'invoice' => [
+                'title' => 'Invoice',
+                'icon' => '',
+                'url' => 'purchase-order/invoice',
+                'class' => 'Invoice',
+                'attr' => ''
+            ]
+        ]
+    ]
 ];
 /*
 // You must reset this admin user 

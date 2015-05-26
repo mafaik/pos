@@ -15,6 +15,7 @@ class PurchaseOrder extends MX_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->acl->auth(__DIR__);
         $this->id_staff = $this->config->item('id_staff');
         $this->load->model('product/ModProduct', 'ModProduct');
         $this->load->library('cart',
@@ -25,15 +26,6 @@ class PurchaseOrder extends MX_Controller
                 'foreign_table' => 'purchase_order_detail'
             ));
         $this->cache = $this->cart->array_cache();
-
-        if ($this->acl->has_permission(strtolower( __CLASS__), 'add'))
-        {
-            echo '<h1>we have permission</h1>';
-        }
-        else
-        {
-            echo '<h2>No way Hosay!</h2>';
-        }
     }
 
     public function index()
