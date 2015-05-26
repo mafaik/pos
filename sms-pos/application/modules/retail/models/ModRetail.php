@@ -37,7 +37,8 @@ class ModRetail extends CI_Model
     public function getRetailDetail($id_retail)
     {
         $this->db->from('retail_detail ed');
-        $this->db->join('product p', 'p.id_product = ed.id_product', 'left');
+        $this->db->join('product_store ps', 'ps.id_product_store = ed.id_product_store', 'left');
+        $this->db->join('product p', 'p.id_product = ps.id_product', 'left');
         $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit');
         $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category');
         $this->db->where(['id_retail'=>$id_retail]);
@@ -86,7 +87,8 @@ class ModRetail extends CI_Model
     public function getRetailDetailItem($id_detail)
     {
         $this->db->from('retail_detail ed');
-        $this->db->join('product p', 'p.id_product = ed.id_product', 'left');
+        $this->db->join('product_store ps', 'ps.id_product_store = ed.id_product_store', 'left');
+        $this->db->join('product p', 'p.id_product = ps.id_product', 'left');
         $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit');
         $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category');
         $this->db->where(['id_retail_detail'=>$id_detail]);
@@ -94,15 +96,13 @@ class ModRetail extends CI_Model
     }
 
 
-    public function checkStock($id_store,$id_product, $qty)
+    public function checkStock($id_product__store, $qty)
     {
-        $row = $this->db->get_where('product_store', ['id_store' => $id_store,'id_product' => $id_product])->row();
+        $row = $this->db->get_where('product_store', ['id_product_store' => $id_product__store])->row();
         if ($row->stock < $qty) {
             return false;
         } else {
             return true;
         }
     }
-
-
 }

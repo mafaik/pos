@@ -6,8 +6,6 @@
     <script type="text/javascript" xmlns="http://www.w3.org/1999/html">
         var data_storage = {$product_storage|@json_encode};
     </script>
-    {js('function.js')}
-    {js('form/custom.js')}
     <div class="panel panel-default">
 
         <div class="panel-heading"><h6 class="panel-title">Retail</h6></div>
@@ -61,24 +59,24 @@
                                 <label class="col-sm-4 control-label">Barcode: </label>
 
                                 <div class="col-md-8">
+                                    <input type="hidden" name="id_product_store" value="{set_value('id_product_store')}"
+                                           id="input-id_product_store">
                                     <input type="text" name="barcode" value="{set_value('barcode')}" id="input-barcode"
-                                           class="form-control" placeholder="Type or scan barcode"
-                                           autofocus onblur="barcodeParam(this)">
-                                    <input type="hidden" name="id_product" value="{set_value('id_product')}"
-                                           id="input-id_product">
+                                           class="form-control" accesskey="submit" placeholder="Scan barcode"
+                                           autofocus>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="col-sm-4 control-label">Qty: </label>
+                        {*<div class="form-group">*}
+                        {*<div class="row">*}
+                        {*<label class="col-sm-4 control-label">Qty: </label>*}
 
-                                <div class="col-md-4 {if form_error('qty')}has-warning{/if}">
-                                    <input type="number" name="qty" value="{set_value('qty')}" id="input-qty"
-                                           class="form-control" placeholder="0">
-                                </div>
-                            </div>
-                        </div>
+                        {*<div class="col-md-4 {if form_error('qty')}has-warning{/if}">*}
+                        {*<input type="number" name="qty" value="{set_value('qty')}" id="input-qty"*}
+                        {*class="form-control" placeholder="0">*}
+                        {*</div>*}
+                        {*</div>*}
+                        {*</div>*}
                         {*<div class="form-group">*}
                         {*<div class="row">*}
                         {*<label class="col-sm-4 control-label">Diskon: </label>*}
@@ -97,9 +95,9 @@
                         {*</div>*}
                         {*</div>*}
 
-                        <div class="col-sm-12">
-                            <input type="submit" class="btn btn-block btn-success" value="Submit">
-                        </div>
+                        {*<div class="col-sm-12">*}
+                        {*<input type="submit" class="btn btn-block btn-success" value="Submit">*}
+                        {*</div>*}
                     </form>
                 </div>
                 <div class="col-md-1">
@@ -146,75 +144,72 @@
 
             </div>
             <hr>
-        </div>
-        <!-- /panel body -->
+            <!-- /panel body -->
 
 
-        {if $items}
-            <div class="table-responsive pre-scrollable">
-                <table class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Barcode</th>
-                        <th>Nama Produk</th>
-                        <th>Merek</th>
-                        <th>Satuan / isi</th>
-                        <th>Qty</th>
-                        <th>Harga</th>
-                        {*<th>Diskon</th>*}
-                        <th>Subtotal</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {assign var=total value=0}
-                    {assign var=val value=1}
-                    {foreach $items as $key }
+            {if $items}
+                <div class="table-responsive pre-scrollable">
+                    <table class="table table-striped table-bordered">
+                        <thead>
                         <tr>
-                            <td>{$val}</td>
-                            <td>{$key['barcode']}</td>
-                            <td>{$key['name']}</td>
-                            <td>{$key['brand']}</td>
-                            <td>{$key['unit']} / {$key['value']}</td>
-                            <td style="width:100px;">
-                                <input type="number" id="qty-{$key['id_product']}" value="{$key['qty']}"
-                                       class="form-control" onkeypress="qtyKeyPress({$key['id_product']},
-                                        '{base_url('retail/update')}')">
-                            </td>
-                            <td style="width:130px;" class="text-right">
-                                Rp {$key['sell_price']|number_format:0}
-                            </td>
-                            {*<td style="width:130px;" class="text-right">*}
-                            {*Rp {$key['discount']|number_format:0}*}
-                            {*</td>*}
-                            <td style="width:130px;" class="text-right">
-                                Rp {($key['qty'] * $key['sell_price'] - $key['discount'])|number_format:0}
-                            </td>
-                            <td style="width:90px;">
-
-                                <div class="table-controls">
-                                    <a class="btn btn-link btn-icon btn-xs tip" title="Update Qty"
-                                       onclick="updateQty({$key['id_product']},
-                                               '{base_url('retail/update')}')">
-                                        <i class="icon-pencil3"></i></a>
-                                    <a href="{base_url('retail/delete')}/{$key['id_product']}"
-                                       class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
-                                        <i class="icon-remove3"></i></a>
-                                </div>
-                            </td>
+                            <th>No</th>
+                            <th>Barcode</th>
+                            <th>Nama Produk</th>
+                            <th>Merek</th>
+                            <th>Satuan / isi</th>
+                            <th>Qty</th>
+                            <th>Harga</th>
+                            {*<th>Diskon</th>*}
+                            <th>Subtotal</th>
+                            <th>Action</th>
                         </tr>
-                        {assign var=val value=$val+1}
-                        {assign var=total value=$total+($key['qty'] * $key['sell_price'] - $key['discount'])}
+                        </thead>
+                        <tbody>
+                        {assign var=total value=0}
+                        {assign var=val value=1}
+                        {foreach $items as $key }
+                            <tr>
+                                <td>{$val}</td>
+                                <td>{$key['barcode']}</td>
+                                <td>{$key['name']}</td>
+                                <td>{$key['brand']}</td>
+                                <td>{$key['unit']} / {$key['value']}</td>
+                                <td style="width:100px;">
+                                    <input type="number" id="qty-{$key['id_product_store']}" value="{$key['qty']}"
+                                           class="form-control" onkeypress="qtyKeyPress({$key['id_product_store']},
+                                            '{base_url('retail/update')}')">
+                                </td>
+                                <td style="width:130px;" class="text-right">
+                                    Rp {$key['sell_price']|number_format:0}
+                                </td>
+                                {*<td style="width:130px;" class="text-right">*}
+                                {*Rp {$key['discount']|number_format:0}*}
+                                {*</td>*}
+                                <td style="width:130px;" class="text-right">
+                                    Rp {($key['qty'] * $key['sell_price'] - $key['discount'])|number_format:0}
+                                </td>
+                                <td style="width:90px;">
 
-                    {/foreach}
-                    </tbody>
-                </table>
-            </div>
-            <form action="{base_url('retail/save')}" role="form" method="post"
-                  onsubmit="return confirm('Process Data');">
+                                    <div class="table-controls">
+                                        <a class="btn btn-link btn-icon btn-xs tip" title="Update Qty"
+                                           onclick="updateQty({$key['id_product_store']},
+                                                   '{base_url('retail/update')}')">
+                                            <i class="icon-pencil3"></i></a>
+                                        <a href="{base_url('retail/delete')}/{$key['id_product_store']}"
+                                           class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
+                                            <i class="icon-remove3"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {assign var=val value=$val+1}
+                            {assign var=total value=$total+($key['qty'] * $key['sell_price'] - $key['discount'])}
 
-                <div class="panel-body">
+                        {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+                <form action="{base_url('retail/save')}" role="form" method="post"
+                      onsubmit="return confirm('Process Data');">
                     <div class="row invoice-payment">
 
                         <div class="col-sm-4 pull-right">
@@ -233,8 +228,8 @@
                                         <div class="input-group">
                                             <span class="input-group-addon">Rp</span>
 
-                                            <input type="number" name="discount" value="{set_value('discount')}"
-                                                   class="form-control" placeholder="0"
+                                            <input type="text" name="discount" value="{set_value('discount')}"
+                                                   class="form-control currency-format" placeholder="0"
                                                    id="input-discount" onblur="setDpp(this.value)">
 
                                         </div>
@@ -265,12 +260,13 @@
 
                                 <tr>
                                     <th>Jumlah Bayar:</th>
-                                    <td class="text-right {if form_error('bayar')}has-warning{/if}" style="max-width: 135px;">
+                                    <td class="text-right {if form_error('bayar')}has-warning{/if}"
+                                        style="max-width: 135px;">
                                         <div class="input-group">
                                             <span class="input-group-addon">Rp</span>
 
-                                            <input type="number" name="bayar" value="{set_value('bayar')}"
-                                                   class="form-control" placeholder="0"
+                                            <input type="text" name="bayar" value="{set_value('bayar')}"
+                                                   class="form-control currency-format" placeholder="0"
                                                    id="input-bayar" onblur="setBayar(this.value)">
 
                                         </div>
@@ -291,17 +287,16 @@
                             </div>
                         </div>
                     </div>
-
-                    <h6>Notes &amp; Information:</h6>
-                    This invoice contains a incomplete list of items destroyed by the Federation ship Enterprise on
-                    Startdate 5401.6 in an unprovked attacked on a peaceful &amp; wholly scientific mission to Outpost
-                    775.
-                    The Romulan people demand immediate compensation for the loss of their Warbird, Shuttle, Cloaking
-                    Device, and to a lesser extent thier troops.
-                </div>
-                <!-- /panel body -->
-            </form>
-        {/if}
+                </form>
+                <h6>Notes &amp; Information:</h6>
+                This invoice contains a incomplete list of items destroyed by the Federation ship Enterprise on
+                Startdate 5401.6 in an unprovked attacked on a peaceful &amp; wholly scientific mission to Outpost
+                775.
+                The Romulan people demand immediate compensation for the loss of their Warbird, Shuttle, Cloaking
+                Device, and to a lesser extent thier troops.
+            {/if}
+        </div>
+        <!-- /panel body -->
     </div>
     <!-- /default panel -->
 

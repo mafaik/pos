@@ -30,8 +30,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /panel body -->
+            <br>
 
 
         {if $items}
@@ -88,19 +87,19 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="form-actions text-right">
-                            <button type="submit" name="save" value="Save" class="btn btn-success"><i
-                                        class="icon-checkmark">
-                                </i> Process
-                            </button>
-                            {*<button type="button" name="print" class="btn btn-default"><i class="icon-print2"></i> Print</button>*}
-                        </div>
+                <br>
+                <div class="form-group">
+                    <div class="form-actions text-right">
+                        <button type="submit" name="save" value="Save" class="btn btn-success"><i
+                                    class="icon-checkmark">
+                            </i> Process
+                        </button>
+                        {*<button type="button" name="print" class="btn btn-default"><i class="icon-print2"></i> Print</button>*}
                     </div>
                 </div>
             </form>
         {/if}
+        </div>
     </div>
     {*<div class="panel-body">*}
     {*<h6>Notes &amp; Information:</h6>*}
@@ -147,7 +146,7 @@
                                         <td>{$products['brand']}</td>
                                         <td>{$products['stock']}</td>
                                         <td>{$products['size']}</td>
-                                        <td>{$products['sell_price']}</td>
+                                        <td>Rp {$products['sell_price']|number_format:0}</td>
                                         <td>
                                             <a
                                                     class="button btn btn-info  btn-icon"

@@ -3,8 +3,18 @@
  */
 
 
+function getDataProductArray(id, array, key){
+    var a = [];
+    $.each(array, function (i, b) {
+        if (b[key] == id) {
+            a = b;
+            return false;
+        }
+    });
+    return a;
+}
+
 function appendItem(data){
-    console.log(data);
     for (var x in data){
         if (data[x] === parseInt(data[x], 10)){
             value = parseInt(data[x]);
@@ -59,6 +69,7 @@ function idParam(param){
     appendItem(data);
 }
 
+
 function updateQty(a, url){
     var qty = $('#qty-'+a).val();
     if(qty <= 0 || isNaN(qty)){
@@ -79,7 +90,7 @@ function qtyKeyPress(a, url){
 function setDpp(param){
 
     var total = parseInt(convertCurrency($('#sum-total-text').text()));
-    var dpp = total - param;
+    var dpp = total - convertCurrency(param);
     $('#sum-dpp-text').html(numberFormat(dpp));
     ppnCheck();
 }
@@ -108,6 +119,35 @@ function ppnCheck(){
 
 function setBayar(bayar){
     var total = parseInt(convertCurrency($('#sum-grand_total-text').text()));
-    $('#sum-returns-text').html(numberFormat(bayar - total));
+    $('#sum-returns-text').html(numberFormat(convertCurrency(bayar) - total));
 
 }
+function inputQty(a,b){
+    var qty_result = a * b;
+    $( "#result-qty" ).html( qty_result );
+    $( "#result-qty-result" ).val(qty_result);
+}
+function formatAsCurrency(el){
+    el.value = numberFormat(convertCurrency(el.value));
+}
+function formatAsNumber(el){
+    el.value = convertCurrency(el.value);
+}
+$(document).ready(function(){
+    $(".currency-format").bind('keyup',function(e){
+        formatAsCurrency(this);
+    }).bind('blur',function(e){
+        formatAsNumber(this);
+    });
+    $('input').bind('keypress',function (e) {
+        if($(this).attr('id') == "input-barcode"){
+            barcodeParam(this);
+        }
+        if(e.keyCode == 13 && $(this).attr('type') != 'submit' && $(this).attr('accesskey') != "submit"){
+            $(":input")[$(":input").index(document.activeElement)+ 1].focus();
+            e.preventDefault();
+        }
+    })
+
+    $("#clock").clock({"format":"24"});
+});

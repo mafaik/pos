@@ -25,6 +25,15 @@ class PurchaseOrder extends MX_Controller
                 'foreign_table' => 'purchase_order_detail'
             ));
         $this->cache = $this->cart->array_cache();
+
+        if ($this->acl->has_permission(strtolower( __CLASS__), 'add'))
+        {
+            echo '<h1>we have permission</h1>';
+        }
+        else
+        {
+            echo '<h2>No way Hosay!</h2>';
+        }
     }
 
     public function index()

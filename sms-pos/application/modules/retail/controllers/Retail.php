@@ -33,14 +33,13 @@ class Retail extends MX_Controller
 
         if ($this->input->post()) {
             if ($this->form_validation->run('retail') == TRUE) {
-                if( $this->ModRetail->checkStock($this->id_store,
-                    $this->input->post('id_product'),
-                    $this->input->post('qty')
+                if( $this->ModRetail->checkStock($this->input->post('id_product_store'),
+                    1
                     )){
-                    $this->cart->add_item($this->input->post('id_product'), [
-                        'id_product' => $this->input->post('id_product'),
+                    $this->cart->add_item($this->input->post('id_product_store'), [
+                        'id_product_store' => $this->input->post('id_product_store'),
                         'barcode' => $this->input->post('barcode'),
-                        'qty' => $this->input->post('qty'),
+                        'qty' => 1,
                         'discount' => $this->input->post('discount') ? $this->input->post('discount') : 0
                     ]);
                     redirect('retail');
@@ -48,17 +47,16 @@ class Retail extends MX_Controller
                 $data['error'] = "stock tidak cukup";
             }
         }
-        $data['items'] = $this->cart->list_item($product_storage, 'id_product')->result_array_item();
+        $data['items'] = $this->cart->list_item($product_storage, 'id_product_store')->result_array_item();
         $this->parser->parse("retail.tpl", $data);
     }
 
-    public function updateItem($id_product, $qty)
+    public function updateItem($id_product_store, $qty)
     {
-        if( $this->ModRetail->checkStock($this->id_store,
-            $id_product,
+        if( $this->ModRetail->checkStock($id_product_store,
             $qty
         )){
-            if (!$this->cart->update_item($id_product, ['qty' => $qty]))
+            if (!$this->cart->update_item($id_product_store, ['qty' => $qty]))
                 $this->session->set_flashdata('error', $this->cart->getError());
         }else{
             $this->session->set_flashdata('error', "stock tidak cukup");
@@ -66,9 +64,9 @@ class Retail extends MX_Controller
         redirect('retail');
     }
 
-    public function deleteItem($id_product)
+    public function deleteItem($id_product_store)
     {
-        if (!$this->cart->delete_item($id_product))
+        if (!$this->cart->delete_item($id_product_store))
             $this->session->set_flashdata('error', $this->cart->getError());
         redirect('retail');
 
@@ -82,7 +80,7 @@ class Retail extends MX_Controller
 
                 if ($id_retail = $this->cart->primary_data(array(
                     'discount' => $this->input->post('discount'),
-                    'bayar' => $this->input->post('bayar'),
+                    'paid' => $this->input->post('bayar'),
                     'id_staff' => $this->id_staff,
                     'id_store' => $this->id_store
                 ))->save()
@@ -99,5 +97,19 @@ class Retail extends MX_Controller
             }
         }
         redirect('retail');
+    }
+
+    public function checkout($id_retail)
+    {
+        if (!$data_retail = $this->ModRetail->getDataRetail($id_retail)
+        ) {
+            redirect('retail');
+        }
+        $data['master'] = $data_retail;
+        $data['items'] = $this->ModRetail->getRetailDetail($id_retail);
+        $this->parser->parse("checkout.tpl", $data);
+    }
+
+    public function directPrint(){
     }
 }
