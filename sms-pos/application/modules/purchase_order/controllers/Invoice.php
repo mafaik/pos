@@ -16,18 +16,18 @@ class Invoice extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('ModPurchaseOrder');
+        $this->load->model('ModelPurchaseOrder','model_purchase_order');
         $this->id_staff = $this->config->item('id_staff');
     }
 
     public function index($id_po){
-        if(!$data_po = $this->db->get_where('purchase_order', array('id_po' => $id_po))->row()){
+        if(!$data_po = $this->db->get_where('purchase_order', array('id_purchase_order' => $id_po))->row()){
             redirect('purchase-order');
         }
         $data['po'] = $data_po;
         $data['principal'] = $this->db->get_where('principal', array('id_principal' => $data_po->id_principal))->row();
         $data['staff'] = $this->db->get_where('staff', array('id_staff' => $data_po->id_staff))->row();
-        $data['pod'] = $this->ModPurchaseOrder->getDataPOD($id_po);
+        $data['pod'] = $this->model_purchase_order->getDataPOD($id_po);
         $this->parser->parse("invoice.tpl",$data);
 
     }

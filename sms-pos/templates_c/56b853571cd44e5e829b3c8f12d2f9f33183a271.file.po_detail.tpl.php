@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-14 05:39:39
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-22 03:18:22
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6338738805530ecdd0a61e9-92077084%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '56b853571cd44e5e829b3c8f12d2f9f33183a271' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl',
-      1 => 1431513788,
+      1 => 1432264649,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
     array (
       0 => '/var/www/sms-pos/application/master.tpl',
-      1 => 1429430584,
+      1 => 1432260073,
       2 => 'file',
     ),
   ),
@@ -323,10 +323,6 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 ;
     <?php echo '</script'; ?>
 >
-    <?php echo js('function.js');?>
-
-    <?php echo js('form/custom.js');?>
-
     <div class="panel panel-default">
 
         <div class="panel-heading"><h6 class="panel-title">Purchase Order</h6></div>
@@ -395,6 +391,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                 <div class="callout callout-danger fade in">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <h5>Error Message</h5>
+
                     <p><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
 </p>
                 </div>
@@ -410,13 +407,13 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                                 <label class="col-sm-4 control-label">Barcode: </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" name="barcode" value="<?php echo set_value('barcode');?>
-" id="input-barcode"
-                                           class="form-control" placeholder="Type or scan barcode"
-                                           autofocus onblur="barcodeParam(this)">
                                     <input type="hidden" name="id_product" value="<?php echo set_value('id_product');?>
 "
                                            id="input-id_product">
+                                    <input type="text" name="barcode" value="<?php echo set_value('barcode');?>
+" id="input-barcode"
+                                           class="form-control" placeholder="Scan barcode"
+                                           autofocus>
                                 </div>
                             </div>
                         </div>
@@ -427,7 +424,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                                 <div class="col-md-4 <?php if (form_error('qty')) {?>has-warning<?php }?>">
                                     <input type="number" name="qty" value="<?php echo set_value('qty');?>
 " id="input-qty"
-                                           class="form-control" placeholder="0">
+                                           class="form-control catcher" placeholder="0">
                                 </div>
                             </div>
                         </div>
@@ -439,9 +436,10 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                                 <div class="col-md-7 <?php if (form_error('price')) {?>has-warning<?php }?>">
                                     <div class="input-group">
                                         <span class="input-group-addon">Rp</span>
-                                        <input type="number" name="price" value="<?php echo set_value('price');?>
+                                        <input type="text" name="price"
+                                               value="<?php echo set_value('price');?>
 "
-                                               class="form-control" placeholder="0">
+                                               class="form-control currency-format" placeholder="0">
 
                                     </div>
                                 </div>
@@ -505,11 +503,10 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /panel body -->
+            <!-- /panel body -->
+            <br>
 
-
-        <?php if ($_smarty_tpl->tpl_vars['items']->value) {?>
+            <?php if ($_smarty_tpl->tpl_vars['items']->value) {?>
             <div class="table-responsive pre-scrollable">
                 <table class="table table-striped table-bordered">
                     <thead>
@@ -598,102 +595,103 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                     </tbody>
                 </table>
             </div>
+
+            <br>
+
             <form action="<?php echo base_url('purchase-order/save');?>
 " role="form" method="post" enctype="multipart/form-data"
                   onsubmit="return confirm('Process Data');">
-                <div class="panel-body">
-
-                    <div class="row invoice-payment">
-
-                        <div class="col-sm-4 pull-right">
-                            <h6>Summary:</h6>
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <th>Total:</th>
-                                    <td class="text-right">
-                                        <span id="sum-total-text"><strong>Rp <?php echo number_format($_smarty_tpl->tpl_vars['total']->value,0);?>
+                <div class="row invoice-payment">
+                    <div class="col-sm-4 pull-right">
+                        <h6>Summary:</h6>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th>Total:</th>
+                                <td class="text-right">
+                                    <span id="sum-total-text"><strong>Rp <?php echo number_format($_smarty_tpl->tpl_vars['total']->value,0);?>
 </strong> </span>
-                                    </td>
-                                    <input type="hidden" name="total" value="<?php echo $_smarty_tpl->tpl_vars['total']->value;?>
+                                </td>
+                                <input type="hidden" name="total" value="<?php echo $_smarty_tpl->tpl_vars['total']->value;?>
 ">
-                                </tr>
-                                <tr>
-                                    <th>Diskon:</th>
-                                    <td class="text-right <?php if (form_error('discount_price')) {?>has-warning<?php }?>"
-                                        style="max-width: 135px;">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Rp</span>
+                            </tr>
+                            <tr>
+                                <th>Diskon:</th>
+                                <td class="text-right <?php if (form_error('discount_price')) {?>has-warning<?php }?>"
+                                    style="max-width: 135px;">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Rp</span>
 
-                                            <input type="number" name="discount_price" value="<?php echo set_value('discount_price');?>
+                                        <input type="text" name="discount_price" value="<?php echo set_value('discount_price');?>
 "
-                                                   class="form-control" placeholder="0"
-                                                   id="input-discount_price">
+                                               class="form-control currency-format" placeholder="0"
+                                               id="input-discount_price ">
 
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>DPP:</th>
-                                    <td class="text-right <?php if (form_error('dpp')) {?>has-warning<?php }?>"
-                                        style="max-width: 135px;">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Rp</span>
-                                            <input type="number" name="dpp" value="<?php echo set_value('dpp');?>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>DPP:</th>
+                                <td class="text-right <?php if (form_error('dpp')) {?>has-warning<?php }?>"
+                                    style="max-width: 135px;">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Rp</span>
+                                        <input type="text" name="dpp" value="<?php echo set_value('dpp');?>
 "
-                                                   class="form-control" placeholder="0"
-                                                   id="input-dpp">
+                                               class="form-control currency-format" placeholder="0"
+                                               id="input-dpp">
 
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>PPN:</th>
-                                    <td class="text-right <?php if (form_error('ppn')) {?>has-warning<?php }?>"
-                                        style="max-width: 135px;">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Rp</span>
-                                            <input type="number" name="ppn" value="<?php echo set_value('ppn');?>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>PPN:</th>
+                                <td class="text-right <?php if (form_error('ppn')) {?>has-warning<?php }?>"
+                                    style="max-width: 135px;">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Rp</span>
+                                        <input type="text" name="ppn" value="<?php echo set_value('ppn');?>
 "
-                                                   class="form-control" placeholder="0"
-                                                   id="input-ppn">
+                                               class="form-control currency-format" placeholder="0"
+                                               id="input-ppn">
 
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Grand Total:</th>
-                                    <td class="text-right <?php if (form_error('grand_total')) {?>has-warning<?php }?>"
-                                        style="max-width: 135px;">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Rp</span>
-                                            <input type="number" name="grand_total" value="<?php echo set_value('grand_total');?>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Grand Total:</th>
+                                <td class="text-right <?php if (form_error('grand_total')) {?>has-warning<?php }?>"
+                                    style="max-width: 135px;">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Rp</span>
+                                        <input type="text" name="grand_total" value="<?php echo set_value('grand_total');?>
 "
-                                                   class="form-control" placeholder="0"
-                                                   id="input-grand_total">
+                                               class="form-control currency-format" placeholder="0"
+                                               id="input-grand_total">
 
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Bukti Pembelian:</th>
-                                    <td class="text-right text-danger">
-                                        <input type="file" name="file" class="styled form-control" id="report-screenshot">
-                                        <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="btn-group right-box">
-                                <button type="submit" name="save" value="save"
-                                        class="btn block full-width btn-success"><i class="icon-checkmark">
-                                    </i> Checkout</button>
-                            </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Bukti Pembelian:</th>
+                                <td class="text-right text-danger">
+                                    <input type="file" name="file" class="styled form-control" id="report-screenshot">
+                                    <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="btn-group right-box">
+                            <button type="submit" name="save" value="save"
+                                    class="btn block full-width btn-success"><i class="icon-checkmark">
+                                </i> Checkout
+                            </button>
                         </div>
                     </div>
                 </div>
-                <!-- /panel body -->
             </form>
+        </div>
+        <!-- /panel body -->
         <?php }?>
 
         
@@ -774,6 +772,8 @@ $_smarty_tpl->tpl_vars['products']->_loop = true;
         </div>
     </div>
     <!-- /default modal -->
+
+        <?php echo js('form/custom.js');?>
 
 
         <!-- Footer -->

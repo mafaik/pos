@@ -6,8 +6,6 @@
     <script type="text/javascript">
         var data_storage = {$product_storage|@json_encode};
     </script>
-    {js('function.js')}
-    {js('form/custom.js')}
     <div class="panel panel-default">
 
         <div class="panel-heading"><h6 class="panel-title">Purchase Order</h6></div>
@@ -59,6 +57,7 @@
                 <div class="callout callout-danger fade in">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <h5>Error Message</h5>
+
                     <p>{$error}</p>
                 </div>
             {/if}
@@ -72,11 +71,11 @@
                                 <label class="col-sm-4 control-label">Barcode: </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" name="barcode" value="{set_value('barcode')}" id="input-barcode"
-                                           class="form-control" placeholder="Type or scan barcode"
-                                           autofocus onblur="barcodeParam(this)">
                                     <input type="hidden" name="id_product" value="{set_value('id_product')}"
                                            id="input-id_product">
+                                    <input type="text" name="barcode" value="{set_value('barcode')}" id="input-barcode"
+                                           class="form-control" placeholder="Scan barcode"
+                                           autofocus>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +85,7 @@
 
                                 <div class="col-md-4 {if form_error('qty')}has-warning{/if}">
                                     <input type="number" name="qty" value="{set_value('qty')}" id="input-qty"
-                                           class="form-control" placeholder="0">
+                                           class="form-control catcher" placeholder="0">
                                 </div>
                             </div>
                         </div>
@@ -98,8 +97,9 @@
                                 <div class="col-md-7 {if form_error('price')}has-warning{/if}">
                                     <div class="input-group">
                                         <span class="input-group-addon">Rp</span>
-                                        <input type="number" name="price" value="{set_value('price')}"
-                                               class="form-control" placeholder="0">
+                                        <input type="text" name="price"
+                                               value="{set_value('price')}"
+                                               class="form-control currency-format" placeholder="0">
 
                                     </div>
                                 </div>
@@ -162,11 +162,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /panel body -->
+            <!-- /panel body -->
+            <br>
 
-
-        {if $items}
+            {if $items}
             <div class="table-responsive pre-scrollable">
                 <table class="table table-striped table-bordered">
                     <thead>
@@ -233,95 +232,96 @@
                     </tbody>
                 </table>
             </div>
+
+            <br>
+
             <form action="{base_url('purchase-order/save')}" role="form" method="post" enctype="multipart/form-data"
                   onsubmit="return confirm('Process Data');">
-                <div class="panel-body">
+                <div class="row invoice-payment">
+                    <div class="col-sm-4 pull-right">
+                        <h6>Summary:</h6>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th>Total:</th>
+                                <td class="text-right">
+                                    <span id="sum-total-text"><strong>Rp {$total|number_format:0}</strong> </span>
+                                </td>
+                                <input type="hidden" name="total" value="{$total}">
+                            </tr>
+                            <tr>
+                                <th>Diskon:</th>
+                                <td class="text-right {if form_error('discount_price')}has-warning{/if}"
+                                    style="max-width: 135px;">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Rp</span>
 
-                    <div class="row invoice-payment">
+                                        <input type="text" name="discount_price" value="{set_value('discount_price')}"
+                                               class="form-control currency-format" placeholder="0"
+                                               id="input-discount_price ">
 
-                        <div class="col-sm-4 pull-right">
-                            <h6>Summary:</h6>
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <th>Total:</th>
-                                    <td class="text-right">
-                                        <span id="sum-total-text"><strong>Rp {$total|number_format:0}</strong> </span>
-                                    </td>
-                                    <input type="hidden" name="total" value="{$total}">
-                                </tr>
-                                <tr>
-                                    <th>Diskon:</th>
-                                    <td class="text-right {if form_error('discount_price')}has-warning{/if}"
-                                        style="max-width: 135px;">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Rp</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>DPP:</th>
+                                <td class="text-right {if form_error('dpp')}has-warning{/if}"
+                                    style="max-width: 135px;">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Rp</span>
+                                        <input type="text" name="dpp" value="{set_value('dpp')}"
+                                               class="form-control currency-format" placeholder="0"
+                                               id="input-dpp">
 
-                                            <input type="number" name="discount_price" value="{set_value('discount_price')}"
-                                                   class="form-control" placeholder="0"
-                                                   id="input-discount_price">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>PPN:</th>
+                                <td class="text-right {if form_error('ppn')}has-warning{/if}"
+                                    style="max-width: 135px;">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Rp</span>
+                                        <input type="text" name="ppn" value="{set_value('ppn')}"
+                                               class="form-control currency-format" placeholder="0"
+                                               id="input-ppn">
 
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>DPP:</th>
-                                    <td class="text-right {if form_error('dpp')}has-warning{/if}"
-                                        style="max-width: 135px;">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Rp</span>
-                                            <input type="number" name="dpp" value="{set_value('dpp')}"
-                                                   class="form-control" placeholder="0"
-                                                   id="input-dpp">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Grand Total:</th>
+                                <td class="text-right {if form_error('grand_total')}has-warning{/if}"
+                                    style="max-width: 135px;">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Rp</span>
+                                        <input type="text" name="grand_total" value="{set_value('grand_total')}"
+                                               class="form-control currency-format" placeholder="0"
+                                               id="input-grand_total">
 
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>PPN:</th>
-                                    <td class="text-right {if form_error('ppn')}has-warning{/if}"
-                                        style="max-width: 135px;">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Rp</span>
-                                            <input type="number" name="ppn" value="{set_value('ppn')}"
-                                                   class="form-control" placeholder="0"
-                                                   id="input-ppn">
-
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Grand Total:</th>
-                                    <td class="text-right {if form_error('grand_total')}has-warning{/if}"
-                                        style="max-width: 135px;">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Rp</span>
-                                            <input type="number" name="grand_total" value="{set_value('grand_total')}"
-                                                   class="form-control" placeholder="0"
-                                                   id="input-grand_total">
-
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Bukti Pembelian:</th>
-                                    <td class="text-right text-danger">
-                                        <input type="file" name="file" class="styled form-control" id="report-screenshot">
-                                        <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="btn-group right-box">
-                                <button type="submit" name="save" value="save"
-                                        class="btn block full-width btn-success"><i class="icon-checkmark">
-                                    </i> Checkout</button>
-                            </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Bukti Pembelian:</th>
+                                <td class="text-right text-danger">
+                                    <input type="file" name="file" class="styled form-control" id="report-screenshot">
+                                    <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="btn-group right-box">
+                            <button type="submit" name="save" value="save"
+                                    class="btn block full-width btn-success"><i class="icon-checkmark">
+                                </i> Checkout
+                            </button>
                         </div>
                     </div>
                 </div>
-                <!-- /panel body -->
             </form>
+        </div>
+        <!-- /panel body -->
         {/if}
 
         {*<div class="panel-body">*}

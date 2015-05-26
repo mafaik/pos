@@ -251,6 +251,7 @@
     <div class="page-content">
 
         {block name=content}{/block}
+        {js('form/custom.js')}
 
         <!-- Footer -->
         <div class="footer clearfix">

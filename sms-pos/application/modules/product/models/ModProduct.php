@@ -13,12 +13,9 @@ class ModProduct extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('Caching');
     }
 
     public function get(){
-
-        $this->db->select('*');
         $this->db->from('product');
         $this->db->join('product_unit','product_unit.id_product_unit = product.id_product_unit');
         $this->db->join('product_category','product_category.id_product_category = product.id_product_category');

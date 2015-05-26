@@ -89,16 +89,6 @@ $config = array(
             'field' => 'qty',
             'label' => 'QTY',
             'rules' => 'required|integer'
-        ),
-        array(
-            'field' => 'id_product_result',
-            'label' => 'ID Product',
-            'rules' => 'required|integer'
-        ),
-        array(
-            'field' => 'qty_result',
-            'label' => 'QTY',
-            'rules' => 'required|integer'
         )
     ),
     'credit' => array(
@@ -139,20 +129,20 @@ $config = array(
     ),
     'retail' => array(
         array(
-            'field' => 'id_product',
+            'field' => 'id_product_store',
             'label' => 'Product',
             'rules' => 'required|integer'
         ),
-        array(
-            'field' => 'qty',
-            'label' => 'QTY',
-            'rules' => 'required|integer'
-        ),
-        array(
-            'field' => 'discount',
-            'label' => 'Diskon',
-            'rules' => 'integer'
-        )
+//        array(
+//            'field' => 'qty',
+//            'label' => 'QTY',
+//            'rules' => 'integer'
+//        ),
+//        array(
+//            'field' => 'discount',
+//            'label' => 'Diskon',
+//            'rules' => 'integer'
+//        )
     ),
     'retail/save' => array(
         array(
@@ -219,12 +209,27 @@ $config = array(
     ),
     'returns' => array(
         array(
-            'field' => 'returns',
+            'field' => 'qty_return',
             'label' => 'Jumlah Retur',
             'rules' => 'required|integer'
         ),
         array(
-            'field' => 'reason',
+            'field' => 'qty',
+            'label' => 'Jumlah Retur',
+            'rules' => 'integer'
+        ),
+        array(
+            'field' => 'id_product_store',
+            'label' => 'Produk ',
+            'rules' => 'integer'
+        ),
+        array(
+            'field' => 'cashback',
+            'label' => 'Produk ',
+            'rules' => 'integer'
+        ),
+        array(
+            'field' => 'note',
             'label' => 'Keterangan',
             'rules' => 'required|trim'
         )

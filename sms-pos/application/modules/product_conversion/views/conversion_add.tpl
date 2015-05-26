@@ -3,11 +3,7 @@
 
 {block name=content}
     <!-- Default panel -->
-    <script type="text/javascript">
-        var data_storage = {$product_storage|@json_encode};
-    </script>
-    {js('function.js')}
-    {js('form/conversion.js')}
+    {js('form/custom.js')}
     <div class="row">
         <form action="{base_url('product-conversion/save')}" role="form" method="post">
             <div class="col-md-12">
@@ -55,28 +51,20 @@
                                     <th>Stok:</th>
                                     <td class="text-right">{$product->stock}</td>
                                 </tr>
+                                <tr>
+                                    <th>Qty:</th>
+                                    <td class="text-right">
+                                        <div class="col-sm-8 pull-right {if form_error('qty')}has-warning{/if}">
+                                            <input type="hidden" name="id_product" value="{$product->id_product}">
+                                            <input type="number" value="{set_value('qty')}" class="form-control"
+                                                   autofocus="autofocus" name="qty" id="qty"
+                                                   onblur="inputQty(this.value,{$product->value})"
+                                                   placeholder="0">
+                                        </div>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Qty: </label>
-                                <div class="col-sm-3 {if form_error('qty')}has-warning{/if}">
-                                    <input type="hidden" name="id_product" value="{$product->id_product}">
-                                    <input type="number" value="{set_value('qty')}" class="form-control" autofocus="autofocus" name="qty" id="qty"
-                                           placeholder="0">
-                                    <input type="hidden" name="id_product_result" id="result-id-product">
-                                    <input type="hidden" name="qty_result" id="result-qty-result">
-                                    <input type="hidden" id="value" value="{$product->value}">
-                                </div>
-                                <label class="col-sm-4 control-label">Conversion To: </label>
-                                <div class="col-sm-3">
-                                    <a data-toggle="modal" role="button" href="#default-modal"
-                                       class="button btn btn-info ">
-                                        <i class="icon-search2"></i> Cari
-                                    </a>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -93,24 +81,25 @@
                                 <tbody>
                                 <tr>
                                     <th>Barcode:</th>
-                                    <td class="text-right" id="result-barcode"></td>
+                                    <td class="text-right" id="result-barcode">{$product_conversion->barcode}</td>
                                 </tr>
                                 <tr>
                                     <th>Nama Produk:</th>
-                                    <td class="text-right" id="result-name"></td>
+                                    <td class="text-right" id="result-name">{$product_conversion->name}</td>
                                 </tr>
                                 <tr>
                                     <th>Merek:</th>
-                                    <td class="text-right" id="result-brand"></td>
+                                    <td class="text-right" id="result-brand">{$product_conversion->brand}</td>
                                 </tr>
                                 <tr>
                                     <th>Satuan / Isi:</th>
                                     <td class="text-right" id="result-unit">
+                                        {$product_conversion->unit}/{$product_conversion->value}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Stok:</th>
-                                    <td class="text-right"  id="result-stock"></td>
+                                    <td class="text-right"  id="result-stock">{$product_conversion->stock}</td>
                                 </tr>
                                 <tr>
                                     <th>Stok Tambahan:</th>
@@ -128,62 +117,4 @@
             </div>
         </form>
     </div>
-
-
-    <!-- Default modal -->
-    <div id="default-modal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Daftar Product</h4>
-                </div>
-
-                <!-- New invoice template -->
-                {if $product_storage}
-                    <div class="panel panel-default">
-                        <div class="datatable-tools">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Barcode</th>
-                                    <th>Name</th>
-                                    <th>Kategory</th>
-                                    <th>Satuan</th>
-                                    <th>Isi</th>
-                                    <th>Merek</th>
-                                    <th>Ukuran</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {foreach $product_storage as $products }
-                                    <tr>
-                                        <td>{$products['barcode']}</td>
-                                        <td>{$products['name']}</td>
-                                        <td>{$products['category']}</td>
-                                        <td>{$products['unit']}</td>
-                                        <td>{$products['value']}</td>
-                                        <td>{$products['brand']}</td>
-                                        <td>{$products['size']}</td>
-                                        <td>
-                                            <a href="#" onclick="addItem({$products['id_product']})"
-                                               class="button btn btn-info  btn-icon" data-dismiss="modal">
-                                                <i class="icon-cart-add"></i>
-                                            </a>
-
-                                        </td>
-                                    </tr>
-
-                                {/foreach}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                {/if}
-                <!-- /new invoice template -->
-            </div>
-        </div>
-    </div>
-    <!-- /default modal -->
 {/block}

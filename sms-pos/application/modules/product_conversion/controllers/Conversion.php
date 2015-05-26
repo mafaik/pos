@@ -17,19 +17,18 @@ class Conversion extends MX_Controller
     {
         parent::__construct();
         $this->load->model('product/ModProduct', 'ModProduct');
-
+        $this->load->model('ModelConversion', 'model_conversion');
         $this->id_staff = $this->config->item('id_staff');
     }
 
     public function index(){
         $data['success'] = $this->session->flashdata('success') != null ? $this->session->flashdata('success') : null;
-        $this->load->model('product/ModProduct', 'ModProduct');
-        $data['product_storage'] = $this->ModProduct->get();
+        $data['product_storage'] = $this->model_conversion->getListProduct();
         $this->parser->parse("conversion.tpl", $data);
     }
     public function addConversion($id_product){
         $data['error'] = $this->session->flashdata('error') != null ? $this->session->flashdata('error') : null;
-        $data['product_storage'] = $this->ModProduct->get();
+        $data['product_conversion'] = $this->model_conversion->getProduct($id_product);
         $data['product'] = $this->ModProduct->getProduct($id_product);
         $this->parser->parse("conversion_add.tpl", $data);
     }
@@ -42,9 +41,7 @@ class Conversion extends MX_Controller
                     $data_value = array(
                         'id_staff' => $this->id_staff,
                         'id_product' => $this->input->post('id_product'),
-                        'qty' => $this->input->post('qty'),
-                        'id_product_result' => $this->input->post('id_product_result'),
-                        'qty_result' => $this->input->post('qty_result')
+                        'qty' => $this->input->post('qty')
                     );
 
                     $this->db->insert('product_conversion',$data_value);

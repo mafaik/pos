@@ -104,14 +104,20 @@ Class CI_Cart
         return $this;
     }
 
-    public function update_item($index, $value = array())
+    public function update_item($index, $value = array(), $all_field_updateable = true)
     {
         if (isset($this->cache['detail']['value'][$index])) {
-            foreach ($this->field_updateable as $v) {
-                $this->cache['detail']['value'][$index][$v] = $value[$v];
+            if($all_field_updateable){
+                foreach ($this->field_updateable as $v) {
+                    $this->cache['detail']['value'][$index][$v] = $value[$v];
+                }
+            }else{
+                $this->delete_item($index);
+                $this->add_item($index,$value);
+                return $this;
             }
         } else {
-            $this->error['param'][] = 'item updated not found';
+            $this->cache['detail']['value'][$index] = $value;
         }
 
         $this->appendCache($this->cache);
@@ -155,23 +161,33 @@ Class CI_Cart
         return $this;
     }
 
-    public function result_array_item()
+    public function result_array_item($recursive = true)
     {
         $result = null;
         if (!$this->item_storage)
             $this->error['param'][] = 'items_storage no set';
         if (!$this->item_key)
             $this->error['param'][] = 'item key no set';
+        if ($recursive){
+            if ($this->cache['detail']['value']) {
+                foreach ($this->cache['detail']['value'] as $key => $value) {
+                    foreach ($this->item_storage as $index => $row) {
+                        if ($key == $row[$this->item_key])
+                            $result[] = array_merge($this->cache['detail']['value'] [$key], $this->item_storage[$index]);
+                    }
+                }
+            } else {
+                $this->error['param'][] = 'items record not set';
+            }
+        }else{
+            foreach ($this->item_storage as $row) {
+                if(empty($this->cache['detail']['value'] [$row[$this->item_key]])){
+                    $result[] = $row;
 
-        if ($this->cache['detail']['value']) {
-            foreach ($this->cache['detail']['value'] as $key => $value) {
-                foreach ($this->item_storage as $index => $row) {
-                    if ($key == $row[$this->item_key])
-                        $result[] = array_merge($this->cache['detail']['value'] [$key], $this->item_storage[$index]);
+                }else{
+                    $result[] = array_merge($this->cache['detail']['value'] [$row[$this->item_key]], $row);
                 }
             }
-        } else {
-            $this->error['param'][] = 'items record not set';
         }
 
         return $result;
@@ -391,7 +407,12 @@ Class CI_Cart
                 $data_row = array();
                 foreach ($fields as $field_row) {
                     if (array_key_exists($field_row, $rows)) {
-                        $data_row[$field_row] = $rows[$field_row];
+//                        if(!empty($rows[$field_row])){
+                            $data_row[$field_row] = $rows[$field_row];
+//                        }else{
+//                            $data_row[$field_row] = null;
+//                        }
+
                     }
                 }
                 $data_row[$reference_field] = $reference_key;

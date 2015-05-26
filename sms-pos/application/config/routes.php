@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'login';
 $route['404_override'] = '';
 //$route['translate_uri_dashes'] = FALSE;
 
@@ -90,12 +90,15 @@ $route['retail'] = "Retail";
 $route['retail/update/(:num)/(:num)'] = "Retail/updateItem/$1/$2";
 $route['retail/delete/(:num)'] = "Retail/deleteItem/$1";
 $route['retail/save'] = "Retail/save";
-$route['retail/checkout/(:num)'] = "retail/Checkout/index/$1";
+$route['retail/checkout/(:num)'] = "Retail/checkout/$1";
 
 
-$route['retail/returns'] = "retail/Returns";
-$route['retail/returns/list-item/(:num)'] = "retail/Returns/listItem/$1";
-$route['retail/returns/(:num)'] = "retail/Returns/returnsItem/$1";
+$route['retail/returns'] = "retail_return/RetailReturn";
+$route['retail/returns/list-item'] = "retail_return/RetailReturn/listItem";
+$route['retail/returns/delete'] = "retail_return/RetailReturn/reset";
+$route['retail/returns/return-item/(:num)'] = "retail_return/RetailReturn/returnsItem/$1";
+$route['retail/returns/save'] = "retail_return/RetailReturn/save";
+$route['retail/returns/checkout/(:num)'] = "retail_return/RetailReturn/checkout/$1";
 
 
 $route['retail/replace/(:num)'] = "retail/Replace/index/$1";

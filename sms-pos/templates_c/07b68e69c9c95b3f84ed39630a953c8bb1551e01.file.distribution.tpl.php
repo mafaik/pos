@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-13 08:17:10
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-22 02:02:07
          compiled from "/var/www/sms-pos/application/modules/product_distribution/views/distribution.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:10828895655373254ab2ba3-61494005%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '07b68e69c9c95b3f84ed39630a953c8bb1551e01' => 
     array (
       0 => '/var/www/sms-pos/application/modules/product_distribution/views/distribution.tpl',
-      1 => 1431505028,
+      1 => 1432259747,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
     array (
       0 => '/var/www/sms-pos/application/master.tpl',
-      1 => 1429430584,
+      1 => 1432260073,
       2 => 'file',
     ),
   ),
@@ -345,8 +345,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /panel body -->
+            <br>
 
 
         <?php if ($_smarty_tpl->tpl_vars['items']->value) {?>
@@ -421,19 +420,19 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                         </tbody>
                     </table>
                 </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="form-actions text-right">
-                            <button type="submit" name="save" value="Save" class="btn btn-success"><i
-                                        class="icon-checkmark">
-                                </i> Process
-                            </button>
-                            
-                        </div>
+                <br>
+                <div class="form-group">
+                    <div class="form-actions text-right">
+                        <button type="submit" name="save" value="Save" class="btn btn-success"><i
+                                    class="icon-checkmark">
+                            </i> Process
+                        </button>
+                        
                     </div>
                 </div>
             </form>
         <?php }?>
+        </div>
     </div>
     
     
@@ -492,7 +491,7 @@ $_smarty_tpl->tpl_vars['products']->_loop = true;
 </td>
                                         <td><?php echo $_smarty_tpl->tpl_vars['products']->value['size'];?>
 </td>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['products']->value['sell_price'];?>
+                                        <td>Rp <?php echo number_format($_smarty_tpl->tpl_vars['products']->value['sell_price'],0);?>
 </td>
                                         <td>
                                             <a
@@ -560,6 +559,8 @@ $_smarty_tpl->tpl_vars['products']->_loop = true;
         </div>
     </div>
     <!-- /default modal -->
+
+        <?php echo js('form/custom.js');?>
 
 
         <!-- Footer -->

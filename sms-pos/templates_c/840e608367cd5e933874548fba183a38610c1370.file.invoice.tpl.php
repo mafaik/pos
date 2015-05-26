@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-14 05:41:42
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-22 02:01:57
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/invoice.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:23005477055334beb312c50-03180410%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '840e608367cd5e933874548fba183a38610c1370' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/invoice.tpl',
-      1 => 1431513788,
+      1 => 1432259055,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
     array (
       0 => '/var/www/sms-pos/application/master.tpl',
-      1 => 1429430584,
+      1 => 1432260073,
       2 => 'file',
     ),
   ),
@@ -321,16 +321,17 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
     <div class="panel panel-success">
         <div class="panel-heading">
             <h6 class="panel-title"><i class="icon-checkmark3"></i> Purchase Order Invoice</h6>
+
             <div class="dropdown pull-right">
                 <a href="#" class="dropdown-toggle panel-icon" data-toggle="dropdown">
                     <i class="icon-cog3"></i>
                     <b class="caret"></b>
                 </a>
                 
-                    
-                    
-                    
-                    
+                
+                
+                
+                
                 
             </div>
         </div>
@@ -375,7 +376,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
                 </div>
                 <div class="col-sm-4">
                     <ul class="invoice-details">
-                        <li>No Faktur <strong class="text-danger"># <?php echo $_smarty_tpl->tpl_vars['po']->value->id_po;?>
+                        <li>No Faktur <strong class="text-danger"># <?php echo $_smarty_tpl->tpl_vars['po']->value->id_purchase_order;?>
 </strong></li>
                         <li>Staff: <strong><?php echo $_smarty_tpl->tpl_vars['staff']->value->name;?>
  </strong></li>
@@ -383,81 +384,81 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
  </strong></li>
                         <li>Jatuh Tempo Pembayaran: <strong><?php echo $_smarty_tpl->tpl_vars['po']->value->due_date;?>
 </strong></li>
-                        <li class="invoice-status list-unstyled">
-                            Stocking Status:
-                            <?php if ($_smarty_tpl->tpl_vars['po']->value->status_stocking==0) {?>
-                                <div class="label label-danger pull-right">
-                                    Waiting
-                                </div>
-                            <?php } else { ?>
-                                <div class="label label-success pull-right">
-                                    Done
-                                </div>
-                            <?php }?>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     </ul>
                 </div>
             </div>
-        </div>
 
 
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Barcode</th>
-                    <th>Nama Product</th>
-                    <th>Merk</th>
-                    <th>Satuan</th>
-                    <th>Qty</th>
-                    <th>Harga</th>
-                    <th>Total</th>
-                    <th>Diskon</th>
-                    <th>Subtotal</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php $_smarty_tpl->tpl_vars['total'] = new Smarty_variable(0, null, 0);?>
-                <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable(1, null, 0);?>
-                <?php  $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['key']->_loop = false;
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Barcode</th>
+                        <th>Nama Product</th>
+                        <th>Merk</th>
+                        <th>Satuan</th>
+                        <th>Qty</th>
+                        <th>Harga</th>
+                        <th>Total</th>
+                        <th>Diskon</th>
+                        <th>Subtotal</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php $_smarty_tpl->tpl_vars['total'] = new Smarty_variable(0, null, 0);?>
+                    <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable(1, null, 0);?>
+                    <?php  $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['key']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['pod']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['key']->key => $_smarty_tpl->tpl_vars['key']->value) {
 $_smarty_tpl->tpl_vars['key']->_loop = true;
 ?>
-                    <tr>
-                        <td><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+                        <tr>
+                            <td><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
 </td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['key']->value['barcode'];?>
+                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['barcode'];?>
 </td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name'];?>
+                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name'];?>
 </td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['key']->value['brand'];?>
+                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['brand'];?>
 </td>
-                        <td style="width:100px;"><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
+                            <td style="width:100px;"><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
  ( <?php echo $_smarty_tpl->tpl_vars['key']->value['value'];?>
  )</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['key']->value['qty'];?>
+                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['qty'];?>
 </td>
-                        <td style="width:130px;" class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],0);?>
+                            <td style="width:130px;" class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],0);?>
 </td>
-                        <td style="width:130px;" class="text-right">Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']),0);?>
+                            <td style="width:130px;" class="text-right">
+                                Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']),0);?>
 </td>
-                        <td style="width:130px;" class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['discount_total'],0);?>
+                            <td style="width:130px;" class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['discount_total'],0);?>
 </td>
-                        <td style="width:130px;" class="text-right">
-                            Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']),0);?>
+                            <td style="width:130px;" class="text-right">
+                                Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']),0);?>
 
-                        </td>
-                    </tr>
-                    <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable($_smarty_tpl->tpl_vars['val']->value+1, null, 0);?>
-                    <?php $_smarty_tpl->tpl_vars['total'] = new Smarty_variable($_smarty_tpl->tpl_vars['total']->value+($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']), null, 0);?>
+                            </td>
+                        </tr>
+                        <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable($_smarty_tpl->tpl_vars['val']->value+1, null, 0);?>
+                        <?php $_smarty_tpl->tpl_vars['total'] = new Smarty_variable($_smarty_tpl->tpl_vars['total']->value+($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']), null, 0);?>
 
-                <?php } ?>
-                </tbody>
-            </table>
-        </div>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="panel-body">
             <div class="row invoice-payment">
                 <div class="col-sm-8">
                 </div>
@@ -494,19 +495,23 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                     </table>
                     <div class="btn-group pull-right">
                         <a href="<?php echo base_url('purchase-order');?>
-"  class="btn btn-info button">
-                            <i class="icon-box-add"></i> New Purchase Order</a>
-                        <button type="button" class="btn btn-primary"><i class="icon-print2"></i> Print</button>
+"
+                           class="btn btn-info button"> <i class="icon-box-add"></i> New Purchase Order
+                        </a>
                     </div>
                 </div>
             </div>
 
             <h6>Notes &amp; Information:</h6>
-            This invoice contains a incomplete list of items destroyed by the Federation ship Enterprise on Startdate 5401.6 in an unprovked attacked on a peaceful &amp; wholly scientific mission to Outpost 775.
-            The Romulan people demand immediate compensation for the loss of their Warbird, Shuttle, Cloaking Device, and to a lesser extent thier troops.
+            This invoice contains a incomplete list of items destroyed by the Federation ship Enterprise on Startdate
+            5401.6 in an unprovked attacked on a peaceful &amp; wholly scientific mission to Outpost 775.
+            The Romulan people demand immediate compensation for the loss of their Warbird, Shuttle, Cloaking Device,
+            and to a lesser extent thier troops.
         </div>
     </div>
     <!-- /new invoice template -->
+
+        <?php echo js('form/custom.js');?>
 
 
         <!-- Footer -->

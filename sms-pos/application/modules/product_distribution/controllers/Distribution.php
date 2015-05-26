@@ -47,6 +47,7 @@ class Distribution extends MX_Controller
         $data['cache'] = $cache;
         $data['items'] = $items;
         $data['product_storage'] = $product_storage;
+//        var_dump($product_storage);
 
         $this->parser->parse("distribution.tpl", $data);
     }
