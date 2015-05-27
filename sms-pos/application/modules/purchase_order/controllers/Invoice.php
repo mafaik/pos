@@ -16,11 +16,23 @@ class Invoice extends MX_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->acl->auth(__DIR__);
         $this->load->model('ModelPurchaseOrder','model_purchase_order');
-        $this->id_staff = $this->config->item('id_staff');
     }
 
-    public function index($id_po){
+    public function index(){
+        if ($this->input->post('id_purchase_order')) {
+            if (
+            $this->db
+                ->where('id_purchase_order',$this->input->post('id_purchase_order'))
+                ->get('purchase_order')->num_rows() > 0 ) {
+                redirect('purchase-order/invoice/'.$this->input->post('id_purchase_order'));
+            }
+            $this->session->set_flashdata('message', array('class' => 'error', 'msg' => 'data tidak di temukan'));
+        }
+        $this->parser->parse("invoice-form.tpl");
+    }
+    public function summary($id_po){
         if(!$data_po = $this->db->get_where('purchase_order', array('id_purchase_order' => $id_po))->row()){
             redirect('purchase-order');
         }

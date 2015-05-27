@@ -197,7 +197,7 @@
                                 <input type="number" id="qty-{$key['id_product']}" value="{$key['qty']}"
                                        class="form-control tip" title="enter untuk update qty"
                                        onkeypress="qtyKeyPress({$key['id_product']},
-                                               '{base_url('purchase-order/detail/update')}')">
+                                               '{base_url('purchase-order/detail/update')}', event)">
                             </td>
                             <td style="width:130px;" class="text-right">
                                 Rp {$key['price']|number_format:0}
@@ -320,9 +320,9 @@
                     </div>
                 </div>
             </form>
-        </div>
         <!-- /panel body -->
         {/if}
+        </div>
 
         {*<div class="panel-body">*}
         {*<h6>Notes &amp; Information:</h6>*}

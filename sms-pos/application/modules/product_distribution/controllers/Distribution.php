@@ -14,7 +14,9 @@ class Distribution extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->id_staff = $this->config->item('id_staff');
+        $this->acl->auth(__DIR__);
+        $this->id_staff = $this->session->userdata('uid');
+        $this->id_store = $this->config->item('id_store');
         $this->load->model('product/ModProduct', 'ModProduct');
         $this->load->library('cart',
             array(
@@ -23,7 +25,6 @@ class Distribution extends MX_Controller
                 'primary_table' => 'product_distribution',
                 'foreign_table' => 'product_distribution_detail'
             ));
-        $this->id_store = $this->config->item('id_store');
     }
 
     public function index()

@@ -17,31 +17,6 @@
                     <small class="display-block">Informasi umum tentang proses retail</small>
                 </h6>
             </div>
-            {*<div class="row invoice-header">*}
-            {*<div class="col-sm-6">*}
-            {*<h3>{$principal->name}</h3>*}
-            {*<span>{$principal->address} - {$principal->zipcode}*}
-            {*</br>*}
-            {*{$principal->city} - {$principal->state}*}
-            {*</br>*}
-            {*{$principal->telp1} - {$principal->telp1}*}
-            {*</br>*}
-            {*{$principal->email}*}
-            {*</span>*}
-            {*</div>*}
-
-            {*<div class="col-sm-6">*}
-            {*<ul class="invoice-details">*}
-            {*<li>No Faktur # <strong class="text-danger">{$cache['value']['invoice_number']}</strong></li>*}
-            {*<li>Tanggal Nota Transaksi: <strong>{$cache['value']['date']}</strong></li>*}
-            {*<li>Jatuh Tempo Pembayaran: <strong>{$cache['value']['due_date']}</strong></li>*}
-            {*<li class="invoice-status text-right">*}
-            {*<a href="{base_url('purchase-order/delete')}"  class=" button btn btn-danger">*}
-            {*<i class="icon-eject"></i>New Purchase Order</a>*}
-            {*</li>*}
-            {*</ul>*}
-            {*</div>*}
-            {*</div>*}
 
             <!-- Callout -->
             {if $error}
@@ -77,27 +52,10 @@
                         {*</div>*}
                         {*</div>*}
                         {*</div>*}
-                        {*<div class="form-group">*}
-                        {*<div class="row">*}
-                        {*<label class="col-sm-4 control-label">Diskon: </label>*}
 
-                        {*<div class="col-md-7 {if form_error('discount_price')}has-warning{/if}">*}
-                        {*<div class="input-group">*}
-                        {*<span class="input-group-addon">Rp</span>*}
-
-                        {*<input type="number" name="discount"*}
-                        {*value="{set_value('discount')}"*}
-                        {*class="form-control" placeholder="0"*}
-                        {*id="input-discount" >*}
-
-                        {*</div>*}
-                        {*</div>*}
-                        {*</div>*}
-                        {*</div>*}
-
-                        {*<div class="col-sm-12">*}
-                        {*<input type="submit" class="btn btn-block btn-success" value="Submit">*}
-                        {*</div>*}
+                        <div class="col-sm-12">
+                        <input type="submit" class="btn btn-block btn-success" value="Submit">
+                        </div>
                     </form>
                 </div>
                 <div class="col-md-1">
@@ -177,7 +135,7 @@
                                 <td style="width:100px;">
                                     <input type="number" id="qty-{$key['id_product_store']}" value="{$key['qty']}"
                                            class="form-control" onkeypress="qtyKeyPress({$key['id_product_store']},
-                                            '{base_url('retail/update')}')">
+                                            '{base_url('retail/update')}',event)">
                                 </td>
                                 <td style="width:130px;" class="text-right">
                                     Rp {$key['sell_price']|number_format:0}
@@ -186,7 +144,7 @@
                                 {*Rp {$key['discount']|number_format:0}*}
                                 {*</td>*}
                                 <td style="width:130px;" class="text-right">
-                                    Rp {($key['qty'] * $key['sell_price'] - $key['discount'])|number_format:0}
+                                    Rp {($key['qty'] * $key['sell_price'] - $key['discount_total'])|number_format:0}
                                 </td>
                                 <td style="width:90px;">
 
@@ -202,7 +160,7 @@
                                 </td>
                             </tr>
                             {assign var=val value=$val+1}
-                            {assign var=total value=$total+($key['qty'] * $key['sell_price'] - $key['discount'])}
+                            {assign var=total value=$total+($key['qty'] * $key['sell_price'] - $key['discount_total'])}
 
                         {/foreach}
                         </tbody>
@@ -210,6 +168,8 @@
                 </div>
                 <form action="{base_url('retail/save')}" role="form" method="post"
                       onsubmit="return confirm('Process Data');">
+
+                    <input type="hidden" name="total" value="{$total}">
                     <div class="row invoice-payment">
 
                         <div class="col-sm-4 pull-right">
@@ -228,9 +188,9 @@
                                         <div class="input-group">
                                             <span class="input-group-addon">Rp</span>
 
-                                            <input type="text" name="discount" value="{set_value('discount')}"
+                                            <input type="text" name="discount_price" value="{set_value('discount_price')}"
                                                    class="form-control currency-format" placeholder="0"
-                                                   id="input-discount" onblur="setDpp(this.value)">
+                                                   id="input-discount_price" onblur="setDpp(this.value)">
 
                                         </div>
                                     </td>
@@ -288,12 +248,6 @@
                         </div>
                     </div>
                 </form>
-                <h6>Notes &amp; Information:</h6>
-                This invoice contains a incomplete list of items destroyed by the Federation ship Enterprise on
-                Startdate 5401.6 in an unprovked attacked on a peaceful &amp; wholly scientific mission to Outpost
-                775.
-                The Romulan people demand immediate compensation for the loss of their Warbird, Shuttle, Cloaking
-                Device, and to a lesser extent thier troops.
             {/if}
         </div>
         <!-- /panel body -->
