@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-26 10:03:04
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-27 06:46:12
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6338738805530ecdd0a61e9-92077084%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '56b853571cd44e5e829b3c8f12d2f9f33183a271' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl',
-      1 => 1432264649,
+      1 => 1432642693,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
     array (
       0 => '/var/www/sms-pos/application/master.tpl',
-      1 => 1432634561,
+      1 => 1432706329,
       2 => 'file',
     ),
   ),
@@ -189,7 +189,7 @@ echo $_smarty_tpl->tpl_vars['menu']->value['url'];
                             <span> <?php echo $_smarty_tpl->tpl_vars['menu']->value['title'];?>
 </span>
                             <i class="<?php echo $_smarty_tpl->tpl_vars['menu']->value['icon'];?>
-" ></i>
+"></i>
                         </a>
                         <?php if ($_smarty_tpl->tpl_vars['menu']->value['child']) {?>
                             <ul class="icons-right">
@@ -462,7 +462,7 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                                        onkeypress="qtyKeyPress(<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
 ,
                                                '<?php echo base_url('purchase-order/detail/update');?>
-')">
+', event)">
                             </td>
                             <td style="width:130px;" class="text-right">
                                 Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],0);?>
@@ -600,9 +600,9 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                     </div>
                 </div>
             </form>
-        </div>
         <!-- /panel body -->
         <?php }?>
+        </div>
 
         
         
@@ -697,7 +697,7 @@ $_smarty_tpl->tpl_vars['products']->_loop = true;
     </div>
     <!-- /page content -->
 
-
+    
 </div>
 <!-- /content -->
 

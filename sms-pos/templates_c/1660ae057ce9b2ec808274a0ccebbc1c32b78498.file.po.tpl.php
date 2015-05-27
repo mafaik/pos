@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-26 10:02:46
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-27 08:44:39
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/po.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:20319457125530dd2fcb4f06-62660745%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1660ae057ce9b2ec808274a0ccebbc1c32b78498' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/po.tpl',
-      1 => 1431503955,
+      1 => 1432716066,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
     array (
       0 => '/var/www/sms-pos/application/master.tpl',
-      1 => 1432634561,
+      1 => 1432706329,
       2 => 'file',
     ),
   ),
@@ -189,7 +189,7 @@ echo $_smarty_tpl->tpl_vars['menu']->value['url'];
                             <span> <?php echo $_smarty_tpl->tpl_vars['menu']->value['title'];?>
 </span>
                             <i class="<?php echo $_smarty_tpl->tpl_vars['menu']->value['icon'];?>
-" ></i>
+"></i>
                         </a>
                         <?php if ($_smarty_tpl->tpl_vars['menu']->value['child']) {?>
                             <ul class="icons-right">
@@ -246,7 +246,7 @@ echo $_smarty_tpl->tpl_vars['child']->value['url'];?>
                             <?php echo form_dropdown('id_principal',$_smarty_tpl->tpl_vars['principals']->value,set_value('id_principal'),'data-placeholder="Supplier" class="select-full" tabindex="1" autofocus');?>
 
                             <?php if (form_error('id_principal')) {?>
-                                <span class="label label-block label-danger text-left"><?php echo form_error('id_principal');?>
+                                  <span class="label label-block label-danger text-left"><?php echo form_error('id_principal');?>
 </span>
                             <?php }?>
                         </div>
@@ -282,11 +282,6 @@ echo $_smarty_tpl->tpl_vars['child']->value['url'];?>
                     </div>
                 </div>
             </div><!-- /panel body -->
-
-            <div class="panel-body">
-                <h6>Notes &amp; Information:</h6>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </div>
         </div><!-- /default panel -->
     </form>
 
@@ -304,7 +299,7 @@ echo $_smarty_tpl->tpl_vars['child']->value['url'];?>
     </div>
     <!-- /page content -->
 
-
+    
 </div>
 <!-- /content -->
 

@@ -58,12 +58,12 @@ class Acl
      * Function to see module folder
      */
 
-    private function module($dir)
+    public function module($dir)
     {
 
         $dir = explode('/', $dir, -1);
         $length = count($dir);
-        return $dir[$length - 1];
+        return strtolower($dir[$length - 1]);
     }
 
     /**
@@ -104,7 +104,7 @@ class Acl
                     $msg = $this->_CI->config->item('login_message');
                     $this->_CI->session->set_flashdata('message', array('class' => 'success', 'msg' => $msg));
                     $data = array(
-                        'uid' => $user['uid'],
+                        'uid' => $user['id_staff'],
                         'roles' => $roles,
                         'username' => $username,
                         'name' => $user['name'],

@@ -77,6 +77,27 @@ $config['module_router'] = [
             ]
         ]
     ],
+    'product_conversion' =>[
+        'title' => "Konversi Produk",
+        'icon' => 'icon-connection',
+        'url' => 'product-conversion',
+        'attr' => '',
+        'child' => null
+    ],
+    'product_distribution' =>[
+        'title' => "Distribusi Produk",
+        'icon' => 'icon-arrow-down-right',
+        'url' => 'product-distribution',
+        'attr' => '',
+        'child' => null
+    ],
+    'pricing' =>[
+        'title' => " Pricing",
+        'icon' => ' icon-settings',
+        'url' => 'pricing',
+        'attr' => '',
+        'child' => null
+    ],
     'purchase_order' => [
         'title' => 'Purchase Order',
         'icon' => 'icon-tag',
@@ -97,7 +118,14 @@ $config['module_router'] = [
                 'attr' => ''
             ]
         ]
-    ]
+    ],
+    'retail' =>[
+        'title' => " Retail",
+        'icon' => 'icon-arrow2',
+        'url' => 'retail',
+        'attr' => '',
+        'child' => null
+    ],
 ];
 /*
 // You must reset this admin user 

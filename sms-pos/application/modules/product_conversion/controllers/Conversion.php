@@ -16,9 +16,10 @@ class Conversion extends MX_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->acl->auth(__DIR__);
+        $this->id_staff = $this->session->userdata('uid');
         $this->load->model('product/ModProduct', 'ModProduct');
         $this->load->model('ModelConversion', 'model_conversion');
-        $this->id_staff = $this->config->item('id_staff');
     }
 
     public function index(){

@@ -13,7 +13,8 @@ class Retail extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->id_staff = $this->config->item('id_staff');
+        $this->acl->auth(__DIR__);
+        $this->id_staff = $this->session->userdata('uid');
         $this->id_store = $this->config->item('id_store');
         $this->load->model('ModRetail');
         $this->load->library('cart',
@@ -33,14 +34,16 @@ class Retail extends MX_Controller
 
         if ($this->input->post()) {
             if ($this->form_validation->run('retail') == TRUE) {
-                if( $this->ModRetail->checkStock($this->input->post('id_product_store'),
+                if ($this->ModRetail->checkStock($this->input->post('id_product_store'),
                     1
-                    )){
+                )
+                ) {
                     $this->cart->add_item($this->input->post('id_product_store'), [
                         'id_product_store' => $this->input->post('id_product_store'),
                         'barcode' => $this->input->post('barcode'),
                         'qty' => 1,
-                        'discount' => $this->input->post('discount') ? $this->input->post('discount') : 0
+                        'discount_total' => $this->input->post('discount_total') ?
+                            $this->input->post('discount_total') : 0
                     ]);
                     redirect('retail');
                 }
@@ -53,12 +56,13 @@ class Retail extends MX_Controller
 
     public function updateItem($id_product_store, $qty)
     {
-        if( $this->ModRetail->checkStock($id_product_store,
+        if ($this->ModRetail->checkStock($id_product_store,
             $qty
-        )){
+        )
+        ) {
             if (!$this->cart->update_item($id_product_store, ['qty' => $qty]))
                 $this->session->set_flashdata('error', $this->cart->getError());
-        }else{
+        } else {
             $this->session->set_flashdata('error', "stock tidak cukup");
         }
         redirect('retail');
@@ -77,23 +81,19 @@ class Retail extends MX_Controller
         if ($this->input->post()) {
             if ($this->form_validation->run('retail/save') == TRUE) {
                 $status_ppn = $this->input->post('status_ppn') == "on" ? 1 : 0;
-
-                if ($id_retail = $this->cart->primary_data(array(
-                    'discount' => $this->input->post('discount'),
+                $dpp = $this->input->post('total') - $this->input->post('discount_price');
+                $ppn = $status_ppn == 1 ? $dpp * 0.1 : 0;
+                $id_retail = $this->cart->primary_data(array(
+                    'total' => $this->input->post('total'),
+                    'discount_price' => $this->input->post('discount_price'),
+                    'dpp' => $dpp,
+                    'ppn' => $ppn,
+                    'grand_total' => $dpp + $ppn,
                     'paid' => $this->input->post('bayar'),
                     'id_staff' => $this->id_staff,
                     'id_store' => $this->id_store
-                ))->save()
-                ) {
-                    $this->db
-                        ->where(['id_retail' => $id_retail])
-                        ->update('retail', [
-                            'status_ppn' => $status_ppn,
-                            'name' => 'customer - ' . $id_retail
-                        ]);
-                    redirect('retail/checkout/' . $id_retail);
-                }
-                $this->session->set_flashdata('error', "transaction error");
+                ))->save();
+                redirect('retail/checkout/' . $id_retail);
             }
         }
         redirect('retail');
@@ -110,6 +110,7 @@ class Retail extends MX_Controller
         $this->parser->parse("checkout.tpl", $data);
     }
 
-    public function directPrint(){
+    public function directPrint()
+    {
     }
 }

@@ -16,7 +16,7 @@ class PurchaseOrder extends MX_Controller
     {
         parent::__construct();
         $this->acl->auth(__DIR__);
-        $this->id_staff = $this->config->item('id_staff');
+        $this->id_staff = $this->session->userdata('uid');
         $this->load->model('product/ModProduct', 'ModProduct');
         $this->load->library('cart',
             array(

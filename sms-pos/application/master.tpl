@@ -107,7 +107,7 @@
                     <li>
                         <a href="{if !$menu['child']}{base_url()}{$menu['url']}{else}#{/if}" {$menu['attr']}>
                             <span> {$menu['title']}</span>
-                            <i class="{$menu['icon']}" ></i>
+                            <i class="{$menu['icon']}"></i>
                         </a>
                         {if $menu['child']}
                             <ul class="icons-right">
@@ -149,7 +149,7 @@
     </div>
     <!-- /page content -->
 
-
+    {block name=print}{/block}
 </div>
 <!-- /content -->
 

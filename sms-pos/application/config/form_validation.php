@@ -151,7 +151,7 @@ $config = array(
             'rules' => 'required|integer'
         ),
         array(
-            'field' => 'discount',
+            'field' => 'discount_price',
             'label' => 'Diskon',
             'rules' => 'integer'
         )

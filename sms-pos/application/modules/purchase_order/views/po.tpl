@@ -20,7 +20,7 @@
                             <label>Supplier / Principal:</label>
                             {form_dropdown('id_principal',$principals,set_value('id_principal'),'data-placeholder="Supplier" class="select-full" tabindex="1" autofocus')}
                             {if form_error('id_principal')}
-                                <span class="label label-block label-danger text-left">{form_error('id_principal') }</span>
+                                  <span class="label label-block label-danger text-left">{form_error('id_principal') }</span>
                             {/if}
                         </div>
                         <div class="col-md-6 {if form_error('invoice_number')}has-warning{/if}">
@@ -51,11 +51,6 @@
                     </div>
                 </div>
             </div><!-- /panel body -->
-
-            <div class="panel-body">
-                <h6>Notes &amp; Information:</h6>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </div>
         </div><!-- /default panel -->
     </form>
 {/block}

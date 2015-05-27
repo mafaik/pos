@@ -111,12 +111,8 @@
                         </tr>
                         <tr>
                             <th>PPN:</th>
-                            {if $master->status_ppn == 0 }
-                                <td class="text-right">Rp 0</td>
-                            {else}
                                 <td class="text-right">
-                                    Rp  {(($master->total-$master->discount_price)*0.1)|number_format:0}</td>
-                            {/if}
+                                    Rp  {$master->ppn|number_format:0}</td>
                         </tr>
                         <tr>
                             <th>Grand Total:</th>
@@ -139,12 +135,6 @@
                     </div>
                 </div>
             </div>
-
-            <h6>Notes &amp; Information:</h6>
-            This invoice contains a incomplete list of items destroyed by the Federation ship Enterprise on Startdate
-            5401.6 in an unprovked attacked on a peaceful &amp; wholly scientific mission to Outpost 775.
-            The Romulan people demand immediate compensation for the loss of their Warbird, Shuttle, Cloaking Device,
-            and to a lesser extent thier troops.
         </div>
     </div>
     <!-- /new invoice template -->

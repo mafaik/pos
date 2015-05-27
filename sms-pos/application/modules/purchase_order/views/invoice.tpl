@@ -1,8 +1,11 @@
 {* Extend our master template *}
 {extends file="../../../master.tpl"}
 
+{block name=print}
+    <script type="text/javascript">
+    </script>
+{/block}
 {block name=content}
-
     <!-- New invoice template -->
     <div class="panel panel-success">
         <div class="panel-heading">
@@ -13,12 +16,6 @@
                     <i class="icon-cog3"></i>
                     <b class="caret"></b>
                 </a>
-                {*<ul class="dropdown-menu icons-right dropdown-menu-right">*}
-                {*<li><a href="#"><i class="icon-print2"></i> Print invoice</a></li>*}
-                {*<li><a href="#"><i class="icon-download"></i> Download invoice</a></li>*}
-                {*<li><a href="#"><i class="icon-file-pdf"></i> View .pdf</a></li>*}
-                {*<li><a href="#"><i class="icon-stack"></i> Archive</a></li>*}
-                {*</ul>*}
             </div>
         </div>
 
@@ -53,25 +50,13 @@
                         <li>Staff: <strong>{$staff->name} </strong></li>
                         <li>Tanggal Nota Transaksi: <strong>{$po->date} </strong></li>
                         <li>Jatuh Tempo Pembayaran: <strong>{$po->due_date}</strong></li>
-                        {*<li class="invoice-status list-unstyled">*}
-                        {*Stocking Status:*}
-                        {*{if $po->status_stocking == 0}*}
-                        {*<div class="label label-danger pull-right">*}
-                        {*Waiting*}
-                        {*</div>*}
-                        {*{else}*}
-                        {*<div class="label label-success pull-right">*}
-                        {*Done*}
-                        {*</div>*}
-                        {*{/if}*}
-                        {*</li>*}
                     </ul>
                 </div>
             </div>
 
 
             <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered" id="table-print">
                     <thead>
                     <tr>
                         <th>No</th>
@@ -149,12 +134,6 @@
                     </div>
                 </div>
             </div>
-
-            <h6>Notes &amp; Information:</h6>
-            This invoice contains a incomplete list of items destroyed by the Federation ship Enterprise on Startdate
-            5401.6 in an unprovked attacked on a peaceful &amp; wholly scientific mission to Outpost 775.
-            The Romulan people demand immediate compensation for the loss of their Warbird, Shuttle, Cloaking Device,
-            and to a lesser extent thier troops.
         </div>
     </div>
     <!-- /new invoice template -->
