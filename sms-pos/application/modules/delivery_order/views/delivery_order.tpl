@@ -4,7 +4,7 @@
 {block name=content}
     <div class="panel panel-default">
 
-        <div class="panel-heading"><h6 class="panel-title">Sales Order</h6></div>
+        <div class="panel-heading"><h6 class="panel-title">Delivery Order</h6></div>
 
         <div class="panel-body">
             <div class="row invoice-header">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-sm-4">
                     <ul class="invoice-details">
-                        <li>No Faktur <strong class="text-info">#{$master->id_so}</strong></li>
+                        <li>No Faktur <strong class="text-info">#{$master->id_sales_order}</strong></li>
                         {*<li>Jenis Proposal <strong class="text-info">{$proposal_type}</strong></li>*}
                         {*<li>PPn status # <strong class="text-info">{$status_ppn}</strong></li>*}
                         <li class="invoice-status text-right list-unstyled">
@@ -42,54 +42,67 @@
                     <p>{$error}</p>
                 </div>
             {/if}
-        </div>
-        <!-- /panel body -->
+            <!-- /panel body -->
 
 
-        {if $items}
-            <div class="datatable-tools">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Produk</th>
-                        <th>Merek</th>
-                        <th>Satuan / isi</th>
-                        <th>Qty</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {assign var=val value=1}
-                    {foreach $items as $key }
+            {if $items}
+                <div class="datatable-tools">
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td>{$val}</td>
-                            <td>{$key['name']}</td>
-                            <td>{$key['brand']}</td>
-                            <td>{$key['unit']} / {$key['value']}</td>
-                            <td>
-                                {$key['qty']}
-                            </td>
-                            {*{/if}*}
-
-                            <td style="width:90px;">
-
-                                <div class="table-controls">
-                                    <a href="{base_url('delivery-order/detail/delete')}/{$key['id_so_detail']}"
-                                       class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
-                                        <i class="icon-remove3"></i></a>
-                                </div>
-                            </td>
+                            <th>No</th>
+                            <th>Nama Produk</th>
+                            <th>Merek</th>
+                            <th>Satuan / isi</th>
+                            <th>Jumlah Pesanan</th>
+                            <th>Terkirim</th>
+                            <th width="50px">Qty</th>
+                            <th>Action</th>
                         </tr>
-                        {assign var=val value=$val+1}
+                        </thead>
+                        <tbody>
+                        {assign var=val value=1}
+                        {foreach $items as $key }
+                            <tr>
+                                <td>{$val}</td>
+                                <td>{$key['name']}</td>
+                                <td>{$key['brand']}</td>
+                                <td>{$key['unit']} / {$key['value']}</td>
+                                <td>
+                                    {$key['qty']}
+                                </td>
+                                <td>
+                                    {$key['delivered']}
+                                </td>
+                                <td>
+                                    <input type="number" id="qty-{$key['id_sales_order_detail']}"
+                                           value="{$key['qty_delivered']}"
+                                           class="form-control" onkeypress="qtyKeyPress({$key['id_sales_order_detail']},
+                                            '{base_url('delivery-order/detail/update')}',event)">
 
-                    {/foreach}
-                    </tbody>
-                </table>
-            </div>
-            <form action="{base_url('delivery-order/save')}" role="form" method="post"
-                  onsubmit="return confirm('Process Data');">
-                <div class="panel-body">
+                                </td>
+
+                                <td style="width:90px;">
+
+                                    <div class="table-controls">
+                                        <a class="btn btn-link btn-icon btn-xs tip" title="Update Qty"
+                                           onclick="updateQty({$key['id_sales_order_detail']},
+                                                   '{base_url('delivery-order/detail/update')}')">
+                                            <i class="icon-pencil3"></i></a>
+                                        <a href="{base_url('delivery-order/detail/delete')}/{$key['id_sales_order_detail']}"
+                                           class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
+                                            <i class="icon-remove3"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {assign var=val value=$val+1}
+
+                        {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+                <form action="{base_url('delivery-order/save')}" role="form" method="post"
+                      onsubmit="return confirm('Process Data');">
 
                     <div class="row invoice-payment">
 
@@ -119,11 +132,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- /panel body -->
-            </form>
-        {/if}
+                    <!-- /panel body -->
+                </form>
+            {/if}
 
+        </div>
     </div>
     <!-- /default panel -->
 

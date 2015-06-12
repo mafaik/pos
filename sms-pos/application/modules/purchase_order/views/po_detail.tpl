@@ -112,8 +112,8 @@
                                 <div class="col-md-7 {if form_error('discount_total')}has-warning{/if}">
                                     <div class="input-group">
                                         <span class="input-group-addon">Rp</span>
-                                        <input type="number" name="discount_total" value="{set_value('discount_total')}"
-                                               class="form-control" placeholder="0">
+                                        <input type="text" name="discount_total" value="{set_value('discount_total')}"
+                                               class="form-control currency-format" placeholder="0">
 
                                     </div>
                                 </div>

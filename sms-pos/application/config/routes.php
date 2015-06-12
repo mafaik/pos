@@ -83,6 +83,11 @@ $route['product-distribution/detail/delete/(:num)'] = "product_distribution/Dist
 $route['product-distribution/save'] = "product_distribution/Distribution/save";
 $route['product-distribution/checkout/(:num)'] = "product_distribution/Distribution/checkout/$1";
 
+$route['product-returns'] = "product_return/Returns";
+$route['product-returns/detail/add'] = "product_return/Returns/add";
+$route['product-returns/detail/delete/(:num)'] = "product_return/Returns/delete/$1";
+$route['product-returns/save'] = "product_return/Returns/save";
+$route['product-returns/checkout/(:num)'] = "product_return/Returns/checkout/$1";
 
 $route['pricing'] = "Pricing";
 $route['pricing/setting/(:num)'] = "Pricing/setPrice/$1";
@@ -91,6 +96,7 @@ $route['retail'] = "Retail";
 $route['retail/update/(:num)/(:num)'] = "Retail/updateItem/$1/$2";
 $route['retail/delete/(:num)'] = "Retail/deleteItem/$1";
 $route['retail/save'] = "Retail/save";
+$route['retail/invoice'] = "Retail/invoice";
 $route['retail/checkout/(:num)'] = "Retail/checkout/$1";
 
 
@@ -100,6 +106,7 @@ $route['retail/returns/delete'] = "retail_return/RetailReturn/reset";
 $route['retail/returns/return-item/(:num)'] = "retail_return/RetailReturn/returnsItem/$1";
 $route['retail/returns/save'] = "retail_return/RetailReturn/save";
 $route['retail/returns/checkout/(:num)'] = "retail_return/RetailReturn/checkout/$1";
+$route['retail/returns/invoice'] = "retail_return/RetailReturn/invoice";
 
 
 $route['retail/replace/(:num)'] = "retail/Replace/index/$1";
@@ -152,6 +159,7 @@ $route['delivery-order/send/(:num)'] = "delivery_order/DeliveryOrder/index/$1";
 $route['delivery-order/list'] = "delivery_order/DeliveryOrder/detail";
 $route['delivery-order/delete'] = "delivery_order/DeliveryOrder/reset";
 $route['delivery-order/detail/delete/(:num)'] = "delivery_order/DeliveryOrder/deleteDetail/$1";
+$route['delivery-order/detail/update/(:num)/(:num)'] = "delivery_order/DeliveryOrder/updateItem/$1/$2";
 $route['delivery-order/save'] = "delivery_order/DeliveryOrder/save";
 $route['delivery-order/checkout/(:num)/(:num)'] = "delivery_order/DeliveryOrder/checkout/$1/$2";
 
@@ -162,3 +170,22 @@ $route['join/do'] = "join/listing";
 $route['join/delete'] = "join/reset";
 $route['join/save'] = "join/save";
 $route['join/checkout/(:num)'] = "join/checkout/$1";
+
+
+$route['extract'] = "extract";
+$route['extract/select/(:num)'] = "extract/select/$1";
+$route['extract/do'] = "extract/listing";
+$route['extract/move/(:num)'] = "extract/deleteDetail/$1";
+$route['extract/undo/(:num)'] = "extract/undoDetail/$1";
+$route['extract/delete'] = "extract/reset";
+$route['extract/save'] = "extract/save";
+$route['extract/checkout/(:num)/(:num)'] = "extract/checkout/$1/$2";
+
+
+$route['sales-order/returns'] = "sales_order_return/SalesOrderReturn";
+$route['sales-order/returns/list-item'] = "sales_order_return/SalesOrderReturn/listItem";
+$route['sales-order/returns/delete'] = "sales_order_return/SalesOrderReturn/reset";
+$route['sales-order/returns/return-item/(:num)'] = "sales_order_return/SalesOrderReturn/returnsItem/$1";
+$route['sales-order/returns/save'] = "sales_order_return/SalesOrderReturn/save";
+$route['sales-order/returns/checkout/(:num)'] = "sales_order_return/SalesOrderReturn/checkout/$1";
+$route['sales-order/returns/invoice'] = "sales_order_return/SalesOrderReturn/invoice";

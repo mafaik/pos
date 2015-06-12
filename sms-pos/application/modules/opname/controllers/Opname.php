@@ -14,9 +14,9 @@ class Opname extends MX_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->acl->auth('product_opname');
+        $this->id_staff = $this->session->userdata('uid');
         $this->load->model('product/ModProduct', 'ModProduct');
-
-        $this->id_staff = $this->config->item('id_staff');
     }
 
     public function index(){
@@ -39,6 +39,7 @@ class Opname extends MX_Controller
                     'id_staff' => $this->id_staff,
                     'id_product' => $this->input->post('id_product'),
                     'stock_system' => $this->input->post('stock_system'),
+                    'stock_difference' => $this->input->post('stock_real')-$this->input->post('stock_system'),
                     'stock_real' => $this->input->post('stock_real'),
                     'note' => $this->input->post('note')
                 );

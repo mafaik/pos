@@ -32,11 +32,12 @@ class ModelDeliveryOrder extends CI_Model
 
     public function getDataDODetail($id)
     {
-        return $this->db->from('sales_order_detail pro')
+        return $this->db->from('delivery_order_detail do')
+            ->join('sales_order_detail pro', 'pro.id_sales_order_detail = do.id_sales_order_detail')
             ->join('product p', 'p.id_product = pro.id_product', 'left')
-            ->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit')
-            ->join('product_category pc', 'pc.id_product_category = p.id_product_category')
-            ->where(['id_do' => $id])
+            ->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit', 'left')
+            ->join('product_category pc', 'pc.id_product_category = p.id_product_category', 'left')
+            ->where(['id_delivery_order' => $id])
             ->get()->result_array();
     }
 
@@ -46,7 +47,7 @@ class ModelDeliveryOrder extends CI_Model
             ->select("*")
             ->from("delivery_order")
             ->join('staff', 'staff.id_staff = delivery_order.id_staff')
-            ->where("id_do", $id)
+            ->where("id_delivery_order", $id)
             ->get()
             ->row();
     }
@@ -54,11 +55,13 @@ class ModelDeliveryOrder extends CI_Model
 
     public function getDataSODetail($id)
     {
-        return $this->db->from('sales_order_detail pro')
+        return $this->db
+            ->select('*, (pro.qty - pro.delivered) as qty_delivered')
+            ->from('sales_order_detail pro')
             ->join('product p', 'p.id_product = pro.id_product', 'left')
-            ->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit')
-            ->join('product_category pc', 'pc.id_product_category = p.id_product_category')
-            ->where(['id_so' => $id,'id_do'=>null])
+            ->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit', 'left')
+            ->join('product_category pc', 'pc.id_product_category = p.id_product_category', 'left')
+            ->where(['id_sales_order' => $id,'status'=>0])
             ->get()->result_array();
     }
 

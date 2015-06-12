@@ -14,9 +14,10 @@ class Store extends MX_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->acl->auth('product_opname_store');
+        $this->id_staff = $this->session->userdata('uid');
         $this->load->model('retail/ModRetail', 'ModRetail');
 
-        $this->id_staff = $this->config->item('id_staff');
         $this->id_store = $this->config->item('id_store');
     }
 
@@ -40,6 +41,7 @@ class Store extends MX_Controller
                     'id_staff' => $this->id_staff,
                     'id_product_store' => $this->input->post('id_product_store'),
                     'stock_system' => $this->input->post('stock_system'),
+                    'stock_difference' => $this->input->post('stock_real')-$this->input->post('stock_system'),
                     'stock_real' => $this->input->post('stock_real'),
                     'note' => $this->input->post('note')
                 );

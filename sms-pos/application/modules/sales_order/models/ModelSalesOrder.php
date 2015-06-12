@@ -19,7 +19,7 @@ class ModelSalesOrder extends CI_Model
             ->from("sales_order")
             ->join('staff', 'staff.id_staff = sales_order.id_staff')
             ->join('customer', 'customer.id_customer = sales_order.id_customer')
-            ->where("id_so", $id)
+            ->where("id_sales_order", $id)
             ->get()
             ->row();
     }
@@ -28,9 +28,9 @@ class ModelSalesOrder extends CI_Model
     {
         return $this->db->from('sales_order_detail pro')
             ->join('product p', 'p.id_product = pro.id_product', 'left')
-            ->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit')
-            ->join('product_category pc', 'pc.id_product_category = p.id_product_category')
-            ->where(['id_so' => $id])
+            ->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit', 'left')
+            ->join('product_category pc', 'pc.id_product_category = p.id_product_category', 'left')
+            ->where(['id_sales_order' => $id])
             ->get()->result_array();
     }
 }

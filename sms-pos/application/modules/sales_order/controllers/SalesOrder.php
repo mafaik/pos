@@ -14,7 +14,7 @@ class SalesOrder extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->id_staff = $this->config->item('id_staff');
+        $this->id_staff = $this->session->userdata('uid');
         $this->load->model('proposal/ModelProduct', 'model_product');
         $this->load->model('proposal/ModelProposal', 'model_proposal');
         $this->load->model('ModelSalesOrder', 'model_so');
@@ -79,23 +79,26 @@ class SalesOrder extends MX_Controller
     {
         if ($this->input->post()) {
             if ($this->form_validation->run('sales_order/save') == TRUE) {
-                $status_ppn = $this->input->post('status_ppn') == "on" ? 1 : 0;
+                $status_ppn = $this->cache['value']['status_ppn'] == 1 ?
+                    1 : $this->input->post('status_ppn') == "on" ? 1 : 0;
+                $dpp = $this->input->post('total') - $this->input->post('discount_price');
+                $ppn = $status_ppn == 1 ? $dpp * 0.1 : 0;
 
                 if ($id_so = $this->cart->primary_data(array(
-                    'status_ppn' => 1,
-//                    'status_ppn' => $this->cache['value']['status_ppn'] == 1 ? 1 : $status_ppn,
-                    'due_date' => $this->input->post('due_date')
+                    'total' => $this->input->post('total'),
+                    'discount_price' => $this->input->post('discount_price'),
+//                    'status_ppn' => 1,
+                    'status_ppn' => $this->cache['value']['status_ppn'] == 1 ? 1 : $status_ppn,
+                    'due_date' => $this->input->post('due_date'),
+                    'ppn' => $ppn,
+                    'dpp' => $dpp,
+                    'grand_total' => $dpp + $ppn
                 ))->save()
                 ) {
                     $this->db
                         ->where(['id_proposal' => $this->cache['value']['id_proposal']])
                         ->update('proposal', [
                             'status' => 2
-                        ]);
-                    $this->db
-                        ->where(['id_so' => $id_so])
-                        ->update('sales_order', [
-                            'status' => 0
                         ]);
                     redirect('sales-order/checkout/' . $id_so);
                 }

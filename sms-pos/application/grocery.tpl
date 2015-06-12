@@ -102,28 +102,7 @@
         <div class="sidebar-content">
 
             <!-- Main navigation -->
-            <ul class="navigation">
-                {foreach userdata('menu') as $menu}
-                    <li>
-                        <a href="{if !$menu['child']}{base_url()}{$menu['url']}{else}#{/if}" {$menu['attr']}>
-                            <span> {$menu['title']}</span>
-                            <i class="{$menu['icon']}" ></i>
-                        </a>
-                        {if $menu['child']}
-                            <ul class="icons-right">
-                                {foreach $menu['child'] as $child}
-                                    <li>
-                                        <a href="{base_url()}{$child['url']}">
-                                            <span>{$child['title']}</span>
-                                            <i class="{$child['icon']}" {$child['attr']}></i>
-                                        </a>
-                                    </li>
-                                {/foreach}
-                            </ul>
-                        {/if}
-                    </li>
-                {/foreach}
-            </ul>
+            {userdata('menu')}
             <!-- /main navigation -->
 
         </div>

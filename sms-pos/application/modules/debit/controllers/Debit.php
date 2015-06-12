@@ -12,7 +12,8 @@ class Debit extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->id_staff = $this->config->item('id_staff');
+        $this->acl->auth('debit');
+        $this->id_staff = $this->session->userdata('uid');
     }
 
     public function index()
@@ -66,7 +67,7 @@ class Debit extends MX_Controller
         $this->parser->parse("debit.tpl", $data);
     }
 
-    public function bill($id_so)
+    public function bill($id_sales_order)
     {
 
         $data['error'] = $this->session->flashdata('error') != null ? $this->session->flashdata('error') : null;
@@ -78,9 +79,9 @@ class Debit extends MX_Controller
                 if (isset($_FILES['file']['size']) && ($_FILES['file']['size'] > 0)) {
                     $config['upload_path'] = './upload/credit';
                     $config['allowed_types'] = 'gif|jpg|png';
-                    $config['max_size'] = '2048';
-                    $config['max_width'] = '1024';
-                    $config['max_height'] = '768';
+                    $config['max_size'] = '4048';
+                    $config['max_width'] = '4024';
+                    $config['max_height'] = '4668';
                     $config['encrypt_name'] = true;
 
                     $this->load->library('upload', $config);
@@ -88,7 +89,7 @@ class Debit extends MX_Controller
                     if (!$this->upload->do_upload('file')) {
                         $this->session->set_flashdata('error',
                             $this->upload->display_errors(''));
-                        redirect('bill' . '/' . $id_so);
+                        redirect('bill' . '/' . $id_sales_order);
                     }
                     $file = $this->upload->data();
                     $scan = base_url() . "/upload/credit" . $file['file_name'];
@@ -97,7 +98,7 @@ class Debit extends MX_Controller
                 }
                 $data_insert = array(
                     'id_staff' => $this->id_staff,
-                    'id_so' => $id_so,
+                    'id_sales_order' => $id_sales_order,
                     'payment_type' => $this->input->post('payment_type'),
                     'amount' => $this->input->post('amount'),
                     'resi_number' => $this->input->post('resi_number'),
@@ -107,10 +108,10 @@ class Debit extends MX_Controller
 
                 $this->db->insert('debit', $data_insert);
 
-                $this->db
-                    ->where('id_so' , $id_so)
-                    ->set('status_extract',0)
-                    ->update('sales_order');
+//                $this->db
+//                    ->where('id_sales_order' , $id_sales_order)
+//                    ->set('status_extract',0)
+//                    ->update('sales_order');
                 $this->session->set_flashdata('success', 'insert data berhasil');
                 redirect('debit');
             }
@@ -121,7 +122,7 @@ class Debit extends MX_Controller
             ->join('proposal p', 'p.id_proposal = so.id_proposal')
             ->join('customer c', 'c.id_customer = p.id_customer')
             ->where(array(
-                'id_so' => $id_so
+                'id_sales_order' => $id_sales_order
             ))
             ->get()
             ->row();
@@ -130,7 +131,7 @@ class Debit extends MX_Controller
         $this->parser->parse("bill.tpl", $data);
     }
 
-    public function detailBayar($id_so)
+    public function detailBayar($id_sales_order)
     {
         $so = $this->db
             ->select('so.*, c.*')
@@ -138,7 +139,7 @@ class Debit extends MX_Controller
             ->join('proposal p', 'p.id_proposal = so.id_proposal')
             ->join('customer c', 'c.id_customer = p.id_customer')
             ->where(array(
-                'id_so' => $id_so
+                'id_sales_order' => $id_sales_order
             ))
             ->get()
             ->row();
@@ -147,7 +148,7 @@ class Debit extends MX_Controller
 
         $debit = $this->db->from('debit')
             ->join('staff', 'staff.id_staff = debit.id_staff')
-            ->where('id_so', $id_so)
+            ->where('id_sales_order', $id_sales_order)
             ->get()
             ->result();
         $data['debit'] = $debit;

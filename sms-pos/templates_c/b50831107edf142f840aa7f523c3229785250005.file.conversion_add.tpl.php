@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-27 06:48:48
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-28 08:29:47
          compiled from "/var/www/sms-pos/application/modules/product_conversion/views/conversion_add.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:3822220495538808c8a4394-43898444%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -13,7 +13,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
     array (
       0 => '/var/www/sms-pos/application/master.tpl',
-      1 => 1432706329,
+      1 => 1432797962,
       2 => 'file',
     ),
   ),
@@ -63,6 +63,11 @@ ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"><?php echo '</script'
  type="text/javascript"
             src="<?php echo theme_url();?>
 ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ type="text/javascript"
+            src="<?php echo theme_url();?>
+ajax.googleapis.com/ajax/libs/jquery/1.10.1/jqClock.min.js"><?php echo '</script'; ?>
 >
 
     <?php echo js('plugins/charts/sparkline.min.js');?>
@@ -375,17 +380,14 @@ echo $_smarty_tpl->tpl_vars['child']->value['url'];?>
 
     </div>
     <!-- /page content -->
+    <div style="display: none;">
 
-    
+        
+    </div>
+    <?php echo js('form/custom.js');?>
+
 </div>
 <!-- /content -->
-
-<?php echo '<script'; ?>
- type="text/javascript"
-        src="<?php echo theme_url();?>
-ajax.googleapis.com/ajax/libs/jquery/1.10.1/jqClock.min.js"><?php echo '</script'; ?>
->
-<?php echo js('form/custom.js');?>
 
 </body>
 </html><?php }} ?>

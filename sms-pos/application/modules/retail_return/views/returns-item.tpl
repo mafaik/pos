@@ -5,8 +5,6 @@
     <script type="text/javascript" xmlns="http://www.w3.org/1999/html">
         var data_storage = {$product_storage|@json_encode};
     </script>
-    {js('function.js')}
-    {js('form/custom.js')}
     <!-- Default panel -->
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -131,8 +129,8 @@
                             <div class="row">
                                 <label class="col-sm-4 control-label">Kembali Uang: </label>
                                 <div class="col-md-4 {if form_error('cashback')}has-warning{/if}">
-                                    <input type="number" name="cashback" value="{set_value('cashback')}" id="input-cashback"
-                                           class="form-control" placeholder="0">
+                                    <input type="text" name="cashback" value="{set_value('cashback')}" id="input-cashback"
+                                           class="form-control  currency-format" placeholder="0">
                                 </div>
                             </div>
                         </div>

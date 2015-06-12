@@ -13,7 +13,7 @@ class Retail extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->acl->auth(__DIR__);
+        $this->acl->auth('retail');
         $this->id_staff = $this->session->userdata('uid');
         $this->id_store = $this->config->item('id_store');
         $this->load->model('ModRetail');
@@ -110,7 +110,17 @@ class Retail extends MX_Controller
         $this->parser->parse("checkout.tpl", $data);
     }
 
-    public function directPrint()
+    public function invoice()
     {
+        if ($this->input->post('id_retail')) {
+            if (
+                $this->db
+                    ->where('id_retail',$this->input->post('id_retail'))
+                    ->get('retail')->num_rows() > 0 ) {
+                redirect('retail/checkout/' . $this->input->post('id_retail'));
+            }
+            $this->session->set_flashdata('message', array('class' => 'error', 'msg' => 'data tidak di temukan'));
+        }
+        $this->parser->parse("invoice-form.tpl");
     }
 }

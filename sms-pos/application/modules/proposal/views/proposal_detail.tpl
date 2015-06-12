@@ -7,8 +7,6 @@
         var data_storage = {$product_storage|@json_encode};
         var items = {$items|@json_encode};
     </script>
-    {js('function.js')}
-    {js('form/custom.js')}
     <div class="panel panel-default">
 
         <div class="panel-heading"><h6 class="panel-title">Proposal</h6></div>
@@ -58,11 +56,12 @@
                                 <label class="col-sm-4 control-label">Barcode: </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" name="barcode" value="{set_value('barcode')}" id="input-barcode"
-                                           class="form-control" placeholder="Type or scan barcode"
-                                           autofocus onblur="barcodeParam(this)">
+
                                     <input type="hidden" name="id_product" value="{set_value('id_product')}"
                                            id="input-id_product">
+                                    <input type="text" name="barcode" value="{set_value('barcode')}" id="input-barcode"
+                                           class="form-control" placeholder="Scan barcode"
+                                           autofocus>
                                 </div>
                             </div>
                         </div>
@@ -87,8 +86,8 @@
                                 <div class="col-md-7 {if form_error('price')}has-warning{/if}">
                                     <div class="input-group">
                                         <span class="input-group-addon">Rp</span>
-                                        <input type="number" name="price" value="{set_value('price')}"
-                                               class="form-control" placeholder="0" id="input-sell_price">
+                                        <input type="text" name="price" value="{set_value('price')}"
+                                               class="form-control currency-format" placeholder="0" id="input-sell_price">
 
                                     </div>
                                 </div>
@@ -101,8 +100,8 @@
                                 <div class="col-md-7 {if form_error('discount')}has-warning{/if}">
                                     <div class="input-group">
                                         <span class="input-group-addon">Rp</span>
-                                        <input type="number" name="discount" value="{set_value('discount')}"
-                                               class="form-control" placeholder="0">
+                                        <input type="text" name="discount" value="{set_value('discount')}"
+                                               class="form-control currency-format"  placeholder="0">
 
                                     </div>
                                 </div>
@@ -166,7 +165,7 @@
                         <th>Satuan / isi</th>
                         <th>Qty</th>
                         <th>Harga</th>
-                        <th>Diskon</th>
+                        <th>Diskon </th>
                         {if $cache['value']['status_ppn'] == 1}
                             <th>Subtotal</th>
                             <th>Ppn</th>
@@ -241,7 +240,7 @@
                             <table class="table">
                                 <tbody>
                                 <tr>
-                                    <th>Total:</th>
+                                    <th>DPP:</th>
                                     <td class="text-right">Rp
                                         <span id="sum-total-text"><strong>{$total|number_format:0}</strong> </span>
                                     </td>
@@ -300,11 +299,12 @@
                                 <tr>
                                     <th>Barcode</th>
                                     <th>Name</th>
-                                    <th>Kategori</th>
+                                    {*<th>Kategori</th>*}
                                     <th>Satuan</th>
                                     <th>Isi</th>
                                     <th>Merek</th>
                                     <th>Ukuran</th>
+                                    <th>Sell Price</th>
                                     <th>Stok</th>
                                     <th>Action</th>
                                 </tr>
@@ -314,11 +314,12 @@
                                     <tr>
                                         <td>{$products['barcode']}</td>
                                         <td>{$products['name']}</td>
-                                        <td>{$products['category']}</td>
+                                        {*<td>{$products['category']}</td>*}
                                         <td>{$products['unit']}</td>
                                         <td>{$products['value']}</td>
                                         <td>{$products['brand']}</td>
                                         <td>{$products['size']}</td>
+                                        <td>Rp {$products['sell_price']|number_format:0}</td>
                                         <td>{$products['stock']}</td>
                                         <td>
                                             <a href="#" onclick="idParam({$products['id_product']})"
@@ -377,8 +378,8 @@
                                         <div class="col-md-7 {if form_error('price')}has-warning{/if}">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Rp</span>
-                                                <input type="number" name="price" value="{set_value('price')}"
-                                                       class="form-control" placeholder="0" id="update-input-price">
+                                                <input type="text" name="price" value="{set_value('price')}"
+                                                       class="form-control  currency-format" placeholder="0" id="update-input-price">
 
                                             </div>
                                         </div>
@@ -391,8 +392,8 @@
                                         <div class="col-md-7 {if form_error('discount')}has-warning{/if}">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Rp</span>
-                                                <input type="number" name="discount" value="{set_value('discount')}"
-                                                       class="form-control" placeholder="0" id="update-input-discount">
+                                                <input type="text" name="discount" value="{set_value('discount')}"
+                                                       class="form-control currency-format" placeholder="0" id="update-input-discount">
 
                                             </div>
                                         </div>

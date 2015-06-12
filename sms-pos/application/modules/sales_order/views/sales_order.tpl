@@ -7,8 +7,6 @@
         var data_storage = {$product_storage|@json_encode};
         var items = {$items|@json_encode};
     </script>
-    {js('function.js')}
-    {js('form/custom.js')}
     <div class="panel panel-default">
 
         <div class="panel-heading"><h6 class="panel-title">Sales Order</h6></div>
@@ -151,7 +149,6 @@
                 {*</div>*}
                 {*</div>*}
             {/if}
-        </div>
         <!-- /panel body -->
 
 
@@ -164,13 +161,13 @@
                         <th>Nama Produk</th>
                         <th>Merek</th>
                         <th>Satuan / isi</th>
-                        <th width="100px">Qty</th>
+                        <th width="50px">Qty</th>
                         <th>Harga</th>
                         <th>Diskon</th>
-                        {*{if $cache['value']['status_ppn'] == 1}*}
+                        {if $cache['value']['status_ppn'] == 1}
                             <th>Subtotal</th>
                             <th>Ppn</th>
-                        {*{/if}*}
+                        {/if}
                         <th>Total</th>
                         <th>Action</th>
                     </tr>
@@ -190,20 +187,19 @@
                                 {if $cache['value']['type'] == 0}
                                     <input type="number" id="qty-{$key['id_product']}" value="{$key['qty']}"
                                            class="form-control" onkeypress="qtyKeyPress({$key['id_product']},
-                                            '{base_url('sales-order/update')}')">
+                                            '{base_url('sales-order/update')}',event)">
                                 {else}
                                     {$key['qty']}
                                 {/if}
                             </td>
-                            {*{/if}*}
                             <td style="width:130px;" class="text-right">
                                 Rp {$key['price']|number_format:0}
                             </td>
                             <td style="width:130px;" class="text-right">
                                 Rp {$key['discount']|number_format:0}
                             </td>
-                            {assign var=ppn value=$ppn+($key['qty'] * ($key['price'] - $key['discount'])*0.1 )}
-                            {*{if $cache['value']['status_ppn'] == 1}*}
+                            {if $cache['value']['status_ppn'] == 1}
+                                {assign var=ppn value=$ppn+($key['qty'] * ($key['price'] - $key['discount'])*0.1 )}
                                 <td style="width:130px;" class="text-right">
                                     Rp {($key['qty'] * ($key['price'] - $key['discount']))|number_format:0}
                                 </td>
@@ -211,7 +207,7 @@
                                     Rp {$ppn|number_format:0}
 
                                 </td>
-                            {*{/if}*}
+                            {/if}
                             <td style="width:130px;" class="text-right">
                                 Rp {($key['qty'] * ($key['price'] - $key['discount'])
                                 +$ppn)|number_format:0}
@@ -219,10 +215,11 @@
                             <td style="width:90px;">
 
                                 <div class="table-controls">
-                                    <a data-toggle="modal" class="btn btn-link btn-icon btn-xs tip" title="Update Qty"
-                                       href="#update-modal" onclick="updateItem({$key['id_product']})" role="button">
+                                    <a class="btn btn-link btn-icon btn-xs tip" title="Update Qty"
+                                       onclick="updateQty({$key['id_product']},
+                                               '{base_url('sales-order/update')}')">
                                         <i class="icon-pencil3"></i></a>
-                                    <a href="{base_url('sales_order/detail/delete')}/{$key['id_product']}"
+                                    <a href="{base_url('sales-order/detail/delete')}/{$key['id_product']}"
                                        class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
                                         <i class="icon-remove3"></i></a>
                                 </div>
@@ -238,6 +235,7 @@
             </div>
             <form action="{base_url('sales-order/save')}" role="form" method="post"
                   onsubmit="return confirm('Process Data');">
+                <input type="hidden" name="total" value="{$total}">
                 <div class="panel-body">
 
                     <div class="row invoice-payment">
@@ -260,8 +258,28 @@
                                     </td>
                                 </tr>
 
+                                {*<tr>*}
+                                    {*<th>Total:</th>*}
+                                    {*<td class="text-right">Rp*}
+                                        {*<span id="sum-total-text"> {$total|number_format:0} </span>*}
+                                    {*</td>*}
+                                {*</tr>*}
+                                {*<tr>*}
+                                    {*<th>Diskon:</th>*}
+                                    {*<td class="text-right" style="max-width: 135px;">*}
+                                        {*<div class="input-group">*}
+                                            {*<span class="input-group-addon">Rp</span>*}
+
+                                            {*<input type="text" name="discount_price" value="{set_value('discount_price')}"*}
+                                                   {*class="form-control currency-format" placeholder="0"*}
+                                                   {*id="input-discount_price" onblur="setDpp(this.value)">*}
+
+                                        {*</div>*}
+                                    {*</td>*}
+                                {*</tr>*}
+
                                 <tr>
-                                    <th>Total:</th>
+                                    <th>DPP:</th>
                                     <td class="text-right">Rp
                                         <span id="sum-dpp-text"><strong>{$total|number_format:0}</strong> </span>
                                     </td>
@@ -269,16 +287,18 @@
                                 <tr>
                                     <th>
                                         <label class="radio">
-                                            {*{if $cache['value']['status_ppn'] == 0}*}
-                                                {*<input type="checkbox" name="status_ppn" class="styled"*}
-                                                       {*onclick="ppnCheck()">*}
-                                            {*{/if}*}
+                                            {if $cache['value']['status_ppn'] == 0}
+                                                <input type="checkbox" name="status_ppn" class="styled"
+                                                onclick="ppnCheck()">
+                                            {/if}
                                             PPN 10 %
                                         </label>
                                     </th>
                                     <td class="text-right">Rp <span
                                                 id="sum-ppn-text">{$ppn_total|number_format:0}</span></td>
                                 </tr>
+
+
                                 <tr>
                                     <th>Total:</th>
                                     <td class="text-right text-danger">
@@ -306,6 +326,7 @@
         {*<h6>Notes &amp; Information:</h6>*}
         {*Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.*}
         {*</div>*}
+        </div>
     </div>
     <!-- /default panel -->
 

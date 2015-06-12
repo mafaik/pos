@@ -36,15 +36,22 @@ class ModelProduct extends CI_Model
 
     private function getPriceLastProposal($id_proposal){
         return $this->db
-            ->select('product.* ,product_unit.* ,product_category.* ,IF(proposal_detail.price IS NULL, product.sell_price, proposal_detail.price) as sell_price'
-                ,false)
-            ->from('proposal_detail')
-            ->join('product', ' product.id_product = proposal_detail.id_product','right outer')
-            ->join('product_unit','product_unit.id_product_unit = product.id_product_unit')
-            ->join('product_category','product_category.id_product_category = product.id_product_category')
-            ->where('proposal_detail.id_proposal',$id_proposal)
-            ->or_where('proposal_detail.id_proposal',null)
-            ->get()
+            ->query("SELECT p.id_product, p.barcode, p.name, p.brand, p.size, p.stock, pu.* , pc.*
+, IF(pr.price IS NULL, p.sell_price, pr.price) AS sell_price
+FROM
+`product` p
+LEFT JOIN (SELECT `price`, `id_product` FROM `proposal_detail` WHERE id_proposal = $id_proposal) pr USING (id_product)
+LEFT JOIN `product_unit` pu USING (`id_product_unit`)
+LEFT JOIN `product_category` pc USING (`id_product_category`)")
+//            ->select('product.* ,product_unit.* ,product_category.* ,
+//            IF(proposal_detail.price IS NULL, product.sell_price, proposal_detail.price) as sell_price'
+//                ,false)
+//            ->from('proposal_detail')
+//            ->join('product', ' product.id_product = proposal_detail.id_product','right')
+//            ->join('product_unit','product_unit.id_product_unit = product.id_product_unit', 'left')
+//            ->join('product_category','product_category.id_product_category = product.id_product_category','left')
+//            ->where('proposal_detail.id_proposal',$id_proposal)
+//            ->or_where('proposal_detail.id_proposal',null)
             ->result_array();
     }
 
@@ -52,8 +59,8 @@ class ModelProduct extends CI_Model
         return $this->db
             ->select('*')
             ->from('product')
-            ->join('product_unit','product_unit.id_product_unit = product.id_product_unit')
-            ->join('product_category','product_category.id_product_category = product.id_product_category')
+            ->join('product_unit','product_unit.id_product_unit = product.id_product_unit', 'left')
+            ->join('product_category','product_category.id_product_category = product.id_product_category', 'left')
             ->get()
             ->result_array();
     }
@@ -61,8 +68,8 @@ class ModelProduct extends CI_Model
     public function getProduct($id_product){
         $this->db->select('*');
         $this->db->from('product');
-        $this->db->join('product_unit','product_unit.id_product_unit = product.id_product_unit');
-        $this->db->join('product_category','product_category.id_product_category = product.id_product_category');
+        $this->db->join('product_unit','product_unit.id_product_unit = product.id_product_unit', 'left');
+        $this->db->join('product_category','product_category.id_product_category = product.id_product_category', 'left');
         $this->db->where('product.id_product',$id_product);
         $this->db->order_by('product.name ASC');
         $result = $this->db->get();

@@ -1,8 +1,101 @@
 {* Extend our master template *}
 {extends file="../../../master.tpl"}
+{block name=print}
 
+    <div id="print">
+        <font size="1.1em">
+            <table border="0" width="100%">
+                <tr>
+                    <td width="60%" align="left" valign="top">
+                        <h3>{$master->store_name}</h3>
+                    <span>{$master->address} - {$master->zipcode}
+                        </br>
+                        {$master->city} - {$master->state}
+                        </br>
+                        {$master->telp}
+                        </br>
+                        {$master->owner}
+                    </span>
+                    </td>
+                    <td align="right" valign="center">
+                        No Faktur # <strong class="text-danger pull-right">{$master->id_retail}</strong></br>
+                        Staff <strong class="pull-right">{$master->staff_name} </strong></br>
+                        Date : <strong class="pull-right">{$master->date}</strong></br>
+                    </td>
+                </tr>
+            </table>
+        </font>
+        <font size="0.8em">
+            <table border="1" width="100%">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th min-width="40%">Nama Produk</th>
+                    <th>Merek</th>
+                    <th>Satuan</th>
+                    <th>Qty</th>
+                    <th>Harga</th>
+                    <th>Subtotal</th>
+                </tr>
+                </thead>
+                <tbody class="tbody-a5">
+                {assign var=total value=0}
+                {assign var=val value=1}
+                {foreach $items as $key }
+                    <tr class="nobordersbottomtop">
+                        <td valign="top" align="left">{$val}</td>
+                        <td valign="top" align="left">{$key['name']}</td>
+                        <td valign="top" align="left">{$key['brand']}</td>
+                        <td valign="top">{$key['unit']} ( {$key['value']} )</td>
+                        <td valign="top" align="left">{$key['qty']}</td>
+                        <td valign="top" align="right">
+                            Rp {$key['price']|number_format:0}</td>
+                        {*<td style="width:130px;" class="text-right">*}
+                        {*Rp {($key['qty'] * $key['price'])|number_format:0}</td>*}
+                        {*<td style="width:130px;" class="text-right">Rp {$key['discount']|number_format:0}</td>*}
+                        <td valign="top" align="right">
+                            Rp {($key['qty'] * $key['price'] - $key['discount_total'])|number_format:0}
+                        </td>
+                    </tr>
+                    {assign var=val value=$val+1}
+                    {assign var=total value=$total+($key['qty'] * $key['price'] - $key['discount_total'])}
+
+                {/foreach}
+                </tbody>
+                <tr class="nobordersbottom">
+                    <td colspan="6" align="right" valign="top" >Total</td>
+                    <td align="right" valign="top">Rp {$master->total|number_format:0}</td>
+                </tr >
+                <tr class="nobordersbottomtop">
+                    <td colspan="6" align="right" valign="top">Diskon</td>
+                    <td align="right" valign="top">Rp {$master->discount_price|number_format:0}</td>
+                </tr>
+                <tr class="nobordersbottomtop">
+                    <td colspan="6" align="right" valign="top">DPP</td>
+                    <td align="right" valign="top">Rp {($master->total-$master->discount_price)|number_format:0}</td>
+                </tr>
+                <tr class="nobordersbottomtop">
+                    <td colspan="6" align="right" valign="top">PPN</td>
+                    <td align="right" valign="top">
+                        Rp  {$master->ppn|number_format:0}</td>
+                </tr>
+                <tr class="nobordersbottomtop">
+                    <td colspan="6" align="right" valign="top">Grand Total</td>
+                    <td align="right" valign="top">Rp {$master->grand_total|number_format:0}</td>
+                </tr>
+                <tr class="nobordersbottomtop">
+                    <td colspan="6" align="right" valign="top">Jumlah Bayar</td>
+                    <td align="right" valign="top">Rp {$master->paid|number_format:0}</td>
+                </tr>
+                <tr class="nobordersbottomtop">
+                    <td colspan="6" align="right" valign="top">Kembali</td>
+                    <td align="right" valign="top">Rp {($master->paid-$master->grand_total)|number_format:0}</td>
+                </tr>
+            </table>
+        </font>
+    </div>
+{/block}
 {block name=content}
-
     <!-- New invoice template -->
     <div class="panel panel-success">
         <div class="panel-heading">
@@ -13,12 +106,6 @@
                     <i class="icon-cog3"></i>
                     <b class="caret"></b>
                 </a>
-                {*<ul class="dropdown-menu icons-right dropdown-menu-right">*}
-                {*<li><a href="#"><i class="icon-print2"></i> Print invoice</a></li>*}
-                {*<li><a href="#"><i class="icon-download"></i> Download invoice</a></li>*}
-                {*<li><a href="#"><i class="icon-file-pdf"></i> View .pdf</a></li>*}
-                {*<li><a href="#"><i class="icon-stack"></i> Archive</a></li>*}
-                {*</ul>*}
             </div>
         </div>
 
@@ -58,7 +145,7 @@
                         <th>Satuan</th>
                         <th>Qty</th>
                         <th>Harga</th>
-                        <th>Total</th>
+                        {*<th>Total</th>*}
                         {*<th>Diskon</th>*}
                         <th>Subtotal</th>
                     </tr>
@@ -75,8 +162,8 @@
                             <td style="width:100px;">{$key['unit']} ( {$key['value']} )</td>
                             <td>{$key['qty']}</td>
                             <td style="width:130px;" class="text-right">Rp {$key['price']|number_format:0}</td>
-                            <td style="width:130px;" class="text-right">
-                                Rp {($key['qty'] * $key['price'])|number_format:0}</td>
+                            {*<td style="width:130px;" class="text-right">*}
+                            {*Rp {($key['qty'] * $key['price'])|number_format:0}</td>*}
                             {*<td style="width:130px;" class="text-right">Rp {$key['discount']|number_format:0}</td>*}
                             <td style="width:130px;" class="text-right">
                                 Rp {($key['qty'] * $key['price'] - $key['discount_total'])|number_format:0}
@@ -111,8 +198,8 @@
                         </tr>
                         <tr>
                             <th>PPN:</th>
-                                <td class="text-right">
-                                    Rp  {$master->ppn|number_format:0}</td>
+                            <td class="text-right">
+                                Rp  {$master->ppn|number_format:0}</td>
                         </tr>
                         <tr>
                             <th>Grand Total:</th>
@@ -131,7 +218,9 @@
                     <div class="btn-group pull-right">
                         <a href="{base_url('retail')}" class="btn btn-info button">
                             <i class="icon-box-add"></i> New Retail</a>
-                        <button type="button" class="btn btn-primary"><i class="icon-print2"></i> Print</button>
+                        <button type="button" class="btn btn-primary" onclick="print_doc();" id="button-focus"><i
+                                    class="icon-print2"></i> Print
+                        </button>
                     </div>
                 </div>
             </div>

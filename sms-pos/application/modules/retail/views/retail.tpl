@@ -273,7 +273,7 @@
                                 <tr>
                                     <th>Barcode</th>
                                     <th>Name</th>
-                                    <th>Kategori</th>
+                                    {*<th>Kategori</th>*}
                                     <th>Satuan</th>
                                     <th>Isi</th>
                                     <th>Merek</th>
@@ -288,7 +288,7 @@
                                     <tr>
                                         <td>{$products['barcode']}</td>
                                         <td>{$products['name']}</td>
-                                        <td>{$products['category']}</td>
+                                        {*<td>{$products['category']}</td>*}
                                         <td>{$products['unit']}</td>
                                         <td>{$products['value']}</td>
                                         <td>{$products['brand']}</td>

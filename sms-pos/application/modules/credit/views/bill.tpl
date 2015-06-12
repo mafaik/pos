@@ -29,7 +29,7 @@
                         <tbody>
                         <tr>
                             <th>No. Faktur:</th>
-                            <td class="text-right">{$po->id_po}</td>
+                            <td class="text-right">{$po->id_purchase_order}</td>
                             <th>Total Bayar:</th>
                             <td class="text-right">Rp {$po->grand_total|number_format:0}</td>
                             <th>Tanggal Transaksi:</th>

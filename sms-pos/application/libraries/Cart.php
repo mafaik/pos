@@ -107,13 +107,13 @@ Class CI_Cart
     public function update_item($index, $value = array(), $all_field_updateable = true)
     {
         if (isset($this->cache['detail']['value'][$index])) {
-            if($all_field_updateable){
+            if ($all_field_updateable) {
                 foreach ($this->field_updateable as $v) {
                     $this->cache['detail']['value'][$index][$v] = $value[$v];
                 }
-            }else{
+            } else {
                 $this->delete_item($index);
-                $this->add_item($index,$value);
+                $this->add_item($index, $value);
                 return $this;
             }
         } else {
@@ -151,6 +151,7 @@ Class CI_Cart
     {
         return count($this->cache['detail']['value']);
     }
+
     public function list_item($data = array(), $key)
     {
 
@@ -168,7 +169,7 @@ Class CI_Cart
             $this->error['param'][] = 'items_storage no set';
         if (!$this->item_key)
             $this->error['param'][] = 'item key no set';
-        if ($recursive){
+        if ($recursive) {
             if ($this->cache['detail']['value']) {
                 foreach ($this->cache['detail']['value'] as $key => $value) {
                     foreach ($this->item_storage as $index => $row) {
@@ -179,12 +180,12 @@ Class CI_Cart
             } else {
                 $this->error['param'][] = 'items record not set';
             }
-        }else{
+        } else {
             foreach ($this->item_storage as $row) {
-                if(empty($this->cache['detail']['value'] [$row[$this->item_key]])){
+                if (empty($this->cache['detail']['value'] [$row[$this->item_key]])) {
                     $result[] = $row;
 
-                }else{
+                } else {
                     $result[] = array_merge($this->cache['detail']['value'] [$row[$this->item_key]], $row);
                 }
             }
@@ -344,7 +345,8 @@ Class CI_Cart
         }
     }
 
-    public function delete_record(){
+    public function delete_record()
+    {
         $this->deleteCache();
     }
 
@@ -398,7 +400,7 @@ Class CI_Cart
      * @return array
      */
 
-    private function parsingReferenceKey($table, $reference_field, $reference_key, $data = array())
+    public function parsingReferenceKey($table, $reference_field, $reference_key, $data = array())
     {
         if (is_array($data)) {
             $result = array();
@@ -407,11 +409,11 @@ Class CI_Cart
                 $data_row = array();
                 foreach ($fields as $field_row) {
                     if (array_key_exists($field_row, $rows)) {
-//                        if(!empty($rows[$field_row])){
+                        if ($rows[$field_row] == "") {
+                            $data_row[$field_row] = null;
+                        } else {
                             $data_row[$field_row] = $rows[$field_row];
-//                        }else{
-//                            $data_row[$field_row] = null;
-//                        }
+                        }
 
                     }
                 }
