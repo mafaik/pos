@@ -15,7 +15,7 @@ $config = array(
         array(
             'field' => 'invoice_number',
             'label' => 'Invoice Number',
-            'rules' => 'trim'
+            'rules' => 'trim|required'
         ),
         array(
             'field' => 'date',
@@ -106,6 +106,18 @@ $config = array(
     'distribution' => array(
         array(
             'field' => 'id_product',
+            'label' => 'ID Product',
+            'rules' => 'required|integer'
+        ),
+        array(
+            'field' => 'qty',
+            'label' => 'QTY',
+            'rules' => 'required|integer'
+        )
+    ),
+    'product-returns' => array(
+        array(
+            'field' => 'id_product_store',
             'label' => 'ID Product',
             'rules' => 'required|integer'
         ),

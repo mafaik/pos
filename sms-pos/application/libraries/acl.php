@@ -15,6 +15,7 @@ class Acl
         $this->_CI = &get_instance();
         $this->_CI->config->load('acl');
         $this->db = $this->_CI->db;
+        $this->menu = "";
     }
 
     /**
@@ -25,7 +26,7 @@ class Acl
      * @param integer $author_uid
      * @return boolean
      */
-    public function auth($dir, $login = true)
+    public function auth($module, $login = true)
     {
 
         $msg = $this->_CI->config->item('module_auth_message');
@@ -42,7 +43,7 @@ class Acl
             }
         }
         $user_roles = $this->_CI->session->userdata('roles');
-        $module = $this->module($dir);
+//        $module = $this->module($dir);
         if (is_array($user_roles) && in_array($module, $user_roles))
             return true;
         $this->_CI->session->set_flashdata('message',
@@ -58,13 +59,13 @@ class Acl
      * Function to see module folder
      */
 
-    public function module($dir)
-    {
-
-        $dir = explode('/', $dir, -1);
-        $length = count($dir);
-        return strtolower($dir[$length - 1]);
-    }
+//    public function module($dir)
+//    {
+//
+//        $dir = explode('/', $dir, -1);
+//        $length = count($dir);
+//        return strtolower($dir[$length - 1]);
+//    }
 
     /**
      * Function to see if a user is logged in
@@ -192,13 +193,33 @@ class Acl
     private function getMenu($roles)
     {
         $router = $this->_CI->config->item('module_router');
-        $return = array();
-        foreach ($roles as $row) {
-            if (isset($router[$row])) {
-                $return[] = $router[$row];
+        $this->menu .= "<ul class=\"navigation\">";
+        $this->roles = $roles;
+        $this->filter($router);
+        $this->menu .= "</ul>";
+        return $this->menu;
+    }
+
+
+    private function filter($router = array())
+    {
+        foreach ($router as $value) {
+            if (isset($value['child']) && !is_null($value['child']) && is_array($value['child'])) {
+                $title = isset($value['title']) ? $value['title'] : "";
+                $icon = isset($value['icon']) ? $value['icon'] : "";
+                $this->menu .= "<li>";
+                $this->menu .= "<a href=\"#\"><span>$title</span><i class=\"$icon\"></i></a>";
+                $this->menu .= "<ul>";
+                $this->filter($value['child']);
+                $this->menu .= "</ul></li>";
+            } else if (in_array($value['module'], $this->roles)) {
+                $title = isset($value['title']) ? $value['title'] : "";
+                $url = isset($value['title']) ? $value['url'] : "";
+                $this->menu .= "<li>";
+                $this->menu .= "<a href=\"".base_url($url)."\">$title</a>";
+                $this->menu .= "</li>";
             }
         }
-        return $return;
     }
 
 }

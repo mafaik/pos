@@ -70,7 +70,7 @@
 
                         <tr>
                             <td>{$val}</td>
-                            <td>{$key->id_po}</td>
+                            <td>{$key->id_purchase_order}</td>
                             <td>{$key->name}</td>
                             <td>{$key->date}</td>
                             <td>{$key->due_date}</td>
@@ -79,11 +79,11 @@
                             <td>Rp {($key->grand_total - $key->paid)|number_format:0}</td>
                             <td>
                                 <div class="table-controls">
-                                    <a href="{base_url('credit/bill/')}/{$key->id_po}"
+                                    <a href="{base_url('credit/bill/')}/{$key->id_purchase_order}"
                                        class="btn btn-link btn-icon btn-xs tip" title="Bayar">
                                         <i class="icon-coin"></i>
                                     </a>
-                                    <a href="{base_url('credit/detail/')}/{$key->id_po}"
+                                    <a href="{base_url('credit/detail/')}/{$key->id_purchase_order}"
                                        class="btn btn-link btn-icon btn-xs tip" title="Detail">
                                         <i class="icon-list"></i>
                                     </a>

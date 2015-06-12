@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-27 04:24:38
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-01 13:07:38
          compiled from "/var/www/sms-pos/application/modules/Credit/views/credit.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:208807457555363f2177cd55-49751657%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ddd67ee425b50d328c12191c7e8c07739d1b8103' => 
     array (
       0 => '/var/www/sms-pos/application/modules/Credit/views/credit.tpl',
-      1 => 1429683043,
+      1 => 1432793053,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
     array (
       0 => '/var/www/sms-pos/application/master.tpl',
-      1 => 1429430584,
+      1 => 1433163876,
       2 => 'file',
     ),
   ),
@@ -28,7 +28,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <?php if ($_valid && !is_callable('content_55363f2189a018_62519913')) {function content_55363f2189a018_62519913($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
 
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,17 +43,28 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <?php echo css('icons.css');?>
 
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <?php echo css('jqClock.css');?>
+
+    
+          
 
     <?php echo '<script'; ?>
- type="text/javascript" src="<?php echo theme_url();?>
+ type="text/javascript"
+            src="<?php echo theme_url();?>
 ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
- type="text/javascript" src="<?php echo theme_url();?>
+ type="text/javascript"
+            src="<?php echo theme_url();?>
 ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</script'; ?>
 >
-
+    <?php echo '<script'; ?>
+ type="text/javascript"
+            src="<?php echo theme_url();?>
+ajax.googleapis.com/ajax/libs/jquery/1.10.1/jqClock.min.js"><?php echo '</script'; ?>
+>
+    <link rel="stylesheet" type="text/css" href="<?php echo theme_url();?>
+css/print.css" media="print" />
     <?php echo js('plugins/charts/sparkline.min.js');?>
 
 
@@ -109,7 +120,7 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
 
     <?php echo js('application.js');?>
 
-
+    
 </head>
 
 <body>
@@ -129,111 +140,24 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
             <i class="icon-paragraph-justify2"></i>
         </button>
     </div>
-
     <ul class="nav navbar-nav navbar-right collapse" id="navbar-icons">
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-                <i class="icon-bell"></i>
-                <span class="label label-default">2</span>
-            </a>
-            <div class="popup dropdown-menu dropdown-menu-right">
-                <div class="popup-header">
-                    <span>Activity</span>
-                </div>
-                <ul class="activity">
-                    <li>
-                        <i class="icon-cart-checkout text-success"></i>
-                        <div>
-                            <a href="#">Eugene</a> ordered 2 copies of <a href="#">OEM license</a>
-                            <span>14 minutes ago</span>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="icon-heart text-danger"></i>
-                        <div>
-                            Your <a href="#">latest post</a> was liked by <a href="#">Audrey Mall</a>
-                            <span>35 minutes ago</span>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="icon-checkmark3 text-success"></i>
-                        <div>
-                            Mail server was updated. See <a href="#">changelog</a>
-                            <span>About 2 hours ago</span>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="icon-paragraph-justify2 text-warning"></i>
-                        <div>
-                            There are <a href="#">6 new tasks</a> waiting for you. Don't forget!
-                            <span>About 3 hours ago</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        <li>
+            <a href="#" id="clock"></a>
         </li>
-
-
-
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle">
-                <i class="icon-grid"></i>
-            </a>
-            <div class="popup dropdown-menu dropdown-menu-right">
-                <div class="popup-header">
-                    <span>Tasks list</span>
-                </div>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>Description</th>
-                        <th>Category</th>
-                        <th class="text-center">Priority</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><span class="status status-success item-before"></span> <a href="#">Frontpage fixes</a></td>
-                        <td><span class="text-smaller text-semibold">Bugs</span></td>
-                        <td class="text-center"><span class="label label-success">87%</span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="status status-danger item-before"></span> <a href="#">CSS compilation</a></td>
-                        <td><span class="text-smaller text-semibold">Bugs</span></td>
-                        <td class="text-center"><span class="label label-danger">18%</span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="status status-info item-before"></span> <a href="#">Responsive layout changes</a></td>
-                        <td><span class="text-smaller text-semibold">Layout</span></td>
-                        <td class="text-center"><span class="label label-info">52%</span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="status status-success item-before"></span> <a href="#">Add categories filter</a></td>
-                        <td><span class="text-smaller text-semibold">Content</span></td>
-                        <td class="text-center"><span class="label label-success">100%</span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="status status-success item-before"></span> <a href="#">Media grid padding issue</a></td>
-                        <td><span class="text-smaller text-semibold">Bugs</span></td>
-                        <td class="text-center"><span class="label label-success">100%</span></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+        <li>
+            <a href="#"> <strong><?php echo userdata('name');?>
+ / <?php echo userdata('name_group');?>
+</strong></a>
         </li>
-
-        <li class="user dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-                <img src="<?php echo theme_url('images/demo/users/putu.png');?>
-" alt="">
-                <span>I Putu Sudarma</span>
-                <i class="caret"></i>
+        <li class="dropdown">
+            <a class="dropdown-toggle icons-right" data-toggle="dropdown">
+                <i class="icon-settings pull-right"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-right icons-right">
                 <li><a href="#"><i class="icon-user"></i> Profile</a></li>
-                <li><a href="#"><i class="icon-question4"></i> Help</a></li>
                 <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
-                <li><a href="#"><i class="icon-exit"></i> Logout</a></li>
+                <li><a href="<?php echo base_url('login/logout');?>
+"><i class="icon-exit"></i> Logout</a></li>
             </ul>
         </li>
     </ul>
@@ -249,62 +173,31 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
     <div class="sidebar">
         <div class="sidebar-content">
 
-            <!-- User dropdown -->
-            <div class="user-menu dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="<?php echo theme_url('images/demo/users/putu.png');?>
-" alt="">
-                    <div class="user-info">
-                        I Putu Sudarma <span>Admin</span>
-                    </div>
-                </a>
-
-            </div>
-            <!-- /user dropdown -->
-
-
             <!-- Main navigation -->
-            <ul class="navigation">
-                <li><a href=""><span>Dashboard</span> <i class="icon-meter-fast"></i></a></li>
-                <li>
-                    <a href="#"><span>Proposal</span> <i class="icon-briefcase"></i></a>
-                    <ul>
-                        <li><a href="medika-master-product.html">Product</a></li>
-                        <li><a href="medika-master-product-category.html">Product Category</a></li>
-                        <li><a href="medika-master-product-unit.html">Product Unit</a></li>
-                        <li><a href="medika-master-product-distribution.html">Product Distribution</a></li>
-                        <li><a href="medika-master-product-conversion.html">Product Conversion</a></li>
-                    </ul>
-                </li>
-                <li><a href="medika-master-supplier.html"><span>Master Supplier</span><i class="icon-users"></i></a></li>
-                <li><a href="medika-master-customer.html"><span>Master Customer</span><i class="icon-users2"></i></a></li>
-                <li><a href="medika-master-store.html"><span>Master Store</span><i class="icon-tag5"></i></a></li>
-                <li>
-                    <a href=""><span>Master Warehouse</span><i class="icon-home7"></i></a>
-                    <ul>
-                        <li><a href="medika-master-warehouse.html">Warehouse</a></li>
-                        <li><a href="medika-master-warehouse-rack.html">Warehouse Rack</a></li>
-                    </ul>
-                </li>
-                <li class="active"><a href="medika-purchase-order.html"><span>Purchase Order</span><i class="icon-cart3"></i></a></li>
-                <li><a href="medika-retur-purchase-order.html"><span>Retur Purchase Order</span><i class="icon-basket"></i></a></li>
-                <li><a href="medika-card-stock.html"><span>Card Stock</span><i class="icon-vcard"></i></a></li>
-                <li><a href="medika-warehouse.html"><span>Warehouse</span><i class="icon-home7"></i></a></li>
-                <li><a href="medika-proposal.html"><span>Proposal</span><i class="icon-file4"></i></a></li>
-                <li><a href="medika-existing-proposal.html"><span>Existing Proposal</span><i class="icon-file4"></i></a></li>
-                <li><a href="medika-hutang.html"><span>Hutang</span><i class="icon-credit"></i></a></li>
-                <li><a href="medika-bayar-hutang.html"><span>Bayar Hutang</span><i class="icon-credit"></i></a></li>
-                <li><a href="medika-sales-order.html"><span>Sales Order</span><i class="icon-coin"></i></a></li>
-                <li><a href="medika-delivery-order.html"><span>Delivery Order</span><i class="icon-file6"></i></a></li>
-                <li><a href="medika-delivery-order-done.html"><span>Delivery Order Done</span><i class="icon-file6"></i></a></li>
-                <li><a href="medika-retur-sales-order.html"><span>Retur Sales Order</span><i class="icon-file6"></i></a></li>
-                <li><a href="medika-piutang.html"><span>Piutang</span><i class="icon-credit"></i></a></li>
-                <li><a href="medika-bayar-piutang.html"><span>Bayar Piutang</span><i class="icon-credit"></i></a></li>
-                <li><a href="medika-mix-faktur.html"><span>Mix Faktur</span><i class="icon-file6"></i></a></li>
-                <li><a href="medika-extract-faktur.html"><span>Extract Faktur</span><i class="icon-file6"></i></a></li>
-                <li><a href="medika-retail.html"><span>Retail</span><i class="icon-coin"></i></a></li>
+            <?php echo userdata('menu');?>
 
-            </ul>
+            
+                
+                    
+                        
+                            
+                            
+                        
+                        
+                            
+                                
+                                    
+                                        
+                                            
+                                            
+                                        
+                                    
+                                
+                            
+                        
+                    
+                
+            
             <!-- /main navigation -->
 
         </div>
@@ -392,7 +285,7 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                         <tr>
                             <td><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
 </td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value->id_po;?>
+                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value->id_purchase_order;?>
 </td>
                             <td><?php echo $_smarty_tpl->tpl_vars['key']->value->name;?>
 </td>
@@ -409,13 +302,13 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                             <td>
                                 <div class="table-controls">
                                     <a href="<?php echo base_url('credit/bill/');?>
-/<?php echo $_smarty_tpl->tpl_vars['key']->value->id_po;?>
+/<?php echo $_smarty_tpl->tpl_vars['key']->value->id_purchase_order;?>
 "
                                        class="btn btn-link btn-icon btn-xs tip" title="Bayar">
                                         <i class="icon-coin"></i>
                                     </a>
                                     <a href="<?php echo base_url('credit/detail/');?>
-/<?php echo $_smarty_tpl->tpl_vars['key']->value->id_po;?>
+/<?php echo $_smarty_tpl->tpl_vars['key']->value->id_purchase_order;?>
 "
                                        class="btn btn-link btn-icon btn-xs tip" title="Detail">
                                         <i class="icon-list"></i>
@@ -438,7 +331,8 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
                     <table class="table">
                         <tbody>
                         <tr>
-                            <th>Total Hutang Bulan Januari:</th>
+                            <th>Total Hutang Bulan " <?php echo set_value('date');?>
+ ":</th>
                             <td class="text-right">Rp <?php echo number_format($_smarty_tpl->tpl_vars['total']->value,0);?>
 </td>
                         </tr>
@@ -474,6 +368,11 @@ $_smarty_tpl->tpl_vars['key']->_loop = true;
 
     </div>
     <!-- /page content -->
+    <div style="display: none;">
+
+        
+    </div>
+    <?php echo js('form/custom.js');?>
 
 </div>
 <!-- /content -->

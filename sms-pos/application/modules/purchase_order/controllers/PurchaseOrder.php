@@ -15,7 +15,7 @@ class PurchaseOrder extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->acl->auth(__DIR__);
+        $this->acl->auth("purchase_order");
         $this->id_staff = $this->session->userdata('uid');
         $this->load->model('product/ModProduct', 'ModProduct');
         $this->load->library('cart',
@@ -77,8 +77,8 @@ class PurchaseOrder extends MX_Controller
                         'brand' => $this->input->post('brand'),
                         'qty' => $this->input->post('qty'),
                         'price' => $this->input->post('price'),
-                        'discount_total' => $this->input->post('discount_total') != null ?
-                            $this->input->post('discount_total') : 0,
+                        'discount_total' => $this->input->post('discount_total') == "" ?
+                            "0" : $this->input->post('discount'),
                         'status' => 0
                     );
                     $this->cart->add_item($this->input->post('id_product'), $data_value);

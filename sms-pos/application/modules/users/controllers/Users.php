@@ -12,8 +12,10 @@ class Users extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->acl->auth(__DIR__);
+        $this->acl->auth('users');
         $this->load->library('grocery_CRUD');
+        $this->menu = "";
+        $this->roles = $this->session->userdata('roles');
     }
 
     public function render($output)

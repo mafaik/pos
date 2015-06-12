@@ -14,7 +14,7 @@ class Distribution extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->acl->auth(__DIR__);
+        $this->acl->auth('product_distribution');
         $this->id_staff = $this->session->userdata('uid');
         $this->id_store = $this->config->item('id_store');
         $this->load->model('product/ModProduct', 'ModProduct');
@@ -136,8 +136,8 @@ class Distribution extends MX_Controller
             ->from('product_distribution pd')
             ->join('product_distribution_detail pdd','pdd.id_product_distribution = pd.id_product_distribution')
             ->join('product p','p.id_product = pdd.id_product')
-            ->join('product_category pc','pc.id_product_category = p.id_product_category')
-            ->join('product_unit pu','pu.id_product_unit = p.id_product_unit')
+            ->join('product_category pc','pc.id_product_category = p.id_product_category','left')
+            ->join('product_unit pu','pu.id_product_unit = p.id_product_unit','left')
             ->where(array('pd.id_product_distribution' => $id_distribution))
             ->get()->result();
         $data['items'] = $items;

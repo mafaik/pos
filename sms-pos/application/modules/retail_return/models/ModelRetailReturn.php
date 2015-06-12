@@ -28,8 +28,8 @@ class ModelRetailReturn extends CI_Model
             ->from('retail_detail ed')
             ->join('product_store ps', 'ps.id_product_store = ed.id_product_store', 'left')
             ->join('product p', 'p.id_product = ps.id_product', 'left')
-            ->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit')
-            ->join('product_category pc', 'pc.id_product_category = p.id_product_category')
+            ->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit','left')
+            ->join('product_category pc', 'pc.id_product_category = p.id_product_category','left')
             ->where(['id_retail'=>$id_retail])
             ->get()->result_array();
     }
@@ -40,8 +40,8 @@ class ModelRetailReturn extends CI_Model
             ->from('retail_detail ed')
             ->join('product_store ps', 'ps.id_product_store = ed.id_product_store', 'left')
             ->join('product p', 'p.id_product = ps.id_product', 'left')
-            ->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit')
-            ->join('product_category pc', 'pc.id_product_category = p.id_product_category')
+            ->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit', 'left')
+            ->join('product_category pc', 'pc.id_product_category = p.id_product_category', 'left')
             ->where(['id_retail'=>$id_retail])
             ->get()->result_array();
     }
@@ -51,8 +51,8 @@ class ModelRetailReturn extends CI_Model
             ->from('retail_detail ed')
             ->join('product_store ps', 'ps.id_product_store = ed.id_product_store', 'left')
             ->join('product p', 'p.id_product = ps.id_product', 'left')
-            ->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit')
-            ->join('product_category pc', 'pc.id_product_category = p.id_product_category')
+            ->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit', 'left')
+            ->join('product_category pc', 'pc.id_product_category = p.id_product_category', 'left')
             ->where(['id_retail_detail'=>$id_detail])
             ->get()->row();
     }
@@ -61,8 +61,8 @@ class ModelRetailReturn extends CI_Model
         $this->db->select('*, ps.stock as stock_retail');
         $this->db->from('product_store ps');
         $this->db->join('product p', 'p.id_product = ps.id_product', 'left');
-        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit');
-        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category');
+        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit', 'left');
+        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category', 'left');
         $this->db->where(['id_store'=>$id_store]);
         return $this->db->get()->result_array();
     }
@@ -81,8 +81,8 @@ class ModelRetailReturn extends CI_Model
         $this->db->join('retail_detail rd', 'rd.id_retail_detail = ed.id_retail_detail');
         $this->db->join('product_store ps', 'ps.id_product_store = rd.id_product_store');
         $this->db->join('product p', 'p.id_product = ps.id_product');
-        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit');
-        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category');
+        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit', 'left');
+        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category', 'left');
         $this->db->where(['id_retail_return'=>$id_return]);
         return $this->db->get()->result_array();
     }
@@ -99,7 +99,7 @@ class ModelRetailReturn extends CI_Model
 
     public function getDataReturn($id_return){
         return $this->db
-            ->select('*, staff.name as staff_name, staff.name as store_name')
+            ->select('*, staff.name as staff_name, store.name as store_name')
             ->from('retail_return')
             ->join('retail','retail.id_retail = retail_return.id_retail')
             ->join('staff', 'staff.id_staff = retail_return.id_staff')

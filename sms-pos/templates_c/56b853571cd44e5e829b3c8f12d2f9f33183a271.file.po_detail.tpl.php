@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-27 06:46:12
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-02 12:00:05
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6338738805530ecdd0a61e9-92077084%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '56b853571cd44e5e829b3c8f12d2f9f33183a271' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl',
-      1 => 1432642693,
+      1 => 1433246403,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
     array (
       0 => '/var/www/sms-pos/application/master.tpl',
-      1 => 1432706329,
+      1 => 1433163876,
       2 => 'file',
     ),
   ),
@@ -23,11 +23,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_5530ecdd211b44_79182658',
-  'variables' => 
-  array (
-    'menu' => 0,
-    'child' => 0,
-  ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5530ecdd211b44_79182658')) {function content_5530ecdd211b44_79182658($_smarty_tpl) {?><!DOCTYPE html>
@@ -40,7 +35,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <title>PT Medika Sejahtera</title>
 
-
     <?php echo css('bootstrap.min.css');?>
 
     <?php echo css('londinium-theme.css');?>
@@ -51,8 +45,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <?php echo css('jqClock.css');?>
 
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=latin,cyrillic-ext"
-          rel="stylesheet" type="text/css">
+    
+          
 
     <?php echo '<script'; ?>
  type="text/javascript"
@@ -64,7 +58,13 @@ ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"><?php echo '</script'
             src="<?php echo theme_url();?>
 ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</script'; ?>
 >
-
+    <?php echo '<script'; ?>
+ type="text/javascript"
+            src="<?php echo theme_url();?>
+ajax.googleapis.com/ajax/libs/jquery/1.10.1/jqClock.min.js"><?php echo '</script'; ?>
+>
+    <link rel="stylesheet" type="text/css" href="<?php echo theme_url();?>
+css/print.css" media="print" />
     <?php echo js('plugins/charts/sparkline.min.js');?>
 
 
@@ -174,47 +174,30 @@ ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</sc
         <div class="sidebar-content">
 
             <!-- Main navigation -->
-            <ul class="navigation">
-                <?php  $_smarty_tpl->tpl_vars['menu'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['menu']->_loop = false;
- $_from = userdata('menu'); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['menu']->key => $_smarty_tpl->tpl_vars['menu']->value) {
-$_smarty_tpl->tpl_vars['menu']->_loop = true;
-?>
-                    <li>
-                        <a href="<?php if (!$_smarty_tpl->tpl_vars['menu']->value['child']) {
-echo base_url();
-echo $_smarty_tpl->tpl_vars['menu']->value['url'];
-} else { ?>#<?php }?>" <?php echo $_smarty_tpl->tpl_vars['menu']->value['attr'];?>
->
-                            <span> <?php echo $_smarty_tpl->tpl_vars['menu']->value['title'];?>
-</span>
-                            <i class="<?php echo $_smarty_tpl->tpl_vars['menu']->value['icon'];?>
-"></i>
-                        </a>
-                        <?php if ($_smarty_tpl->tpl_vars['menu']->value['child']) {?>
-                            <ul class="icons-right">
-                                <?php  $_smarty_tpl->tpl_vars['child'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['child']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['menu']->value['child']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['child']->key => $_smarty_tpl->tpl_vars['child']->value) {
-$_smarty_tpl->tpl_vars['child']->_loop = true;
-?>
-                                    <li>
-                                        <a href="<?php echo base_url();
-echo $_smarty_tpl->tpl_vars['child']->value['url'];?>
-">
-                                            <span><?php echo $_smarty_tpl->tpl_vars['child']->value['title'];?>
-</span>
-                                            <i class="<?php echo $_smarty_tpl->tpl_vars['child']->value['icon'];?>
-" <?php echo $_smarty_tpl->tpl_vars['child']->value['attr'];?>
-></i>
-                                        </a>
-                                    </li>
-                                <?php } ?>
-                            </ul>
-                        <?php }?>
-                    </li>
-                <?php } ?>
-            </ul>
+            <?php echo userdata('menu');?>
+
+            
+                
+                    
+                        
+                            
+                            
+                        
+                        
+                            
+                                
+                                    
+                                        
+                                            
+                                            
+                                        
+                                    
+                                
+                            
+                        
+                    
+                
+            
             <!-- /main navigation -->
 
         </div>
@@ -362,9 +345,9 @@ echo $_smarty_tpl->tpl_vars['child']->value['url'];?>
                                 <div class="col-md-7 <?php if (form_error('discount_total')) {?>has-warning<?php }?>">
                                     <div class="input-group">
                                         <span class="input-group-addon">Rp</span>
-                                        <input type="number" name="discount_total" value="<?php echo set_value('discount_total');?>
+                                        <input type="text" name="discount_total" value="<?php echo set_value('discount_total');?>
 "
-                                               class="form-control" placeholder="0">
+                                               class="form-control currency-format" placeholder="0">
 
                                     </div>
                                 </div>
@@ -696,17 +679,14 @@ $_smarty_tpl->tpl_vars['products']->_loop = true;
 
     </div>
     <!-- /page content -->
+    <div style="display: none;">
 
-    
+        
+    </div>
+    <?php echo js('form/custom.js');?>
+
 </div>
 <!-- /content -->
-
-<?php echo '<script'; ?>
- type="text/javascript"
-        src="<?php echo theme_url();?>
-ajax.googleapis.com/ajax/libs/jquery/1.10.1/jqClock.min.js"><?php echo '</script'; ?>
->
-<?php echo js('form/custom.js');?>
 
 </body>
 </html><?php }} ?>

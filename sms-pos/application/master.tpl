@@ -8,20 +8,21 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <title>PT Medika Sejahtera</title>
 
-
     {css('bootstrap.min.css')}
     {css('londinium-theme.css')}
     {css('styles.css')}
     {css('icons.css')}
     {css('jqClock.css')}
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=latin,cyrillic-ext"
-          rel="stylesheet" type="text/css">
+    {*<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=latin,cyrillic-ext"*}
+          {*rel="stylesheet" type="text/css">*}
 
     <script type="text/javascript"
             src="{theme_url()}ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script type="text/javascript"
             src="{theme_url()}ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-
+    <script type="text/javascript"
+            src="{theme_url()}ajax.googleapis.com/ajax/libs/jquery/1.10.1/jqClock.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{theme_url()}css/print.css" media="print" />
     {js('plugins/charts/sparkline.min.js')}
 
     {js('plugins/forms/uniform.min.js')}
@@ -102,28 +103,29 @@
         <div class="sidebar-content">
 
             <!-- Main navigation -->
-            <ul class="navigation">
-                {foreach userdata('menu') as $menu}
-                    <li>
-                        <a href="{if !$menu['child']}{base_url()}{$menu['url']}{else}#{/if}" {$menu['attr']}>
-                            <span> {$menu['title']}</span>
-                            <i class="{$menu['icon']}"></i>
-                        </a>
-                        {if $menu['child']}
-                            <ul class="icons-right">
-                                {foreach $menu['child'] as $child}
-                                    <li>
-                                        <a href="{base_url()}{$child['url']}">
-                                            <span>{$child['title']}</span>
-                                            <i class="{$child['icon']}" {$child['attr']}></i>
-                                        </a>
-                                    </li>
-                                {/foreach}
-                            </ul>
-                        {/if}
-                    </li>
-                {/foreach}
-            </ul>
+            {userdata('menu')}
+            {*<ul class="navigation">*}
+                {*{foreach userdata('menu') as $menu}*}
+                    {*<li>*}
+                        {*<a href="{if !$menu['child']}{base_url()}{$menu['url']}{else}#{/if}" {$menu['attr']}>*}
+                            {*<span> {$menu['title']}</span>*}
+                            {*<i class="{$menu['icon']}"></i>*}
+                        {*</a>*}
+                        {*{if $menu['child']}*}
+                            {*<ul class="icons-right">*}
+                                {*{foreach $menu['child'] as $child}*}
+                                    {*<li>*}
+                                        {*<a href="{base_url()}{$child['url']}">*}
+                                            {*<span>{$child['title']}</span>*}
+                                            {*<i class="{$child['icon']}" {$child['attr']}></i>*}
+                                        {*</a>*}
+                                    {*</li>*}
+                                {*{/foreach}*}
+                            {*</ul>*}
+                        {*{/if}*}
+                    {*</li>*}
+                {*{/foreach}*}
+            {*</ul>*}
             <!-- /main navigation -->
 
         </div>
@@ -148,13 +150,13 @@
 
     </div>
     <!-- /page content -->
+    <div style="display: none;">
 
-    {block name=print}{/block}
+        {block name=print}{/block}
+    </div>
+    {js('form/custom.js')}
 </div>
 <!-- /content -->
 
-<script type="text/javascript"
-        src="{theme_url()}ajax.googleapis.com/ajax/libs/jquery/1.10.1/jqClock.min.js"></script>
-{js('form/custom.js')}
 </body>
 </html>

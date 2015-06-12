@@ -17,8 +17,8 @@ class ModRetail extends CI_Model
         $this->db->select('*, ps.stock as stock_retail');
         $this->db->from('product_store ps');
         $this->db->join('product p', 'p.id_product = ps.id_product', 'left');
-        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit');
-        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category');
+        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit','left');
+        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category','left');
         $this->db->where(['id_store'=>$id_store]);
         return $this->db->get()->result_array();
     }
@@ -28,8 +28,8 @@ class ModRetail extends CI_Model
         $this->db->select('*, ps.stock as stock_retail');
         $this->db->from('product_store ps');
         $this->db->join('product p', 'p.id_product = ps.id_product', 'left');
-        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit');
-        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category');
+        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit','left');
+        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category','left');
         $this->db->where(['ps.id_store'=>$id_store,'ps.id_product'=>$id_product]);
         return $this->db->get()->row();
     }
@@ -39,8 +39,8 @@ class ModRetail extends CI_Model
         $this->db->from('retail_detail ed');
         $this->db->join('product_store ps', 'ps.id_product_store = ed.id_product_store', 'left');
         $this->db->join('product p', 'p.id_product = ps.id_product', 'left');
-        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit');
-        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category');
+        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit','left');
+        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category','left');
         $this->db->where(['id_retail'=>$id_retail]);
         return $this->db->get()->result_array();
     }
@@ -49,8 +49,8 @@ class ModRetail extends CI_Model
     {
         $this->db->from('retail_returns_detail ed');
         $this->db->join('product p', 'p.id_product = ed.id_product', 'left');
-        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit');
-        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category');
+        $this->db->join('product_unit pu', 'pu.id_product_unit = p.id_product_unit','left');
+        $this->db->join('product_category pc', 'pc.id_product_category = p.id_product_category','left');
         $this->db->where(['id_retail_returns'=>$id_retur]);
         return $this->db->get()->result_array();
     }

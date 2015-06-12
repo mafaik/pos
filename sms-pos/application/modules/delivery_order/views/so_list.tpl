@@ -42,7 +42,7 @@
                         <tr>
                             <td>{$val}</td>
                             <td>{$key->id_proposal}</td>
-                            <td>{$key->id_so}</td>
+                            <td>{$key->id_sales_order}</td>
                             <td>{$key->customer_name}</td>
                             <td>{$key->date}</td>
                             <td>{$key->due_date}</td>
@@ -52,7 +52,7 @@
                             <td>
                                 <div class="table-controls">
 
-                                    <a href="{base_url('delivery-order/send')}/{$key->id_so}"
+                                    <a href="{base_url('delivery-order/send')}/{$key->id_sales_order}"
                                        class="button btn btn-success ">
                                         Detail
                                     </a>

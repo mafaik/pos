@@ -14,7 +14,8 @@ class Proposal extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->id_staff = $this->config->item('id_staff');
+        $this->acl->auth('proposal');
+        $this->id_staff = $this->session->userdata('uid');
         $this->load->model('ModelProduct', 'model_product');
         $this->load->model('ModelProposal', 'model_proposal');
         $this->load->library('cart',
@@ -46,7 +47,7 @@ class Proposal extends MX_Controller
                         'id_staff' => $this->id_staff,
                         'type' => $this->input->post('type'),
                         'status_ppn' => $this->input->post('status_ppn'),
-                        'status' => $this->input->post('type') == 0 ? 1 : 0
+                        'status' => $this->input->post('type') == 0 ? "1" : "0"
                     ]
                 );
                 redirect('proposal/detail');
@@ -80,8 +81,7 @@ class Proposal extends MX_Controller
                         'qty' => $this->input->post('qty') != null ?
                             $this->input->post('qty') : 1,
                         'price' => $this->input->post('price'),
-                        'discount' => $this->input->post('discount') != null ?
-                            $this->input->post('discount') : 0
+                        'discount' => $this->input->post('discount') == "" ?  "0" : $this->input->post('discount')
                     );
 
                     $this->cart->add_item($this->input->post('id_product'), $data_value);
@@ -136,8 +136,7 @@ class Proposal extends MX_Controller
                         'qty' => $this->input->post('qty') != null ?
                             $this->input->post('qty') : 1,
                         'price' => $this->input->post('price'),
-                        'discount' => $this->input->post('discount') != null ?
-                            $this->input->post('discount') : 0
+                        'discount' => $this->input->post('discount') == "" ?  "0" : $this->input->post('discount')
                     ]
                 )
                 )
@@ -178,11 +177,55 @@ class Proposal extends MX_Controller
         ) {
             redirect('proposal');
         }
+        $this->load->library('grocery_CRUD');
+        $this->load->model('grocery_CRUD_Model');
+
+        $crud = new grocery_CRUD();
+
+        $crud->set_model('CheckoutModel');
+        $crud->set_table('proposal_detail'); //Change to your table name
+        $crud->columns('name', 'brand', 'unit', 'size', 'qty', 'price', 'discount', 'discount_price', 'sub_total'
+            ,'ppn', 'final_sub_total');
+        $crud->basic_model->getDataProposalDetail($id);
+
+        $crud->callback_column('unit', array($this, '_callback_unit'));
+        $crud->callback_column('price', array($this, '_callback_currency'));
+        $crud->callback_column('discount', array($this, '_callback_currency'));
+        $crud->callback_column('discount_price', array($this, '_callback_currency'));
+        $crud->callback_column('sub_total', array($this, '_callback_currency'));
+        $crud->callback_column('ppn', array($this, '_callback_currency'));
+        $crud->callback_column('final_sub_total', array($this, '_callback_currency'));
+
+        $crud->display_as('final_sub_total','total');
+//
+        $crud->unset_add()
+            ->unset_edit()
+            ->unset_delete()
+            ->unset_print()
+            ->unset_read();
+        $output = $crud->render();
+//        $this->render($output);
+
+
+        $data['output'] = $output;
         $data['master'] = $master;
         $data['proposal_type'] = $this->proposal_type[$master->type];
         $data['status_ppn'] = $this->status_ppn[$master->status_ppn];
-        $data['items'] = $this->model_proposal->getDataProposalDetail($id);
-        $this->parser->parse("proposal_checkout.tpl", $data);
+        $this->parser->parse("list_detail.tpl", $data);
+//        $data['items'] = $this->model_proposal->getDataProposalDetail($id);
+//        $this->parser->parse("proposal_checkout.tpl", $data);
 
     }
+
+    public function _callback_unit($value, $row)
+    {
+        return $row->unit . " / " . $row->value;
+    }
+
+    public function _callback_currency($value, $row)
+    {
+        return "Rp " . number_format($value);
+
+    }
+
 }

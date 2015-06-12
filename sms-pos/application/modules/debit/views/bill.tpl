@@ -29,7 +29,7 @@
                         <tbody>
                         <tr>
                             <th>No. Faktur:</th>
-                            <td class="text-right">{$so->id_so}</td>
+                            <td class="text-right">{$so->id_sales_order}</td>
                             <th>Total Bayar:</th>
                             <td class="text-right">Rp {$so->grand_total|number_format:0}</td>
                             <th>Tanggal Transaksi:</th>
@@ -63,9 +63,9 @@
                     <div class="col-sm-4">
                         <div class="input-group">
                             <span class="input-group-addon">Rp</span>
-                            <input type="number" name="amount"
+                            <input type="text" name="amount"
                                    value="{set_value('amount',($so->grand_total - $so->paid))}"
-                                   class="form-control" placeholder="0">
+                                   class="form-control currency-format" placeholder="0">
                         </div>
                         {if form_error('amount')}
                             <span class="label label-block label-danger text-left">{form_error('amount') }</span>

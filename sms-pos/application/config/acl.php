@@ -36,7 +36,7 @@ $config['login_controller'] = 'login';
 
 // Set the default landing page for users that successfully login.
 // controller/method as a string or NULL, null will be the site main page 
-$config['login_landing_page'] = 'admin';
+$config['login_landing_page'] = 'users';
 
 // Set the flash message for logging a user out, NULL for no flashdata message
 $config['login_message'] = 'Success! You have been logged in.';
@@ -56,79 +56,171 @@ $config['module_auth_message'] = 'please login to access this module.';
 
 //
 $config['module_router'] = [
-    'users' => [
+    [
         'title' => 'Users',
         'icon' => 'icon-user',
-        'attr' => '',
         'child' => [
-            'users' => [
+            [
                 'title' => 'Staff List',
-                'icon' => '',
                 'url' => 'users',
-                'class' => 'Users',
-                'attr' => ''
+                'module' => 'users'
             ],
-            'groups' => [
+            [
                 'title' => 'Staff Kategori',
-                'icon' => '',
                 'url' => 'groups',
-                'attr' => '',
-                'class' => 'Groups'
+                'module' => 'users'
             ]
         ]
     ],
-    'product_conversion' =>[
-        'title' => "Konversi Produk",
+    'product' => [
+        'title' => "Produk",
         'icon' => 'icon-connection',
-        'url' => 'product-conversion',
-        'attr' => '',
-        'child' => null
+        'child' => [
+            [
+                'title' => "Produk List",
+                'url' => 'product',
+                'module' => 'product'
+            ],
+            [
+                'title' => "Produk Opname",
+                'url' => 'stock-opname',
+                'module' => 'product_opname'
+            ],
+            [
+                'title' => "Produk Opname Store",
+                'url' => 'stock-opname/store',
+                'module' => 'product_opname_store'
+            ],
+            [
+                'title' => "Distribusi Produk",
+                'url' => 'product-distribution',
+                'module' => 'product_distribution'
+            ],
+            [
+                'title' => "Produk Return",
+                'url' => 'product-returns',
+                'module' => 'product_return'
+            ],
+            [
+                'title' => "Produk Pricing",
+                'url' => 'pricing',
+                'module' => 'pricing'
+            ],
+            [
+                'title' => "Konversi Produk",
+                'url' => 'product-conversion',
+                'module' => 'product_conversion'
+            ],
+        ]
     ],
-    'product_distribution' =>[
-        'title' => "Distribusi Produk",
-        'icon' => 'icon-arrow-down-right',
-        'url' => 'product-distribution',
-        'attr' => '',
-        'child' => null
-    ],
-    'pricing' =>[
-        'title' => " Pricing",
-        'icon' => ' icon-settings',
-        'url' => 'pricing',
-        'attr' => '',
-        'child' => null
-    ],
-    'purchase_order' => [
+    [
         'title' => 'Purchase Order',
         'icon' => 'icon-tag',
-        'attr' => '',
         'child' => [
-            'purchase_order' => [
+            [
                 'title' => 'Purchase Order',
-                'icon' => '',
                 'url' => 'purchase-order',
-                'class' => 'PurchaseOrder',
-                'attr' => ''
+                'module' => 'purchase_order'
             ],
-            'invoice' => [
+            [
                 'title' => 'Invoice',
-                'icon' => '',
                 'url' => 'purchase-order/invoice',
-                'class' => 'Invoice',
-                'attr' => ''
+                'module' => 'purchase_order'
+            ],
+            [
+                'title' => " Hutang",
+                'url' => 'credit',
+                'module' => 'credit'
             ]
         ]
     ],
-    'retail' =>[
+    [
         'title' => " Retail",
         'icon' => 'icon-arrow2',
-        'url' => 'retail',
-        'attr' => '',
-        'child' => null
+        'child' => [
+            [
+                'title' => 'retail',
+                'url' => 'retail',
+                'module' => 'retail'
+            ],
+            [
+                'title' => 'Invoice',
+                'url' => 'retail/invoice',
+                'module' => 'retail'
+            ],
+            [
+                'title' => "Return",
+                'url' => 'retail/returns',
+                'module' => 'retail'
+            ],
+            [
+                'title' => 'Invoice Return',
+                'url' => 'retail/returns/invoice',
+                'module' => 'retail'
+            ]
+        ]
+    ],
+    [
+        'title' => 'Sales Order',
+        'icon' => 'icon-arrow2',
+        'child' => [
+            [
+                'title' => "Proposal",
+                'url' => 'proposal',
+                'module' => 'proposal'
+
+            ],
+            [
+                'title' => "Sales Order",
+                'url' => 'proposal/list',
+                'module' => 'proposal'
+
+            ],
+            [
+                'title' => "Piutang",
+                'url' => 'debit',
+                'module' => 'debit'
+
+            ],
+            [
+                'title' => "Return",
+                'url' => 'sales-order/returns',
+                'module' => 'proposal'
+            ],
+            [
+                'title' => 'Invoice Return',
+                'url' => 'sales-order/returns/invoice',
+                'module' => 'proposal'
+            ]
+        ]
+    ],
+    [
+        'title'=> 'Delivery Order',
+        'icon'=>'',
+        'url' => 'delivery-order',
+        'module'=>'delivery_order'
+    ],
+    [
+        'title' => 'Sales Order',
+        'icon' => 'icon-arrow2',
+        'child' => [
+            [
+                'title' => "Join Faktur",
+                'url' => 'join',
+                'module' => 'join'
+
+            ],
+            [
+            'title' => "Pisah Faktur",
+            'url' => 'extract',
+            'module' => 'extract'
+
+        ]
+        ]
     ],
 ];
 /*
-// You must reset this admin user 
+// You must reset this admin user
 // The second element in the array is the username  $config['users']['username'];
 // Don't use admin as the username - please reset   
 $config['users']['admin'] = array(

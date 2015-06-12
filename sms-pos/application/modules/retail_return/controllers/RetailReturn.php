@@ -13,7 +13,8 @@ class RetailReturn extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->id_staff = $this->config->item('id_staff');
+        $this->acl->auth('retail');
+        $this->id_staff = $this->session->userdata('uid');
         $this->id_store = $this->config->item('id_store');
         $this->load->model('ModelRetailReturn','model_return');
         $this->load->library('cart',
@@ -129,5 +130,19 @@ class RetailReturn extends MX_Controller
         $data['returns'] = $this->model_return->getReturnReplacerDetailItem($id_return);
 //        var_dump($data['items']);
         $this->parser->parse("returns-checkout.tpl", $data);
+    }
+
+    public function invoice()
+    {
+        if ($this->input->post('id_retail_return')) {
+            if (
+                $this->db
+                    ->where('id_retail_return',$this->input->post('id_retail_return'))
+                    ->get('retail_return')->num_rows() > 0 ) {
+                redirect('retail/returns/checkout/' . $this->input->post('id_retail_return'));
+            }
+            $this->session->set_flashdata('message', array('class' => 'error', 'msg' => 'data tidak di temukan'));
+        }
+        $this->parser->parse("invoice-form.tpl");
     }
 }

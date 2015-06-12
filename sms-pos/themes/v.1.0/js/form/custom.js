@@ -108,13 +108,14 @@ function ppnCheck(){
     var dpp = parseInt(convertCurrency($('#sum-dpp-text').text()));
     var ppn = 0;
 
-
-    if(input.prop( "checked" ) == true){
-        ppn = 0.1 * dpp;
+    if(input.length) {
+        if(input.prop( "checked" ) == true){
+            ppn = 0.1 * dpp;
+        }
+        $('#sum-ppn-text').html(numberFormat(ppn));
+        var total = dpp + ppn;
+        $('#sum-grand_total-text').html(numberFormat(total));
     }
-    $('#sum-ppn-text').html(numberFormat(ppn));
-    var total = dpp + ppn;
-    $('#sum-grand_total-text').html(numberFormat(total));
     setBayar($('#input-bayar').val());
 }
 
@@ -134,51 +135,45 @@ function formatAsCurrency(el){
 function formatAsNumber(el){
     el.value = convertCurrency(el.value);
 }
-
 function print_doc() {
+    if($("#print").length == 0){
+        return false;
+    }
+    var body = $("body").html();
+    var print_area = $("#print").html();
+    $("body").html(print_area);
+
     try {
-        //Try to print using jsPrintSetup Plug-In in Firefox
-        //If it is not installed fall back to default printing
         jsPrintSetup.clearSilentPrint();
-        //jsPrintSetup.definePaperSize(6, 6, "na_invoice", "na_invoice_5.5x8.5in", "'US Statement", 8.5 , 5.5, jsPrintSetup.kPaperSizeInches);
-        jsPrintSetup.setOption('shrinkToFit', 0);
+        jsPrintSetup.setPrinter('EPSON LX 300');
         jsPrintSetup.setOption('orientation', jsPrintSetup.kPotraitOrientation);
         jsPrintSetup.undefinePaperSize(78);
         jsPrintSetup.definePaperSize(78, 78, 'iso_a5_rotate', 'iso_a5_rotate_210x148mm', 'A5 Rotated', 210, 148, jsPrintSetup.kPaperSizeMillimeters);
         jsPrintSetup.setPaperSizeData(78);
         jsPrintSetup.setSilentPrint(true);
-        /** Set silent printing */
 
-            //Choose printer using one or more of the following functions
-            //jsPrintSetup.getPrintersList...
-            //jsPrintSetup.setPrinter...
+        jsPrintSetup.setOption('marginTop', 0);
+        jsPrintSetup.setOption('marginBottom', 5);
+        jsPrintSetup.setOption('marginLeft', 5);
+        jsPrintSetup.setOption('marginRight', 0);
 
-            //Set Header and footer...
-        jsPrintSetup.setOption('marginTop', 5);
-        jsPrintSetup.setOption('marginBottom', 10);
-        jsPrintSetup.setOption('marginLeft', 10);
-        jsPrintSetup.setOption('marginRight', 10);
-        // set page header
-        jsPrintSetup.setOption('headerStrLeft', 'My custom header');
-        jsPrintSetup.setOption('headerStrCenter', 'top center');
-        jsPrintSetup.setOption('headerStrRight', 'top right');
-        // set empty page footer
-        jsPrintSetup.setOption('footerStrLeft', 'bottom left');
-        jsPrintSetup.setOption('footerStrCenter', 'cottom center');
+        jsPrintSetup.setOption('headerStrLeft', '');
+        jsPrintSetup.setOption('headerStrCenter', '');
+        jsPrintSetup.setOption('headerStrRight', '');
+
+        jsPrintSetup.setOption('footerStrLeft', '');
+        jsPrintSetup.setOption('footerStrCenter', '');
         jsPrintSetup.setOption('footerStrRight', '&PT');
 
-        $('body')
+
         jsPrintSetup.print();
         jsPrintSetup.setSilentPrint(false);
-        /** Set silent printing back to false */
-        window.close();
     }
     catch (err) {
-        alert(err);
-        //Default printing if jsPrintsetup is not available
-        //window.print();
-        //window.close();
+        window.print();
     }
+    window.close();
+    $("body").html(body);
 
 }
 
@@ -199,4 +194,8 @@ $(document).ready(function(){
     })
 
     $("#clock").clock({"format":"24"});
+    $('#button-focus').focus();
 });
+//document.addEventListener('DOMContentLoaded', function() {
+//    print_doc();
+//}, false);

@@ -53,11 +53,6 @@
                                            onclick="return confirm('Proposal {$key->id_proposal} telah di terima oleh {$key->customer_name}')">
                                             Ganti status
                                         </a>
-                                        <a href="{base_url('proposal/delete')}/{$key->id_proposal}"
-                                           class="button btn btn-danger "
-                                           onclick="return confirm('Proposal {$key->id_proposal} akan di hapus}')">
-                                            Hapus
-                                        </a>
                                     {else}
                                         <a href="{base_url('sales-order/')}/{$key->id_proposal}"
                                            class="button btn btn-success ">
@@ -69,7 +64,11 @@
                                        class="button btn btn-warning ">
                                         Detail
                                     </a>
-
+                                    <a href="{base_url('proposal/delete')}/{$key->id_proposal}"
+                                       class="button btn btn-danger "
+                                       onclick="return confirm('Proposal {$key->id_proposal} akan di hapus')">
+                                        Hapus
+                                    </a>
                                 </div>
                             </td>
                         </tr>

@@ -16,7 +16,7 @@ class Invoice extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->acl->auth(__DIR__);
+        $this->acl->auth("purchase_order");
         $this->load->model('ModelPurchaseOrder','model_purchase_order');
     }
 

@@ -33,6 +33,7 @@
 
                 <div class="col-sm-3 pull-right">
                     <ul>
+                        <li>No Faktur SO # <strong class="text-danger pull-right">{$master->id_sales_order}</strong></li>
                         <li>No Proposal # <strong class="text-danger pull-right">{$master->id_proposal}</strong></li>
                         <li>Staff <strong class="pull-right">{$master->staff_name} </strong></li>
                         <li>Date : <strong class="pull-right">{$master->date}</strong></li>
@@ -41,82 +42,74 @@
                     </ul>
                 </div>
             </div>
-        </div>
 
-
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Produk</th>
-                    <th>Merek</th>
-                    <th>Satuan / isi</th>
-                    <th>Qty</th>
-                    <th>Harga</th>
-                    <th>Diskon</th>
-                    {if $master->status_ppn == 1}
-                        <th>Ppn</th>
-                    {/if}
-                    <th>Subtotal</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                {assign var=total value=0}
-                {assign var=ppn_total value=0}
-                {assign var=val value=1}
-                {foreach $items as $key }
-                    {assign var=ppn value=0}
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
                     <tr>
-                        <td>{$val}</td>
-                        <td>{$key['name']}</td>
-                        <td>{$key['brand']}</td>
-                        <td>{$key['unit']} / {$key['value']}</td>
-                        <td>
-                            {$key['qty']}
-                        </td>
-                        {*{/if}*}
-                        <td style="width:130px;" class="text-right">
-                            Rp {$key['price']|number_format:0}
-                        </td>
-                        <td style="width:130px;" class="text-right">
-                            Rp {$key['discount']|number_format:0}
-                        </td>
+                        <th>No</th>
+                        <th>Nama Produk</th>
+                        <th>Merek</th>
+                        <th>Satuan / isi</th>
+                        <th>Qty</th>
+                        <th>Harga</th>
+                        <th>Diskon</th>
                         {if $master->status_ppn == 1}
-                            <td style="width:130px;" class="text-right">
-                                {assign var=ppn value=($key['qty']*($key['price'] - $key['discount'])*0.1)}
-                                Rp {$ppn|number_format:0}
-                            </td>
+                            <th>Ppn</th>
                         {/if}
-                        <td style="width:130px;" class="text-right">
-                            Rp {($key['qty'] *
-                            ($key['price'] - $key['discount'])
-                            +$ppn
-                            )|number_format:0}
-                        </td>
-                        <td style="width:90px;">
-
-                            <div class="table-controls">
-                                <a data-toggle="modal" class="btn btn-link btn-icon btn-xs tip" title="Update Qty"
-                                   href="#update-modal" onclick="updateItem({$key['id_product']})" role="button">
-                                    <i class="icon-pencil3"></i></a>
-                                <a href="{base_url('proposal/detail/delete')}/{$key['id_product']}"
-                                   class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">
-                                    <i class="icon-remove3"></i></a>
-                            </div>
-                        </td>
+                        <th>Subtotal</th>
                     </tr>
-                    {assign var=val value=$val+1}
-                    {assign var=total value=$total+($key['qty'] * ($key['price'] - $key['discount']))}
-                    {assign var=ppn_total value=$ppn_total+ $ppn}
+                    </thead>
+                    <tbody>
+                    {assign var=val value=1}
+                    {foreach $items as $key }
+                        {assign var=ppn value=0}
+                        <tr>
+                            <td>{$val}</td>
+                            <td>{$key['name']}</td>
+                            <td>{$key['brand']}</td>
+                            <td>{$key['unit']} / {$key['value']}</td>
+                            <td>
+                                {$key['qty']}
+                            </td>
+                            {*{/if}*}
+                            <td style="width:130px;" class="text-right">
+                                Rp {$key['price']|number_format:0}
+                            </td>
+                            <td style="width:130px;" class="text-right">
+                                Rp {$key['discount']|number_format:0}
+                            </td>
+                            {if $master->status_ppn == 1}
+                                <td style="width:130px;" class="text-right">
+                                    {assign var=ppn value=($key['qty']*($key['price'] - $key['discount'])*0.1)}
+                                    Rp {$ppn|number_format:0}
+                                </td>
+                            {/if}
+                            <td style="width:130px;" class="text-right">
+                                Rp {($key['qty'] *
+                                ($key['price'] - $key['discount'])
+                                +$ppn
+                                )|number_format:0}
+                            </td>
+                            {*<td style="width:90px;">*}
 
-                {/foreach}
-                </tbody>
-            </table>
-        </div>
+                                {*<div class="table-controls">*}
+                                    {*<a data-toggle="modal" class="btn btn-link btn-icon btn-xs tip" title="Update Qty"*}
+                                       {*href="#update-modal" onclick="updateItem({$key['id_product']})" role="button">*}
+                                        {*<i class="icon-pencil3"></i></a>*}
+                                    {*<a href="{base_url('proposal/detail/delete')}/{$key['id_product']}"*}
+                                       {*class="btn btn-link btn-icon btn-xs tip" title="Hapus Data">*}
+                                        {*<i class="icon-remove3"></i></a>*}
+                                {*</div>*}
+                            {*</td>*}
+                        </tr>
+                        {assign var=val value=$val+1}
 
-        <div class="panel-body">
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+
             <div class="row invoice-payment">
                 <div class="col-sm-8">
                 </div>
@@ -125,18 +118,23 @@
                     <table class="table">
                         <tbody>
                         <tr>
-                            <th>Total:</th>
-                            <td class="text-right">Rp {$total|number_format:0}</td>
+                            <th>Dpp:</th>
+                            <td class="text-right">Rp {$master->dpp|number_format:0}</td>
+                        </tr>
+                        <tr>
+                            <th>Discount:</th>
+                            <td class="text-right">Rp {$master->discount_price|number_format:0}</td>
                         </tr>
                         <tr>
                             <th>PPn:</th>
-                            <td class="text-right">Rp {$ppn_total|number_format:0}</td>
+                            <td class="text-right">Rp {$master->ppn|number_format:0}</td>
                         </tr>
 
                         <tr>
                             <th>Grand Total:</th>
                             <td class="text-right text-danger">
-                                <h6>Rp <span id="sum-grand_total-text">{($total+$ppn_total)|number_format:0} </span>
+                                <h6>Rp <span id="sum-grand_total-text">
+                                    Rp {$master->grand_total|number_format:0}
                                 </h6>
                             </td>
                         </tr>

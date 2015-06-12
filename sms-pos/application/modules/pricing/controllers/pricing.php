@@ -16,7 +16,7 @@ class Pricing extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->acl->auth(__DIR__);
+        $this->acl->auth('pricing');
         $this->load->model('product/ModProduct', 'ModProduct');
 
         $this->id_staff = $this->config->item('id_staff');

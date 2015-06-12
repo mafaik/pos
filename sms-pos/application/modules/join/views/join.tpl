@@ -43,13 +43,13 @@
                     {foreach $items as $key }
                         <tr>
                             <td>{$val}</td>
-                            <td>{$key->id_so}</td>
+                            <td>{$key->id_sales_order}</td>
                             <td>{$key->date}</td>
                             <td class="text-right">
                                 Rp {$key->grand_total|number_format:0}</td>
                             <td class="text-center">
 
-                                <input type="checkbox" name="id_so[]" value="{$key->id_so}" class="styled" />
+                                <input type="checkbox" name="id_sales_order[]" value="{$key->id_sales_order}" class="styled" />
                             </td>
                         </tr>
                         {assign var=val value=$val+1}

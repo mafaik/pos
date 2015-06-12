@@ -12,7 +12,8 @@ class Credit extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->id_staff = $this->config->item('id_staff');
+        $this->acl->auth('credit');
+        $this->id_staff = $this->session->userdata('uid');
     }
 
     public function index()
@@ -28,26 +29,26 @@ class Credit extends MX_Controller
 
         }
         $po = $this->db
-            ->where('po.status', false)
+            ->where('po.status_paid', false)
             ->order_by('date_created  asc')
             ->get()
             ->result();
         $data['po'] = $po;
 
         $grand_total = $this->db->select_sum('grand_total')
-            ->where(array('po.status' => false))
+            ->where(array('po.status_paid' => false))
             ->get('purchase_order po')
             ->row();
 
         $paid = $this->db->select_sum('paid')
-            ->where(array('po.status' => false))
+            ->where(array('po.status_paid' => false))
             ->get('purchase_order po')
             ->row();
 
         $data['credit_total'] = $grand_total->grand_total - $paid->paid;
 
         $date_available = $this->db->select('MONTH(date) as month,YEAR(date) as year')
-            ->where(array('po.status' => false))
+            ->where(array('po.status_paid' => false))
             ->group_by('month(date)')
             ->get('purchase_order po')
             ->result();
@@ -64,7 +65,7 @@ class Credit extends MX_Controller
         $this->parser->parse("credit.tpl", $data);
     }
 
-    public function bill($id_po)
+    public function bill($id_purchase_order)
     {
 
         $data['error'] = $this->session->flashdata('error') != null ? $this->session->flashdata('error') : null;
@@ -76,9 +77,9 @@ class Credit extends MX_Controller
                 if (isset($_FILES['file']['size']) && ($_FILES['file']['size'] > 0)) {
                     $config['upload_path'] = './upload/credit';
                     $config['allowed_types'] = 'gif|jpg|png';
-                    $config['max_size'] = '2048';
-                    $config['max_width'] = '1024';
-                    $config['max_height'] = '768';
+                    $config['max_size'] = '4048';
+                    $config['max_width'] = '4024';
+                    $config['max_height'] = '4668';
                     $config['encrypt_name'] = true;
 
                     $this->load->library('upload', $config);
@@ -86,33 +87,35 @@ class Credit extends MX_Controller
                     if (!$this->upload->do_upload('file')) {
                         $this->session->set_flashdata('error',
                             $this->upload->display_errors(''));
-                        redirect('bill' . '/' . $id_po);
+                        redirect('credit/bill' . '/' . $id_purchase_order);
                     }
                     $file = $this->upload->data();
-                    $scan = base_url() . "/upload/credit" . $file['file_name'];
+                    $scan = base_url() . "upload/credit/" . $file['file_name'];
 
 
+                    $data_insert = array(
+                        'id_staff' => $this->id_staff,
+                        'id_purchase_order' => $id_purchase_order,
+                        'payment_type' => $this->input->post('payment_type'),
+                        'amount' => $this->input->post('amount'),
+                        'resi_number' => $this->input->post('resi_number'),
+                        'date_withdrawal' => $this->input->post('date_withdrawal') == "" ?
+                            null : $this->input->post('date_withdrawal'),
+                        'status' => $this->input->post('payment_type') == "bg" ? 0 : 1,
+                        'file' => $scan
+                    );
+
+                    $this->db->insert('credit', $data_insert);
+                    $this->session->set_flashdata('success', 'insert data berhasil');
+                    redirect('credit');
                 }
-                $data_insert = array(
-                    'id_staff' => $this->id_staff,
-                    'id_po' => $id_po,
-                    'payment_type' => $this->input->post('payment_type'),
-                    'amount' => $this->input->post('amount'),
-                    'resi_number' => $this->input->post('resi_number'),
-                    'date_withdrawal' => $this->input->post('date_withdrawal'),
-                    'status' => $this->input->post('payment_type') == "bg" ? 0 : 1,
-                    'file' => $scan
-                );
-
-                $this->db->insert('credit', $data_insert);
-                $this->session->set_flashdata('success', 'insert data berhasil');
-                redirect('credit');
+                $data['error'] = "masukkan bukti pembayaran";
             }
         }
         $po = $this->db->from('purchase_order po')
             ->join('principal p', 'p.id_principal = po.id_principal')
             ->where(array(
-                'id_po' => $id_po
+                'id_purchase_order' => $id_purchase_order
             ))
             ->get()
             ->row();
@@ -128,15 +131,15 @@ class Credit extends MX_Controller
             ->set('status',true)
             ->update('credit');
         $row = $this->db->get_where('credit',['id_credit'=>$id_credit])->row();
-            redirect('credit/detail'.'/'.$row->id_po);
+            redirect('credit/detail'.'/'.$row->id_purchase_order);
     }
 
-    public function detailBayar($id_po)
+    public function detailBayar($id_purchase_order)
     {
         $po = $this->db->from('purchase_order po')
             ->join('principal p', 'p.id_principal = po.id_principal')
             ->where(array(
-                'id_po' => $id_po
+                'id_purchase_order' => $id_purchase_order
             ))
             ->get()
             ->row();
@@ -145,7 +148,7 @@ class Credit extends MX_Controller
 
         $credit = $this->db->from('credit')
             ->join('staff', 'staff.id_staff = credit.id_staff')
-            ->where('id_po', $id_po)
+            ->where('id_purchase_order', $id_purchase_order)
             ->get()
             ->result();
         $data['credit'] = $credit;

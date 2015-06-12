@@ -21,7 +21,7 @@
 
                     <div class="col-sm-3 pull-right">
                         <ul>
-                            <li>No Faktur # <strong class="text-danger pull-right">{$so->id_so}</strong></li>
+                            <li>No Faktur # <strong class="text-danger pull-right">{$so->id_sales_order}</strong></li>
                             <li>Tanggal Nota Transaksi : <strong class="pull-right">{$so->date}</strong></li>
                             <li>Tanggal Jatuh Tempo: <strong class="pull-right">{$so->due_date}</strong></li>
                         </ul>
