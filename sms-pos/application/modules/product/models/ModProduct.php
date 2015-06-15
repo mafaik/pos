@@ -17,8 +17,8 @@ class ModProduct extends CI_Model
 
     public function get(){
         $this->db->from('product');
-        $this->db->join('product_unit','product_unit.id_product_unit = product.id_product_unit','left');
-        $this->db->join('product_category','product_category.id_product_category = product.id_product_category','left');
+        $this->db->join('product_unit','product_unit.id_product_unit = product.id_product_unit');
+        $this->db->join('product_category','product_category.id_product_category = product.id_product_category');
         $result = $this->db->get();
         $rows = $result->result_array();
         return $rows;
@@ -27,8 +27,8 @@ class ModProduct extends CI_Model
     public function getProduct($id_product){
         $this->db->select('*');
         $this->db->from('product');
-        $this->db->join('product_unit','product_unit.id_product_unit = product.id_product_unit','left');
-        $this->db->join('product_category','product_category.id_product_category = product.id_product_category','left');
+        $this->db->join('product_unit','product_unit.id_product_unit = product.id_product_unit');
+        $this->db->join('product_category','product_category.id_product_category = product.id_product_category');
         $this->db->where('product.id_product',$id_product);
         $this->db->order_by('product.name ASC');
         $result = $this->db->get();
@@ -42,6 +42,16 @@ class ModProduct extends CI_Model
             return false;
         } else {
             return true;
+        }
+    }
+
+    public function checkPrefixCode($prefix_code, $selected_table)
+    {
+        $rows = $this->db->get_where($selected_table, array('prefix_code' => $prefix_code))->num_rows();
+        if ($rows > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
