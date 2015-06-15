@@ -24,6 +24,11 @@ class Users extends MX_Controller
         $this->parser->parse("index.tpl",$output);
     }
 
+    public function renderGroup($output)
+    {
+        $this->parser->parse("group-index.tpl",$output);
+    }
+
     public function index()
     {
         $crud = new grocery_CRUD();
@@ -35,11 +40,26 @@ class Users extends MX_Controller
                 ->display_as('register_date', 'Register Date')
                 ->set_relation('id_group', 'staff_group', 'name_group')
                 ->field_type('password', 'password')
-                ->callback_edit_field('password',array($this,'setPasswordInputToEmpty'))
-                ->callback_add_field('password',array($this,'setPasswordInputToEmpty'))
-                ->callback_before_update(array($this,'encryptPasswordCallback'));
+                ->callback_field('password',array($this,'setPasswordInputToEmpty'))
+                ->callback_before_insert(array($this, 'checkPassword'))
+                ->callback_before_update(array($this,'encryptPasswordCallback'))
+                ->required_fields('id_group', 'nip', 'name', 'username', 'email', 'register_date')
+                ->set_rules('email', 'Email', 'valid_email')
+                ->unset_read();
         $output = $crud->render();
         $this->render($output);
+    }
+
+    function checkPassword($post_array)
+    {  
+        if (empty($post_array['password'])) {
+            $message = 'The Password field is required';
+            $this->form_validation->set_message('password', $message);
+            return false;
+        } else {
+            $post_array['password'] = $this->acl->hash_password($post_array['password']);
+            return $post_array;
+        }
     }
 
     function setPasswordInputToEmpty()
@@ -50,7 +70,7 @@ class Users extends MX_Controller
     function encryptPasswordCallback($post_array, $primary_key)
     {
         if (!empty($post_array['password'])) {
-            $post_array['password'] = $this->acl->hash_password($post_array['password']);;
+            $post_array['password'] = $this->acl->hash_password($post_array['password']);
         }
         else {
             unset($post_array['password']);
@@ -61,29 +81,30 @@ class Users extends MX_Controller
 
     public function group()
     {
-        $data['success'] = $this->session->flashdata('success') != null ? $this->session->flashdata('success') : null;
-        $data['userGroup'] = $this->ModUsers->getUserGroup();
-        $this->parser->parse("group.tpl", $data);
+        $crud = new grocery_CRUD();
+
+        $crud->set_table('staff_group')
+                ->columns('name_group', 'note', 'jml_user')
+                ->fields('name_group', 'note')
+                ->display_as('name_group', 'Group Name')
+                ->display_as('jml_user', 'Jumlah User')
+                ->required_fields('name_group')
+                ->callback_column('jml_user', array($this, 'countJmlUser'))
+                ->add_action('Update Role', '', '', 'read-icon', array($this, 'addUpdateRoleAction'))
+                ->unset_read();
+        $output = $crud->render();
+        $this->renderGroup($output);
     }
 
-    public function updateGroup($id_group)
+    function countJmlUser($value, $row)
     {
-        if ($this->input->post()) {
-            if ($this->form_validation->run('users/edit-group') == TRUE) {
-                $data = $this->input->post();
-                $this->ModUsers->updateUserGroup($id_group, $data);
-                redirect('users/group');
-            }
-        }
-
-        $data['userGroupData'] = $this->ModUsers->getUserGroupByID($id_group);
-        $this->parser->parse('update-group.tpl', $data);
+        $jmlUser = $this->ModUsers->getUserGroupCount($row->id_group);
+        return $jmlUser;
     }
 
-    public function deleteGroup($id_group)
+    function addUpdateRoleAction($value, $row)
     {
-        $this->ModUsers->deleteUserGroup($id_group);
-        redirect('users/group');
+        return site_url('users/update-group-role').'/'.$row->id_group;
     }
 
     public function updateRole($id_group)
@@ -95,20 +116,11 @@ class Users extends MX_Controller
             return false;
         }
 
-        $directory = "application/modules";
-        $dirLen = strlen($directory) + 1;
-        $modules = glob($directory . "/*", GLOB_ONLYDIR );
-        $fixedModules = array();
-        foreach ($modules as $value) {
-            $valueLen = strlen($value);
-            $fixedValue = substr($value, $dirLen, $valueLen);
-            $fixedModules[$fixedValue] = $fixedValue;
-        }
-        unset($fixedModules['login']);
+        $modulesList = $this->acl->getModulesList();
         $userGroupRoles = $this->ModUsers->getUserGroupRole($id_group);
         $fixedUserGroupRoles = json_decode($userGroupRoles['roles']);
         $data['userGroupRoles'] = $fixedUserGroupRoles;
-        $data['modulesList'] = $fixedModules;
+        $data['modulesList'] = $modulesList;
         $this->parser->parse('update-role.tpl', $data);
     }
 }

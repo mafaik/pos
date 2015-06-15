@@ -28,7 +28,9 @@ class Bank_Info extends MX_Controller
                 ->display_as('bank_city', 'Bank City')
                 ->display_as('bank_branch', 'Bank Branch')
                 ->set_relation('id_principal', 'principal', 'name')
-                ->fields('id_principal', 'bank_name', 'bank_account', 'bank_beneficiary_name', 'bank_city', 'bank_branch');
+                ->fields('id_principal', 'bank_name', 'bank_account', 'bank_beneficiary_name', 'bank_city', 'bank_branch')
+                ->required_fields('id_principal', 'bank_name', 'bank_account', 'bank_beneficiary_name', 'bank_city', 'bank_branch')
+                ->unset_read();
         $output = $crud->render();
         $this->render($output);
     }

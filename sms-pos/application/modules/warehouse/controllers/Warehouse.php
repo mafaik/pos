@@ -21,6 +21,10 @@ class Warehouse extends MX_Controller
  
         $crud->set_table('warehouse')
                 ->display_as('zipcode', 'Zip Code')
+                ->required_fields('name', 'address', 'zipcode', 'city', 'state', 'country', 'telp')
+                ->unset_read()
+                ->unset_add()
+                ->unset_delete()
                 ->callback_add_field('note', array($this, 'setTextarea'));
         $output = $crud->render();
         $this->render($output);
@@ -31,13 +35,23 @@ class Warehouse extends MX_Controller
     	$crud = new grocery_CRUD();
     	$crud->set_table('warehouse_rack')
                 ->columns('name', 'parent')
+                ->display_as('id_warehouse', 'Nama Warehouse')
                 ->display_as('name', 'Rack Name')
                 ->display_as('parent', 'Rack Parent')
-                ->set_relation('id_warehouse', 'warehouse', 'name')
+                ->required_fields('name')
                 ->set_relation('parent', 'warehouse_rack', '{name}')
-                ->unset_fields('length', 'width', 'height', 'weight');
+                ->unset_fields('length', 'width', 'height', 'weight')
+                ->field_type('id_warehouse', 'invisible')
+                ->callback_before_insert(array($this, 'addWarehouseID'))
+                ->unset_read();
     	$output = $crud->render();
         $this->render($output);
+    }
+
+    function addWarehouseID($post_array)
+    {
+        $post_array['id_warehouse'] = 1;
+        return $post_array;
     }
 
     public function productPlacing()
@@ -50,7 +64,9 @@ class Warehouse extends MX_Controller
                 ->set_relation('id_rack', 'warehouse_rack', 'name')
                 ->set_relation('id_product', 'product', 'name')
                 ->unset_fields('total')
-                ->callback_column('stock', array($this, 'addProductStockColumn'));
+                ->callback_column('stock', array($this, 'addProductStockColumn'))
+                ->required_fields('id_rack', 'id_product')
+                ->unset_read();
         $output = $crud->render();
         $this->render($output);
     }
