@@ -298,5 +298,13 @@ $config = array(
             'label' => 'Tanggal Pengiriman',
             'rules' => 'required'
         )
+    ),
+    'users/edit-group' => array(
+        array(
+            'field' => 'name_group',
+            'label' => 'Nama Group',
+            'rules' => 'required'
+        )
     )
+
 );

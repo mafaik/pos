@@ -21,6 +21,8 @@
             src="{theme_url()}ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script type="text/javascript"
             src="{theme_url()}ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script type="text/javascript"
+            src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 
     {js('plugins/charts/sparkline.min.js')}
 
@@ -135,5 +137,25 @@
 <script type="text/javascript"
         src="{theme_url()}ajax.googleapis.com/ajax/libs/jquery/1.10.1/jqClock.min.js"></script>
 {js('form/custom.js')}
+
+<script type="text/javascript">
+    $(".insertCategoryPrefixCode").keyup(function() {
+        var source = $('.insertCategoryPrefixCode').val();
+        if (source.length <= 2) {
+            var value = $( this ).val();
+            $( 'input[name="prefix_code"]' ).val( value );
+            $( 'input[name="disabled_prefix_code"]' ).val( value );
+        }
+    });
+
+    $(".insertUnitPrefixCode").keyup(function() {
+        var source = $('.insertUnitPrefixCode').val();
+        if (source.length <= 3) {
+            var value = $( this ).val();
+            $( 'input[name="prefix_code"]' ).val( value );
+            $( 'input[name="disabled_prefix_code"]' ).val( value );
+        }
+    });
+</script>
 </body>
 </html>
