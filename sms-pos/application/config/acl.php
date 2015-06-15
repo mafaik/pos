@@ -67,10 +67,37 @@ $config['module_router'] = [
             ],
             [
                 'title' => 'Staff Kategori',
-                'url' => 'groups',
+                'url' => 'users/group',
                 'module' => 'users'
             ]
         ]
+    ],
+    [
+        'title' => 'Warehouse',
+        'icon' => 'icon-arrow2',
+        'child' => [
+            [
+                'title' => 'Warehouse List',
+                'url' => 'warehouse',
+                'module' => 'warehouse'
+            ],
+            [
+                'title' => 'Warehouse Rack',
+                'url' => 'warehouse/rack',
+                'module' => 'warehouse'
+            ],
+            [
+                'title' => 'Product Placing',
+                'url' => 'warehouse/productPlacing',
+                'module' => 'warehouse'
+            ]
+        ]
+    ],
+    [
+        'title'=> 'Store',
+        'icon'=>'',
+        'url' => 'store',
+        'module'=>'store'
     ],
     'product' => [
         'title' => "Produk",
@@ -79,6 +106,16 @@ $config['module_router'] = [
             [
                 'title' => "Produk List",
                 'url' => 'product',
+                'module' => 'product'
+            ],
+            [
+                'title' => "Kategori Produk",
+                'url' => 'product/category',
+                'module' => 'product'
+            ],
+            [
+                'title' => "Produk Unit",
+                'url' => 'product/unit',
                 'module' => 'product'
             ],
             [
@@ -112,6 +149,24 @@ $config['module_router'] = [
                 'module' => 'product_conversion'
             ],
         ]
+    ],
+    [
+        'title'=> 'Principal',
+        'icon'=>'',
+        'url' => 'principal',
+        'module'=>'principal'
+    ],
+    [
+        'title'=> 'Bank Info',
+        'icon'=>'',
+        'url' => 'bank_info',
+        'module'=>'bank_info'
+    ],
+    [
+        'title'=> 'Customer',
+        'icon'=>'',
+        'url' => 'customer',
+        'module'=>'customer'
     ],
     [
         'title' => 'Purchase Order',
