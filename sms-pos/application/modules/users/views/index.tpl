@@ -14,15 +14,15 @@
     <!-- Default panel -->
     <div class="panel panel-default">
 
-        <div class="panel-heading"><h6 class="panel-title">Purchase Order</h6></div>
+        <div class="panel-heading"><h6 class="panel-title">Users List</h6></div>
 
         <div class="panel-body">
-            <div class="block-inner">
-                <h6 class="heading-hr">
-                    <i class="icon-clipboard"></i> Purchase Info
-                    <small class="display-block">Informasi umum tentang proses purchasing</small>
-                </h6>
-            </div>
+            {*<div class="block-inner">*}
+                {*<h6 class="heading-hr">*}
+                    {*<i class="icon-clipboard"></i> Purchase Info*}
+                    {*<small class="display-block">Informasi umum tentang proses purchasing</small>*}
+                {*</h6>*}
+            {*</div>*}
 
             <div class="row">
                 <div class="col-md-12">

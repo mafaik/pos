@@ -55,225 +55,455 @@ $config['logout_message'] = 'Success! You have been logged out.';
 $config['module_auth_message'] = 'please login to access this module.';
 
 //
-$config['module_router'] = [
+$config['module_router'] =
     [
-        'title' => 'Users',
-        'icon' => 'icon-user',
-        'child' => [
-            [
-                'title' => 'Staff List',
-                'url' => 'users',
-                'module' => 'users'
-            ],
-            [
-                'title' => 'Staff Kategori',
-                'url' => 'users/group',
-                'module' => 'users'
+        [
+            'title' => 'Master',
+            'icon' => 'icon-settings',
+            'child' => [
+                [
+                    'title' => 'Users',
+                    'child' => [
+                        [
+                            'title' => 'Staff List',
+                            'url' => 'users',
+                            'module' => 'users'
+                        ], [
+                            'title' => 'Staff Kategori',
+                            'url' => 'users/group',
+                            'module' => 'users'
+                        ]
+                    ]
+                ], [
+                    'title' => 'Store',
+                    'child' => [
+                        [
+                            'title' => 'Store',
+                            'url' => 'store',
+                            'module' => 'store'
+                        ], [
+                            'title' => 'Warehouse List',
+                            'url' => 'warehouse',
+                            'module' => 'warehouse'
+                        ], [
+                            'title' => 'Warehouse Rack',
+                            'url' => 'warehouse/rack',
+                            'module' => 'warehouse'
+                        ]
+                    ]
+                ], [
+                    'title' => 'Principal',
+                    'child' => [
+                        [
+                            'title' => 'Principal List',
+                            'url' => 'principal',
+                            'module' => 'principal'
+                        ], [
+                            'title' => 'Bank Info',
+                            'url' => 'bank_info',
+                            'module' => 'bank_info'
+                        ],
+                    ]
+                ], [
+                    'title' => 'Customer',
+                    'url' => 'customer',
+                    'module' => 'customer'
+                ], [
+                    'title' => 'Produk',
+                    'child' => [
+                        [
+                            'title' => "Produk List",
+                            'url' => 'product',
+                            'module' => 'product'
+                        ], [
+                            'title' => "Kategori Produk",
+                            'url' => 'product/category',
+                            'module' => 'product'
+                        ], [
+                            'title' => "Produk Unit",
+                            'url' => 'product/unit',
+                            'module' => 'product'
+                        ], [
+                            'title' => "Produk Opname",
+                            'url' => 'stock-opname',
+                            'module' => 'product_opname'
+                        ], [
+                            'title' => "Produk Opname Store",
+                            'url' => 'stock-opname/store',
+                            'module' => 'product_opname_store'
+                        ], [
+                            'title' => "Distribusi Produk",
+                            'url' => 'product-distribution',
+                            'module' => 'product_distribution'
+                        ], [
+                            'title' => "Produk Return",
+                            'url' => 'product-returns',
+                            'module' => 'product_return'
+                        ], [
+                            'title' => "Produk Pricing",
+                            'url' => 'pricing',
+                            'module' => 'pricing'
+                        ], [
+                            'title' => "Konversi Produk",
+                            'url' => 'product-conversion',
+                            'module' => 'product_conversion'
+                        ], [
+                            'title' => 'Product Placing',
+                            'url' => 'warehouse/productPlacing',
+                            'module' => 'warehouse'
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        [
+            'title' => 'Purchase Order',
+            'icon' => 'icon-tag',
+            'child' => [
+                [
+                    'title' => 'Purchase Order',
+                    'url' => 'purchase-order',
+                    'module' => 'purchase_order'
+                ], [
+                    'title' => 'Invoice',
+                    'url' => 'purchase-order/invoice',
+                    'module' => 'purchase_order'
+                ]
+            ]
+        ],
+        [
+            'title' => 'Sales Order',
+            'icon' => 'icon-cart',
+            'child' => [
+                [
+                    'title' => 'Proposal',
+                    'child' => [
+                        [
+                            'title' => "Proposal",
+                            'url' => 'proposal',
+                            'module' => 'proposal'
+
+                        ],
+                        [
+                            'title' => "Proposal List",
+                            'url' => 'proposal/list',
+                            'module' => 'proposal'
+
+                        ]
+                    ]
+                ],
+                [
+                    'title' => 'Sales Order',
+                    'child' => [
+                        [
+                            'title' => "Return",
+                            'url' => 'sales-order/returns',
+                            'module' => 'proposal'
+                        ],
+                        [
+                            'title' => 'Invoice Return',
+                            'url' => 'sales-order/returns/invoice',
+                            'module' => 'proposal'
+                        ]
+                    ]
+                ],
+                [
+                    'title' => 'Delivery Order',
+                    'url' => 'delivery-order',
+                    'module' => 'delivery_order'
+                ],
+                [
+                    'title' => 'Faktur',
+                    'child' => [
+                        [
+                            'title' => "Join Faktur",
+                            'url' => 'join',
+                            'module' => 'join'
+
+                        ],
+                        [
+                            'title' => "Pisah Faktur",
+                            'url' => 'extract',
+                            'module' => 'extract'
+
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        [
+            'title' => 'Debit & Credit',
+            'icon' => 'icon-book2',
+            'child' => [
+                [
+                    'title' => " Hutang",
+                    'url' => 'credit',
+                    'module' => 'credit'
+                ], [
+                    'title' => "Piutang",
+                    'url' => 'debit',
+                    'module' => 'debit'
+
+                ]
+            ]
+
+        ],
+        [
+            'title' => " Retail",
+            'icon' => 'icon-cart',
+            'child' => [
+                [
+                    'title' => 'retail',
+                    'url' => 'retail',
+                    'module' => 'retail'
+                ],
+                [
+                    'title' => 'Invoice',
+                    'url' => 'retail/invoice',
+                    'module' => 'retail'
+                ],
+                [
+                    'title' => "Return",
+                    'url' => 'retail/returns',
+                    'module' => 'retail'
+                ],
+                [
+                    'title' => 'Invoice Return',
+                    'url' => 'retail/returns/invoice',
+                    'module' => 'retail'
+                ]
             ]
         ]
-    ],
-    [
-        'title' => 'Warehouse',
-        'icon' => 'icon-arrow2',
-        'child' => [
-            [
-                'title' => 'Warehouse List',
-                'url' => 'warehouse',
-                'module' => 'warehouse'
-            ],
-            [
-                'title' => 'Warehouse Rack',
-                'url' => 'warehouse/rack',
-                'module' => 'warehouse'
-            ],
-            [
-                'title' => 'Product Placing',
-                'url' => 'warehouse/productPlacing',
-                'module' => 'warehouse'
-            ]
-        ]
-    ],
-    [
-        'title'=> 'Store',
-        'icon'=>'',
-        'url' => 'store',
-        'module'=>'store'
-    ],
-    'product' => [
-        'title' => "Produk",
-        'icon' => 'icon-connection',
-        'child' => [
-            [
-                'title' => "Produk List",
-                'url' => 'product',
-                'module' => 'product'
-            ],
-            [
-                'title' => "Kategori Produk",
-                'url' => 'product/category',
-                'module' => 'product'
-            ],
-            [
-                'title' => "Produk Unit",
-                'url' => 'product/unit',
-                'module' => 'product'
-            ],
-            [
-                'title' => "Produk Opname",
-                'url' => 'stock-opname',
-                'module' => 'product_opname'
-            ],
-            [
-                'title' => "Produk Opname Store",
-                'url' => 'stock-opname/store',
-                'module' => 'product_opname_store'
-            ],
-            [
-                'title' => "Distribusi Produk",
-                'url' => 'product-distribution',
-                'module' => 'product_distribution'
-            ],
-            [
-                'title' => "Produk Return",
-                'url' => 'product-returns',
-                'module' => 'product_return'
-            ],
-            [
-                'title' => "Produk Pricing",
-                'url' => 'pricing',
-                'module' => 'pricing'
-            ],
-            [
-                'title' => "Konversi Produk",
-                'url' => 'product-conversion',
-                'module' => 'product_conversion'
-            ],
-        ]
-    ],
-    [
-        'title'=> 'Principal',
-        'icon'=>'',
-        'url' => 'principal',
-        'module'=>'principal'
-    ],
-    [
-        'title'=> 'Bank Info',
-        'icon'=>'',
-        'url' => 'bank_info',
-        'module'=>'bank_info'
-    ],
-    [
-        'title'=> 'Customer',
-        'icon'=>'',
-        'url' => 'customer',
-        'module'=>'customer'
-    ],
-    [
-        'title' => 'Purchase Order',
-        'icon' => 'icon-tag',
-        'child' => [
-            [
-                'title' => 'Purchase Order',
-                'url' => 'purchase-order',
-                'module' => 'purchase_order'
-            ],
-            [
-                'title' => 'Invoice',
-                'url' => 'purchase-order/invoice',
-                'module' => 'purchase_order'
-            ],
-            [
-                'title' => " Hutang",
-                'url' => 'credit',
-                'module' => 'credit'
-            ]
-        ]
-    ],
-    [
-        'title' => " Retail",
-        'icon' => 'icon-arrow2',
-        'child' => [
-            [
-                'title' => 'retail',
-                'url' => 'retail',
-                'module' => 'retail'
-            ],
-            [
-                'title' => 'Invoice',
-                'url' => 'retail/invoice',
-                'module' => 'retail'
-            ],
-            [
-                'title' => "Return",
-                'url' => 'retail/returns',
-                'module' => 'retail'
-            ],
-            [
-                'title' => 'Invoice Return',
-                'url' => 'retail/returns/invoice',
-                'module' => 'retail'
-            ]
-        ]
-    ],
-    [
-        'title' => 'Sales Order',
-        'icon' => 'icon-arrow2',
-        'child' => [
-            [
-                'title' => "Proposal",
-                'url' => 'proposal',
-                'module' => 'proposal'
-
-            ],
-            [
-                'title' => "Sales Order",
-                'url' => 'proposal/list',
-                'module' => 'proposal'
-
-            ],
-            [
-                'title' => "Piutang",
-                'url' => 'debit',
-                'module' => 'debit'
-
-            ],
-            [
-                'title' => "Return",
-                'url' => 'sales-order/returns',
-                'module' => 'proposal'
-            ],
-            [
-                'title' => 'Invoice Return',
-                'url' => 'sales-order/returns/invoice',
-                'module' => 'proposal'
-            ]
-        ]
-    ],
-    [
-        'title'=> 'Delivery Order',
-        'icon'=>'',
-        'url' => 'delivery-order',
-        'module'=>'delivery_order'
-    ],
-    [
-        'title' => 'Sales Order',
-        'icon' => 'icon-arrow2',
-        'child' => [
-            [
-                'title' => "Join Faktur",
-                'url' => 'join',
-                'module' => 'join'
-
-            ],
-            [
-            'title' => "Pisah Faktur",
-            'url' => 'extract',
-            'module' => 'extract'
-
-        ]
-        ]
-    ],
-];
+    ];
+//    [
+//        'title' => 'Users',
+//        'icon' => 'icon-user',
+//        'child' => [
+//            [
+//                'title' => 'Staff List',
+//                'url' => 'users',
+//                'module' => 'users'
+//            ],
+//            [
+//                'title' => 'Staff Kategori',
+//                'url' => 'users/group',
+//                'child' => [
+//                    [
+//                        'title' => 'Staff List',
+//                        'url' => 'users',
+//                        'module' => 'users'
+//                    ],
+//                    [
+//                        'title' => 'Staff Kategori',
+//                        'url' => 'users/group',
+//                        'module' => 'users'
+//                    ]
+//                ]
+//            ]
+//        ]
+//    ],
+//    [
+//        'title' => 'Warehouse',
+//        'icon' => 'icon-arrow2',
+//        'child' => [
+//            [
+//                'title' => 'Warehouse List',
+//                'url' => 'warehouse',
+//                'module' => 'warehouse'
+//            ],
+//            [
+//                'title' => 'Warehouse Rack',
+//                'url' => 'warehouse/rack',
+//                'module' => 'warehouse'
+//            ],
+//            [
+//                'title' => 'Product Placing',
+//                'url' => 'warehouse/productPlacing',
+//                'module' => 'warehouse'
+//            ]
+//        ]
+//    ],
+//    [
+//        'title' => 'Store',
+//        'icon' => '',
+//        'url' => 'store',
+//        'module' => 'store'
+//    ],
+//    'product' => [
+//        'title' => "Produk",
+//        'icon' => 'icon-connection',
+//        'child' => [
+//            [
+//                'title' => "Produk List",
+//                'url' => 'product',
+//                'module' => 'product'
+//            ],
+//            [
+//                'title' => "Kategori Produk",
+//                'url' => 'product/category',
+//                'module' => 'product'
+//            ],
+//            [
+//                'title' => "Produk Unit",
+//                'url' => 'product/unit',
+//                'module' => 'product'
+//            ],
+//            [
+//                'title' => "Produk Opname",
+//                'url' => 'stock-opname',
+//                'module' => 'product_opname'
+//            ],
+//            [
+//                'title' => "Produk Opname Store",
+//                'url' => 'stock-opname/store',
+//                'module' => 'product_opname_store'
+//            ],
+//            [
+//                'title' => "Distribusi Produk",
+//                'url' => 'product-distribution',
+//                'module' => 'product_distribution'
+//            ],
+//            [
+//                'title' => "Produk Return",
+//                'url' => 'product-returns',
+//                'module' => 'product_return'
+//            ],
+//            [
+//                'title' => "Produk Pricing",
+//                'url' => 'pricing',
+//                'module' => 'pricing'
+//            ],
+//            [
+//                'title' => "Konversi Produk",
+//                'url' => 'product-conversion',
+//                'module' => 'product_conversion'
+//            ],
+//        ]
+//    ],
+//    [
+//        'title' => 'Principal',
+//        'icon' => '',
+//        'url' => 'principal',
+//        'module' => 'principal'
+//    ],
+//    [
+//        'title' => 'Bank Info',
+//        'icon' => '',
+//        'url' => 'bank_info',
+//        'module' => 'bank_info'
+//    ],
+//    [
+//        'title' => 'Customer',
+//        'icon' => '',
+//        'url' => 'customer',
+//        'module' => 'customer'
+//    ],
+//    [
+//        'title' => 'Purchase Order',
+//        'icon' => 'icon-tag',
+//        'child' => [
+//            [
+//                'title' => 'Purchase Order',
+//                'url' => 'purchase-order',
+//                'module' => 'purchase_order'
+//            ],
+//            [
+//                'title' => 'Invoice',
+//                'url' => 'purchase-order/invoice',
+//                'module' => 'purchase_order'
+//            ],
+//            [
+//                'title' => " Hutang",
+//                'url' => 'credit',
+//                'module' => 'credit'
+//            ]
+//        ]
+//    ],
+//    [
+//        'title' => " Retail",
+//        'icon' => 'icon-arrow2',
+//        'child' => [
+//            [
+//                'title' => 'retail',
+//                'url' => 'retail',
+//                'module' => 'retail'
+//            ],
+//            [
+//                'title' => 'Invoice',
+//                'url' => 'retail/invoice',
+//                'module' => 'retail'
+//            ],
+//            [
+//                'title' => "Return",
+//                'url' => 'retail/returns',
+//                'module' => 'retail'
+//            ],
+//            [
+//                'title' => 'Invoice Return',
+//                'url' => 'retail/returns/invoice',
+//                'module' => 'retail'
+//            ]
+//        ]
+//    ],
+//    [
+//        'title' => 'Sales Order',
+//        'icon' => 'icon-arrow2',
+//        'child' => [
+//            [
+//                'title' => "Proposal",
+//                'url' => 'proposal',
+//                'module' => 'proposal'
+//
+//            ],
+//            [
+//                'title' => "Sales Order",
+//                'url' => 'proposal/list',
+//                'module' => 'proposal'
+//
+//            ],
+//            [
+//                'title' => "Piutang",
+//                'url' => 'debit',
+//                'module' => 'debit'
+//
+//            ],
+//            [
+//                'title' => "Return",
+//                'url' => 'sales-order/returns',
+//                'module' => 'proposal'
+//            ],
+//            [
+//                'title' => 'Invoice Return',
+//                'url' => 'sales-order/returns/invoice',
+//                'module' => 'proposal'
+//            ]
+//        ]
+//    ],
+//    [
+//        'title' => 'Delivery Order',
+//        'icon' => '',
+//        'url' => 'delivery-order',
+//        'module' => 'delivery_order'
+//    ],
+//    [
+//        'title' => 'Sales Order',
+//        'icon' => 'icon-arrow2',
+//        'child' => [
+//            [
+//                'title' => "Join Faktur",
+//                'url' => 'join',
+//                'module' => 'join'
+//
+//            ],
+//            [
+//                'title' => "Pisah Faktur",
+//                'url' => 'extract',
+//                'module' => 'extract'
+//
+//            ]
+//        ]
+//    ],
+//];
 /*
 // You must reset this admin user
 // The second element in the array is the username  $config['users']['username'];
