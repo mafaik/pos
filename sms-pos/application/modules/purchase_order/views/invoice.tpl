@@ -1,10 +1,5 @@
 {* Extend our master template *}
 {extends file="../../../master.tpl"}
-
-{block name=print}
-    <script type="text/javascript">
-    </script>
-{/block}
 {block name=content}
     <!-- New invoice template -->
     <div class="panel panel-success">

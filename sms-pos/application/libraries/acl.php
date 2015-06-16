@@ -224,7 +224,7 @@ class Acl
 
     public function getModulesList()
     {
-        $modules = array("bank_info", "card_stock", "credit", "customer", "debit", "delivery_order", "extract", "join", "login", "opname", "pricing", "principal", "product", "product_conversion", "product_distribution", "product_return", "proposal", "purchase_order", "retail", "retail_return", "sales_order", "sales_order_return", "store", "users", "warehouse");
+        $modules = $this->_CI->config->item('module_list');
         return $modules;
     }
 

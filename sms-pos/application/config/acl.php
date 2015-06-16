@@ -55,6 +55,10 @@ $config['logout_message'] = 'Success! You have been logged out.';
 $config['module_auth_message'] = 'please login to access this module.';
 
 //
+$config['module_list'] = ["bank_info",
+    "card_stock", "credit", "customer", "debit", "delivery_order", "extract", "join", "opname", "pricing",
+    "principal", "product", "product_conversion", "product_distribution", "product_return", "proposal",
+    "purchase_order", "retail", "retail_return", "sales_order", "sales_order_return", "store", "users", "warehouse"];
 $config['module_router'] =
     [
         [

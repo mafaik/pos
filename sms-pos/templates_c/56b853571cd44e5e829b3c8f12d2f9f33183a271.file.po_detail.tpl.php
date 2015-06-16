@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-02 12:00:05
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-16 05:23:15
          compiled from "/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6338738805530ecdd0a61e9-92077084%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '56b853571cd44e5e829b3c8f12d2f9f33183a271' => 
     array (
       0 => '/var/www/sms-pos/application/modules/purchase_order/views/po_detail.tpl',
-      1 => 1433246403,
+      1 => 1434432193,
       2 => 'file',
     ),
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
     array (
       0 => '/var/www/sms-pos/application/master.tpl',
-      1 => 1433163876,
+      1 => 1434428776,
       2 => 'file',
     ),
   ),
@@ -45,8 +45,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <?php echo css('jqClock.css');?>
 
-    
-          
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=latin,cyrillic-ext"
+          rel="stylesheet" type="text/css">
 
     <?php echo '<script'; ?>
  type="text/javascript"
@@ -57,6 +57,10 @@ ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"><?php echo '</script'
  type="text/javascript"
             src="<?php echo theme_url();?>
 ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ type="text/javascript"
+            src="http://code.jquery.com/jquery-migrate-1.2.1.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
  type="text/javascript"
@@ -173,32 +177,8 @@ css/print.css" media="print" />
     <div class="sidebar">
         <div class="sidebar-content">
 
-            <!-- Main navigation -->
             <?php echo userdata('menu');?>
 
-            
-                
-                    
-                        
-                            
-                            
-                        
-                        
-                            
-                                
-                                    
-                                        
-                                            
-                                            
-                                        
-                                    
-                                
-                            
-                        
-                    
-                
-            
-            <!-- /main navigation -->
 
         </div>
     </div>
@@ -359,10 +339,21 @@ css/print.css" media="print" />
                     </form>
                 </div>
                 <div class="col-md-2">
-                    <div class="col-sm-12">
-                        <a data-toggle="modal" role="button" href="#default-modal"
-                           class="button btn btn-info center-block">Cari
-                        </a>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a data-toggle="modal" role="button" href="#default-modal"
+                               class="button btn btn-info center-block">Cari
+                            </a>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a role="button" href="<?php echo base_url('product/index/add');?>
+"
+                               class="button btn btn-warning center-block">Tambah Produk
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -400,191 +391,191 @@ css/print.css" media="print" />
             <br>
 
             <?php if ($_smarty_tpl->tpl_vars['items']->value) {?>
-            <div class="table-responsive pre-scrollable">
-                <table class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Barcode</th>
-                        <th>Nama Produk</th>
-                        <th>Merek</th>
-                        <th>Satuan / isi</th>
-                        <th>Qty</th>
-                        <th>Harga</th>
-                        <th>Total</th>
-                        <th>Diskon</th>
-                        <th>Subtotal</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php $_smarty_tpl->tpl_vars['total'] = new Smarty_variable(0, null, 0);?>
-                    <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable(1, null, 0);?>
-                    <?php  $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['key']->_loop = false;
+                <div class="table-responsive pre-scrollable">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Barcode</th>
+                            <th>Nama Produk</th>
+                            <th>Merek</th>
+                            <th>Satuan / isi</th>
+                            <th>Qty</th>
+                            <th>Harga</th>
+                            <th>Total</th>
+                            <th>Diskon</th>
+                            <th>Subtotal</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php $_smarty_tpl->tpl_vars['total'] = new Smarty_variable(0, null, 0);?>
+                        <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable(1, null, 0);?>
+                        <?php  $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['key']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['items']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['key']->key => $_smarty_tpl->tpl_vars['key']->value) {
 $_smarty_tpl->tpl_vars['key']->_loop = true;
 ?>
-                        <tr>
-                            <td><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+                            <tr>
+                                <td><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
 </td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['barcode'];?>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['barcode'];?>
 </td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name'];?>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['name'];?>
 </td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['brand'];?>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['brand'];?>
 </td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
+                                <td><?php echo $_smarty_tpl->tpl_vars['key']->value['unit'];?>
  / <?php echo $_smarty_tpl->tpl_vars['key']->value['value'];?>
 </td>
-                            <td style="width:100px;">
-                                <input type="number" id="qty-<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
+                                <td style="width:100px;">
+                                    <input type="number" id="qty-<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
 " value="<?php echo $_smarty_tpl->tpl_vars['key']->value['qty'];?>
 "
-                                       class="form-control tip" title="enter untuk update qty"
-                                       onkeypress="qtyKeyPress(<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
+                                           class="form-control tip" title="enter untuk update qty"
+                                           onkeypress="qtyKeyPress(<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
 ,
-                                               '<?php echo base_url('purchase-order/detail/update');?>
+                                                   '<?php echo base_url('purchase-order/detail/update');?>
 ', event)">
-                            </td>
-                            <td style="width:130px;" class="text-right">
-                                Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],0);?>
+                                </td>
+                                <td style="width:130px;" class="text-right">
+                                    Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['price'],0);?>
 
-                            </td>
-                            <td style="width:130px;" class="text-right">
-                                Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']),0);?>
+                                </td>
+                                <td style="width:130px;" class="text-right">
+                                    Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']),0);?>
 
-                            </td>
-                            <td style="width:130px;" class="text-right">
-                                Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['discount_total'],0);?>
+                                </td>
+                                <td style="width:130px;" class="text-right">
+                                    Rp <?php echo number_format($_smarty_tpl->tpl_vars['key']->value['discount_total'],0);?>
 
-                            </td>
-                            <td style="width:130px;" class="text-right">
-                                Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']),0);?>
+                                </td>
+                                <td style="width:130px;" class="text-right">
+                                    Rp <?php echo number_format(($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']),0);?>
 
-                            </td>
-                            <td style="width:90px;">
+                                </td>
+                                <td style="width:90px;">
 
-                                <div class="table-controls">
-                                    <a class="btn btn-link btn-icon btn-xs tip" title="Update Qty"
-                                       onclick="updateQty(<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
+                                    <div class="table-controls">
+                                        <a class="btn btn-link btn-icon btn-xs tip" title="Update Qty"
+                                           onclick="updateQty(<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
 ,
-                                               '<?php echo base_url('purchase-order/detail/update');?>
+                                                   '<?php echo base_url('purchase-order/detail/update');?>
 ')">
-                                        <i class="icon-pencil3"></i></a>
-                                    <a href="<?php echo base_url('purchase-order/detail/delete');?>
+                                            <i class="icon-pencil3"></i></a>
+                                        <a href="<?php echo base_url('purchase-order/detail/delete');?>
 /<?php echo $_smarty_tpl->tpl_vars['key']->value['id_product'];?>
 "
-                                       class="btn btn-link btn-icon btn-xs tip"
-                                       onclick="return confirm('Hapus Item?')" title="Hapus Item">
-                                        <i class="icon-remove3"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable($_smarty_tpl->tpl_vars['val']->value+1, null, 0);?>
-                        <?php $_smarty_tpl->tpl_vars['total'] = new Smarty_variable($_smarty_tpl->tpl_vars['total']->value+($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']), null, 0);?>
+                                           class="btn btn-link btn-icon btn-xs tip"
+                                           onclick="return confirm('Hapus Item?')" title="Hapus Item">
+                                            <i class="icon-remove3"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php $_smarty_tpl->tpl_vars['val'] = new Smarty_variable($_smarty_tpl->tpl_vars['val']->value+1, null, 0);?>
+                            <?php $_smarty_tpl->tpl_vars['total'] = new Smarty_variable($_smarty_tpl->tpl_vars['total']->value+($_smarty_tpl->tpl_vars['key']->value['qty']*$_smarty_tpl->tpl_vars['key']->value['price']-$_smarty_tpl->tpl_vars['key']->value['discount_total']), null, 0);?>
 
-                    <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <br>
-
-            <form action="<?php echo base_url('purchase-order/save');?>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <form action="<?php echo base_url('purchase-order/save');?>
 " role="form" method="post" enctype="multipart/form-data"
-                  onsubmit="return confirm('Process Data');">
-                <div class="row invoice-payment">
-                    <div class="col-sm-4 pull-right">
-                        <h6>Summary:</h6>
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                <th>Total:</th>
-                                <td class="text-right">
-                                    <span id="sum-total-text"><strong>Rp <?php echo number_format($_smarty_tpl->tpl_vars['total']->value,0);?>
+                      onsubmit="return confirm('Process Data');">
+                    <div class="row invoice-payment">
+                        <div class="col-sm-4 pull-right">
+                            <h6>Summary:</h6>
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th>Total:</th>
+                                    <td class="text-right">
+                                        <span id="sum-total-text"><strong>Rp <?php echo number_format($_smarty_tpl->tpl_vars['total']->value,0);?>
 </strong> </span>
-                                </td>
-                                <input type="hidden" name="total" value="<?php echo $_smarty_tpl->tpl_vars['total']->value;?>
+                                    </td>
+                                    <input type="hidden" name="total" value="<?php echo $_smarty_tpl->tpl_vars['total']->value;?>
 ">
-                            </tr>
-                            <tr>
-                                <th>Diskon:</th>
-                                <td class="text-right <?php if (form_error('discount_price')) {?>has-warning<?php }?>"
-                                    style="max-width: 135px;">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Rp</span>
+                                </tr>
+                                <tr>
+                                    <th>Diskon:</th>
+                                    <td class="text-right <?php if (form_error('discount_price')) {?>has-warning<?php }?>"
+                                        style="max-width: 135px;">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Rp</span>
 
-                                        <input type="text" name="discount_price" value="<?php echo set_value('discount_price');?>
+                                            <input type="text" name="discount_price"
+                                                   value="<?php echo set_value('discount_price');?>
 "
-                                               class="form-control currency-format" placeholder="0"
-                                               id="input-discount_price ">
+                                                   class="form-control currency-format" placeholder="0"
+                                                   id="input-discount_price ">
 
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>DPP:</th>
-                                <td class="text-right <?php if (form_error('dpp')) {?>has-warning<?php }?>"
-                                    style="max-width: 135px;">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Rp</span>
-                                        <input type="text" name="dpp" value="<?php echo set_value('dpp');?>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>DPP:</th>
+                                    <td class="text-right <?php if (form_error('dpp')) {?>has-warning<?php }?>"
+                                        style="max-width: 135px;">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Rp</span>
+                                            <input type="text" name="dpp" value="<?php echo set_value('dpp');?>
 "
-                                               class="form-control currency-format" placeholder="0"
-                                               id="input-dpp">
+                                                   class="form-control currency-format" placeholder="0"
+                                                   id="input-dpp">
 
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>PPN:</th>
-                                <td class="text-right <?php if (form_error('ppn')) {?>has-warning<?php }?>"
-                                    style="max-width: 135px;">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Rp</span>
-                                        <input type="text" name="ppn" value="<?php echo set_value('ppn');?>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>PPN:</th>
+                                    <td class="text-right <?php if (form_error('ppn')) {?>has-warning<?php }?>"
+                                        style="max-width: 135px;">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Rp</span>
+                                            <input type="text" name="ppn" value="<?php echo set_value('ppn');?>
 "
-                                               class="form-control currency-format" placeholder="0"
-                                               id="input-ppn">
+                                                   class="form-control currency-format" placeholder="0"
+                                                   id="input-ppn">
 
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Grand Total:</th>
-                                <td class="text-right <?php if (form_error('grand_total')) {?>has-warning<?php }?>"
-                                    style="max-width: 135px;">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Rp</span>
-                                        <input type="text" name="grand_total" value="<?php echo set_value('grand_total');?>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Grand Total:</th>
+                                    <td class="text-right <?php if (form_error('grand_total')) {?>has-warning<?php }?>"
+                                        style="max-width: 135px;">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Rp</span>
+                                            <input type="text" name="grand_total" value="<?php echo set_value('grand_total');?>
 "
-                                               class="form-control currency-format" placeholder="0"
-                                               id="input-grand_total">
+                                                   class="form-control currency-format" placeholder="0"
+                                                   id="input-grand_total">
 
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Bukti Pembelian:</th>
-                                <td class="text-right text-danger">
-                                    <input type="file" name="file" class="styled form-control" id="report-screenshot">
-                                    <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="btn-group right-box">
-                            <button type="submit" name="save" value="save"
-                                    class="btn block full-width btn-success"><i class="icon-checkmark">
-                                </i> Checkout
-                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Bukti Pembelian:</th>
+                                    <td class="text-right text-danger">
+                                        <input type="file" name="file" class="styled form-control"
+                                               id="report-screenshot">
+                                        <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="btn-group right-box">
+                                <button type="submit" name="save" value="save"
+                                        class="btn block full-width btn-success"><i class="icon-checkmark">
+                                    </i> Checkout
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        <!-- /panel body -->
-        <?php }?>
+                </form>
+                <!-- /panel body -->
+            <?php }?>
         </div>
 
         
@@ -685,6 +676,27 @@ $_smarty_tpl->tpl_vars['products']->_loop = true;
     </div>
     <?php echo js('form/custom.js');?>
 
+    <?php echo '<script'; ?>
+ type="text/javascript">
+        $(".insertCategoryPrefixCode").keyup(function() {
+            var source = $('.insertCategoryPrefixCode').val();
+            if (source.length <= 2) {
+                var value = $( this ).val();
+                $( 'input[name="prefix_code"]' ).val( value );
+                $( 'input[name="disabled_prefix_code"]' ).val( value );
+            }
+        });
+
+        $(".insertUnitPrefixCode").keyup(function() {
+            var source = $('.insertUnitPrefixCode').val();
+            if (source.length <= 3) {
+                var value = $( this ).val();
+                $( 'input[name="prefix_code"]' ).val( value );
+                $( 'input[name="disabled_prefix_code"]' ).val( value );
+            }
+        });
+    <?php echo '</script'; ?>
+>
 </div>
 <!-- /content -->
 

@@ -5,21 +5,22 @@
     <!-- Default panel -->
     <div class="panel panel-default">
 
-        <div class="panel-heading"><h6 class="panel-title">User Group Role</h6></div>
+        <div class="panel-heading"><h6 class="panel-title">User Group Roles</h6></div>
 
         <div class="panel-body">
-            <div class="block-inner">
-                <h6 class="heading-hr">
-                    <i class="icon-clipboard"></i> User Group Role
-                    <small class="display-block">User Group Role</small>
-                </h6>
-            </div>
+            {*<div class="block-inner">*}
+                {*<h6 class="heading-hr">*}
+                    {*<i class="icon-clipboard"></i> User Group Role*}
+                    {*<small class="display-block">User Group Role</small>*}
+                {*</h6>*}
+            {*</div>*}
             <!-- Callout -->
 
             {if $modulesList}
                 <form method="post">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><h6 class="panel-title"><i class="icon-pencil3"></i> Update Group Role</h6></div>
+                        <div class="panel-heading"><h6 class="panel-title"><i class="icon-pencil3"></i> Update Group
+                                Role</h6></div>
                         <div class="panel-body">
 
                             <!-- Company General Information -->
@@ -31,7 +32,9 @@
                                             {foreach $modulesList as $module}
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="selected_modules[]" class="styled" {if in_array($module, $userGroupRoles)}checked="checked"{/if} value="{$module}">{$module}
+                                                        <input type="checkbox" name="selected_modules[]" class="styled"
+                                                               {if in_array($module, $userGroupRoles)}checked="checked"{/if}
+                                                               value="{$module}">{$module}
                                                     </label>
                                                 </div>
                                             {/foreach}

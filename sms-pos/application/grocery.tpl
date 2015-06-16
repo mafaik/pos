@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <title>PT Medika Sejahtera</title>
 
-
     {css('bootstrap.min.css')}
     {css('londinium-theme.css')}
     {css('styles.css')}
