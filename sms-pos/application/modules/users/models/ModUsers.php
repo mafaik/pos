@@ -66,7 +66,7 @@ class ModUsers extends CI_Model
 
     public function getUserGroupRole($id_group)
     {
-        $this->db->select('roles');
+        $this->db->select('name_group, roles');
         $this->db->where('id_group', $id_group);
         $query = $this->db->get('staff_group');
 
