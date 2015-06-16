@@ -79,7 +79,7 @@
                                         <i class="icon-coin"></i>
                                     </a>
                                     <a href="{base_url('debit/detail/')}/{$key->id_sales_order}"
-                                       class="btn btn-link btn-icon btn-xs tip" title="Detail">
+                                       class="btn btn-link btn-icon btn-xs tip icon-c" title="Detail">
                                         <i class="icon-list"></i>
                                     </a>
 
