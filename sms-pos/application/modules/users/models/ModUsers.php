@@ -20,6 +20,22 @@ class ModUsers extends CI_Model
         }
     }
 
+    public function getUserGroupCount($id_group)
+    {
+        $query = $this->db->query("SELECT COUNT(s.id_staff) AS jml_staff
+                                    FROM `staff_group` sg
+                                    LEFT JOIN `staff` s ON sg.`id_group` = s.`id_group`
+                                    WHERE sg.`id_group` = $id_group
+                                    GROUP BY sg.`id_group`
+                                    ORDER BY sg.`id_group`");
+        if ($query->num_rows() > 0) {
+            $result = $query->row();
+            return $result->jml_staff;
+        } else {
+            return 0;
+        }
+    }
+
     public function getUserGroupByID($id_group){
         $this->db->where('id_group', $id_group);
         $query = $this->db->get('staff_group');
@@ -28,6 +44,13 @@ class ModUsers extends CI_Model
             return $query->row();
         }
         return false;
+    }
+
+    public function insertUserGroup()
+    {
+        $this->db->insert('staff_group', $data);
+        $id_group = $this->db->insert_id();
+        return $id_group;
     }
 
     public function updateUserGroup($id_group, $data)

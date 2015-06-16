@@ -24,6 +24,8 @@ class Store extends MX_Controller
                 ->display_as('npwp', 'NPWP')
                 ->display_as('zipcode', 'Zip Code')
                 ->fields('name', 'owner', 'address', 'zipcode', 'city', 'state', 'country', 'telp', 'note')
+                ->required_fields('name', 'owner', 'address', 'zipcode', 'city', 'state', 'country', 'telp')
+                ->unset_read()
                 ->callback_add_field('note', array($this, 'setTextarea'));
         $output = $crud->render();
         $this->render($output);

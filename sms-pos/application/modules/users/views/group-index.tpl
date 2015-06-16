@@ -14,13 +14,13 @@
     <!-- Default panel -->
     <div class="panel panel-default">
 
-        <div class="panel-heading"><h6 class="panel-title">User</h6></div>
+        <div class="panel-heading"><h6 class="panel-title">User Group</h6></div>
 
         <div class="panel-body">
             <div class="block-inner">
                 <h6 class="heading-hr">
-                    <i class="icon-clipboard"></i> User
-                    <small class="display-block">Informasi umum tentang user staf</small>
+                    <i class="icon-clipboard"></i> User Group
+                    <small class="display-block">Informasi umum tentang grup user staf</small>
                 </h6>
             </div>
 
