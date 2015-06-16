@@ -26,6 +26,8 @@ class Store extends MX_Controller
                 ->fields('name', 'owner', 'address', 'zipcode', 'city', 'state', 'country', 'telp', 'note')
                 ->required_fields('name', 'owner', 'address', 'zipcode', 'city', 'state', 'country', 'telp')
                 ->unset_read()
+                ->unset_add()
+                ->unset_delete()
                 ->callback_add_field('note', array($this, 'setTextarea'));
         $output = $crud->render();
         $this->render($output);

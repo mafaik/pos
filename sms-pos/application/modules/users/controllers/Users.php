@@ -126,6 +126,7 @@ class Users extends MX_Controller
         }
         $data['userGroupRoles'] = $fixedUserGroupRoles;
         $data['modulesList'] = $modulesList;
+        $data['name_group'] = strtoupper($userGroupRoles['name_group']);
         $this->parser->parse('update-role.tpl', $data);
     }
 }

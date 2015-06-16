@@ -13,8 +13,21 @@
 {block name=content}
     <!-- Default panel -->
     <div class="panel panel-default">
+<<<<<<< HEAD
         <div class="panel-heading"><h6 class="panel-title">User Lists</h6></div>
         <div class="panel-body">
+=======
+        <div class="panel-heading"><h6 class="panel-title">User</h6></div>
+
+        <div class="panel-body">
+            <div class="block-inner">
+                <h6 class="heading-hr">
+                    <i class="icon-clipboard"></i> User
+                    <small class="display-block">Informasi umum tentang user staf</small>
+                </h6>
+            </div>
+
+>>>>>>> 34c5283f93c8b67256c42e8997c9ed485e3b223d
             <div class="row">
                 <div class="col-md-12">
                     {$output}
