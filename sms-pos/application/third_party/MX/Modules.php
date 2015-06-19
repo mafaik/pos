@@ -199,7 +199,7 @@ class Modules
 				
 				if ($base == 'libraries/' OR $base == 'models/')
 				{
-					if(is_file($fullpath.ucfirst($file_ext))) return array($fullpath, ucfirst($file));
+					if(is_file($fullpath.ucfirst($file_ext))) return array($fullpath, $file);
 				}
 				else
 				/* load non-class files */

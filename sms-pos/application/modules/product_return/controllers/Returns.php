@@ -41,7 +41,7 @@ class Returns extends MX_Controller
             $data['error'] = $this->cart->getError();
         }
 
-        $product_storage = $this->model_product->get();
+        $product_storage = $this->model_product->get($this->id_store);
 
         $items = $this->cart->list_item($product_storage, 'id_product_store')->result_array_item();
 

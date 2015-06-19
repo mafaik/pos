@@ -15,12 +15,13 @@ class ModelProductStore extends CI_Model
         parent::__construct();
     }
 
-    public function get(){
+    public function get($id_store){
         $this->db->select("*, ps.stock as store_stock");
         $this->db->from('product_store ps');
         $this->db->join('product p','p.id_product = ps.id_product');
         $this->db->join('product_unit pu','pu.id_product_unit = p.id_product_unit','left');
         $this->db->join('product_category pc','pc.id_product_category = p.id_product_category','left');
+        $this->db->where('id_store',$id_store);
         $result = $this->db->get();
         $rows = $result->result_array();
         return $rows;
