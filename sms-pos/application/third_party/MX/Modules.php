@@ -196,12 +196,12 @@ class Modules
             foreach($modules as $module => $subpath)
             {
                 $fullpath = $location.$module.'/'.$base.$subpath;
-                    echo $fullpath;
-//                if ($base == 'libraries/' OR $base == 'models/')
-//                {
-//                    if(is_file($fullpath.ucfirst($file_ext))) return array($fullpath, ucfirst($file));
-//                }
-//                else
+                echo $fullpath;
+                if ($base == 'libraries/' OR $base == 'models/')
+                {
+                    if(is_file($fullpath.$file_ext)) return array($fullpath, $file);
+                }
+                else
                     /* load non-class files */
                     if (is_file($fullpath.$file_ext)) return array($fullpath, $file);
             }
@@ -232,13 +232,11 @@ class Modules
             if (preg_match('#^'.$key.'$#', $uri))
             {
                 if (strpos($val, '$') !== FALSE AND strpos($key, '(') !== FALSE)
-                eg                    h('#^'.$key.'$#', $uri))
-			{
-				if (str                $v                '$') !== FALSE AND strpos($key, '(') !=            AL        )     				{
-					$val = preg_replace('#^'.$key.'$#', $val, $uri);
-				}
-				return explode('/', $module.'/'.$val);
-			}
-		}
-	}
+                {
+                    $val = preg_replace('#^'.$key.'$#', $val, $uri);
+                }
+                return explode('/', $module.'/'.$val);
+            }
+        }
+    }
 }
