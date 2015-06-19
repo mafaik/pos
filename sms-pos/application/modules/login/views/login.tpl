@@ -3,7 +3,7 @@
 
 {block name=content}
     <div class="login-wrapper">
-        <form action="{base_url('Login/validate')}" role="form" method="post">
+        <form action="{base_url('login/validate')}" role="form" method="post">
             <div class="popup-header">
                 <a href="#" class="pull-left"></a>
                 <span class="text-semibold">User Login</span>

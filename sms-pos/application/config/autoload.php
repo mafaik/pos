@@ -104,7 +104,7 @@ $autoload['helper'] = array('url','form','security');
 |
 */
 
-$autoload['config'] = array('dummy\config','cache','smarty');
+$autoload['config'] = array('cache','smarty');
 
 
 /*

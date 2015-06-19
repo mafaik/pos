@@ -80,20 +80,19 @@ $config['module_router'] =
                     ]
                 ], [
                     'title' => 'Store',
-                    'child' => [
-                        [
-                            'title' => 'Store',
-                            'url' => 'store',
-                            'module' => 'store'
-                        ], [
-                            'title' => 'Warehouse List',
-                            'url' => 'warehouse',
-                            'module' => 'warehouse'
-                        ], [
-                            'title' => 'Warehouse Rack',
-                            'url' => 'warehouse/rack',
-                            'module' => 'warehouse'
-                        ]
+                    'url' => 'store',
+                    'module' => 'store'
+                ], [
+                    'title' => 'Gudang',
+                    'child' => [[
+                        'title' => 'Gudang',
+                        'url' => 'warehouse',
+                        'module' => 'warehouse'
+                    ], [
+                        'title' => 'Rack',
+                        'url' => 'warehouse/rack',
+                        'module' => 'warehouse'
+                    ]
                     ]
                 ], [
                     'title' => 'Principal',
@@ -127,36 +126,42 @@ $config['module_router'] =
                             'title' => "Produk Unit",
                             'url' => 'product/unit',
                             'module' => 'product'
-                        ], [
-                            'title' => "Produk Opname",
-                            'url' => 'stock-opname',
-                            'module' => 'product_opname'
-                        ], [
-                            'title' => "Produk Opname Store",
-                            'url' => 'stock-opname/store',
-                            'module' => 'product_opname_store'
-                        ], [
-                            'title' => "Distribusi Produk",
-                            'url' => 'product-distribution',
-                            'module' => 'product_distribution'
-                        ], [
-                            'title' => "Produk Return",
-                            'url' => 'product-returns',
-                            'module' => 'product_return'
-                        ], [
-                            'title' => "Produk Pricing",
-                            'url' => 'pricing',
-                            'module' => 'pricing'
-                        ], [
-                            'title' => "Konversi Produk",
-                            'url' => 'product-conversion',
-                            'module' => 'product_conversion'
-                        ], [
-                            'title' => 'Product Placing',
-                            'url' => 'warehouse/productPlacing',
-                            'module' => 'warehouse'
                         ]
                     ]
+                ]
+            ]
+        ],
+        [
+            'title' => 'Produk',
+            'child' => [
+                [
+                    'title' => "Produk Opname",
+                    'url' => 'stock-opname',
+                    'module' => 'product_opname'
+                ], [
+                    'title' => "Produk Opname Store",
+                    'url' => 'stock-opname/store',
+                    'module' => 'product_opname_store'
+                ], [
+                    'title' => "Distribusi Produk",
+                    'url' => 'product-distribution',
+                    'module' => 'product_distribution'
+                ], [
+                    'title' => "Produk Return",
+                    'url' => 'product-returns',
+                    'module' => 'product_return'
+                ], [
+                    'title' => "Produk Pricing",
+                    'url' => 'pricing',
+                    'module' => 'pricing'
+                ], [
+                    'title' => "Konversi Produk",
+                    'url' => 'product-conversion',
+                    'module' => 'product_conversion'
+                ], [
+                    'title' => 'Product Placing',
+                    'url' => 'warehouse/productPlacing',
+                    'module' => 'warehouse'
                 ]
             ]
         ],
@@ -199,6 +204,16 @@ $config['module_router'] =
                 [
                     'title' => 'Sales Order',
                     'child' => [
+                        [
+                            'title' => "Sales Order",
+                            'url' => 'sales-order/search',
+                            'module' => 'proposal'
+                        ],
+                        [
+                            'title' => 'Invoice',
+                            'url' => 'sales-order/invoice',
+                            'module' => 'proposal'
+                        ],
                         [
                             'title' => "Return",
                             'url' => 'sales-order/returns',

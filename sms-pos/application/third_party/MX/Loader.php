@@ -192,38 +192,38 @@ class MX_Loader extends CI_Loader
 	}
 
 	/** Load a module model **/
-	public function model($model, $object_name = NULL, $connect = FALSE) 
+	public function model($model, $object_name = NULL, $connect = FALSE)
 	{
 		if (is_array($model)) return $this->models($model);
 
 		($_alias = $object_name) OR $_alias = basename($model);
 
-		if (in_array($_alias, $this->_ci_models, TRUE)) 
+		if (in_array($_alias, $this->_ci_models, TRUE))
 			return $this;
-			
+
 		/* check module */
 		list($path, $_model) = Modules::find(strtolower($model), $this->_module, 'models/');
-		
+
 		if ($path == FALSE)
 		{
 			/* check application & packages */
 			parent::model($model, $object_name, $connect);
-		} 
-		else 
+		}
+		else
 		{
 			class_exists('CI_Model', FALSE) OR load_class('Model', 'core');
-			
-			if ($connect !== FALSE && ! class_exists('CI_DB', FALSE)) 
+
+			if ($connect !== FALSE && ! class_exists('CI_DB', FALSE))
 			{
 				if ($connect === TRUE) $connect = '';
 				$this->database($connect, FALSE, TRUE);
 			}
-			
+
 			Modules::load_file($_model, $path);
-			
-			$model = ucfirst($_model);
-			CI::$APP->$_alias = new $model();
-			
+
+//			$model = ucfirst($_model);
+			CI::$APP->$_alias = new $_model();
+
 			$this->_ci_models[] = $_alias;
 		}
 		return $this;

@@ -45,7 +45,7 @@ class Users extends MX_Controller
             ->callback_before_update(array($this, 'encryptPasswordCallback'))
             ->required_fields('id_group', 'nip', 'name', 'username', 'email')
             ->set_rules('email', 'Email', 'valid_email')
-            ->set_rules('nip', 'NIP', 'integer')
+            ->set_rules('nip', 'NIP', 'integer|required')
             ->unset_fields('register_date')
             ->unset_read();
         $output = $crud->render();

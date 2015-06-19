@@ -16,13 +16,13 @@
 
         <div class="panel-heading"><h6 class="panel-title">User Groups</h6></div>
 
-        {*<div class="panel-body">*}
-            {*<div class="block-inner">*}
-                {*<h6 class="heading-hr">*}
-                    {*<i class="icon-clipboard"></i> User Group*}
-                    {*<small class="display-block">Informasi umum tentang grup user staf</small>*}
-                {*</h6>*}
-            {*</div>*}
+        <div class="panel-body">
+            <div class="block-inner">
+                <h6 class="heading-hr">
+                    <i class="icon-clipboard"></i> User Group
+                    <small class="display-block">Informasi umum tentang grup user staf</small>
+                </h6>
+            </div>
 
             <div class="row">
                 <div class="col-md-12">

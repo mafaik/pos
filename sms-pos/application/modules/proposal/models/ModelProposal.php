@@ -27,6 +27,16 @@ class ModelProposal extends CI_Model
             ->row();
     }
 
+    public function getDataProposalActive($id_proposal)
+    {
+        return $this->db
+            ->from("proposal")
+            ->where("id_proposal", $id_proposal)
+            ->where("status", 1)
+            ->get()
+            ->row();
+    }
+
     public function getListProposal($status = array())
     {
         $this->db
