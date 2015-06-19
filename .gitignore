@@ -2,4 +2,6 @@
 .vagrant/*
 sms-pos/upload/*
 sms-pos/application/cache/*
+sms-pos/application/config/database.php
+sms-pos/application/config/config.php
 sms-pos/templates_c/*
