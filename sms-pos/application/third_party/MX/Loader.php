@@ -222,6 +222,7 @@ class MX_Loader extends CI_Loader
 			Modules::load_file($_model, $path);
 
 //			$model = ucfirst($_model);
+            echo $_model;
 			CI::$APP->$_alias = new $_model();
 
 			$this->_ci_models[] = $_alias;
