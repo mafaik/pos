@@ -72,10 +72,10 @@ $route['product-conversion/save'] = "product_conversion/Conversion/save";
 //$route['product-conversion/invoice/(:num)'] = "product_conversion/Conversion/invoice/$1";
 //$route['product-conversion/detail/delete/(:num)'] = "product_conversion/Conversion/deleteDetail/$1";
 
-$route['credit'] = "Credit";
-$route['credit/bill/(:num)'] = "Credit/bill/$1";
-$route['credit/paid/(:num)'] = "Credit/update/$1";
-$route['credit/detail/(:num)'] = "Credit/detailBayar/$1";
+$route['credit'] = "credit";
+$route['credit/bill/(:num)'] = "credit/bill/$1";
+$route['credit/paid/(:num)'] = "credit/update/$1";
+$route['credit/detail/(:num)'] = "credit/detailBayar/$1";
 
 $route['product-distribution'] = "product_distribution/Distribution";
 $route['product-distribution/detail/add'] = "product_distribution/Distribution/add";
@@ -89,14 +89,14 @@ $route['product-returns/detail/delete/(:num)'] = "product_return/Returns/delete/
 $route['product-returns/save'] = "product_return/Returns/save";
 $route['product-returns/checkout/(:num)'] = "product_return/Returns/checkout/$1";
 
-$route['pricing'] = "Pricing";
-$route['pricing/setting/(:num)'] = "Pricing/setPrice/$1";
+$route['pricing'] = "pricing";
+$route['pricing/setting/(:num)'] = "pricing/setPrice/$1";
 
-$route['retail'] = "Retail";
-$route['retail/update/(:num)/(:num)'] = "Retail/updateItem/$1/$2";
-$route['retail/delete/(:num)'] = "Retail/deleteItem/$1";
-$route['retail/save'] = "Retail/save";
-$route['retail/invoice'] = "Retail/invoice";
+$route['retail'] = "retail";
+$route['retail/update/(:num)/(:num)'] = "retail/updateItem/$1/$2";
+$route['retail/delete/(:num)'] = "retail/deleteItem/$1";
+$route['retail/save'] = "retail/save";
+$route['retail/invoice'] = "retail/invoice";
 $route['retail/checkout/(:num)'] = "Retail/checkout/$1";
 
 
@@ -114,9 +114,9 @@ $route['retail/replace/update/(:num)/(:num)/(:num)'] = "retail/Replace/updateIte
 $route['retail/replace/delete/(:num)/(:num)'] = "retail/Replace/deleteItem/$1/$2";
 $route['retail/replace/checkout/(:num)'] = "retail/Checkout/replace/$1";
 
-$route['stock-opname'] = "Opname";
-$route['stock-opname/checking/(:num)'] = "Opname/checking/$1";
-$route['stock-opname/save'] = "Opname/save";
+$route['stock-opname'] = "opname";
+$route['stock-opname/checking/(:num)'] = "opname/checking/$1";
+$route['stock-opname/save'] = "opname/save";
 
 $route['stock-opname/store'] = "opname/Store";
 $route['stock-opname/store/checking/(:num)'] = "opname/Store/checking/$1";
@@ -149,10 +149,10 @@ $route['sales-order/save'] = "sales_order/SalesOrder/save";
 $route['sales-order/update/(:num)/(:num)'] = "sales_order/SalesOrder/updateItem/$1/$2";
 $route['sales-order/checkout/(:num)'] = "sales_order/SalesOrder/checkout/$1";
 
-$route['debit'] = "Debit";
-$route['debit/bill/(:num)'] = "Debit/bill/$1";
-$route['debit/paid/(:num)'] = "Debit/update/$1";
-$route['debit/detail/(:num)'] = "Debit/detailBayar/$1";
+$route['debit'] = "debit";
+$route['debit/bill/(:num)'] = "debit/bill/$1";
+$route['debit/paid/(:num)'] = "debit/update/$1";
+$route['debit/detail/(:num)'] = "debit/detailBayar/$1";
 
 
 $route['delivery-order'] = "delivery_order/DeliveryOrder/listing";
