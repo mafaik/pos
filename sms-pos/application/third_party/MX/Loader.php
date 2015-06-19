@@ -194,7 +194,6 @@ class MX_Loader extends CI_Loader
 	/** Load a module model **/
 	public function model($model, $object_name = NULL, $connect = FALSE)
 	{
-        echo $model;;
 		if (is_array($model)) return $this->models($model);
 
 		($_alias = $object_name) OR $_alias = basename($model);
@@ -219,6 +218,7 @@ class MX_Loader extends CI_Loader
 				if ($connect === TRUE) $connect = '';
 				$this->database($connect, FALSE, TRUE);
 			}
+            echo $path.$_model;
 			Modules::load_file($_model, $path);
 
 //			$model = ucfirst($_model);
