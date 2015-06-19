@@ -218,7 +218,6 @@ class MX_Loader extends CI_Loader
 				if ($connect === TRUE) $connect = '';
 				$this->database($connect, FALSE, TRUE);
 			}
-            echo $path.$_model;
 			Modules::load_file($_model, $path);
 
 			$model = ucfirst($_model);
