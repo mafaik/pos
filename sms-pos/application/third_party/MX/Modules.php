@@ -196,7 +196,6 @@ class Modules
             foreach($modules as $module => $subpath)
             {
                 $fullpath = $location.$module.'/'.$base.$subpath;
-                echo $fullpath.$file_ext;
                 if ($base == 'libraries/' OR $base == 'models/')
                 {
                     if(is_file($fullpath.$file_ext)) return array($fullpath, $file);
