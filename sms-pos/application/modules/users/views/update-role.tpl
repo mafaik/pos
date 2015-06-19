@@ -8,21 +8,11 @@
         <div class="panel-heading"><h6 class="panel-title">User Group Roles</h6></div>
 
         <div class="panel-body">
-<<<<<<< HEAD
-            {*<div class="block-inner">*}
-                {*<h6 class="heading-hr">*}
-                    {*<i class="icon-clipboard"></i> User Group Role*}
-                    {*<small class="display-block">User Group Role</small>*}
-                {*</h6>*}
-            {*</div>*}
-=======
             <div class="block-inner">
                 <h6 class="heading-hr">
                     <i class="icon-clipboard"></i> Update User Group Role: {$name_group}
                 </h6>
             </div>
->>>>>>> 34c5283f93c8b67256c42e8997c9ed485e3b223d
-            <!-- Callout -->
 
             {if $modulesList}
                 <form method="post">

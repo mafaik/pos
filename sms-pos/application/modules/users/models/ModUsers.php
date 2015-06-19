@@ -46,7 +46,7 @@ class ModUsers extends CI_Model
         return false;
     }
 
-    public function insertUserGroup()
+    public function insertUserGroup($data)
     {
         $this->db->insert('staff_group', $data);
         $id_group = $this->db->insert_id();

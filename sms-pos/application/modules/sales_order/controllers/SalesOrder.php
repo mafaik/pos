@@ -50,6 +50,35 @@ class SalesOrder extends MX_Controller
         redirect('sales-order/list');
     }
 
+    public function search()
+    {
+        if ($this->cart->primary_data_exists()) {
+            redirect('sales-order/list');
+        }
+        $data['error'] = $this->session->flashdata('error') != null ? $this->session->flashdata('error') : null;
+        if ($this->input->post('id_proposal')) {
+            if ($data_id_proposal = $this->model_proposal->getDataProposalActive($this->input->post('id_proposal'))) {
+
+                redirect('sales-order/'.$this->input->post('id_proposal'));
+            }
+            $data['error'] = 'no nota tidak ditemukan';
+        }
+        $this->parser->parse("sales_order-form.tpl", $data);
+    }
+
+    public function invoice(){
+        if ($this->input->post('id_sales_order')) {
+            if (
+                $this->db
+                    ->where('id_sales_order',$this->input->post('id_sales_order'))
+                    ->get('sales_order')->num_rows() > 0 ) {
+                redirect('sales-order/checkout/' . $this->input->post('id_sales_order'));
+            }
+            $this->session->set_flashdata('message', array('class' => 'error', 'msg' => 'data tidak di temukan'));
+        }
+        $this->parser->parse("invoice-form.tpl");
+    }
+
     public function detail()
     {
         if (!$this->cart->primary_data_exists()) {
