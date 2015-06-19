@@ -207,7 +207,7 @@ class MX_Loader extends CI_Loader
 		if ($path == FALSE)
 		{
 			/* check application & packages */
-			parent::model($model, $object_name, $connect);
+//			parent::model($model, $object_name, $connect);
 		}
 		else
 		{
@@ -221,8 +221,8 @@ class MX_Loader extends CI_Loader
             echo $path.$_model;
 			Modules::load_file($_model, $path);
 
-//			$model = ucfirst($_model);
-//			CI::$APP->$_alias = new $_model();
+			$model = ucfirst($_model);
+			CI::$APP->$_alias = new $_model();
 
 			$this->_ci_models[] = $_alias;
 		}
