@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-14 15:09:29
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-23 19:47:50
          compiled from "/var/www/sms-pos/application/modules/product_conversion/views/conversion.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:14670946775534c34ec3dec4-49258782%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -13,7 +13,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fff4798455c3e7183d6e4c124fc2bab3741f8371' => 
     array (
       0 => '/var/www/sms-pos/application/master.tpl',
-      1 => 1434109896,
+      1 => 1435052609,
       2 => 'file',
     ),
   ),
@@ -45,8 +45,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <?php echo css('jqClock.css');?>
 
-    
-          
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=latin,cyrillic-ext"
+          rel="stylesheet" type="text/css">
 
     <?php echo '<script'; ?>
  type="text/javascript"
@@ -57,6 +57,10 @@ ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"><?php echo '</script'
  type="text/javascript"
             src="<?php echo theme_url();?>
 ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ type="text/javascript"
+            src="http://code.jquery.com/jquery-migrate-1.2.1.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
  type="text/javascript"
@@ -173,32 +177,8 @@ css/print.css" media="print" />
     <div class="sidebar">
         <div class="sidebar-content">
 
-            <!-- Main navigation -->
             <?php echo userdata('menu');?>
 
-            
-                
-                    
-                        
-                            
-                            
-                        
-                        
-                            
-                                
-                                    
-                                        
-                                            
-                                            
-                                        
-                                    
-                                
-                            
-                        
-                    
-                
-            
-            <!-- /main navigation -->
 
         </div>
     </div>
@@ -314,6 +294,27 @@ $_smarty_tpl->tpl_vars['products']->_loop = true;
     </div>
     <?php echo js('form/custom.js');?>
 
+    <?php echo '<script'; ?>
+ type="text/javascript">
+        $(".insertCategoryPrefixCode").keyup(function() {
+            var source = $('.insertCategoryPrefixCode').val();
+            if (source.length <= 2) {
+                var value = $( this ).val();
+                $( 'input[name="prefix_code"]' ).val( value );
+                $( 'input[name="disabled_prefix_code"]' ).val( value );
+            }
+        });
+
+        $(".insertUnitPrefixCode").keyup(function() {
+            var source = $('.insertUnitPrefixCode').val();
+            if (source.length <= 3) {
+                var value = $( this ).val();
+                $( 'input[name="prefix_code"]' ).val( value );
+                $( 'input[name="disabled_prefix_code"]' ).val( value );
+            }
+        });
+    <?php echo '</script'; ?>
+>
 </div>
 <!-- /content -->
 

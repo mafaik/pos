@@ -1,4 +1,4 @@
-{* Extend our master template *}
+{* Extend our grocery template *}
 {extends file="../../../grocery.tpl"}
 
 {block name=head}
