@@ -1,4 +1,4 @@
-{* Extend our grocery template *}
+{* Extend our master template *}
 {extends file="../../../grocery.tpl"}
 
 {block name=head}
@@ -14,13 +14,12 @@
     <!-- Default panel -->
     <div class="panel panel-default">
 
-        <div class="panel-heading"><h6 class="panel-title">Master Warehouse</h6></div>
+        <div class="panel-heading"><h6 class="panel-title">Dashboard</h6></div>
 
         <div class="panel-body">
             <div class="block-inner">
                 <h6 class="heading-hr">
-                    <i class="icon-clipboard"></i> Master Warehouse
-                    <small class="display-block">Informasi warehouse pusat</small>
+                    <i class="icon-clipboard"></i> {$extra}
                 </h6>
             </div>
 

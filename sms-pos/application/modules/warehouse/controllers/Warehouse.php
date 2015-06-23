@@ -39,7 +39,7 @@ class Warehouse extends MX_Controller
                 ->display_as('name', 'Rack Name')
                 ->display_as('parent', 'Rack Parent')
                 ->required_fields('name')
-                ->set_relation('parent', 'warehouse_rack', '{name}')
+                ->set_relation('parent', 'warehouse_rack', 'name')
                 ->unset_fields('length', 'width', 'height', 'weight')
                 ->field_type('id_warehouse', 'invisible')
                 ->callback_before_insert(array($this, 'addWarehouseID'))

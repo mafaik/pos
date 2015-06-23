@@ -24,6 +24,31 @@ class ModProduct extends CI_Model
         return $rows;
     }
 
+    public function getProductOnly(){
+        $result = $this->db->get('product');
+        $rows = $result->result_array();
+        return $rows;
+    }
+
+    public function getCategoryOnly(){
+        $result = $this->db->get('product_category');
+        $rows = $result->result_array();
+        return $rows;
+    }
+
+    public function getCategoryName($id_product_category)
+    {
+        $this->db->where('id_product_category', $id_product_category);
+        $result = $this->db->get('product_category');
+        if ($result->num_rows() > 0)
+        {
+           $row = $result->row(); 
+
+           return $row->category;
+        }
+        return '';
+    }
+
     public function getProduct($id_product){
         $this->db->select('*');
         $this->db->from('product');

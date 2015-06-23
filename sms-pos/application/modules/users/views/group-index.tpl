@@ -1,5 +1,5 @@
-{* Extend our master template *}
-{extends file="../../../master.tpl"}
+{* Extend our grocery template *}
+{extends file="../../../grocery.tpl"}
 
 {block name=head}
     {foreach $css_files as $css_file }

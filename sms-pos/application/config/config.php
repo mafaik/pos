@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://sms-awalinyudhana.rhcloud.com/sms-pos/';
+$config['base_url'] = 'http://sms-pos.dev/';
 
 /*
 |--------------------------------------------------------------------------

@@ -91,10 +91,16 @@ class Users extends MX_Controller
             ->display_as('jml_user', 'Jumlah User')
             ->required_fields('name_group')
             ->callback_column('jml_user', array($this, 'countJmlUser'))
+            ->callback_field('note', array($this, 'setTextarea'))
             ->add_action('Update Role', '', '', 'read-icon', array($this, 'addUpdateRoleAction'))
             ->unset_read();
         $output = $crud->render();
         $this->renderGroup($output);
+    }
+
+    public function setTextarea()
+    {
+        return "<textarea name='note' rows='2' cols='40'></textarea>";
     }
 
     function countJmlUser($value, $row)

@@ -8,6 +8,7 @@ class Product extends MX_Controller
         parent::__construct();
         $this->acl->auth('product');
         $this->load->library('grocery_CRUD');
+        $this->load->model('ModProduct');
     }
 
     public function render($output)
@@ -28,20 +29,36 @@ class Product extends MX_Controller
                 ->callback_column('sell_price', array($this, 'currencyFormat'))
                 ->set_relation('id_product_category', 'product_category', 'category')
                 ->set_relation('id_product_unit', 'product_unit', 'unit')
-                ->set_relation('parent', 'product', '{name}')
                 ->fields('barcode', 'id_product_category', 'parent', 'name', 'brand', 'id_product_unit', 'size', 'date_expired', 'license', 'minimum_stock')
                 ->required_fields('barcode', 'id_product_category', 'name', 'brand', 'id_product_unit', 'date_expired', 'minimum_stock')
                 ->unset_fields('weight', 'length', 'width', 'height', 'sell_price', 'stock')
-                ->unique_fields('barcode');
+                ->unique_fields('barcode')
+                ->callback_field('parent', array($this, 'productParentField'))
+                ->unset_read();
 
         $output = $crud->render();
         
         $this->render($output);
     }
 
-    function currencyFormat($value, $row)
+    public function currencyFormat($value, $row)
     {
         return "Rp " . number_format($value);
+    }
+
+    public function productParentField($value = '', $primary_key = null)
+    {
+        $products = $this->ModProduct->getProductOnly();
+        $text = '<select id="field-parent" name="parent" class="chosen-select chzn-done" data-placeholder="Select Parent" style="width: 300px;"><option value="">Select Parent</option>';
+        foreach ($products as $row) {
+            if ($value == $row['id_product']) {
+                $text .= '<option value="' . $row['id_product'] . '" selected>' . $row['name'] . '</option>';
+            } else {
+                $text .= '<option value="' . $row['id_product'] . '">' . $row['name'] . '</option>';
+            }
+        }
+        $text .= '</select>';
+        return $text;
     }
 
     public function category($action = null, $id_product_category = null)
@@ -50,20 +67,44 @@ class Product extends MX_Controller
         $crud = new grocery_CRUD();
         $crud->set_table('product_category')
                 ->columns('category', 'parent', 'prefix_code', 'note')
-                ->set_relation('parent', 'product_category', '{category}')
                 ->add_fields('category', 'prefix_code', 'parent', 'note')
                 ->edit_fields('category', 'prefix_code', 'parent', 'note')
                 ->required_fields('category')
                 ->display_as('category', 'Nama Kategori')
                 ->callback_add_field('category', array($this, 'setPrefixCode'))
-                ->callback_add_field('note', array($this, 'setTextarea'))
+                ->callback_field('note', array($this, 'setTextarea'))
                 ->callback_add_field('prefix_code', array($this, 'disablePrefixCode'))
                 ->callback_edit_field('prefix_code', array($this, 'disablePrefixCode'))
                 ->callback_before_insert(array($this, 'checkPrefixCode'))
+                ->callback_field('parent', array($this, 'categoryParentField'))
+                ->callback_column('parent', array($this, 'categoryParentName'))
                 ->unset_read();
         
         $output = $crud->render();
         $this->render($output);
+    }
+
+    public function categoryParentName($value, $row)
+    {
+        $categoriesName = $this->ModProduct->getcategoryName($row->parent);
+        return $categoriesName;
+    }
+
+    public function categoryParentField($value = '', $primary_key = null)
+    {
+        
+        $categories = $this->ModProduct->getCategoryOnly();
+        $text = '<select id="field-parent" name="parent" class="chosen-select chzn-done" data-placeholder="Select Parent" style="width: 300px;"><option value="">Select Parent</option>';
+        foreach ($categories as $row) {
+            if (!empty($value) && $value == $row['id_product_category']) {
+                $text .= '<option value="' . $row['id_product_category'] . '" selected>' . $row['category'] . '</option>';
+            } else {
+                $text .= '<option value="' . $row['id_product_category'] . '">' . $row['category'] . '</option>';
+            }
+            // $text .= '<option value="' . $row['id_product_category'] . '">' . $row['category'] . '-' . $value . '-' . $row['parent'] .'</option>';
+        }
+        $text .= '</select>';
+        return $text;
     }
 
     public function unit() 
@@ -77,7 +118,7 @@ class Product extends MX_Controller
                 ->required_fields('unit', 'value')
                 ->display_as('prefix_code', 'Prefix Code')
                 ->callback_add_field('unit', array($this, 'setPrefixCode'))
-                ->callback_add_field('note', array($this, 'setTextarea'))
+                ->callback_field('note', array($this, 'setTextarea'))
                 ->callback_add_field('prefix_code', array($this, 'disablePrefixCode'))
                 ->callback_edit_field('prefix_code', array($this, 'disablePrefixCode'))
                 ->callback_before_insert(array($this, 'checkPrefixCode'))
@@ -108,7 +149,6 @@ class Product extends MX_Controller
 
     public function checkPrefixCode($post_array, $table_name)
     {
-        $this->load->model('ModProduct');
         $selected_table = $this->session->userdata('selected_table');
 
         if ($selected_table == 'product_category') {
