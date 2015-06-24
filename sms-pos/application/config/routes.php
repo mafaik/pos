@@ -198,7 +198,7 @@ $route['warehouse/product-placing/read/(:num)'] = "warehouse/productPlacing/read
 $route['warehouse/product-placing/delete/(:num)'] = "warehouse/productPlacing/delete/$1";
 $route['warehouse/product-placing/success/(:num)'] = "warehouse/productPlacing/success/$1";
 
-$route['bank-info'] = "bank_info";
+$route['bank-info'] = "bank_info/BankInfo";
 $route['users/update-group-role/(:num)'] = "users/updateRole/$1";
 $route['users/update-group/(:num)'] = "users/updateGroup/$1";
 $route['users/delete-group/(:num)'] = "users/deleteGroup/$1";

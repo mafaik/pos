@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Bank_Info extends MX_Controller
+class BankInfo extends MX_Controller
 {
     public function __construct()
     {

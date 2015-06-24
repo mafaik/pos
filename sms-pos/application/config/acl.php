@@ -103,7 +103,7 @@ $config['module_router'] =
                             'module' => 'principal'
                         ], [
                             'title' => 'Bank Info',
-                            'url' => 'bank_info',
+                            'url' => 'bank-info',
                             'module' => 'bank_info'
                         ],
                     ]
