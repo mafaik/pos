@@ -68,7 +68,7 @@ class Users extends MX_Controller
     {
         return "<input type='password' name='password' value='' />";
     }
-
+    
     function encryptPasswordCallback($post_array, $primary_key)
     {
         if (!empty($post_array['password'])) {
